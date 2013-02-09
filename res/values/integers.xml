@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <integer name="def_input">0</integer>
+
+  <integer name="def_ref">440</integer>
+  <integer name="max_ref">450</integer>
+  <integer name="min_ref">430</integer>
+
+</resources>
