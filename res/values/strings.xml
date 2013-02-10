@@ -25,6 +25,8 @@
   <string name="multiple_on">Multiple notes on</string>
   <string name="multiple_off">Multiple notes off</string>
 
+  <string name="sample_rate">Sample rate: %1.0f</string>
+
   <string name="filter">filter</string>
   <string name="zoom">zoom</string>
   <string name="lock">lock</string>

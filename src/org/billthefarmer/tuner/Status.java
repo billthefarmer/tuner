@@ -34,6 +34,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+// Status
+
 public class Status extends View
 {
     Audio audio;
@@ -44,12 +46,16 @@ public class Status extends View
 
     Paint paint;
 
+    // Constructor
+
     public Status(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
 
 	paint = new Paint();
     }
+
+    // On size changed
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
@@ -59,29 +65,43 @@ public class Status extends View
 	margin = width / 32;
     }
 
+    // On draw
+
     @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
 	String s;
 
+	// Draw separator line
+
 	paint.setStrokeWidth(3);
 	paint.setColor(Color.GRAY);
-	paint.setFlags(Paint.ANTI_ALIAS_FLAG);
+	paint.setAntiAlias(true);
 	paint.setStyle(Paint.Style.STROKE);
 	canvas.drawLine(0, 0, width, 0, paint);
+
+	// Check for audio
 
 	if (audio == null)
 	    return;
 
+	// Set up text
+
 	paint.setStrokeWidth(1);
 	paint.setColor(Color.BLACK);
 	paint.setTextSize(height / 2);
-	paint.setStyle(Paint.Style.FILL_AND_STROKE);
+	paint.setStyle(Paint.Style.FILL);
+
+	// Move down
 
 	canvas.translate(0, height * 2 / 3);
 
-	s = String.format("Sample rate: %1.0f", audio.sample);
+	// Draw sample rate text
+
+	s = String.format(getResources().getString(R.string.sample_rate), audio.sample);
 	canvas.drawText(s, margin, 0, paint);
+
+	// Filter
 
 	float x = margin + paint.measureText(s + "  ");
 	if (audio.filter)
@@ -91,12 +111,16 @@ public class Status extends View
 	    x += paint.measureText(s + " ");
 	}
 
+	// Downsample
+
 	if (audio.downsample)
 	{
 	    s = getResources().getString(R.string.downsample);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
+
+	// Zoom
 
 	if (audio.zoom)
 	{
@@ -105,12 +129,25 @@ public class Status extends View
 	    x += paint.measureText(s + " ");
 	}
 
+	// Lock
+
 	if (audio.lock)
 	{
 	    s = getResources().getString(R.string.lock);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
+
+	// Multiple
+
+	if (audio.multiple)
+	{
+		s = getResources().getString(R.string.multiple);
+	    canvas.drawText(s, x, 0, paint);
+	    x += paint.measureText(s + " ");
+	}
+
+	// Strobe
 
 	if (audio.strobe)
 	{
