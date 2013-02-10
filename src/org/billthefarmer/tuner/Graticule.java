@@ -33,6 +33,8 @@ import android.util.AttributeSet;
 
 public class Graticule extends TunerView
 {
+    private static final int SIZE = 10;
+
     // Contructor
 
     protected Graticule(Context context, AttributeSet attrs)
@@ -72,10 +74,10 @@ public class Graticule extends TunerView
 
 	// Draw the graticule
 
-	for (int i = (width % 10) / 2; i <= width; i += 10)
+	for (int i = (width % SIZE) / 2; i <= width; i += SIZE)
 	    canvas.drawLine(i, 0, i, height, paint);
 
-	for (int i = (height % 10) / 2; i <= height; i +=10)
+	for (int i = (height % SIZE) / 2; i <= height; i +=SIZE)
 	    canvas.drawLine(0, i, width, i, paint);
     }
 }

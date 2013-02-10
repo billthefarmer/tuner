@@ -34,6 +34,8 @@ import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.util.AttributeSet;
 
+// Spectrum
+
 public class Spectrum extends Graticule
 {
     protected Audio audio;
@@ -42,12 +44,16 @@ public class Spectrum extends Graticule
 
     float max;
 
+    // Constructor
+
     public Spectrum(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
 
 	path = new Path();
     }
+
+    // On draw
 
     @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
@@ -58,6 +64,8 @@ public class Spectrum extends Graticule
 
 	if (audio == null || audio.xa == null)
 	    return;
+
+	// Draw D if downsample
 
 	if (audio.downsample)
 	{
@@ -75,6 +83,8 @@ public class Spectrum extends Graticule
 
 	canvas.translate(0, height);
 
+	// Chack max value
+
 	if (max < 1.0f)
 	    max = 1.0f;
 
@@ -84,13 +94,17 @@ public class Spectrum extends Graticule
 
 	max = 0.0f;
 
-	// Reset path
+	// Rewind path
 
-	path.reset();
+	path.rewind();
 	path.moveTo(0, 0);
+
+	// If zoomed
 
 	if (audio.zoom)
 	{
+	    // Calculate limits
+
 	    double lower = audio.lower / audio.fps;
 	    double higher = audio.higher / audio.fps;
 	    double nearest = audio.nearest / audio.fps;
@@ -99,11 +113,18 @@ public class Spectrum extends Graticule
 
 	    float xscale = (float)((width / (nearest - lower)) / 2.0);
 
-	    for (int i = (int)Math.floor(lower); i <= Math.ceil(higher); i++)
+	    int lo = (int)Math.floor(lower);
+	    int hi = (int)Math.ceil(higher);
+
+	    // Create trace
+
+	    for (int i = lo; i <= hi; i++)
 	    {
 		if (i > 0 && i < audio.xa.length)
 		{
 		    float value = (float)audio.xa[i];
+
+		    // Get max value
 
 		    if (max < value)
 			max = value;
@@ -115,7 +136,7 @@ public class Spectrum extends Graticule
 		}
 	    }
 
-	    // Draw centre line
+	    // Create centre line
 
 	    path.moveTo(width / 2, 0);
 	    path.lineTo(width / 2, -height);
@@ -126,18 +147,19 @@ public class Spectrum extends Graticule
 	    paint.setAntiAlias(true);
 	    paint.setColor(Color.GREEN);
 
-	    // Draw path
+	    // Draw trace
 
 	    canvas.drawPath(path, paint);
-	    path.reset();
+	    path.rewind();
 
 	    // Yellow pen for frequency trace
 
+	    paint.setTextAlign(Align.CENTER);
 	    paint.setColor(Color.YELLOW);
 	    paint.setAntiAlias(false);
 	    paint.setStrokeWidth(1);
 
-	    // Draw lines for each frequency
+	    // Create lines for each frequency
 
 	    for (int i = 0; i < audio.count; i++)
 	    {
@@ -146,9 +168,9 @@ public class Spectrum extends Graticule
 		if (audio.maxima.f[i] > audio.lower &&
 		    audio.maxima.f[i] < audio.higher)
 		{
-		    float x = (float)((audio.maxima.f[i] - audio.lower) /
-				      audio.fps * xscale);
-
+		    float x =
+			(float)((audio.maxima.f[i] - audio.lower) /
+				audio.fps * xscale);
 
 		    path.moveTo(x, 0);
 		    path.lineTo(x, -height);
@@ -165,7 +187,8 @@ public class Spectrum extends Graticule
 		    if (Double.isNaN(c))
 			continue;
 
-		    paint.setTextAlign(Align.CENTER);
+		    // Draw cents value
+
 		    String s = String.format("%+1.0f", c * 100.0);
 		    canvas.drawText(s, x, 0, paint);
 		}
@@ -181,9 +204,15 @@ public class Spectrum extends Graticule
 	    canvas.drawPath(path, paint);
 	}
 
+	// Not zoomed
+
 	else
 	{
-	    float xscale = ((float)audio.xa.length / (float)width);
+	    // Calculate x scale
+
+	    float xscale = (float)audio.xa.length / (float)width;
+
+	    // Create trace
 
 	    for (int x = 0; x < width; x++)
 	    {
@@ -193,6 +222,8 @@ public class Spectrum extends Graticule
 
 		if (x > 0)
 		{
+		    // Find max value for each vertex
+
 		    for (int j = 0; j < xscale; j++)
 		    {
 			int n = (int)(x * xscale) + j;
@@ -202,13 +233,14 @@ public class Spectrum extends Graticule
 		    }
 		}
 
+		// Get max value
+
 		if (max < value)
 		    max = value;
 
 		float y = -value * yscale;
 
 		path.lineTo(x, y);
-
 	    }
 
 	    // Color green

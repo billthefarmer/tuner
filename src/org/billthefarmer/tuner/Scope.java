@@ -32,12 +32,16 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.util.AttributeSet;
 
+// Scope
+
 public class Scope extends Graticule
 {
     protected Audio audio;
 
     Path path;
     int max;
+
+    // Constructor
 
     public Scope(Context context, AttributeSet attrs)
     {
@@ -46,7 +50,8 @@ public class Scope extends Graticule
 	path = new Path();
     }
 
-    @Override
+    // On draw
+
     protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);
@@ -55,6 +60,8 @@ public class Scope extends Graticule
 
 	if (audio == null || audio.data == null)
 	    return;
+
+	// Draw F if filter
 
 	if (audio.filter)
 	{
@@ -74,6 +81,8 @@ public class Scope extends Graticule
 	int dx = 0;
 	int n = 0;
 
+	// Look for zero crossing
+
 	for (int i = 1; i < audio.data.length; i++)
 	{
 	    dx = audio.data[i] - audio.data[i - 1];
@@ -91,18 +100,30 @@ public class Scope extends Graticule
 
 	canvas.translate(0, height / 2);
 
+	// Check max vale
+
 	if (max < 4096)
 	    max = 4096;
 
+	// Calculate y scale
+
 	float yscale = max / (height / 2);
+
+	// Reset max value
 
 	max = 0;
 
-	path.reset();
+	// Rewind the path
+
+	path.rewind();
 	path.moveTo(0, 0);
+
+	// Create the trace
 
 	for (int i = 0; i <= Math.min(width, audio.data.length - n); i++)
 	{
+	    // Get max value
+
 	    if (max < Math.abs(audio.data[n + i]))
 		max = Math.abs(audio.data[n + i]);
 
@@ -117,7 +138,7 @@ public class Scope extends Graticule
 	paint.setAntiAlias(true);
 	paint.setColor(Color.GREEN);
 
-	// Draw path
+	// Draw trace
 
 	canvas.drawPath(path, paint);
     }

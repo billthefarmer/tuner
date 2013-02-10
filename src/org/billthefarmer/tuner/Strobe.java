@@ -41,16 +41,18 @@ public class Strobe extends TunerView
 
     float size;
     float scale;
-    float offset;
+    double offset;
     double cents;
 
-    private static final int DELAY = 100;
+    private static final int DELAY = 40;
 
     // Constructor
 
     public Strobe(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
+
+	// Create handler
 
 	handler = new Handler();
 	run = new Runnable()
@@ -63,6 +65,8 @@ public class Strobe extends TunerView
 		}
 	    };
 
+	// Start the runnable
+
 	handler.postDelayed(run, DELAY);
     }
 
@@ -72,9 +76,8 @@ public class Strobe extends TunerView
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
-	size = height / 4;
-
-	scale = width / 500;
+	size = height / 4.0f;
+	scale = width / 500.0f;
     }
 
     // On draw
@@ -83,13 +86,19 @@ public class Strobe extends TunerView
     {
 	super.onDraw(canvas);
 
+	// Don't draw if turned off
+
 	if (!audio.strobe)
 		return;
 
-	if (audio != null)
-	    cents = (cents * 7.0 + audio.cents) / 8.0;
+	// Do inertia calculation
 
-	offset = (float)(offset + (cents * scale));
+	if (audio != null)
+	    cents = (cents * 19.0 + audio.cents) / 20.0;
+
+	// Calculate offset
+
+	offset = offset + (cents * scale);
 
 	if (offset > size * 16)
 		offset = 0.0f;
@@ -103,8 +112,10 @@ public class Strobe extends TunerView
 	paint.setColor(Color.BLACK);
 	paint.setStyle(Style.FILL);
 
+	// Draw the strobe chequers
+
 	float y = 0;
-	float x = offset - size * 16;
+	float x = (float)offset - size * 16;
 	for (int i = 0; i <= width / size * 2; i++)
 	{
 	    canvas.drawRect(x, y, x + size, y + size, paint);
@@ -112,7 +123,7 @@ public class Strobe extends TunerView
 	}
 
 	y += size;
-	x = offset - size * 16;
+	x = (float)offset - size * 16;
 	for (int i = 0; i <= width / size * 4; i++)
 	{
 	    canvas.drawRect(x, y, x + size * 2, y + size, paint);
@@ -120,7 +131,7 @@ public class Strobe extends TunerView
 	}
 
 	y += size;
-	x = offset - size * 16;
+	x = (float)offset - size * 16;
 	for (int i = 0; i <= width / size * 8; i++)
 	{
 	    canvas.drawRect(x, y, x + size * 4, y + size, paint);
@@ -128,12 +139,11 @@ public class Strobe extends TunerView
 	}
 
 	y += size;
-	x = offset - size * 16;
+	x = (float)offset - size * 16;
 	for (int i = 0; i <= width / size * 16; i++)
 	{
 	    canvas.drawRect(x, y, x + size * 8, y + size, paint);
 	    x += size * 16;
 	}
-
     }
 }
