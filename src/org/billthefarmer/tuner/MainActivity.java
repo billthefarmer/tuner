@@ -48,14 +48,14 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity
 {
-    Spectrum spectrum;
-    Display display;
-    Strobe strobe;
-    Status status;
-    Meter meter;
-    Scope scope;
+    private Spectrum spectrum;
+    private Display display;
+    private Strobe strobe;
+    private Status status;
+    private Meter meter;
+    private Scope scope;
 
-    Audio audio;
+    private Audio audio;
 
     // On Create
 
@@ -239,7 +239,7 @@ public class MainActivity extends Activity
 	// Update status
 
 	if (status != null)
-		status.invalidate();
+	    status.invalidate();
     }
 
     // On start
@@ -339,10 +339,10 @@ public class MainActivity extends Activity
 	    audio.sample =
 		Double.valueOf(preferences.getString("pref_sample", "11025"));
 
-	    audio.filter = preferences.getBoolean("pref_filter", true);
+	    audio.filter = preferences.getBoolean("pref_filter", false);
 	    audio.downsample = preferences.getBoolean("pref_down", false);
 	    audio.multiple = preferences.getBoolean("pref_multiple", false);
-	    audio.strobe = preferences.getBoolean("pref_strobe", true);
+	    audio.strobe = preferences.getBoolean("pref_strobe", false);
 	    audio.zoom = preferences.getBoolean("pref_zoom", true);
 	}
     }
@@ -856,16 +856,22 @@ public class MainActivity extends Activity
 		    // Ignore silly values
 
 		    if (Double.isNaN(cents))
+		    {
+			cents = 0.0;
 			found = false;
-
-		    // Difference
-
-		    difference = frequency - nearest;
+		    }
 
 		    // Ignore if not within 50 cents of reference note
 
 		    if (Math.abs(cents) > 50.0)
+		    {
+			cents = 0.0;
 			found = false;
+		    }
+
+		    // Difference
+
+		    difference = frequency - nearest;
 		}
 
 		// Found

@@ -38,13 +38,13 @@ import android.view.View;
 
 public class Status extends View
 {
-    Audio audio;
+    protected Audio audio;
 
-    int width;
-    int height;
-    int margin;
+    private int width;
+    private int height;
+    private int margin;
 
-    Paint paint;
+    private Paint paint;
 
     // Constructor
 

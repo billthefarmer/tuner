@@ -27,22 +27,37 @@ package org.billthefarmer.tuner;
 import org.billthefarmer.tuner.MainActivity.Audio;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.os.Handler;
+import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
 
 public class Strobe extends TunerView
 {
-    Audio audio;
-    Handler handler;
-    Runnable run;
+    protected Audio audio;
 
-    float size;
-    float scale;
-    double offset;
-    double cents;
+    private Matrix matrix;
+
+    private BitmapShader smallShader;
+    private BitmapShader mediumShader;
+    private BitmapShader largeShader;
+    private BitmapShader largerShader;
+    private LinearGradient smallGradient;
+    private LinearGradient mediumGradient;
+    private LinearGradient largeGradient;
+    private LinearGradient smallGreyGradient;
+
+    private int size;
+    private double scale;
+    private double offset;
+    private double cents;
 
     private static final int DELAY = 40;
 
@@ -51,33 +66,57 @@ public class Strobe extends TunerView
     public Strobe(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
-
-	// Create handler
-
-	handler = new Handler();
-	run = new Runnable()
-	    {
-		@Override
-		public void run()
-		{
-		    invalidate();
-		    handler.postDelayed(this, DELAY);
-		}
-	    };
-
-	// Start the runnable
-
-	handler.postDelayed(run, DELAY);
     }
 
-    // OnSizeChanged
+    // On size changed
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
-	size = height / 4.0f;
-	scale = width / 500.0f;
+	size = height / 4;
+	scale = width / 500.0;
+
+	matrix = new Matrix();
+
+	smallShader = new BitmapShader(createShaderBitmap(size, size),
+				       TileMode.REPEAT, TileMode.CLAMP);
+	mediumShader = new BitmapShader(createShaderBitmap(size * 2, size),
+					TileMode.REPEAT, TileMode.CLAMP);
+	largeShader = new BitmapShader(createShaderBitmap(size * 4, size),
+				       TileMode.REPEAT, TileMode.CLAMP);
+	largerShader = new BitmapShader(createShaderBitmap(size * 8, size),
+					TileMode.REPEAT, TileMode.CLAMP);
+
+	smallGradient = new LinearGradient(0, 0, size, 0,
+					   Color.CYAN, Color.BLUE,
+					   TileMode.MIRROR);
+	mediumGradient = new LinearGradient(0, 0, size * 2, 0,
+					    Color.CYAN, Color.BLUE,
+					    TileMode.MIRROR);
+	largeGradient = new LinearGradient(0, 0, size * 4, 0,
+					   Color.CYAN, Color.BLUE,
+					   TileMode.MIRROR);
+	smallGreyGradient = new LinearGradient(0, 0, size, 0,
+					       Color.CYAN, Color.rgb(0, 127, 255),
+					       TileMode.MIRROR);
+    }
+
+    // Create shader bitmap
+
+    private Bitmap createShaderBitmap(int width, int height)
+    {
+	Bitmap bitmap = Bitmap.createBitmap(width * 2, height, Config.RGB_565);
+	Canvas canvas = new Canvas(bitmap);
+	Paint paint = new Paint();
+
+	int colour = getResources().getColor(android.R.color.background_light);
+	canvas.drawColor(Color.CYAN);
+	colour = getResources().getColor(android.R.color.primary_text_light);
+	paint.setColor(Color.BLUE);
+	canvas.drawRect(0, 0, width, height, paint);
+
+	return bitmap;
     }
 
     // On draw
@@ -86,10 +125,14 @@ public class Strobe extends TunerView
     {
 	super.onDraw(canvas);
 
+	// Post invalidate after delay
+
+	postInvalidateDelayed(DELAY);
+
 	// Don't draw if turned off
 
-	if (!audio.strobe)
-		return;
+	if (audio == null || !audio.strobe)
+	    return;
 
 	// Do inertia calculation
 
@@ -101,49 +144,78 @@ public class Strobe extends TunerView
 	offset = offset + (cents * scale);
 
 	if (offset > size * 16)
-		offset = 0.0f;
+	    offset = 0.0;
 
-	if (offset < 0.0f)
-		offset = size * 16;
+	if (offset < 0.0)
+	    offset = size * 16;
 
 	// Reset the paint to black
 
 	paint.setStrokeWidth(1);
+	paint.setAntiAlias(true);
 	paint.setColor(Color.BLACK);
 	paint.setStyle(Style.FILL);
 
+	// Translate
+
+	matrix.setTranslate((float)offset, 0);
+
 	// Draw the strobe chequers
 
-	float y = 0;
-	float x = (float)offset - size * 16;
-	for (int i = 0; i <= width / size * 2; i++)
+	if (Math.abs(cents) < 25.0)
 	{
-	    canvas.drawRect(x, y, x + size, y + size, paint);
-	    x += size * 2;
+	    smallShader.setLocalMatrix(matrix);
+	    paint.setShader(smallShader);
+	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
-	y += size;
-	x = (float)offset - size * 16;
-	for (int i = 0; i <= width / size * 4; i++)
+	else if (Math.abs(cents) < 35.0)
 	{
-	    canvas.drawRect(x, y, x + size * 2, y + size, paint);
-	    x += size * 4;
+	    smallGradient.setLocalMatrix(matrix);
+	    paint.setShader(smallGradient);
+	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
-	y += size;
-	x = (float)offset - size * 16;
-	for (int i = 0; i <= width / size * 8; i++)
+	else
+
 	{
-	    canvas.drawRect(x, y, x + size * 4, y + size, paint);
-	    x += size * 8;
+	    smallGreyGradient.setLocalMatrix(matrix);
+	    paint.setShader(smallGreyGradient);
+	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
-	y += size;
-	x = (float)offset - size * 16;
-	for (int i = 0; i <= width / size * 16; i++)
+	if (Math.abs(cents) < 35.0)
 	{
-	    canvas.drawRect(x, y, x + size * 8, y + size, paint);
-	    x += size * 16;
+	    mediumShader.setLocalMatrix(matrix);
+	    paint.setShader(mediumShader);
+	    canvas.drawRect(0, size, width, size * 2, paint);
 	}
+
+	else
+	{
+	    mediumGradient.setLocalMatrix(matrix);
+	    paint.setShader(mediumGradient);
+	    canvas.drawRect(0, size, width, size * 2, paint);
+	}
+
+	if (Math.abs(cents) < 45)
+	{
+	    largeShader.setLocalMatrix(matrix);
+	    paint.setShader(largeShader);
+	    canvas.drawRect(0, size * 2, width, size * 3, paint);
+	}
+
+	else
+	{
+	    largeGradient.setLocalMatrix(matrix);
+	    paint.setShader(largeGradient);
+	    canvas.drawRect(0, size * 2, width, size * 3, paint);
+	}
+
+	largerShader.setLocalMatrix(matrix);
+	paint.setShader(largerShader);
+	canvas.drawRect(0, size * 3, width, size * 4, paint);
+
+	paint.setShader(null);
     }
 }

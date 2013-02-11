@@ -37,11 +37,11 @@ import android.view.View;
 
 public class TunerView extends View
 {
-    int width;
-    int height;
-    Paint paint;
-    Rect clipRect;
-    RectF outlineRect;
+    protected int width;
+    protected int height;
+    protected Paint paint;
+    protected Rect clipRect;
+    private RectF outlineRect;
 
     // Constructor
 

@@ -36,9 +36,9 @@ import android.preference.PreferenceManager;
 public class SettingsFragment extends PreferenceFragment
     implements OnSharedPreferenceChangeListener
 {
-    public static final String KEY_PREF_INPUT = "pref_input";
-    public static final String KEY_PREF_SAMPLE = "pref_sample";
-    public static final String KEY_PREF_REFERENCE = "pref_reference";
+    private static final String KEY_PREF_INPUT = "pref_input";
+    private static final String KEY_PREF_SAMPLE = "pref_sample";
+    private static final String KEY_PREF_REFERENCE = "pref_reference";
 
     private String refSummary;
 

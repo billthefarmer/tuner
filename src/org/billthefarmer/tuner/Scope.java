@@ -38,8 +38,8 @@ public class Scope extends Graticule
 {
     protected Audio audio;
 
-    Path path;
-    int max;
+    private Path path;
+    private int max;
 
     // Constructor
 
@@ -100,7 +100,7 @@ public class Scope extends Graticule
 
 	canvas.translate(0, height / 2);
 
-	// Check max vale
+	// Check max value
 
 	if (max < 4096)
 	    max = 4096;

@@ -37,21 +37,17 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.util.AttributeSet;
 
 // Meter
 
 public class Meter extends TunerView
 {
-    Audio audio;
+    protected Audio audio;
 
-    Handler handler;
-    Runnable run;
-
-    Matrix matrix;
-    Rect barRect;
-    Path path;
+    private Matrix matrix;
+    private Rect barRect;
+    private Path path;
 
     private double cents;
     private float medium;
@@ -63,23 +59,6 @@ public class Meter extends TunerView
     public Meter(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
-
-	// Create handler
-
-	handler = new Handler();
-	run = new Runnable()
-	    {
-		@Override
-		public void run()
-		{
-		    invalidate();
-		    handler.postDelayed(this, DELAY);
-		}
-	    };
-
-	// Start the runnable
-
-	handler.postDelayed(run, DELAY);
 
 	// Create a path for the thumb
 
@@ -135,6 +114,10 @@ public class Meter extends TunerView
     protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);
+
+	// Post invalidate after delay
+
+	postInvalidateDelayed(DELAY);
 
 	// Reset the paint to black
 

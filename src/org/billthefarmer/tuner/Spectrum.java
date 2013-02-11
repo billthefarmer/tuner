@@ -40,9 +40,9 @@ public class Spectrum extends Graticule
 {
     protected Audio audio;
 
-    Path path;
+    private Path path;
 
-    float max;
+    private float max;
 
     // Constructor
 
