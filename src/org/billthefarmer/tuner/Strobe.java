@@ -24,8 +24,6 @@
 
 package org.billthefarmer.tuner;
 
-import org.billthefarmer.tuner.MainActivity.Audio;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -41,7 +39,11 @@ import android.util.AttributeSet;
 
 public class Strobe extends TunerView
 {
-    protected Audio audio;
+    protected int colour;
+    private final static int colours[][] =
+    {{Color.argb(191, 0, 0, 255), Color.argb(191, 0, 255, 255)},
+     {Color.argb(191, 0, 255, 0), Color.argb(191, 191, 255, 0)},
+     {Color.argb(191, 255, 0, 0), Color.argb(191, 255, 191, 0)}};
 
     private Matrix matrix;
 
@@ -59,7 +61,7 @@ public class Strobe extends TunerView
     private double offset;
     private double cents;
 
-    private static final int DELAY = 40;
+    protected static final int DELAY = 40;
 
     // Constructor
 
@@ -74,46 +76,87 @@ public class Strobe extends TunerView
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
+	// Calculate size and scale
+
 	size = height / 4;
 	scale = width / 500.0;
 
+	// Create matrix for translating shaders
+
 	matrix = new Matrix();
 
-	smallShader = new BitmapShader(createShaderBitmap(size, size),
-				       TileMode.REPEAT, TileMode.CLAMP);
-	mediumShader = new BitmapShader(createShaderBitmap(size * 2, size),
-					TileMode.REPEAT, TileMode.CLAMP);
-	largeShader = new BitmapShader(createShaderBitmap(size * 4, size),
-				       TileMode.REPEAT, TileMode.CLAMP);
-	largerShader = new BitmapShader(createShaderBitmap(size * 8, size),
-					TileMode.REPEAT, TileMode.CLAMP);
+	// Create the shaders
+
+	createShaders();
+    }
+
+    // Create shaders
+
+    protected void createShaders()
+    {
+	// Get the colours
+
+	int foreground = colours[colour][0];
+	int background = colours[colour][1];
+
+	// Create the bitmap shaders
+
+	smallShader =
+	    new BitmapShader(createShaderBitmap(size,
+						size, foreground, background),
+			     TileMode.REPEAT, TileMode.CLAMP);
+	mediumShader =
+	    new BitmapShader(createShaderBitmap(size * 2,
+						size, foreground, background),
+			     TileMode.REPEAT, TileMode.CLAMP);
+	largeShader =
+	    new BitmapShader(createShaderBitmap(size * 4,
+						size, foreground, background),
+			     TileMode.REPEAT, TileMode.CLAMP);
+	largerShader =
+	    new BitmapShader(createShaderBitmap(size * 8,
+						size, foreground, background),
+			     TileMode.REPEAT, TileMode.CLAMP);
+
+	// Create the gradients
 
 	smallGradient = new LinearGradient(0, 0, size, 0,
-					   Color.CYAN, Color.BLUE,
+					   background, foreground,
 					   TileMode.MIRROR);
 	mediumGradient = new LinearGradient(0, 0, size * 2, 0,
-					    Color.CYAN, Color.BLUE,
+					    background, foreground,
 					    TileMode.MIRROR);
 	largeGradient = new LinearGradient(0, 0, size * 4, 0,
-					   Color.CYAN, Color.BLUE,
+					   background, foreground,
 					   TileMode.MIRROR);
-	smallGreyGradient = new LinearGradient(0, 0, size, 0,
-					       Color.CYAN, Color.rgb(0, 127, 255),
-					       TileMode.MIRROR);
+
+	// Calculate intermediate colours for the small gradient
+
+	int red = (Color.red(foreground) + Color.red(background)) / 2;
+	int green = (Color.green(foreground) + Color.green(background)) / 2;
+	int blue = (Color.blue(foreground) + Color.blue(background)) / 2;
+
+	smallGreyGradient =
+	    new LinearGradient(0, 0, size, 0,
+			       background,
+			       Color.argb(191, red, green, blue),
+			       TileMode.MIRROR);
     }
 
     // Create shader bitmap
 
-    private Bitmap createShaderBitmap(int width, int height)
+    private Bitmap createShaderBitmap(int width, int height, int f, int b)
     {
-	Bitmap bitmap = Bitmap.createBitmap(width * 2, height, Config.RGB_565);
+	// Create bitmap twice as wide as the block
+
+	Bitmap bitmap = Bitmap.createBitmap(width * 2, height, Config.ARGB_8888);
 	Canvas canvas = new Canvas(bitmap);
 	Paint paint = new Paint();
 
-	int colour = getResources().getColor(android.R.color.background_light);
-	canvas.drawColor(Color.CYAN);
-	colour = getResources().getColor(android.R.color.primary_text_light);
-	paint.setColor(Color.BLUE);
+	// Draw the bitmap
+
+	canvas.drawColor(b);
+	paint.setColor(f);
 	canvas.drawRect(0, 0, width, height, paint);
 
 	return bitmap;

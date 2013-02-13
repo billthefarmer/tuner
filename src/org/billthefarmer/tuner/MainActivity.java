@@ -276,7 +276,7 @@ public class MainActivity extends Activity
     {
 	super.onPause();
 
-	// Save resources
+	// Save preferences
 
 	savePreferences();
 
@@ -292,6 +292,7 @@ public class MainActivity extends Activity
     {
 	super.onStop();
     }
+
     // On settings click
 
     public void onSettingsClick(MenuItem item)
@@ -344,6 +345,26 @@ public class MainActivity extends Activity
 	    audio.multiple = preferences.getBoolean("pref_multiple", false);
 	    audio.strobe = preferences.getBoolean("pref_strobe", false);
 	    audio.zoom = preferences.getBoolean("pref_zoom", true);
+
+	    // Check for strobe before setting colours
+
+	    if (strobe != null)
+	    {
+	    	strobe.colour =
+		    Integer.valueOf(preferences.getString("pref_colour", "0"));
+
+		// Call function to create shaders after delay to
+		// ensure the view dimensions have been set
+
+	    	strobe.postDelayed(new Runnable()
+		    {
+	    		@Override
+	    		public void run()
+	    		{
+			    strobe.createShaders();
+	    		}
+		    }, Strobe.DELAY);
+	    }
 	}
     }
 

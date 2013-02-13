@@ -24,6 +24,8 @@
 
 package org.billthefarmer.tuner;
 
+import org.billthefarmer.tuner.MainActivity.Audio;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -37,6 +39,8 @@ import android.view.View;
 
 public class TunerView extends View
 {
+    protected Audio audio;
+
     protected int width;
     protected int height;
     protected Paint paint;

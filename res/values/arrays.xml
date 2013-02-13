@@ -18,6 +18,17 @@
     <item>5</item>
   </string-array>
 
+  <string-array name="pref_colour_entries">
+      <item>Blue</item>
+      <item>Green</item>
+      <item>Red</item>
+  </string-array>
+  <string-array name="pref_colour_entry_values">
+      <item>0</item>
+      <item>1</item>
+      <item>2</item>
+  </string-array>
+
   <string-array name="pref_sample_rate_entries">
     <item>8000 samples/sec</item>
     <item>11025 samples/sec (default)</item>

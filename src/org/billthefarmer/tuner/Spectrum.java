@@ -24,8 +24,6 @@
 
 package org.billthefarmer.tuner;
 
-import org.billthefarmer.tuner.MainActivity.Audio;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -38,8 +36,6 @@ import android.util.AttributeSet;
 
 public class Spectrum extends Graticule
 {
-    protected Audio audio;
-
     private Path path;
 
     private float max;

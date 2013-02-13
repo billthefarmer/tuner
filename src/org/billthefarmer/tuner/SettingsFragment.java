@@ -37,6 +37,7 @@ public class SettingsFragment extends PreferenceFragment
     implements OnSharedPreferenceChangeListener
 {
     private static final String KEY_PREF_INPUT = "pref_input";
+    private static final String KEY_PREF_COLOUR = "pref_colour";
     private static final String KEY_PREF_SAMPLE = "pref_sample";
     private static final String KEY_PREF_REFERENCE = "pref_reference";
 
@@ -60,14 +61,35 @@ public class SettingsFragment extends PreferenceFragment
 	Preference preference = findPreference(KEY_PREF_INPUT);
 	preference.setSummary(((ListPreference)preference).getEntry());
 
+	preference = findPreference(KEY_PREF_COLOUR);
+	preference.setSummary(((ListPreference)preference).getEntry());
+	int v = Integer.valueOf(((ListPreference)preference).getValue());
+	switch (v)
+	{
+	case 0:
+		((ListPreference)preference).setIcon(R.drawable.ic_pref_blue);
+		((ListPreference)preference).setDialogIcon(R.drawable.ic_pref_blue);
+		break;
+
+	case 1:
+		((ListPreference)preference).setIcon(R.drawable.ic_pref_green);
+		((ListPreference)preference).setDialogIcon(R.drawable.ic_pref_green);
+		break;
+
+	case 2:
+		((ListPreference)preference).setIcon(R.drawable.ic_pref_red);
+		((ListPreference)preference).setDialogIcon(R.drawable.ic_pref_red);
+		break;
+	}
+
 	preference = findPreference(KEY_PREF_SAMPLE);
 	preference.setSummary(((ListPreference)preference).getEntry());
 
 	preference = findPreference(KEY_PREF_REFERENCE);
 	refSummary = (String)preference.getSummary();
 
-	int value = ((NumberPickerPreference)preference).getValue();
-	String s = String.format(refSummary, value);
+	v = ((NumberPickerPreference)preference).getValue();
+	String s = String.format(refSummary, v);
 	preference.setSummary(s);
     }
 
@@ -76,19 +98,50 @@ public class SettingsFragment extends PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences preferences,
 					  String key)
     {
-	if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_SAMPLE))
+	if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_SAMPLE) ||
+			key.equals(KEY_PREF_COLOUR))
 	{
 	    Preference preference = findPreference(key);
+
 	    // Set summary to be the user-description for the selected value
+
 	    preference.setSummary(((ListPreference) preference).getEntry());
+	}
+
+	if (key.equals(KEY_PREF_COLOUR))
+	{
+	    Preference preference = findPreference(key);
+
+	    // Get the value and set the dialog icon
+
+	    int v = Integer.valueOf(((ListPreference)preference).getValue());
+		switch (v)
+		{
+		case 0:
+			((ListPreference)preference).setIcon(R.drawable.ic_pref_blue);
+			((ListPreference)preference).setDialogIcon(R.drawable.ic_pref_blue);
+			break;
+
+		case 1:
+			((ListPreference)preference).setIcon(R.drawable.ic_pref_green);
+			((ListPreference)preference).setDialogIcon(R.drawable.ic_pref_green);
+			break;
+
+		case 2:
+			((ListPreference)preference).setIcon(R.drawable.ic_pref_red);
+			((ListPreference)preference).setDialogIcon(R.drawable.ic_pref_red);
+			break;
+		}
 	}
 
 	if (key.equals(KEY_PREF_REFERENCE))
 	{
 	    Preference preference = findPreference(key);
 
-	    int value = ((NumberPickerPreference)preference).getValue();
-		String s = String.format(refSummary, value);
+	    // Get the value and set the summary
+
+	    int v = ((NumberPickerPreference)preference).getValue();
+		String s = String.format(refSummary, v);
 		preference.setSummary(s);
 	}
     }

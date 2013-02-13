@@ -3,39 +3,57 @@
     		  xmlns:tuner="http://schemas.andoid.com/apk/res/org.billthefarmer.tuner">
   <ListPreference
       android:key="pref_input"
+      android:icon="@drawable/ic_device_access_mic"
       android:title="@string/pref_input"
       android:summary="@string/pref_input_summ"
       android:entries="@array/pref_input_entries"
       android:entryValues="@array/pref_input_entry_values"
+      android:dialogIcon="@drawable/ic_device_access_mic"
       android:defaultValue="@integer/def_input" />
   <CheckBoxPreference
+      android:icon="@drawable/ic_pref_filter"
       android:key="pref_filter"
       android:title="@string/pref_filter"
       android:summary="@string/pref_filter_summ"
       android:defaultValue="true" />
   <CheckBoxPreference
       android:key="pref_down"
+      android:icon="@drawable/ic_pref_downsample"
       android:title="@string/pref_down"
       android:summary="@string/pref_down_summ"
       android:defaultValue="false" />
   <CheckBoxPreference
       android:key="pref_zoom"
+      android:icon="@drawable/ic_pref_zoom"
       android:title="@string/pref_zoom"
       android:summary="@string/pref_zoom_summ"
       android:defaultValue="true" />
   <CheckBoxPreference
       android:key="pref_multiple"
+      android:icon="@drawable/ic_pref_multiple"
       android:title="@string/pref_multiple"
       android:summary="@string/pref_multiple_summ"
       android:persistent="false"
       android:defaultValue="false" />
   <CheckBoxPreference
       android:key="pref_strobe"
+      android:icon="@drawable/ic_pref_strobe"
       android:title="@string/pref_strobe"
       android:summary="@string/pref_strobe_summ"
       android:defaultValue="true" />
   <ListPreference
+      android:key="pref_colour"
+      android:icon="@drawable/ic_pref_blue"
+      android:title="@string/pref_colour"
+      android:summary="@string/pref_colour_summ"
+      android:entries="@array/pref_colour_entries"
+      android:entryValues="@array/pref_colour_entry_values"
+      android:dialogIcon="@drawable/ic_pref_blue"
+      android:defaultValue="0" />
+  <ListPreference
       android:key="pref_sample"
+      android:icon="@drawable/ic_pref_sample_rate"
+      android:dialogIcon="@drawable/ic_pref_sample_rate"
       android:title="@string/pref_sample_rate"
       android:summary="@string/pref_sample_rate_summ"
       android:entries="@array/pref_sample_rate_entries"
@@ -43,6 +61,8 @@
       android:defaultValue="11025" />
   <org.billthefarmer.tuner.NumberPickerPreference
       android:key="pref_reference"
+      android:icon="@drawable/ic_pref_ref"
+      android:dialogIcon="@drawable/ic_pref_ref"
       android:title="@string/pref_ref"
       android:summary="@string/pref_ref_summ"
       android:defaultValue="@integer/def_ref"

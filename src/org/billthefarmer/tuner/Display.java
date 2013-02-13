@@ -24,8 +24,6 @@
 
 package org.billthefarmer.tuner;
 
-import org.billthefarmer.tuner.MainActivity.Audio;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -39,8 +37,6 @@ import android.util.AttributeSet;
 
 public class Display extends TunerView
 {
-    protected Audio audio;
-
     private static final int OCTAVE = 12;
 
     private int large;
