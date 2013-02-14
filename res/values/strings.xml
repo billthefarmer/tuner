@@ -34,6 +34,7 @@
   <string name="downsample">downsample</string>
   <string name="multiple">multiple</string>
 
+  <string name="pref_input_category">Input</string>
   <string name="pref_input">Input source</string>
   <string name="pref_input_summ">%s"</string>
 
@@ -43,6 +44,7 @@
   <string name="pref_down">Downsample</string>
   <string name="pref_down_summ">Downsample output before analysis</string>
 
+  <string name="pref_display">Display</string>
   <string name="pref_zoom">Zoom spectrum</string>
   <string name="pref_zoom_summ">Zoom in to current note on spectrum display</string>
 

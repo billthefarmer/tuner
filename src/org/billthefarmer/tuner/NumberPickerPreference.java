@@ -50,8 +50,10 @@ public class NumberPickerPreference extends DialogPreference
 	TypedArray a =
 	    context.obtainStyledAttributes(attrs,
 					   R.styleable.NumberPickerPreference);
-	mMaxValue = a.getInteger(R.styleable.NumberPickerPreference_maxValue, 450);
-	mMinValue = a.getInteger(R.styleable.NumberPickerPreference_minValue, 430);
+	mMaxValue = a.getInteger(R.styleable.NumberPickerPreference_maxValue,
+				 450);
+	mMinValue = a.getInteger(R.styleable.NumberPickerPreference_minValue,
+				 430);
 	 a.recycle();
     }
 
@@ -60,7 +62,7 @@ public class NumberPickerPreference extends DialogPreference
     {
 	super.onBindDialogView(view);
 
-	mPicker = (NumberPicker)view.findViewById(R.id.picker);
+	mPicker = (NumberPicker)view.findViewById(R.id.number_picker);
 
 	mPicker.setMaxValue(mMaxValue);
 	mPicker.setMinValue(mMinValue);

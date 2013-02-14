@@ -19,7 +19,7 @@
   </string-array>
 
   <string-array name="pref_colour_entries">
-      <item>Blue</item>
+      <item>Blue (default)</item>
       <item>Green</item>
       <item>Red</item>
   </string-array>

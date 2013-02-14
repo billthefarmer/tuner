@@ -54,7 +54,7 @@ public class Strobe extends TunerView
     private LinearGradient smallGradient;
     private LinearGradient mediumGradient;
     private LinearGradient largeGradient;
-    private LinearGradient smallGreyGradient;
+    private LinearGradient smallBlurGradient;
 
     private int size;
     private double scale;
@@ -136,7 +136,7 @@ public class Strobe extends TunerView
 	int green = (Color.green(foreground) + Color.green(background)) / 2;
 	int blue = (Color.blue(foreground) + Color.blue(background)) / 2;
 
-	smallGreyGradient =
+	smallBlurGradient =
 	    new LinearGradient(0, 0, size, 0,
 			       background,
 			       Color.argb(191, red, green, blue),
@@ -219,11 +219,24 @@ public class Strobe extends TunerView
 	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
-	else
-
+	else if (Math.abs(cents) < 45.0)
 	{
-	    smallGreyGradient.setLocalMatrix(matrix);
-	    paint.setShader(smallGreyGradient);
+	    smallBlurGradient.setLocalMatrix(matrix);
+	    paint.setShader(smallBlurGradient);
+	    canvas.drawRect(0, 0, width, size, paint);
+	}
+
+	else
+	{
+	    int red = (Color.red(colours[colour][0]) +
+		       Color.red(colours[colour][1]) * 3) / 4;
+	    int green = (Color.green(colours[colour][0]) +
+			 Color.green(colours[colour][1]) * 3) / 4;
+	    int blue = (Color.blue(colours[colour][0]) +
+			Color.blue(colours[colour][1]) * 3) / 4;
+
+	    paint.setShader(null);
+	    paint.setColor(Color.argb(191, red, green, blue));
 	    canvas.drawRect(0, 0, width, size, paint);
 	}
 

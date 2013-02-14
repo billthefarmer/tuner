@@ -353,17 +353,10 @@ public class MainActivity extends Activity
 	    	strobe.colour =
 		    Integer.valueOf(preferences.getString("pref_colour", "0"));
 
-		// Call function to create shaders after delay to
-		// ensure the view dimensions have been set
+		// Ensure the view dimensions have been set
 
-	    	strobe.postDelayed(new Runnable()
-		    {
-	    		@Override
-	    		public void run()
-	    		{
-			    strobe.createShaders();
-	    		}
-		    }, Strobe.DELAY);
+	    	if (strobe.width > 0 && strobe.height > 0)
+		    strobe.createShaders();
 	    }
 	}
     }
