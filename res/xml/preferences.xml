@@ -67,15 +67,14 @@
       android:entryValues="@array/pref_colour_entry_values"
       android:dialogIcon="@drawable/ic_pref_blue"
       android:defaultValue="0" />
-<!--  <org.billthefarmer.tuner.ColourPickerPreference
+      <org.billthefarmer.tuner.ColourPickerPreference
       android:key="pref_colour_picker"
       android:dependency="pref_strobe"
-      android:icon="@drawable/ic_pref_blue"
+      android:icon="@drawable/ic_pref_strobe"
       android:title="@string/pref_colour"
       android:summary="@string/pref_colour_summ"
-      android:dialogIcon="@drawable/ic_pref_red"
-      android:defaultValue="@integer/def_colour"
-      android:dialogLayout="@layout/colourpicker" /> -->
+      android:dialogIcon="@drawable/ic_pref_strobe"
+      android:defaultValue="@integer/def_colour" />
   </PreferenceCategory>
   <PreferenceCategory
       android:key="pref_ref_category"
@@ -88,7 +87,6 @@
       android:summary="@string/pref_ref_summ"
       android:defaultValue="@integer/def_ref"
       tuner:maxValue="@integer/max_ref"
-      tuner:minValue="@integer/min_ref"
-      android:dialogLayout="@layout/numberpicker" />
+      tuner:minValue="@integer/min_ref" />
   </PreferenceCategory>
 </PreferenceScreen>

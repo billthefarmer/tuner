@@ -57,30 +57,31 @@ public class NumberPickerPreference extends DialogPreference
 	 a.recycle();
     }
 
+    // On create dialog view
+
     @Override
-    protected void onBindDialogView(View view)
+    protected View onCreateDialogView()
     {
-	super.onBindDialogView(view);
+    	mPicker = new NumberPicker(getContext());
 
-	mPicker = (NumberPicker)view.findViewById(R.id.number_picker);
+    	mPicker.setMaxValue(mMaxValue);
+    	mPicker.setMinValue(mMinValue);
+    	mPicker.setValue(mValue);
 
-	mPicker.setMaxValue(mMaxValue);
-	mPicker.setMinValue(mMinValue);
+    	mPicker.setFormatter(new NumberPicker.Formatter()
+    	    {
+    		@SuppressLint("DefaultLocale")
+    		@Override
+    		public String format(int value)
+    		{
+    		    return String.format("%dHz", value);
+    		}
+    	    });
 
-	mPicker.setValue(mValue);
+    	mPicker.setWrapSelectorWheel(false);
+    	mPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
-	mPicker.setFormatter(new NumberPicker.Formatter()
-	    {
-		@SuppressLint("DefaultLocale")
-		@Override
-		public String format(int value)
-		{
-		    return String.format("%dHz", value);
-		}
-	    });
-
-	mPicker.setWrapSelectorWheel(false);
-	mPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+    	return mPicker;
     }
 
     // On get default value
@@ -88,7 +89,7 @@ public class NumberPickerPreference extends DialogPreference
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index)
     {
-	return a.getInteger(index, 0);
+	return a.getInteger(index, mValue);
     }
 
     // On set initial value
