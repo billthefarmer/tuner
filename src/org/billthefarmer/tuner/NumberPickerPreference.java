@@ -50,11 +50,11 @@ public class NumberPickerPreference extends DialogPreference
 	TypedArray a =
 	    context.obtainStyledAttributes(attrs,
 					   R.styleable.NumberPickerPreference);
-	mMaxValue = a.getInteger(R.styleable.NumberPickerPreference_maxValue,
-				 450);
-	mMinValue = a.getInteger(R.styleable.NumberPickerPreference_minValue,
-				 430);
-	 a.recycle();
+	mMaxValue =
+	    a.getInt(R.styleable.NumberPickerPreference_maxValue, 0);
+	mMinValue =
+	    a.getInt(R.styleable.NumberPickerPreference_minValue, 0);
+	a.recycle();
     }
 
     // On create dialog view
@@ -62,26 +62,26 @@ public class NumberPickerPreference extends DialogPreference
     @Override
     protected View onCreateDialogView()
     {
-    	mPicker = new NumberPicker(getContext());
+	mPicker = new NumberPicker(getContext());
 
-    	mPicker.setMaxValue(mMaxValue);
-    	mPicker.setMinValue(mMinValue);
-    	mPicker.setValue(mValue);
+	mPicker.setMaxValue(mMaxValue);
+	mPicker.setMinValue(mMinValue);
+	mPicker.setValue(mValue);
 
-    	mPicker.setFormatter(new NumberPicker.Formatter()
-    	    {
-    		@SuppressLint("DefaultLocale")
-    		@Override
-    		public String format(int value)
-    		{
-    		    return String.format("%dHz", value);
-    		}
-    	    });
+	mPicker.setFormatter(new NumberPicker.Formatter()
+	    {
+		@SuppressLint("DefaultLocale")
+		@Override
+		public String format(int value)
+		{
+		    return String.format("%dHz", value);
+		}
+	    });
 
-    	mPicker.setWrapSelectorWheel(false);
-    	mPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+	mPicker.setWrapSelectorWheel(false);
+	mPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
-    	return mPicker;
+	return mPicker;
     }
 
     // On get default value

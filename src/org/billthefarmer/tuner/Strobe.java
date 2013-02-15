@@ -40,10 +40,16 @@ import android.util.AttributeSet;
 public class Strobe extends TunerView
 {
     protected int colour;
+    protected int foreground;
+    protected int background;
+
     private final static int colours[][] =
     {{Color.argb(191, 0, 0, 255), Color.argb(191, 0, 255, 255)},
      {Color.argb(191, 0, 255, 0), Color.argb(191, 191, 255, 0)},
-     {Color.argb(191, 255, 0, 0), Color.argb(191, 255, 191, 0)}};
+     {Color.argb(191, 255, 0, 0), Color.argb(191, 255, 191, 0)},
+     {Color.argb(191, 0, 0, 255), Color.argb(191, 0, 255, 255)}};
+
+    private static final int CUSTOM = 3;
 
     private Matrix matrix;
 
@@ -94,10 +100,22 @@ public class Strobe extends TunerView
 
     protected void createShaders()
     {
+	int foreground;
+	int background;
+
 	// Get the colours
 
-	int foreground = colours[colour][0];
-	int background = colours[colour][1];
+	if (colour < CUSTOM)
+	{
+	    foreground = colours[colour][0];
+	    background = colours[colour][1];
+	}
+
+	else
+	{
+	    foreground = this.foreground;
+	    background = this.background;
+	}
 
 	// Create the bitmap shaders
 

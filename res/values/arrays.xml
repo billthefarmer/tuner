@@ -19,14 +19,16 @@
   </string-array>
 
   <string-array name="pref_colour_entries">
-      <item>Blue (default)</item>
-      <item>Green</item>
-      <item>Red</item>
+    <item>Blue (default)</item>
+    <item>Green</item>
+    <item>Red</item>
+    <item>Custom</item>
   </string-array>
   <string-array name="pref_colour_entry_values">
-      <item>0</item>
-      <item>1</item>
-      <item>2</item>
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
   </string-array>
 
   <string-array name="pref_sample_rate_entries">

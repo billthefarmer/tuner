@@ -27,6 +27,12 @@ package org.billthefarmer.tuner;
 import android.preference.DialogPreference;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -43,10 +49,11 @@ public class ColourPickerPreference extends DialogPreference
     @Override
     protected View onCreateDialogView()
     {
-    	mPicker = new ColourPicker(getContext());
-    	mPicker.setColour(mColour);
+	mPicker = new ColourPicker(getContext());
+	mPicker.setColour(mColour);
 
-    	return mPicker;
+	setIconColour();
+	return mPicker;
     }
 
     // On get default value
@@ -90,13 +97,34 @@ public class ColourPickerPreference extends DialogPreference
 	{
 	    mColour = mPicker.getColour();
 	    persistInt(mColour);
+	    setIconColour();
 	}
     }
 
-    // Get value
+    // Get colour
 
-    protected int getValue()
+    protected int getColour()
     {
 	return mColour;
+    }
+    
+    private void setIconColour()
+    {
+	BitmapDrawable drawable = (BitmapDrawable)getIcon();
+
+	if (drawable != null)
+	{
+	    Bitmap bitmap = drawable.getBitmap();
+	    bitmap = bitmap.copy(Config.ARGB_8888, true);
+	    int w = bitmap.getWidth();
+	    int h = bitmap.getHeight();
+	    Canvas canvas = new Canvas(bitmap);
+	    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	    paint.setColor(mColour);
+	    paint.setStyle(Style.FILL);
+	    canvas.drawCircle(w / 2, h / 2, w / 6, paint);
+	    drawable = new BitmapDrawable(mPicker.getResources(), bitmap);
+	    setIcon(drawable);
+	}
     }
 }

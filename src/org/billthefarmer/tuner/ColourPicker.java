@@ -28,7 +28,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorMatrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -138,27 +137,6 @@ public class ColourPicker extends View
 	return mCenterPaint.getColor();
     }
 
-    private int floatToByte(float x)
-    {
-	int n = Math.round(x);
-	return n;
-    }
-
-    private int pinToByte(int n)
-    {
-	if (n < 0)
-	{
-	    n = 0;
-	}
-
-	else if (n > 255)
-	{
-	    n = 255;
-	}
-
-	return n;
-    }
-
     private int ave(int s, int d, float p)
     {
 	return s + Math.round(p * (d - s));
@@ -190,33 +168,6 @@ public class ColourPicker extends View
 	int b = ave(Color.blue(c0), Color.blue(c1), p);
 
 	return Color.argb(a, r, g, b);
-    }
-
-    @SuppressWarnings("unused")
-    private int rotateColour(int colour, float rad)
-    {
-	float deg = rad * 180 / 3.1415927f;
-	int r = Color.red(colour);
-	int g = Color.green(colour);
-	int b = Color.blue(colour);
-
-	ColorMatrix cm = new ColorMatrix();
-	ColorMatrix tmp = new ColorMatrix();
-
-	cm.setRGB2YUV();
-	tmp.setRotate(0, deg);
-	cm.postConcat(tmp);
-	tmp.setYUV2RGB();
-	cm.postConcat(tmp);
-
-	final float[] a = cm.getArray();
-
-	int ir = floatToByte(a[0] * r +	 a[1] * g +	 a[2] * b);
-	int ig = floatToByte(a[5] * r +	 a[6] * g +	 a[7] * b);
-	int ib = floatToByte(a[10] * r + a[11] * g + a[12] * b);
-
-	return Color.argb(Color.alpha(colour), pinToByte(ir),
-			  pinToByte(ig), pinToByte(ib));
     }
 
     private static final float PI = 3.1415926f;

@@ -353,6 +353,11 @@ public class MainActivity extends Activity
 	    	strobe.colour =
 		    Integer.valueOf(preferences.getString("pref_colour", "0"));
 
+	    	strobe.background =
+	    			preferences.getInt("pref_background", 0);
+	    	strobe.foreground =
+	    			preferences.getInt("pref_foreground", 0);
+
 		// Ensure the view dimensions have been set
 
 	    	if (strobe.width > 0 && strobe.height > 0)
