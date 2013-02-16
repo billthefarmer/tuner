@@ -1,6 +1,8 @@
 Android Tuner
 =============
 
+![](http://github.com/billthefarmer/tuner/wiki/images/Tuner-portrait.png)
+
 To import this project into the Android ADT you will need to add a
 .project file here. The easiest way to do that is to copy one from
 another project and edit the
