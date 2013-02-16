@@ -24,35 +24,34 @@
 
 package org.billthefarmer.tuner;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.view.MotionEvent;
 import android.view.View;
 
+// Colourpicker
+
 public class ColourPicker extends View
 {
     private Paint mPaint;
-    private Paint mCenterPaint;
+    private Paint mCentrePaint;
     private final int[] mColours;
 
-    private static final int CENTER_X = 100;
-    private static final int CENTER_Y = 100;
-    private static final int CENTER_RADIUS = 32;
-    private static final int MARGIN_Y = 20;
+    private static final int MARGIN = 8;
 
-    private boolean mTrackingCenter;
-    private boolean mHighlightCenter;
+    private static final float PI = (float)Math.PI;
 
-    private int width;
-    @SuppressWarnings("unused")
-	private int height;
-    private int offset;
+    private boolean mTrackingCentre;
+    private int mCircleRadius;
+    private int mStrokeWidth;
+    private int mCentreRadius;
+    private int mOffset;
+
+    // Constructor
 
     public ColourPicker(Context context)
     {
@@ -67,10 +66,9 @@ public class ColourPicker extends View
 	mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	mPaint.setShader(s);
 	mPaint.setStyle(Paint.Style.STROKE);
-	mPaint.setStrokeWidth(32);
 
-	mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	mCenterPaint.setStrokeWidth(5);
+	mCentrePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	mCentrePaint.setStrokeWidth(8);
     }
 
     // On measure
@@ -78,7 +76,17 @@ public class ColourPicker extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), CENTER_Y * 2 + MARGIN_Y * 2);
+	// Go for full width so we can be in the middle
+
+	int w = MeasureSpec.getSize(widthMeasureSpec);
+
+	// Derive the circle radius from the width
+
+	int r = w / 6;
+
+	// Derive the height from the circle radius and the margin
+
+	setMeasuredDimension(w, r * 2 + MARGIN * 2);
     }
 
     // On size changed
@@ -86,58 +94,51 @@ public class ColourPicker extends View
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
-	width = w;
-	height = h;
+	// Calculate the dimensions based on the given values
 
-	offset = width / 2;
+	mCircleRadius = (h - (MARGIN * 2)) / 2;
+	mStrokeWidth = w / 15;
+	mCentreRadius = w / 18;
+	mOffset = w / 2;
+
+	mPaint.setStrokeWidth(mStrokeWidth);
     }
 
-    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas)
     {
-	float r = CENTER_X - mPaint.getStrokeWidth() * 0.5f;
+	float r = mCircleRadius - mStrokeWidth * 0.5f;
 
-	canvas.translate(offset, CENTER_Y + MARGIN_Y);
+	canvas.translate(mOffset, mCircleRadius + MARGIN);
 
-	canvas.drawOval(new RectF(-r, -r, r, r), mPaint);
-	canvas.drawCircle(0, 0, CENTER_RADIUS, mCenterPaint);
+	canvas.drawCircle(0, 0, r, mPaint);
+	canvas.drawCircle(0, 0, mCentreRadius, mCentrePaint);
 
-	if (mTrackingCenter)
+	if (mTrackingCentre)
 	{
-	    int c = mCenterPaint.getColor();
-	    mCenterPaint.setStyle(Paint.Style.STROKE);
-
-	    if (mHighlightCenter)
-	    {
-		mCenterPaint.setAlpha(0xFF);
-	    }
-
-	    else
-	    {
-		mCenterPaint.setAlpha(0x80);
-	    }
+	    int c = mCentrePaint.getColor();
+	    mCentrePaint.setStyle(Paint.Style.STROKE);
 
 	    canvas.drawCircle(0, 0,
-			      CENTER_RADIUS + mCenterPaint.getStrokeWidth(),
-			      mCenterPaint);
+			      mCentreRadius + mStrokeWidth,
+			      mCentrePaint);
 
-	    mCenterPaint.setStyle(Paint.Style.FILL);
-	    mCenterPaint.setColor(c);
+	    mCentrePaint.setStyle(Paint.Style.FILL);
+	    mCentrePaint.setColor(c);
 	}
     }
 
     protected void setColour(int c)
     {
-	mCenterPaint.setColor(c);
+	mCentrePaint.setColor(c);
     }
 
     protected int getColour()
     {
-	return mCenterPaint.getColor();
+	return mCentrePaint.getColor();
     }
 
-    private int ave(int s, int d, float p)
+    private int avg(int s, int d, float p)
     {
 	return s + Math.round(p * (d - s));
     }
@@ -162,47 +163,33 @@ public class ColourPicker extends View
 
 	int c0 = colours[i];
 	int c1 = colours[i+1];
-	int a = ave(Color.alpha(c0), Color.alpha(c1), p);
-	int r = ave(Color.red(c0), Color.red(c1), p);
-	int g = ave(Color.green(c0), Color.green(c1), p);
-	int b = ave(Color.blue(c0), Color.blue(c1), p);
+	int a = avg(Color.alpha(c0), Color.alpha(c1), p);
+	int r = avg(Color.red(c0), Color.red(c1), p);
+	int g = avg(Color.green(c0), Color.green(c1), p);
+	int b = avg(Color.blue(c0), Color.blue(c1), p);
 
 	return Color.argb(a, r, g, b);
     }
 
-    private static final float PI = 3.1415926f;
-
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-	float x = event.getX() - offset;
-	float y = event.getY() - CENTER_Y - MARGIN_Y;
+	float x = event.getX() - mOffset;
+	float y = event.getY() - mCentreRadius - MARGIN;
 
-	boolean inCenter = java.lang.Math.sqrt(x*x + y*y) <= CENTER_RADIUS;
+	boolean inCentre = Math.sqrt(x*x + y*y) <= mCentreRadius;
 
 	switch (event.getAction())
 	{
 	case MotionEvent.ACTION_DOWN:
-	    mTrackingCenter = inCenter;
-	    if (inCenter)
-	    {
-		mHighlightCenter = true;
-		invalidate();
+	    mTrackingCentre = inCentre;
+	    if (inCentre)
 		break;
-	    }
 
 	case MotionEvent.ACTION_MOVE:
-	    if (mTrackingCenter)
+	    if (!mTrackingCentre)
 	    {
-		if (mHighlightCenter != inCenter) {
-		    mHighlightCenter = inCenter;
-		    invalidate();
-		}
-	    }
-
-	    else
-	    {
-		float angle = (float)java.lang.Math.atan2(y, x);
+		float angle = (float)Math.atan2(y, x);
 
 		// need to turn angle [-PI ... PI] into unit [0....1]
 
@@ -212,20 +199,15 @@ public class ColourPicker extends View
 		    unit += 1;
 		}
 
-		mCenterPaint.setColor(interpColour(mColours, unit));
+		mCentrePaint.setColor(interpColour(mColours, unit));
 		invalidate();
 	    }
 	    break;
 
 	case MotionEvent.ACTION_UP:
-	    if (mTrackingCenter)
+	    if (mTrackingCentre)
 	    {
-		if (inCenter)
-		{
-		    // mListener.colourChanged(mCenterPaint.getColor());
-		}
-		    
-		mTrackingCenter = false;	// so we draw w/o halo
+		mTrackingCentre = false;
 		invalidate();
 	    }
 	    break;
@@ -233,5 +215,4 @@ public class ColourPicker extends View
 
 	return true;
     }
-
 }

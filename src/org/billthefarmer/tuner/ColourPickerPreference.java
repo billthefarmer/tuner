@@ -41,10 +41,14 @@ public class ColourPickerPreference extends DialogPreference
     private int mColour;
     private ColourPicker mPicker;
 
+    // Constructor
+
     public ColourPickerPreference(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
     }
+
+    // On create dialog view
 
     @Override
     protected View onCreateDialogView()
@@ -110,20 +114,48 @@ public class ColourPickerPreference extends DialogPreference
     
     private void setIconColour()
     {
+	// Get the drawable icon
+
 	BitmapDrawable drawable = (BitmapDrawable)getIcon();
+
+	// Check we've got one
 
 	if (drawable != null)
 	{
+	    // Get the bitmap
+
 	    Bitmap bitmap = drawable.getBitmap();
+
+	    // Copy it
+
 	    bitmap = bitmap.copy(Config.ARGB_8888, true);
+
+	    // Get the dimensions
+
 	    int w = bitmap.getWidth();
 	    int h = bitmap.getHeight();
+
+	    // Create a canvas to draw in and some paint to draw with
+
 	    Canvas canvas = new Canvas(bitmap);
 	    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+	    // Set the colour ans fill style
+
 	    paint.setColor(mColour);
 	    paint.setStyle(Style.FILL);
+
+	    // Draw a circle in the middle
+
 	    canvas.drawCircle(w / 2, h / 2, w / 6, paint);
+
+	    // Create another drawable from the bitmap
+
 	    drawable = new BitmapDrawable(mPicker.getResources(), bitmap);
+
+	    // Set the icon, all the above just to change the colour
+	    // of the middle circle
+
 	    setIcon(drawable);
 	}
     }

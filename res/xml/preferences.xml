@@ -79,7 +79,7 @@
 	  android:icon="@drawable/ic_pref_colour"
 	  android:title="@string/pref_foreground"
 	  android:summary="@string/pref_foreground_summ"
-	  android:dialogIcon="@drawable/ic_pref_strobe"
+	  android:dialogIcon="@drawable/ic_pref_colour"
 	  android:defaultValue="@integer/def_colour" />
       <org.billthefarmer.tuner.ColourPickerPreference
 	  android:key="pref_background"
@@ -87,7 +87,7 @@
 	  android:icon="@drawable/ic_pref_colour"
 	  android:title="@string/pref_background"
 	  android:summary="@string/pref_background_summ"
-	  android:dialogIcon="@drawable/ic_pref_strobe"
+	  android:dialogIcon="@drawable/ic_pref_colour"
 	  android:defaultValue="@integer/def_colour" />
     </PreferenceScreen>
   </PreferenceCategory>

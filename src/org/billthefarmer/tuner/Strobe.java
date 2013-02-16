@@ -50,6 +50,9 @@ public class Strobe extends TunerView
      {Color.argb(191, 0, 0, 255), Color.argb(191, 0, 255, 255)}};
 
     private static final int CUSTOM = 3;
+    private static final float SLOW = 20;
+    private static final float MEDIUM = 30;
+    private static final float FAST = 40;
 
     private Matrix matrix;
 
@@ -210,11 +213,10 @@ public class Strobe extends TunerView
 	if (offset < 0.0)
 	    offset = size * 16;
 
-	// Reset the paint to black
+	// Reset the paint
 
 	paint.setStrokeWidth(1);
 	paint.setAntiAlias(true);
-	paint.setColor(Color.BLACK);
 	paint.setStyle(Style.FILL);
 
 	// Translate
@@ -223,21 +225,21 @@ public class Strobe extends TunerView
 
 	// Draw the strobe chequers
 
-	if (Math.abs(cents) < 25.0)
+	if (Math.abs(cents) < SLOW)
 	{
 	    smallShader.setLocalMatrix(matrix);
 	    paint.setShader(smallShader);
 	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
-	else if (Math.abs(cents) < 35.0)
+	else if (Math.abs(cents) < MEDIUM)
 	{
 	    smallGradient.setLocalMatrix(matrix);
 	    paint.setShader(smallGradient);
 	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
-	else if (Math.abs(cents) < 45.0)
+	else if (Math.abs(cents) < FAST)
 	{
 	    smallBlurGradient.setLocalMatrix(matrix);
 	    paint.setShader(smallBlurGradient);
@@ -246,19 +248,13 @@ public class Strobe extends TunerView
 
 	else
 	{
-	    int red = (Color.red(colours[colour][0]) +
-		       Color.red(colours[colour][1]) * 3) / 4;
-	    int green = (Color.green(colours[colour][0]) +
-			 Color.green(colours[colour][1]) * 3) / 4;
-	    int blue = (Color.blue(colours[colour][0]) +
-			Color.blue(colours[colour][1]) * 3) / 4;
 
 	    paint.setShader(null);
-	    paint.setColor(Color.argb(191, red, green, blue));
+	    paint.setColor(colours[colour][1]);
 	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
-	if (Math.abs(cents) < 35.0)
+	if (Math.abs(cents) < MEDIUM)
 	{
 	    mediumShader.setLocalMatrix(matrix);
 	    paint.setShader(mediumShader);
@@ -272,7 +268,7 @@ public class Strobe extends TunerView
 	    canvas.drawRect(0, size, width, size * 2, paint);
 	}
 
-	if (Math.abs(cents) < 45)
+	if (Math.abs(cents) < FAST)
 	{
 	    largeShader.setLocalMatrix(matrix);
 	    paint.setShader(largeShader);
