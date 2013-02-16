@@ -140,7 +140,7 @@ public class ColourPickerPreference extends DialogPreference
 	    Canvas canvas = new Canvas(bitmap);
 	    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-	    // Set the colour ans fill style
+	    // Set the colour and fill style
 
 	    paint.setColor(mColour);
 	    paint.setStyle(Style.FILL);

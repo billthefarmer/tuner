@@ -175,7 +175,7 @@ public class ColourPicker extends View
     public boolean onTouchEvent(MotionEvent event)
     {
 	float x = event.getX() - mOffset;
-	float y = event.getY() - mCentreRadius - MARGIN;
+	float y = event.getY() - mCircleRadius - MARGIN;
 
 	boolean inCentre = Math.sqrt(x*x + y*y) <= mCentreRadius;
 
