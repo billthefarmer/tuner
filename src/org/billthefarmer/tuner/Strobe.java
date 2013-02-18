@@ -43,13 +43,11 @@ public class Strobe extends TunerView
     protected int foreground;
     protected int background;
 
-    private final static int colours[][] =
-    {{Color.argb(191, 0, 0, 255), Color.argb(191, 0, 255, 255)},
-     {Color.argb(191, 0, 255, 0), Color.argb(191, 191, 255, 0)},
-     {Color.argb(191, 255, 0, 0), Color.argb(191, 255, 191, 0)},
-     {Color.argb(191, 0, 0, 255), Color.argb(191, 0, 255, 255)}};
-
+    private int fore[];
+    private int back[];
+    
     private static final int CUSTOM = 3;
+
     private static final float SLOW = 20;
     private static final float MEDIUM = 30;
     private static final float FAST = 40;
@@ -108,10 +106,13 @@ public class Strobe extends TunerView
 
 	// Get the colours
 
+	fore = getResources().getIntArray(R.array.foreground_colours);
+	back = getResources().getIntArray(R.array.background_colours);
+
 	if (colour < CUSTOM)
 	{
-	    foreground = colours[colour][0];
-	    background = colours[colour][1];
+	    foreground = fore[colour];
+	    background = back[colour];
 	}
 
 	else
@@ -250,7 +251,7 @@ public class Strobe extends TunerView
 	{
 
 	    paint.setShader(null);
-	    paint.setColor(colours[colour][1]);
+	    paint.setColor(back[colour]);
 	    canvas.drawRect(0, 0, width, size, paint);
 	}
 

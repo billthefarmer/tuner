@@ -100,10 +100,10 @@ public class Status extends View
 
 	s = String.format(getResources().getString(R.string.sample_rate), audio.sample);
 	canvas.drawText(s, margin, 0, paint);
+	float x = margin + paint.measureText(s + "   ");
 
 	// Filter
 
-	float x = margin + paint.measureText(s + "  ");
 	if (audio.filter)
 	{
 	    s = getResources().getString(R.string.filter);

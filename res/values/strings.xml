@@ -25,7 +25,7 @@
   <string name="multiple_on">Multiple notes on</string>
   <string name="multiple_off">Multiple notes off</string>
 
-  <string name="sample_rate">Sample rate: %1.0f</string>
+  <string name="sample_rate">Sample rate: %1.0f samples/sec</string>
 
   <string name="filter">filter</string>
   <string name="zoom">zoom</string>
@@ -54,14 +54,11 @@
   <string name="pref_strobe">Strobe</string>
   <string name="pref_strobe_summ">Show the strobe display</string>
 
-  <string name="pref_colour">Strobe colour</string>
-  <string name="pref_colour_summ">%s</string>
+  <string name="pref_colour">Strobe colours</string>
+  <string name="pref_colour_summ">Change the strobe colours</string>
 
-  <string name="pref_foreground">Foreground</string>
-  <string name="pref_foreground_summ">Custom foreground colour</string>
-
-  <string name="pref_background">Background</string>
-  <string name="pref_background_summ">Custom background colour</string>
+  <string name="pref_custom">Custom</string>
+  <string name="pref_custom_summ">Custom colours</string>
 
   <string name="pref_sample_rate">Sample Rate</string>
   <string name="pref_sample_rate_summ">%s</string>

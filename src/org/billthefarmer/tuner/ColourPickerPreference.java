@@ -36,10 +36,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
+// Colour picker preference
+
 public class ColourPickerPreference extends DialogPreference
 {
     private int mColour;
-    private ColourPicker mPicker;
+    private ColourPicker mForegroundPicker;
+    private ColourPicker mBackgroundPicker;
 
     // Constructor
 
@@ -48,17 +51,32 @@ public class ColourPickerPreference extends DialogPreference
 	super(context, attrs);
     }
 
-    // On create dialog view
+    // On bind dialog view
 
     @Override
-    protected View onCreateDialogView()
+    protected void onBindDialogView(View view)
     {
-	mPicker = new ColourPicker(getContext());
-	mPicker.setColour(mColour);
+    	super.onBindDialogView(view);
 
-	setIconColour();
-	return mPicker;
+    	mForegroundPicker =
+    			(ColourPicker)view.findViewById(R.id.foreground_picker);
+    	mBackgroundPicker =
+    			(ColourPicker)view.findViewById(R.id.background_picker);
+
+    	mForegroundPicker.setColour(mColour);
+    	mBackgroundPicker.setColour(mColour);
+
+    	setIconColour();
     }
+
+    // On create dialog view
+
+//    @Override
+//    protected View onCreateDialogView()
+//    {
+//	mPicker = new ColourPicker(getContext());
+//	return mPicker;
+//    }
 
     // On get default value
 
@@ -99,7 +117,7 @@ public class ColourPickerPreference extends DialogPreference
 
 	if (positiveResult)
 	{
-	    mColour = mPicker.getColour();
+	    mColour = mForegroundPicker.getColour();
 	    persistInt(mColour);
 	    setIconColour();
 	}
@@ -149,12 +167,13 @@ public class ColourPickerPreference extends DialogPreference
 
 	    canvas.drawCircle(w / 2, h / 2, w / 6, paint);
 
-	    // Create another drawable from the bitmap
+	    // Create another drawable from the bitmap using
+	    // the picker's resources because we ain't got none
 
-	    drawable = new BitmapDrawable(mPicker.getResources(), bitmap);
+	    drawable = new BitmapDrawable(mForegroundPicker.getResources(), bitmap);
 
 	    // Set the icon, all the above just to change the colour
-	    // of the middle circle
+	    // of the middle circle in the icon
 
 	    setIcon(drawable);
 	}

@@ -62,6 +62,7 @@
 	android:key="pref_colour_screen"
 	android:icon="@drawable/ic_pref_blue"
 	android:title="@string/pref_colour"
+	android:summary="@string/pref_colour_summ"
 	android:dependency="pref_strobe">
       <ListPreference
 	  android:key="pref_colour"
@@ -74,19 +75,12 @@
 	  android:dialogIcon="@drawable/ic_pref_blue"
 	  android:defaultValue="0" />
       <org.billthefarmer.tuner.ColourPickerPreference
-	  android:key="pref_foreground"
+	  android:key="pref_custom"
 	  android:dependency="pref_strobe"
 	  android:icon="@drawable/ic_pref_colour"
-	  android:title="@string/pref_foreground"
-	  android:summary="@string/pref_foreground_summ"
-	  android:dialogIcon="@drawable/ic_pref_colour"
-	  android:defaultValue="@integer/def_colour" />
-      <org.billthefarmer.tuner.ColourPickerPreference
-	  android:key="pref_background"
-	  android:dependency="pref_strobe"
-	  android:icon="@drawable/ic_pref_colour"
-	  android:title="@string/pref_background"
-	  android:summary="@string/pref_background_summ"
+	  android:title="@string/pref_custom"
+	  android:dialogLayout="@layout/colour_picker_preference"
+	  android:summary="@string/pref_custom_summ"
 	  android:dialogIcon="@drawable/ic_pref_colour"
 	  android:defaultValue="@integer/def_colour" />
     </PreferenceScreen>

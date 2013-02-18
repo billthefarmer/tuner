@@ -1,26 +1,24 @@
-////////////////////////////////////////////////////////////////////////////////
+/*
+ * Copyright (C) 2007 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Severely hacked by:
+// Bill Farmer  william j farmer [at] yahoo [dot] co [dot] uk.
 //
-//  Tuner - An Android Tuner written in Java.
+// 16-02-2013
 //
-//  Copyright (C) 2013	Bill Farmer
-//
-//  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 2 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License along
-//  with this program; if not, write to the Free Software Foundation, Inc.,
-//  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-//
-//  Bill Farmer	 william j farmer [at] yahoo [dot] co [dot] uk.
-//
-///////////////////////////////////////////////////////////////////////////////
 
 package org.billthefarmer.tuner;
 
@@ -30,10 +28,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-// Colourpicker
+// Colour picker
 
 public class ColourPicker extends View
 {
@@ -41,21 +40,19 @@ public class ColourPicker extends View
     private Paint mCentrePaint;
     private final int[] mColours;
 
-    private static final int MARGIN = 8;
-
-    private static final float PI = (float)Math.PI;
-
     private boolean mTrackingCentre;
     private int mCircleRadius;
     private int mStrokeWidth;
     private int mCentreRadius;
     private int mOffset;
 
+    private float hsv[];
+
     // Constructor
 
-    public ColourPicker(Context context)
+    public ColourPicker(Context context, AttributeSet attrs)
     {
-	super(context);
+	super(context, attrs);
 
 	mColours = new int[]
 	    {0xFFFF0000, 0xFFFF00FF, 0xFF0000FF, 0xFF00FFFF, 0xFF00FF00,
@@ -69,6 +66,8 @@ public class ColourPicker extends View
 
 	mCentrePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	mCentrePaint.setStrokeWidth(8);
+
+	hsv = new float[3];
     }
 
     // On measure
@@ -76,17 +75,17 @@ public class ColourPicker extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	// Go for full width so we can be in the middle
+	// Get the specs
 
-	int w = MeasureSpec.getSize(widthMeasureSpec);
+    int w = MeasureSpec.getSize(widthMeasureSpec);
 
-	// Derive the circle radius from the width
+	// Derive the circle diameter from the width
 
-	int r = w / 6;
+	int d = w / 3;
 
 	// Derive the height from the circle radius and the margin
 
-	setMeasuredDimension(w, r * 2 + MARGIN * 2);
+	setMeasuredDimension(d, d);
     }
 
     // On size changed
@@ -96,9 +95,9 @@ public class ColourPicker extends View
     {
 	// Calculate the dimensions based on the given values
 
-	mCircleRadius = (h - (MARGIN * 2)) / 2;
-	mStrokeWidth = w / 15;
-	mCentreRadius = w / 18;
+	mCircleRadius = h / 2;
+	mStrokeWidth = w / 5;
+	mCentreRadius = w / 6;
 	mOffset = w / 2;
 
 	mPaint.setStrokeWidth(mStrokeWidth);
@@ -109,7 +108,7 @@ public class ColourPicker extends View
     {
 	float r = mCircleRadius - mStrokeWidth * 0.5f;
 
-	canvas.translate(mOffset, mCircleRadius + MARGIN);
+	canvas.translate(mOffset, mCircleRadius);
 
 	canvas.drawCircle(0, 0, r, mPaint);
 	canvas.drawCircle(0, 0, mCentreRadius, mCentrePaint);
@@ -138,44 +137,11 @@ public class ColourPicker extends View
 	return mCentrePaint.getColor();
     }
 
-    private int avg(int s, int d, float p)
-    {
-	return s + Math.round(p * (d - s));
-    }
-
-    private int interpColour(int colours[], float unit)
-    {
-	if (unit <= 0)
-	{
-	    return colours[0];
-	}
-
-	if (unit >= 1)
-	{
-	    return colours[colours.length - 1];
-	}
-
-	float p = unit * (colours.length - 1);
-	int i = (int)p;
-	p -= i;
-
-	// now p is just the fractional part [0...1) and i is the index
-
-	int c0 = colours[i];
-	int c1 = colours[i+1];
-	int a = avg(Color.alpha(c0), Color.alpha(c1), p);
-	int r = avg(Color.red(c0), Color.red(c1), p);
-	int g = avg(Color.green(c0), Color.green(c1), p);
-	int b = avg(Color.blue(c0), Color.blue(c1), p);
-
-	return Color.argb(a, r, g, b);
-    }
-
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
 	float x = event.getX() - mOffset;
-	float y = event.getY() - mCircleRadius - MARGIN;
+	float y = event.getY() - mCircleRadius;
 
 	boolean inCentre = Math.sqrt(x*x + y*y) <= mCentreRadius;
 
@@ -189,17 +155,17 @@ public class ColourPicker extends View
 	case MotionEvent.ACTION_MOVE:
 	    if (!mTrackingCentre)
 	    {
-		float angle = (float)Math.atan2(y, x);
+		float angle = (float)Math.toDegrees(Math.atan2(y, x));
 
-		// need to turn angle [-PI ... PI] into unit [0....1]
+		// need to turn angle +-180 to 0-360
 
-		float unit = angle / (2 * PI);
-		if (unit < 0)
-		{
-		    unit += 1;
-		}
+		angle += 180;
+		
+		hsv[0] = angle;
+		hsv[1] = 1;
+		hsv[2] = 1;
 
-		mCentrePaint.setColor(interpColour(mColours, unit));
+		mCentrePaint.setColor(Color.HSVToColor(255, hsv));
 		invalidate();
 	    }
 	    break;

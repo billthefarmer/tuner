@@ -40,8 +40,7 @@ public class SettingsFragment extends PreferenceFragment
     private static final String KEY_PREF_COLOUR = "pref_colour";
     private static final String KEY_PREF_SAMPLE = "pref_sample";
     private static final String KEY_PREF_REFERENCE = "pref_reference";
-    private static final String KEY_PREF_FOREGROUND = "pref_foreground";
-    private static final String KEY_PREF_BACKGROUND = "pref_background";    
+    private static final String KEY_PREF_CUSTOM = "pref_custom";
 
     private String refSummary;
 
@@ -64,14 +63,12 @@ public class SettingsFragment extends PreferenceFragment
 	preference.setSummary(preference.getEntry());
 
 	preference = (ListPreference)findPreference(KEY_PREF_COLOUR);
-	Preference foreground = findPreference(KEY_PREF_FOREGROUND);
-	Preference background = findPreference(KEY_PREF_BACKGROUND);
+	Preference custom = findPreference(KEY_PREF_CUSTOM);
 	preference.setSummary(preference.getEntry());
 
 	// Disable colourpickers
 
-	foreground.setEnabled(false);
-	background.setEnabled(false);
+	custom.setEnabled(false);
 
 	int v = Integer.valueOf(preference.getValue());
 	switch (v)
@@ -82,13 +79,13 @@ public class SettingsFragment extends PreferenceFragment
 		break;
 
 	case 1:
-		preference.setIcon(R.drawable.ic_pref_green);
-		preference.setDialogIcon(R.drawable.ic_pref_green);
+		preference.setIcon(R.drawable.ic_pref_olive);
+		preference.setDialogIcon(R.drawable.ic_pref_olive);
 		break;
 
 	case 2:
-		preference.setIcon(R.drawable.ic_pref_red);
-		preference.setDialogIcon(R.drawable.ic_pref_red);
+		preference.setIcon(R.drawable.ic_pref_magenta);
+		preference.setDialogIcon(R.drawable.ic_pref_magenta);
 		break;
 
 	case 3:
@@ -97,8 +94,7 @@ public class SettingsFragment extends PreferenceFragment
 
 		// Enable colourpickers
 
-		foreground.setEnabled(true);
-		background.setEnabled(true);
+		custom.setEnabled(true);
 		break;
 	}
 
@@ -131,11 +127,9 @@ public class SettingsFragment extends PreferenceFragment
 	if (key.equals(KEY_PREF_COLOUR))
 	{
 	    ListPreference preference = (ListPreference)findPreference(key);
-		Preference foreground = findPreference(KEY_PREF_FOREGROUND);
-		Preference background = findPreference(KEY_PREF_BACKGROUND);
+		Preference custom = findPreference(KEY_PREF_CUSTOM);
 
-		foreground.setEnabled(false);
-		background.setEnabled(false);
+		custom.setEnabled(false);
 
 	    // Get the value and set the dialog icon
 
@@ -148,21 +142,20 @@ public class SettingsFragment extends PreferenceFragment
 			break;
 
 		case 1:
-			preference.setIcon(R.drawable.ic_pref_green);
-			preference.setDialogIcon(R.drawable.ic_pref_green);
+			preference.setIcon(R.drawable.ic_pref_olive);
+			preference.setDialogIcon(R.drawable.ic_pref_olive);
 			break;
 
 		case 2:
-			preference.setIcon(R.drawable.ic_pref_red);
-			preference.setDialogIcon(R.drawable.ic_pref_red);
+			preference.setIcon(R.drawable.ic_pref_magenta);
+			preference.setDialogIcon(R.drawable.ic_pref_magenta);
 			break;
 
 		case 3:
 			preference.setIcon(R.drawable.ic_pref_colour);
 			preference.setDialogIcon(R.drawable.ic_pref_colour);
 
-			foreground.setEnabled(true);
-			background.setEnabled(true);
+			custom.setEnabled(true);
 			break;
 		}
 	}

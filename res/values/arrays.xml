@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
   <string-array name="pref_input_entries">
     <item>Default audio source</item>
@@ -19,9 +20,9 @@
   </string-array>
 
   <string-array name="pref_colour_entries">
-    <item>Blue (default)</item>
-    <item>Green</item>
-    <item>Red</item>
+    <item>Blue/Cyan (default)</item>
+    <item>Olive/Aquamarine</item>
+    <item>Magenta/Yellow</item>
     <item>Custom</item>
   </string-array>
   <string-array name="pref_colour_entry_values">
@@ -30,6 +31,19 @@
     <item>2</item>
     <item>3</item>
   </string-array>
+  
+  <integer-array name="foreground_colours">
+      <item>0xbf0000ff</item>
+      <item>0xbf6f6f00</item>
+      <item>0xbfff00ff</item>
+      <item>0xbf0000ff</item>
+  </integer-array>
+  <integer-array name="background_colours">
+      <item>0xbf00ffff</item>
+      <item>0xbfbfffbf</item>
+      <item>0xbfffff00</item>
+      <item>0xbf0000ff</item>
+  </integer-array>
 
   <string-array name="pref_sample_rate_entries">
     <item>8000 samples/sec</item>
