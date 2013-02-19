@@ -24,15 +24,13 @@
 
 package org.billthefarmer.tuner;
 
+import org.billthefarmer.tuner.ColourPicker.ColourChangeListener;
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.preference.DialogPreference;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -40,7 +38,8 @@ import android.view.View;
 
 public class ColourPickerPreference extends DialogPreference
 {
-    private int mColour;
+    private JSONArray mColours;
+    private StrobeView mStrobe;
     private ColourPicker mForegroundPicker;
     private ColourPicker mBackgroundPicker;
 
@@ -56,34 +55,53 @@ public class ColourPickerPreference extends DialogPreference
     @Override
     protected void onBindDialogView(View view)
     {
-    	super.onBindDialogView(view);
+	super.onBindDialogView(view);
 
-    	mForegroundPicker =
-    			(ColourPicker)view.findViewById(R.id.foreground_picker);
-    	mBackgroundPicker =
-    			(ColourPicker)view.findViewById(R.id.background_picker);
+	mStrobe = (StrobeView)view.findViewById(R.id.strobe);
+	mForegroundPicker =
+	    (ColourPicker)view.findViewById(R.id.foreground_picker);
+	mBackgroundPicker =
+	    (ColourPicker)view.findViewById(R.id.background_picker);
 
-    	mForegroundPicker.setColour(mColour);
-    	mBackgroundPicker.setColour(mColour);
+	try
+	{
+	    mForegroundPicker.setColour(mColours.getInt(0));
+	    mBackgroundPicker.setColour(mColours.getInt(1));
+	}
 
-    	setIconColour();
+	catch (JSONException e)
+	{
+	    e.printStackTrace();
+	}
+
+	mStrobe.foreground = mForegroundPicker.getColour();
+	mStrobe.background = mBackgroundPicker.getColour();
+	
+	mForegroundPicker.setListener(new ColourChangeListener()
+	    {
+		public void onColourChanged(int c)
+		{
+		    mStrobe.foreground = c;
+		    mStrobe.createShaders();
+		}
+	    });
+
+	mBackgroundPicker.setListener(new ColourChangeListener()
+	    {
+		public void onColourChanged(int c)
+		{
+		    mStrobe.background = c;
+		    mStrobe.createShaders();
+		}
+	    });
     }
-
-    // On create dialog view
-
-//    @Override
-//    protected View onCreateDialogView()
-//    {
-//	mPicker = new ColourPicker(getContext());
-//	return mPicker;
-//    }
 
     // On get default value
 
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index)
     {
-	return a.getInteger(index, 0);
+	return a.getString(index);
     }
 
     // On set initial value
@@ -96,15 +114,32 @@ public class ColourPickerPreference extends DialogPreference
 	{
 	    // Restore existing state
 
-	    mColour = getPersistedInt(0);
+	    try
+	    {
+		mColours = new JSONArray(getPersistedString(null));
+	    }
+
+	    catch (JSONException e)
+	    {
+		e.printStackTrace();
+	    }
 	}
 
 	else
 	{
 	    // Set default state from the XML attribute
 
-	    mColour = (Integer) defaultValue;
-	    persistInt(mColour);
+	    try
+	    {
+		mColours = new JSONArray((String)defaultValue);
+	    }
+
+	    catch (JSONException e)
+	    {
+		e.printStackTrace();
+	    }
+
+	    persistString(mColours.toString());
 	}
     }
 
@@ -117,65 +152,12 @@ public class ColourPickerPreference extends DialogPreference
 
 	if (positiveResult)
 	{
-	    mColour = mForegroundPicker.getColour();
-	    persistInt(mColour);
-	    setIconColour();
-	}
-    }
+	    mColours = new JSONArray();
 
-    // Get colour
+	    mColours.put(mForegroundPicker.getColour());
+	    mColours.put(mBackgroundPicker.getColour());
 
-    protected int getColour()
-    {
-	return mColour;
-    }
-    
-    private void setIconColour()
-    {
-	// Get the drawable icon
-
-	BitmapDrawable drawable = (BitmapDrawable)getIcon();
-
-	// Check we've got one
-
-	if (drawable != null)
-	{
-	    // Get the bitmap
-
-	    Bitmap bitmap = drawable.getBitmap();
-
-	    // Copy it
-
-	    bitmap = bitmap.copy(Config.ARGB_8888, true);
-
-	    // Get the dimensions
-
-	    int w = bitmap.getWidth();
-	    int h = bitmap.getHeight();
-
-	    // Create a canvas to draw in and some paint to draw with
-
-	    Canvas canvas = new Canvas(bitmap);
-	    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-	    // Set the colour and fill style
-
-	    paint.setColor(mColour);
-	    paint.setStyle(Style.FILL);
-
-	    // Draw a circle in the middle
-
-	    canvas.drawCircle(w / 2, h / 2, w / 6, paint);
-
-	    // Create another drawable from the bitmap using
-	    // the picker's resources because we ain't got none
-
-	    drawable = new BitmapDrawable(mForegroundPicker.getResources(), bitmap);
-
-	    // Set the icon, all the above just to change the colour
-	    // of the middle circle in the icon
-
-	    setIcon(drawable);
+	    persistString(mColours.toString());
 	}
     }
 }

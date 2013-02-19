@@ -34,10 +34,15 @@
   <string name="downsample">downsample</string>
   <string name="multiple">multiple</string>
 
+  <string name="def_custom">[0.0,180.0]</string>
+
   <string name="pref_input_category">Input</string>
   <string name="pref_input">Input source</string>
   <string name="pref_input_summ">%s"</string>
 
+  <string name="pref_sample_rate">Sample Rate</string>
+  <string name="pref_sample_rate_summ">%s</string>
+  
   <string name="pref_filter">Audio filter</string>
   <string name="pref_filter_summ">Filter input audio from microphone</string>
 
@@ -59,9 +64,6 @@
 
   <string name="pref_custom">Custom</string>
   <string name="pref_custom_summ">Custom colours</string>
-
-  <string name="pref_sample_rate">Sample Rate</string>
-  <string name="pref_sample_rate_summ">%s</string>
 
   <string name="pref_ref">Reference</string>
   <string name="pref_ref_summ">%dHz</string>

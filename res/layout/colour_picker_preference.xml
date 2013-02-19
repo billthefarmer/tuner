@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="horizontal"
     android:gravity="center">
 
-  <!-- Icon -->
-  <ImageView
-      android:id="@+id/image"
-      android:src="@drawable/ic_tuner"
+  <!-- Strobe -->
+
+  <org.billthefarmer.tuner.StrobeView
+      android:id="@+id/strobe"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_margin="8dip"
-      />
+      android:layout_margin="8dip"/>
 
   <LinearLayout
       android:id="@+id/pickers"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:gravity="center"
-      android:orientation="horizontal" >
-
+      android:orientation="horizontal"
+      android:gravity="center" >
+      
     <!-- Foreground -->
+
     <org.billthefarmer.tuner.ColourPicker
-	android:id="@+id/foreground_picker"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginTop="8dip"
-	android:layout_marginBottom="8dip"
-	android:layout_marginEnd="8dip"
-	android:layout_weight="1"
-	/>
+        android:id="@+id/foreground_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dip" />
 
     <!-- Background -->
+
     <org.billthefarmer.tuner.ColourPicker
-	android:id="@+id/background_picker"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:layout_marginTop="8dip"
-	android:layout_marginBottom="8dip"
-	android:layout_marginEnd="8dip"
-	android:layout_weight="1"
-	/>
+        android:id="@+id/background_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dip" />
 
   </LinearLayout>
 

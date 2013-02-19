@@ -45,7 +45,7 @@ public class SettingsFragment extends PreferenceFragment
     private String refSummary;
 
     @SuppressLint("DefaultLocale")
-	@Override
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
@@ -59,7 +59,8 @@ public class SettingsFragment extends PreferenceFragment
 
 	preferences.registerOnSharedPreferenceChangeListener(this);
 
-	ListPreference preference = (ListPreference)findPreference(KEY_PREF_INPUT);
+	ListPreference preference =
+	    (ListPreference)findPreference(KEY_PREF_INPUT);
 	preference.setSummary(preference.getEntry());
 
 	preference = (ListPreference)findPreference(KEY_PREF_COLOUR);
@@ -74,34 +75,35 @@ public class SettingsFragment extends PreferenceFragment
 	switch (v)
 	{
 	case 0:
-		preference.setIcon(R.drawable.ic_pref_blue);
-		preference.setDialogIcon(R.drawable.ic_pref_blue);
-		break;
+	    preference.setIcon(R.drawable.ic_pref_blue);
+	    preference.setDialogIcon(R.drawable.ic_pref_blue);
+	    break;
 
 	case 1:
-		preference.setIcon(R.drawable.ic_pref_olive);
-		preference.setDialogIcon(R.drawable.ic_pref_olive);
-		break;
+	    preference.setIcon(R.drawable.ic_pref_olive);
+	    preference.setDialogIcon(R.drawable.ic_pref_olive);
+	    break;
 
 	case 2:
-		preference.setIcon(R.drawable.ic_pref_magenta);
-		preference.setDialogIcon(R.drawable.ic_pref_magenta);
-		break;
+	    preference.setIcon(R.drawable.ic_pref_magenta);
+	    preference.setDialogIcon(R.drawable.ic_pref_magenta);
+	    break;
 
 	case 3:
-		preference.setIcon(R.drawable.ic_pref_colour);
-		preference.setDialogIcon(R.drawable.ic_pref_colour);
+	    preference.setIcon(R.drawable.ic_pref_colour);
+	    preference.setDialogIcon(R.drawable.ic_pref_colour);
 
-		// Enable colourpickers
+	    // Enable colourpickers
 
-		custom.setEnabled(true);
-		break;
+	    custom.setEnabled(true);
+	    break;
 	}
 
 	preference = (ListPreference)findPreference(KEY_PREF_SAMPLE);
 	preference.setSummary(preference.getEntry());
 
-	NumberPickerPreference picker = (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
+	NumberPickerPreference picker =
+	    (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
 	refSummary = (String)picker.getSummary();
 
 	v = picker.getValue();
@@ -115,7 +117,7 @@ public class SettingsFragment extends PreferenceFragment
 					  String key)
     {
 	if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_SAMPLE) ||
-			key.equals(KEY_PREF_COLOUR))
+	    key.equals(KEY_PREF_COLOUR))
 	{
 	    Preference preference = findPreference(key);
 
@@ -127,48 +129,49 @@ public class SettingsFragment extends PreferenceFragment
 	if (key.equals(KEY_PREF_COLOUR))
 	{
 	    ListPreference preference = (ListPreference)findPreference(key);
-		Preference custom = findPreference(KEY_PREF_CUSTOM);
+	    Preference custom = findPreference(KEY_PREF_CUSTOM);
 
-		custom.setEnabled(false);
+	    custom.setEnabled(false);
 
 	    // Get the value and set the dialog icon
 
 	    int v = Integer.valueOf(((ListPreference)preference).getValue());
-		switch (v)
-		{
-		case 0:
-			preference.setIcon(R.drawable.ic_pref_blue);
-			preference.setDialogIcon(R.drawable.ic_pref_blue);
-			break;
+	    switch (v)
+	    {
+	    case 0:
+		preference.setIcon(R.drawable.ic_pref_blue);
+		preference.setDialogIcon(R.drawable.ic_pref_blue);
+		break;
 
-		case 1:
-			preference.setIcon(R.drawable.ic_pref_olive);
-			preference.setDialogIcon(R.drawable.ic_pref_olive);
-			break;
+	    case 1:
+		preference.setIcon(R.drawable.ic_pref_olive);
+		preference.setDialogIcon(R.drawable.ic_pref_olive);
+		break;
 
-		case 2:
-			preference.setIcon(R.drawable.ic_pref_magenta);
-			preference.setDialogIcon(R.drawable.ic_pref_magenta);
-			break;
+	    case 2:
+		preference.setIcon(R.drawable.ic_pref_magenta);
+		preference.setDialogIcon(R.drawable.ic_pref_magenta);
+		break;
 
-		case 3:
-			preference.setIcon(R.drawable.ic_pref_colour);
-			preference.setDialogIcon(R.drawable.ic_pref_colour);
+	    case 3:
+		preference.setIcon(R.drawable.ic_pref_colour);
+		preference.setDialogIcon(R.drawable.ic_pref_colour);
 
-			custom.setEnabled(true);
-			break;
-		}
+		custom.setEnabled(true);
+		break;
+	    }
 	}
 
 	if (key.equals(KEY_PREF_REFERENCE))
 	{
-	    NumberPickerPreference preference = (NumberPickerPreference)findPreference(key);
+	    NumberPickerPreference preference =
+		(NumberPickerPreference)findPreference(key);
 
 	    // Get the value and set the summary
 
 	    int v = preference.getValue();
-		String s = String.format(refSummary, v);
-		preference.setSummary(s);
+	    String s = String.format(refSummary, v);
+	    preference.setSummary(s);
 	}
     }
 }

@@ -24,6 +24,9 @@
 
 package org.billthefarmer.tuner;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -350,17 +353,32 @@ public class MainActivity extends Activity
 
 	    if (strobe != null)
 	    {
-	    	strobe.colour =
+		strobe.colour =
 		    Integer.valueOf(preferences.getString("pref_colour", "0"));
 
-	    	strobe.background =
-	    			preferences.getInt("pref_background", 0);
-	    	strobe.foreground =
-	    			preferences.getInt("pref_foreground", 0);
+		if (strobe.colour == 3)
+		{
+		    JSONArray custom;
+
+		    try
+		    {
+			custom =
+			    new JSONArray(preferences.getString("pref_custom",
+								null));
+
+			strobe.foreground = custom.getInt(0);
+			strobe.background = custom.getInt(1);
+		    }
+
+		    catch (JSONException e)
+		    {
+			e.printStackTrace();
+		    }
+		}
 
 		// Ensure the view dimensions have been set
 
-	    	if (strobe.width > 0 && strobe.height > 0)
+		if (strobe.width > 0 && strobe.height > 0)
 		    strobe.createShaders();
 	    }
 	}

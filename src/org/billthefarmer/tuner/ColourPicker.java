@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,7 +15,7 @@
  */
 
 // Severely hacked by:
-// Bill Farmer  william j farmer [at] yahoo [dot] co [dot] uk.
+// Bill Farmer	william j farmer [at] yahoo [dot] co [dot] uk.
 //
 // 16-02-2013
 //
@@ -36,9 +36,11 @@ import android.view.View;
 
 public class ColourPicker extends View
 {
-    private Paint mPaint;
+    private Paint mCirclePaint;
     private Paint mCentrePaint;
-    private final int[] mColours;
+    private final int[] mColours =
+    {Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN,
+     Color.GREEN, Color.YELLOW, Color.RED};
 
     private boolean mTrackingCentre;
     private int mCircleRadius;
@@ -46,7 +48,19 @@ public class ColourPicker extends View
     private int mCentreRadius;
     private int mOffset;
 
-    private float hsv[];
+    private float hsv[] = {0, 1, 1};
+
+    private final static int WIDTH = 160;
+    private final static int HEIGHT = 160;
+    
+    // Colour change listener
+
+    private ColourChangeListener listener;
+
+    protected interface ColourChangeListener
+    {
+	void onColourChanged(int colour);
+    }
 
     // Constructor
 
@@ -54,20 +68,14 @@ public class ColourPicker extends View
     {
 	super(context, attrs);
 
-	mColours = new int[]
-	    {0xFFFF0000, 0xFFFF00FF, 0xFF0000FF, 0xFF00FFFF, 0xFF00FF00,
-	     0xFFFFFF00, 0xFFFF0000};
+	Shader shader = new SweepGradient(0, 0, mColours, null);
 
-	Shader s = new SweepGradient(0, 0, mColours, null);
-
-	mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	mPaint.setShader(s);
-	mPaint.setStyle(Paint.Style.STROKE);
+	mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	mCirclePaint.setShader(shader);
+	mCirclePaint.setStyle(Paint.Style.STROKE);
 
 	mCentrePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	mCentrePaint.setStrokeWidth(8);
-
-	hsv = new float[3];
     }
 
     // On measure
@@ -75,17 +83,7 @@ public class ColourPicker extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	// Get the specs
-
-    int w = MeasureSpec.getSize(widthMeasureSpec);
-
-	// Derive the circle diameter from the width
-
-	int d = w / 3;
-
-	// Derive the height from the circle radius and the margin
-
-	setMeasuredDimension(d, d);
+	setMeasuredDimension(WIDTH, HEIGHT);
     }
 
     // On size changed
@@ -100,8 +98,10 @@ public class ColourPicker extends View
 	mCentreRadius = w / 6;
 	mOffset = w / 2;
 
-	mPaint.setStrokeWidth(mStrokeWidth);
+	mCirclePaint.setStrokeWidth(mStrokeWidth);
     }
+
+    // On draw
 
     @Override
     protected void onDraw(Canvas canvas)
@@ -110,32 +110,32 @@ public class ColourPicker extends View
 
 	canvas.translate(mOffset, mCircleRadius);
 
-	canvas.drawCircle(0, 0, r, mPaint);
+	canvas.drawCircle(0, 0, r, mCirclePaint);
 	canvas.drawCircle(0, 0, mCentreRadius, mCentrePaint);
-
-	if (mTrackingCentre)
-	{
-	    int c = mCentrePaint.getColor();
-	    mCentrePaint.setStyle(Paint.Style.STROKE);
-
-	    canvas.drawCircle(0, 0,
-			      mCentreRadius + mStrokeWidth,
-			      mCentrePaint);
-
-	    mCentrePaint.setStyle(Paint.Style.FILL);
-	    mCentrePaint.setColor(c);
-	}
     }
+
+    // Set listener
+
+    protected void setListener(ColourChangeListener l)
+    {
+	listener = l;
+    }
+
+    // Set colour
 
     protected void setColour(int c)
     {
 	mCentrePaint.setColor(c);
     }
 
+    // Get colour
+
     protected int getColour()
     {
 	return mCentrePaint.getColor();
     }
+
+    // On touch event
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
@@ -143,29 +143,30 @@ public class ColourPicker extends View
 	float x = event.getX() - mOffset;
 	float y = event.getY() - mCircleRadius;
 
-	boolean inCentre = Math.sqrt(x*x + y*y) <= mCentreRadius;
+	boolean inCentre = Math.sqrt(x * x + y * y) <= mCentreRadius;
 
 	switch (event.getAction())
 	{
 	case MotionEvent.ACTION_DOWN:
 	    mTrackingCentre = inCentre;
 	    if (inCentre)
+	    {
+		if (listener != null)
+		    listener.onColourChanged(mCentrePaint.getColor());
+
 		break;
+	    }
 
 	case MotionEvent.ACTION_MOVE:
 	    if (!mTrackingCentre)
 	    {
-		float angle = (float)Math.toDegrees(Math.atan2(y, x));
+		float angle = (float)Math.toDegrees(Math.atan2(y, -x));
 
 		// need to turn angle +-180 to 0-360
 
-		angle += 180;
-		
-		hsv[0] = angle;
-		hsv[1] = 1;
-		hsv[2] = 1;
+		hsv[0] = angle + 180;
 
-		mCentrePaint.setColor(Color.HSVToColor(255, hsv));
+		mCentrePaint.setColor(Color.HSVToColor(hsv));
 		invalidate();
 	    }
 	    break;

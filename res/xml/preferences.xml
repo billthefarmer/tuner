@@ -82,7 +82,7 @@
 	  android:dialogLayout="@layout/colour_picker_preference"
 	  android:summary="@string/pref_custom_summ"
 	  android:dialogIcon="@drawable/ic_pref_colour"
-	  android:defaultValue="@integer/def_colour" />
+	  android:defaultValue="@string/def_custom" />
     </PreferenceScreen>
   </PreferenceCategory>
   <PreferenceCategory
