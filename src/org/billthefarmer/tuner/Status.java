@@ -147,6 +147,15 @@ public class Status extends View
 	    x += paint.measureText(s + " ");
 	}
 
+	// Screen
+
+	if (audio.screen)
+	{
+		s = getResources().getString(R.string.screen);
+	    canvas.drawText(s, x, 0, paint);
+	    x += paint.measureText(s + " ");
+	}
+
 	// Strobe
 
 	if (audio.strobe)

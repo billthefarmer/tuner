@@ -90,6 +90,11 @@ public class Strobe extends TunerView
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
+	// Recalculate dimensions
+
+	width = clipRect.right - clipRect.left;
+	height = clipRect.bottom - clipRect.top;
+
 	// Calculate size and scale
 
 	size = height / 4;

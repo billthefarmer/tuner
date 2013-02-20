@@ -26,11 +26,13 @@ package org.billthefarmer.tuner;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 
 // Display
@@ -63,6 +65,11 @@ public class Display extends TunerView
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	super.onSizeChanged(w, h, oldw, oldh);
+
+	// Recalculate dimensions
+
+	width = clipRect.right - clipRect.left;
+	height = clipRect.bottom - clipRect.top;
 
 	// Calculate text sizes
 	
@@ -103,6 +110,19 @@ public class Display extends TunerView
 	paint.setColor(Color.BLACK);
 	paint.setTextAlign(Align.LEFT);
 	paint.setStyle(Style.FILL);
+
+	// Translate to the clip rect
+
+	canvas.translate(clipRect.left, clipRect.top);
+
+	if (audio.lock)
+	{
+		BitmapDrawable drawable =
+				(BitmapDrawable)getResources().getDrawable(R.drawable.ic_locked);
+		Bitmap bitmap = drawable.getBitmap();
+		canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+		drawable.draw(canvas);
+	}
 
 	// Multiple values
 

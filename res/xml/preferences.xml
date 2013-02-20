@@ -28,7 +28,7 @@
 	android:key="pref_filter"
 	android:title="@string/pref_filter"
 	android:summary="@string/pref_filter_summ"
-	android:defaultValue="true" />
+	android:defaultValue="false" />
     <CheckBoxPreference
 	android:key="pref_down"
 	android:icon="@drawable/ic_pref_downsample"
@@ -40,6 +40,13 @@
       android:key="pref_display_category"
       android:title="@string/pref_display">
     <CheckBoxPreference
+	android:key="pref_screen"
+	android:icon="@drawable/ic_pref_screen"
+	android:title="@string/pref_screen"
+ 	android:summary="@string/pref_screen_summ"
+	android:persistent="true"
+	android:defaultValue="false" />
+   <CheckBoxPreference
 	android:key="pref_zoom"
 	android:icon="@drawable/ic_pref_zoom"
 	android:title="@string/pref_zoom"

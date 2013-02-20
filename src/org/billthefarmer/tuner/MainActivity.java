@@ -45,6 +45,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.Window;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
 
 // Main Activity
@@ -59,6 +61,7 @@ public class MainActivity extends Activity
     private Scope scope;
 
     private Audio audio;
+    private Toast toast;
 
     // On Create
 
@@ -184,6 +187,7 @@ public class MainActivity extends Activity
 		    public void onClick(View v)
 		    {
 			audio.lock = !audio.lock;
+			display.invalidate();
 
 			if (audio.lock)
 			    showToast(R.string.lock_on);
@@ -222,20 +226,57 @@ public class MainActivity extends Activity
 
 			if (audio.strobe)
 			    showToast(R.string.strobe_on);
+
 			else
 			    showToast(R.string.strobe_off);
 		    }
 		});
+
+    // Meter
+
+    if (meter != null)
+    	meter.setOnClickListener(new OnClickListener()
+		{
+		    @Override
+		    public void onClick(View v)
+		    {
+		    	audio.screen = !audio.screen;
+
+		    	if (audio.screen)
+		    		showToast(R.string.screen_on);
+
+		    	else
+		    		showToast(R.string.screen_off);
+
+		    	if (audio.screen)
+		    	{
+		    		Window window = getWindow();
+		    		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		    	}
+
+		    	else
+		    	{
+		    		Window window = getWindow();
+		    		window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		    	}
+		    }
+		});
     }
-    
-    // Show toast
+
+    // Show toast.
 
     void showToast(int key)
     {
 	String text = getResources().getString(key);
 
-	Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+	// Cancel the last one
 
+	if (toast != null)
+		toast.cancel();
+
+	// Make a new one
+
+	toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
 	toast.setGravity(Gravity.CENTER, 0, 0);
 	toast.show();
 
@@ -316,6 +357,7 @@ public class MainActivity extends Activity
 	editor.putBoolean("pref_filter", audio.filter);
 	editor.putBoolean("pref_down", audio.downsample);
 	editor.putBoolean("pref_multiple", audio.multiple);
+	editor.putBoolean("pref_screen", audio.screen);
 	editor.putBoolean("pref_strobe", audio.strobe);
 	editor.putBoolean("pref_zoom", audio.zoom);
 
@@ -346,8 +388,23 @@ public class MainActivity extends Activity
 	    audio.filter = preferences.getBoolean("pref_filter", false);
 	    audio.downsample = preferences.getBoolean("pref_down", false);
 	    audio.multiple = preferences.getBoolean("pref_multiple", false);
+	    audio.screen = preferences.getBoolean("pref_screen", false);
 	    audio.strobe = preferences.getBoolean("pref_strobe", false);
 	    audio.zoom = preferences.getBoolean("pref_zoom", true);
+
+	    // Check screen
+
+	    if (audio.screen)
+	    {
+    		Window window = getWindow();
+    		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+	    }
+
+	    else
+	    {
+    		Window window = getWindow();
+    		window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+	    }
 
 	    // Check for strobe before setting colours
 
@@ -429,6 +486,7 @@ public class MainActivity extends Activity
 	protected boolean lock;
 	protected boolean zoom;
 	protected boolean filter;
+	protected boolean screen;
 	protected boolean strobe;
 	protected boolean multiple;
 	protected boolean downsample;

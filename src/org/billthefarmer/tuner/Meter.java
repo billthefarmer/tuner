@@ -26,6 +26,7 @@ package org.billthefarmer.tuner;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -33,6 +34,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -78,6 +80,11 @@ public class Meter extends TunerView
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
+	// Recalculate dimensions
+
+	width = clipRect.right - clipRect.left;
+	height = clipRect.bottom - clipRect.top;
+
 	// Recalculate text size
 
 	medium = height / 3.0f;
@@ -114,6 +121,19 @@ public class Meter extends TunerView
 	// Post invalidate after delay
 
 	postInvalidateDelayed(DELAY);
+
+	// Translate to the clip rect
+
+	canvas.translate(clipRect.left, clipRect.top);
+
+	if (audio.screen)
+	{
+		BitmapDrawable drawable =
+				(BitmapDrawable)getResources().getDrawable(R.drawable.ic_pref_screen);
+		Bitmap bitmap = drawable.getBitmap();
+		canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+		drawable.draw(canvas);
+	}
 
 	// Reset the paint to black
 
