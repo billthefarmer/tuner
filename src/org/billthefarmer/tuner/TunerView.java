@@ -30,6 +30,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -69,7 +70,7 @@ public class TunerView extends View
 	// the outline and clipping
 
 	outlineRect = new RectF(1, 1, width - 1, height - 1);
-	clipRect = new Rect(4, 4, width - 4, height - 4);
+	clipRect = new Rect(3, 3, width - 3, height - 3);
     }
 
     // On Draw
@@ -81,7 +82,7 @@ public class TunerView extends View
 	paint.setStrokeWidth(3);
 	paint.setAntiAlias(true);
 	paint.setColor(Color.GRAY);
-	paint.setStyle(Paint.Style.STROKE);
+	paint.setStyle(Style.STROKE);
 	canvas.drawRoundRect(outlineRect, 10, 10, paint);
 
 	// Set the cliprect

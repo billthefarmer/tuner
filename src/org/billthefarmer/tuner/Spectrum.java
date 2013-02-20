@@ -49,12 +49,11 @@ public class Spectrum extends Graticule
 	path = new Path();
     }
 
-    // On draw
+    // Draw trace
 
     @SuppressLint("DefaultLocale")
-    protected void onDraw(Canvas canvas)
+    protected void drawTrace(Canvas canvas)
     {
-	super.onDraw(canvas);
 
 	// Check for data
 

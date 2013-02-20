@@ -105,9 +105,9 @@ public class StrobeView extends View
 	// Create rounded bitmap
 
 	rounded = Bitmap.createBitmap(w, h, Config.ARGB_8888);
-	Canvas canvas = new Canvas(rounded);    
+	Canvas canvas = new Canvas(rounded);	
 	paint.setColor(Color.WHITE);
-	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);     
+	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);	
 
 	// Create magic paint
 

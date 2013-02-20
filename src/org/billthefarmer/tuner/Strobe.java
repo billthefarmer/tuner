@@ -33,7 +33,10 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
 import android.graphics.Paint.Style;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
 
@@ -53,6 +56,10 @@ public class Strobe extends TunerView
     private static final float FAST = 40;
 
     private Matrix matrix;
+    private Canvas source;
+    private Bitmap bitmap;
+    private Bitmap rounded;
+    private Paint xferPaint;
 
     private BitmapShader smallShader;
     private BitmapShader mediumShader;
@@ -88,6 +95,23 @@ public class Strobe extends TunerView
 	size = height / 4;
 	scale = width / 500.0;
 
+	// Create rounded bitmap
+
+	rounded = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	Canvas canvas = new Canvas(rounded);
+	paint.setColor(Color.WHITE);
+	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);	
+
+	// Create magic paint
+
+	xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	xferPaint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
+
+	// Create a bitmap to draw on
+
+	bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	source = new Canvas(bitmap);
+
 	// Create matrix for translating shaders
 
 	matrix = new Matrix();
@@ -101,9 +125,6 @@ public class Strobe extends TunerView
 
     protected void createShaders()
     {
-	int foreground;
-	int background;
-
 	// Get the colours
 
 	fore = getResources().getIntArray(R.array.foreground_colours);
@@ -113,12 +134,6 @@ public class Strobe extends TunerView
 	{
 	    foreground = fore[colour];
 	    background = back[colour];
-	}
-
-	else
-	{
-	    foreground = this.foreground;
-	    background = this.background;
 	}
 
 	// Create the bitmap shaders
@@ -214,6 +229,24 @@ public class Strobe extends TunerView
 	if (offset < 0.0)
 	    offset = size * 16;
 
+	// Draw strobe
+
+	drawStrobe(source);
+
+	// Use the magic paint
+
+	source.drawBitmap(rounded, 0, 0, xferPaint);
+
+	// Draw the result on the canvas
+
+	canvas.drawBitmap(bitmap, 0, 0, null);
+	paint.setShader(null);
+    }
+
+    // Draw strobe
+
+    private void drawStrobe(Canvas canvas)
+    {
 	// Reset the paint
 
 	paint.setStrokeWidth(1);
@@ -249,9 +282,8 @@ public class Strobe extends TunerView
 
 	else
 	{
-
 	    paint.setShader(null);
-	    paint.setColor(back[colour]);
+	    paint.setColor(background);
 	    canvas.drawRect(0, 0, width, size, paint);
 	}
 
@@ -286,7 +318,5 @@ public class Strobe extends TunerView
 	largerShader.setLocalMatrix(matrix);
 	paint.setShader(largerShader);
 	canvas.drawRect(0, size * 3, width, size * 4, paint);
-
-	paint.setShader(null);
     }
 }

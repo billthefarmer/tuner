@@ -25,8 +25,15 @@
 package org.billthefarmer.tuner;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
+import android.graphics.Bitmap.Config;
+import android.graphics.PorterDuff.Mode;
 import android.util.AttributeSet;
 
 // Graticule
@@ -35,7 +42,12 @@ public class Graticule extends TunerView
 {
     private static final int SIZE = 10;
 
-    // Contructor
+    private Canvas source;
+    private Bitmap bitmap;
+    private Bitmap rounded;
+    private Paint xferPaint;
+
+    // Constructor
 
     protected Graticule(Context context, AttributeSet attrs)
     {
@@ -52,6 +64,24 @@ public class Graticule extends TunerView
 
 	width = (int)(clipRect.right - clipRect.left);
 	height = (int)(clipRect.bottom - clipRect.top);
+
+	// Create rounded bitmap
+
+	rounded = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	Canvas canvas = new Canvas(rounded);	
+	paint.setStyle(Style.FILL);
+	paint.setColor(Color.WHITE);
+	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);	
+
+	// Create magic paint
+
+	xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	xferPaint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
+
+	// Create a bitmap to draw on
+
+	bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	source = new Canvas(bitmap);
     }
 
     // On Draw
@@ -60,6 +90,32 @@ public class Graticule extends TunerView
     {
 	super.onDraw(canvas);
 
+	// Reset the canvas transform
+
+	source.setMatrix(null);
+
+	// Draw on the canvas
+
+	drawGraticule(source);
+	drawTrace(source);
+
+	// Reset the canvas transform again
+
+	source.setMatrix(null);
+
+	// Use the magic paint
+
+	source.drawBitmap(rounded, 0, 0, xferPaint);
+
+	// Draw the result on the canvas
+
+	canvas.drawBitmap(bitmap, 0, 0, null);
+    }
+
+    // Draw graticule
+
+    private void drawGraticule(Canvas canvas)
+    {
 	// Draw black rectangle
 
 	canvas.drawColor(Color.BLACK);
@@ -67,8 +123,9 @@ public class Graticule extends TunerView
 	// Set up paint for dark green thin lines
 
 	paint.setAntiAlias(false);
-	paint.setStrokeWidth(1);
+	paint.setStyle(Style.STROKE);
 	paint.setColor(0xff007f00);
+	paint.setStrokeWidth(1);
 
 	canvas.translate(clipRect.left, clipRect.top);
 
@@ -79,5 +136,12 @@ public class Graticule extends TunerView
 
 	for (int i = (height % SIZE) / 2; i <= height; i +=SIZE)
 	    canvas.drawLine(0, i, width, i, paint);
+    }
+
+    // Draw trace
+
+    protected void drawTrace(Canvas canvas)
+    {
+	// Dummy method
     }
 }
