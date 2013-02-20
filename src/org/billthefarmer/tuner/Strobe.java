@@ -25,6 +25,7 @@
 package org.billthefarmer.tuner;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapShader;
@@ -132,15 +133,18 @@ public class Strobe extends TunerView
     {
 	// Get the colours
 
-	fore = getResources().getIntArray(R.array.foreground_colours);
-	back = getResources().getIntArray(R.array.background_colours);
+    Resources resources = getResources();
+    if (audio != null)
+    {
+	fore = resources.getIntArray(R.array.foreground_colours);
+	back = resources.getIntArray(R.array.background_colours);
 
-	if (colour < CUSTOM)
+    if (colour < CUSTOM)
 	{
 	    foreground = fore[colour];
 	    background = back[colour];
 	}
-
+    }
 	// Create the bitmap shaders
 
 	smallShader =

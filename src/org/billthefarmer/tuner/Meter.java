@@ -126,7 +126,7 @@ public class Meter extends TunerView
 
 	canvas.translate(clipRect.left, clipRect.top);
 
-	if (audio.screen)
+	if (audio != null && audio.screen)
 	{
 		BitmapDrawable drawable =
 				(BitmapDrawable)getResources().getDrawable(R.drawable.ic_pref_screen);
