@@ -33,6 +33,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.os.Bundle;
@@ -232,33 +233,33 @@ public class MainActivity extends Activity
 		    }
 		});
 
-    // Meter
+	// Meter
 
-    if (meter != null)
-    	meter.setOnClickListener(new OnClickListener()
+	if (meter != null)
+	    meter.setOnClickListener(new OnClickListener()
 		{
 		    @Override
 		    public void onClick(View v)
 		    {
-		    	audio.screen = !audio.screen;
+			audio.screen = !audio.screen;
 
-		    	if (audio.screen)
-		    		showToast(R.string.screen_on);
+			if (audio.screen)
+			    showToast(R.string.screen_on);
 
-		    	else
-		    		showToast(R.string.screen_off);
+			else
+			    showToast(R.string.screen_off);
 
-		    	if (audio.screen)
-		    	{
-		    		Window window = getWindow();
-		    		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-		    	}
+			if (audio.screen)
+			{
+			    Window window = getWindow();
+			    window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+			}
 
-		    	else
-		    	{
-		    		Window window = getWindow();
-		    		window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-		    	}
+			else
+			{
+			    Window window = getWindow();
+			    window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+			}
 		    }
 		});
     }
@@ -267,12 +268,13 @@ public class MainActivity extends Activity
 
     void showToast(int key)
     {
-	String text = getResources().getString(key);
+	Resources resources = getResources();
+	String text = resources.getString(key);
 
 	// Cancel the last one
 
 	if (toast != null)
-		toast.cancel();
+	    toast.cancel();
 
 	// Make a new one
 
@@ -379,11 +381,11 @@ public class MainActivity extends Activity
 
 	if (audio != null)
 	{
-	    audio.sample = preferences.getInt("pref_source", 0);
+	    audio.source = preferences.getInt("pref_source", 0);
 	    audio.reference = preferences.getInt("pref_reference", 440);
 
 	    audio.sample =
-		Double.valueOf(preferences.getString("pref_sample", "11025"));
+		Double.valueOf(preferences.getString("pref_sample", "11025.0"));
 
 	    audio.filter = preferences.getBoolean("pref_filter", false);
 	    audio.downsample = preferences.getBoolean("pref_down", false);
@@ -396,14 +398,14 @@ public class MainActivity extends Activity
 
 	    if (audio.screen)
 	    {
-    		Window window = getWindow();
-    		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		Window window = getWindow();
+		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
 	    }
 
 	    else
 	    {
-    		Window window = getWindow();
-    		window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		Window window = getWindow();
+		window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
 	    }
 
 	    // Check for strobe before setting colours
@@ -532,6 +534,8 @@ public class MainActivity extends Activity
 	private static final double G = 3.023332184e+01;
 	private static final double K = 0.9338478249;
 
+	private int divisor;
+
 	private double xv[];
 	private double yv[];
 
@@ -652,6 +656,25 @@ public class MainActivity extends Activity
 		audioRecord.release();
 		thread = null;
 		return;
+	    }
+
+	    // Set divisor according to sample rate
+	    
+	    switch ((int)sample)
+	    {
+	    case 8000:
+	    case 11025:
+	    	divisor = 1;
+	    	break;
+
+	    case 16000:
+	    case 22050:
+	    	divisor = 2;
+	    	break;
+
+	    case 44100:
+	    	divisor = 4;
+	    	break;
 	    }
 
 	    // Start recording

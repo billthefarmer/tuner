@@ -28,6 +28,7 @@ import org.billthefarmer.tuner.MainActivity.Audio;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -98,7 +99,9 @@ public class Status extends View
 
 	// Draw sample rate text
 
-	s = String.format(getResources().getString(R.string.sample_rate), audio.sample);
+	Resources resources = getResources();
+	s = String.format(resources.getString(R.string.sample_rate),
+			  audio.sample);
 	canvas.drawText(s, margin, 0, paint);
 	float x = margin + paint.measureText(s + "   ");
 
@@ -106,7 +109,7 @@ public class Status extends View
 
 	if (audio.filter)
 	{
-	    s = getResources().getString(R.string.filter);
+	    s = resources.getString(R.string.filter);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
@@ -115,7 +118,7 @@ public class Status extends View
 
 	if (audio.downsample)
 	{
-	    s = getResources().getString(R.string.downsample);
+	    s = resources.getString(R.string.downsample);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
@@ -124,7 +127,7 @@ public class Status extends View
 
 	if (audio.zoom)
 	{
-	    s = getResources().getString(R.string.zoom);
+	    s = resources.getString(R.string.zoom);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
@@ -133,7 +136,7 @@ public class Status extends View
 
 	if (audio.lock)
 	{
-	    s = getResources().getString(R.string.lock);
+	    s = resources.getString(R.string.lock);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
@@ -142,7 +145,7 @@ public class Status extends View
 
 	if (audio.multiple)
 	{
-		s = getResources().getString(R.string.multiple);
+		s = resources.getString(R.string.multiple);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
@@ -151,7 +154,7 @@ public class Status extends View
 
 	if (audio.screen)
 	{
-		s = getResources().getString(R.string.screen);
+		s = resources.getString(R.string.screen);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
@@ -160,7 +163,7 @@ public class Status extends View
 
 	if (audio.strobe)
 	{
-	    s = getResources().getString(R.string.strobe);
+	    s = resources.getString(R.string.strobe);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}

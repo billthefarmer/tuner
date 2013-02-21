@@ -103,10 +103,10 @@ public class Strobe extends TunerView
 
 	// Create rounded bitmap
 
-	rounded = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	rounded = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 	Canvas canvas = new Canvas(rounded);
 	paint.setColor(Color.WHITE);
-	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);	
+	canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);	
 
 	// Create magic paint
 
@@ -115,7 +115,7 @@ public class Strobe extends TunerView
 
 	// Create a bitmap to draw on
 
-	bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 	source = new Canvas(bitmap);
 
 	// Create matrix for translating shaders
@@ -133,18 +133,20 @@ public class Strobe extends TunerView
     {
 	// Get the colours
 
-    Resources resources = getResources();
-    if (audio != null)
-    {
-	fore = resources.getIntArray(R.array.foreground_colours);
-	back = resources.getIntArray(R.array.background_colours);
-
-    if (colour < CUSTOM)
+	if (audio != null)
 	{
-	    foreground = fore[colour];
-	    background = back[colour];
+	    Resources resources = getResources();
+
+	    fore = resources.getIntArray(R.array.foreground_colours);
+	    back = resources.getIntArray(R.array.background_colours);
+
+	    if (colour < CUSTOM)
+	    {
+		foreground = fore[colour];
+		background = back[colour];
+	    }
 	}
-    }
+
 	// Create the bitmap shaders
 
 	smallShader =
@@ -195,7 +197,8 @@ public class Strobe extends TunerView
     {
 	// Create bitmap twice as wide as the block
 
-	Bitmap bitmap = Bitmap.createBitmap(width * 2, height, Config.ARGB_8888);
+	Bitmap bitmap =
+	    Bitmap.createBitmap(width * 2, height, Config.ARGB_8888);
 	Canvas canvas = new Canvas(bitmap);
 	Paint paint = new Paint();
 
@@ -237,6 +240,10 @@ public class Strobe extends TunerView
 
 	if (offset < 0.0)
 	    offset = size * 16;
+
+	// Translate to the clip rect
+
+	canvas.translate(clipRect.left, clipRect.top);
 
 	// Draw strobe
 

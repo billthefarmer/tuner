@@ -67,11 +67,11 @@ public class Graticule extends TunerView
 
 	// Create rounded bitmap
 
-	rounded = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	rounded = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 	Canvas canvas = new Canvas(rounded);	
 	paint.setStyle(Style.FILL);
 	paint.setColor(Color.WHITE);
-	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);	
+	canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);	
 
 	// Create magic paint
 
@@ -80,7 +80,7 @@ public class Graticule extends TunerView
 
 	// Create a bitmap to draw on
 
-	bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 	source = new Canvas(bitmap);
     }
 
@@ -107,6 +107,10 @@ public class Graticule extends TunerView
 
 	source.drawBitmap(rounded, 0, 0, xferPaint);
 
+	// Translate to the clip rect
+
+	canvas.translate(clipRect.left, clipRect.top);
+
 	// Draw the result on the canvas
 
 	canvas.drawBitmap(bitmap, 0, 0, null);
@@ -126,8 +130,6 @@ public class Graticule extends TunerView
 	paint.setStyle(Style.STROKE);
 	paint.setColor(0xff007f00);
 	paint.setStrokeWidth(1);
-
-	canvas.translate(clipRect.left, clipRect.top);
 
 	// Draw the graticule
 

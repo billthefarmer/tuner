@@ -26,6 +26,7 @@ package org.billthefarmer.tuner;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -96,7 +97,7 @@ public class Meter extends TunerView
 	if (dx >= width / 11)
 	    paint.setTextScaleX((width / 12) / dx);
 
-	// Create a rect for the horizoltal bar
+	// Create a rect for the horizontal bar
 
 	barRect = new Rect(width / 36 - width / 2, -height / 64,
 			   width / 2 - width / 36, height / 64);
@@ -128,11 +129,12 @@ public class Meter extends TunerView
 
 	if (audio != null && audio.screen)
 	{
-		BitmapDrawable drawable =
-				(BitmapDrawable)getResources().getDrawable(R.drawable.ic_pref_screen);
-		Bitmap bitmap = drawable.getBitmap();
-		canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
-		drawable.draw(canvas);
+	    Resources resources = getResources();
+	    BitmapDrawable drawable =
+		(BitmapDrawable)resources.getDrawable(R.drawable.ic_pref_screen);
+	    Bitmap bitmap = drawable.getBitmap();
+	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+	    drawable.draw(canvas);
 	}
 
 	// Reset the paint to black

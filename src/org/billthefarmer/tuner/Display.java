@@ -26,6 +26,7 @@ package org.billthefarmer.tuner;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -117,11 +118,12 @@ public class Display extends TunerView
 
 	if (audio.lock)
 	{
-		BitmapDrawable drawable =
-				(BitmapDrawable)getResources().getDrawable(R.drawable.ic_locked);
-		Bitmap bitmap = drawable.getBitmap();
-		canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
-		drawable.draw(canvas);
+	    Resources resources = getResources();
+	    BitmapDrawable drawable =
+		(BitmapDrawable)resources.getDrawable(R.drawable.ic_locked);
+	    Bitmap bitmap = drawable.getBitmap();
+	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+	    drawable.draw(canvas);
 	}
 
 	// Multiple values
