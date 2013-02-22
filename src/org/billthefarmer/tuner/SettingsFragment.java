@@ -38,7 +38,7 @@ public class SettingsFragment extends PreferenceFragment
 {
     private static final String KEY_PREF_INPUT = "pref_input";
     private static final String KEY_PREF_COLOUR = "pref_colour";
-    private static final String KEY_PREF_SAMPLE = "pref_sample";
+//    private static final String KEY_PREF_SAMPLE = "pref_sample";
     private static final String KEY_PREF_REFERENCE = "pref_reference";
     private static final String KEY_PREF_CUSTOM = "pref_custom";
 
@@ -99,8 +99,8 @@ public class SettingsFragment extends PreferenceFragment
 	    break;
 	}
 
-	preference = (ListPreference)findPreference(KEY_PREF_SAMPLE);
-	preference.setSummary(preference.getEntry());
+//	preference = (ListPreference)findPreference(KEY_PREF_SAMPLE);
+//	preference.setSummary(preference.getEntry());
 
 	NumberPickerPreference picker =
 	    (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
@@ -116,7 +116,7 @@ public class SettingsFragment extends PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences preferences,
 					  String key)
     {
-	if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_SAMPLE) ||
+	if (key.equals(KEY_PREF_INPUT) || /* key.equals(KEY_PREF_SAMPLE) || */
 	    key.equals(KEY_PREF_COLOUR))
 	{
 	    Preference preference = findPreference(key);

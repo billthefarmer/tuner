@@ -14,15 +14,6 @@
 	android:entryValues="@array/pref_input_entry_values"
 	android:dialogIcon="@drawable/ic_pref_mic"
 	android:defaultValue="@integer/def_input" />
-    <ListPreference
-	android:key="pref_sample"
-	android:icon="@drawable/ic_pref_sample_rate"
-	android:dialogIcon="@drawable/ic_pref_sample_rate"
-	android:title="@string/pref_sample_rate"
-	android:summary="@string/pref_sample_rate_summ"
-	android:entries="@array/pref_sample_rate_entries"
-	android:entryValues="@array/pref_sample_rate_entry_values"
-	android:defaultValue="11025" />
     <CheckBoxPreference
 	android:icon="@drawable/ic_pref_filter"
 	android:key="pref_filter"

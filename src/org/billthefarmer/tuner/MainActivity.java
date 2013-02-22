@@ -249,17 +249,13 @@ public class MainActivity extends Activity
 			else
 			    showToast(R.string.screen_off);
 
+			Window window = getWindow();
+
 			if (audio.screen)
-			{
-			    Window window = getWindow();
 			    window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-			}
 
 			else
-			{
-			    Window window = getWindow();
 			    window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-			}
 		    }
 		});
     }
@@ -518,6 +514,7 @@ public class MainActivity extends Activity
 	// Private data
 
 	private long timer;
+	private int divisor = 1;
 
 	private AudioRecord audioRecord;
 
@@ -526,6 +523,7 @@ public class MainActivity extends Activity
 	private static final int SAMPLES = 16384;
 	private static final int RANGE = SAMPLES * 3 / 8;
 	private static final int STEP = SAMPLES / OVERSAMPLE;
+	private static final int SIZE = 4096;
 
 	private static final int C5_OFFSET = 57;
 	private static final long TIMER_COUNT = 24; 
@@ -533,8 +531,6 @@ public class MainActivity extends Activity
 
 	private static final double G = 3.023332184e+01;
 	private static final double K = 0.9338478249;
-
-	private int divisor;
 
 	private double xv[];
 	private double yv[];
@@ -611,26 +607,64 @@ public class MainActivity extends Activity
 
 	    thread = Thread.currentThread();
 
+	    int rates[] =
+		{11025, 8000, 22050, 16000, 44100};
+
+	    int size;
+	    for (int rate: rates)
+	    {
+		sample = rate;
+		size =
+		    AudioRecord.getMinBufferSize((int)sample,
+						 AudioFormat.CHANNEL_IN_MONO,
+						 AudioFormat.ENCODING_PCM_16BIT);
+		if (size > 0)
+		    break;
+
+		if (size == AudioRecord.ERROR_BAD_VALUE)
+		    continue;
+
+		if (size == AudioRecord.ERROR)
+		{
+		    runOnUiThread(new Runnable()
+			{
+			    public void run()
+			    {
+				showAlert(R.string.app_name,
+					  R.string.error_buffer);
+			    }
+			});
+
+		    thread = null;
+		    return;
+		}
+	    }
+
+	    // Calculate fps
+
 	    fps = (double)sample / (double)SAMPLES;
 	    final double expect = 2.0 * Math.PI *
 		(double)STEP / (double)SAMPLES;
 
-	    int size =
-		AudioRecord.getMinBufferSize((int)sample,
-					     AudioFormat.CHANNEL_IN_MONO,
-					     AudioFormat.ENCODING_PCM_16BIT);
-	    if (size <= 0)
+	    // Set divisor according to sample rate
+	    
+	    switch ((int)sample)
 	    {
-		runOnUiThread(new Runnable()
-		    {
-			public void run()
-			{
-			    showAlert(R.string.app_name, R.string.error_buffer);
-			}
-		    });
+	    case 8000:
+	    case 11025:
+		divisor = 1;
+		break;
 
-		thread = null;
-		return;
+	    case 16000:
+	    case 22050:
+		divisor = 2;
+		data = new short[STEP * divisor];
+		break;
+
+	    case 44100:
+		divisor = 4;
+		data = new short[STEP * divisor];
+		break;
 	    }
 
 	    // Create the AudioRecord object
@@ -638,7 +672,8 @@ public class MainActivity extends Activity
 	    audioRecord =
 		new AudioRecord(source, (int)sample,
 				AudioFormat.CHANNEL_IN_MONO,
-				AudioFormat.ENCODING_PCM_16BIT, 4096);
+				AudioFormat.ENCODING_PCM_16BIT,
+				SIZE * divisor);
 	    // Check state
 
 	    int state = audioRecord.getState(); 
@@ -658,25 +693,6 @@ public class MainActivity extends Activity
 		return;
 	    }
 
-	    // Set divisor according to sample rate
-	    
-	    switch ((int)sample)
-	    {
-	    case 8000:
-	    case 11025:
-	    	divisor = 1;
-	    	break;
-
-	    case 16000:
-	    case 22050:
-	    	divisor = 2;
-	    	break;
-
-	    case 44100:
-	    	divisor = 4;
-	    	break;
-	    }
-
 	    // Start recording
 
 	    audioRecord.startRecording();
@@ -687,7 +703,7 @@ public class MainActivity extends Activity
 	    {
 		// Read a buffer of data
 
-		size = audioRecord.read(data, 0, STEP);
+		size = audioRecord.read(data, 0, STEP * divisor);
 
 		// Stop the thread if no data
 
@@ -719,7 +735,7 @@ public class MainActivity extends Activity
 		    // Choose filtered/unfiltered data
 
 		    buffer[(SAMPLES - STEP) + i] =
-			audio.filter? yv[1]: (double)data[i];
+			audio.filter? yv[1]: (double)data[i * divisor];
 		}
 
 		// Maximum data value
@@ -905,6 +921,11 @@ public class MainActivity extends Activity
 
 			maxima.n[count] = (int)(Math.round(cf) + C5_OFFSET);
 
+			// Don't use if negative
+
+			if (maxima.n[count] < 0)
+			    continue;
+
 			// Set limit to octave above
 
 			if (!downsample && (limit > i * 2))
@@ -934,6 +955,11 @@ public class MainActivity extends Activity
 
 		    double cf =
 			-12.0 * log2(reference / frequency);
+
+		    // Don't count silly values
+
+		    if (Double.isNaN(cf))
+			continue;
 
 		    // Reference note
 

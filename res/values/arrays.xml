@@ -45,19 +45,4 @@
       <item>0xbf0000ff</item>
   </integer-array>
 
-  <string-array name="pref_sample_rate_entries">
-    <item>8000 samples/sec</item>
-    <item>11025 samples/sec (default)</item>
-    <item>16000 samples/sec</item>
-    <item>22050 samples/sec</item>
-    <item>44100 samples/sec</item>
-  </string-array>
-  <string-array name="pref_sample_rate_entry_values">
-    <item>8000</item>
-    <item>11025</item>
-    <item>16000</item>
-    <item>22050</item>
-    <item>44100</item>
-  </string-array>
-
 </resources>
