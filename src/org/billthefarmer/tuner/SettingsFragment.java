@@ -6,7 +6,7 @@
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 2 of the License, or
+//  the Free Software Foundation; either version 3 of the License, or
 //  (at your option) any later version.
 //
 //  This program is distributed in the hope that it will be useful,
@@ -14,9 +14,8 @@
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
 //
-//  You should have received a copy of the GNU General Public License along
-//  with this program; if not, write to the Free Software Foundation, Inc.,
-//  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 //  Bill Farmer	 william j farmer [at] yahoo [dot] co [dot] uk.
 //
@@ -38,7 +37,6 @@ public class SettingsFragment extends PreferenceFragment
 {
     private static final String KEY_PREF_INPUT = "pref_input";
     private static final String KEY_PREF_COLOUR = "pref_colour";
-//    private static final String KEY_PREF_SAMPLE = "pref_sample";
     private static final String KEY_PREF_REFERENCE = "pref_reference";
     private static final String KEY_PREF_CUSTOM = "pref_custom";
 
@@ -99,9 +97,6 @@ public class SettingsFragment extends PreferenceFragment
 	    break;
 	}
 
-//	preference = (ListPreference)findPreference(KEY_PREF_SAMPLE);
-//	preference.setSummary(preference.getEntry());
-
 	NumberPickerPreference picker =
 	    (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
 	refSummary = (String)picker.getSummary();
@@ -116,8 +111,7 @@ public class SettingsFragment extends PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences preferences,
 					  String key)
     {
-	if (key.equals(KEY_PREF_INPUT) || /* key.equals(KEY_PREF_SAMPLE) || */
-	    key.equals(KEY_PREF_COLOUR))
+	if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_COLOUR))
 	{
 	    Preference preference = findPreference(key);
 

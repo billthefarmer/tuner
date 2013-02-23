@@ -4,9 +4,9 @@
 //
 //  Copyright (C) 2013	Bill Farmer
 //
-//  This program is free software; you can redistribute it and/or modify
+//  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 2 of the License, or
+//  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
 //
 //  This program is distributed in the hope that it will be useful,
@@ -14,9 +14,8 @@
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
 //
-//  You should have received a copy of the GNU General Public License along
-//  with this program; if not, write to the Free Software Foundation, Inc.,
-//  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 //  Bill Farmer	 william j farmer [at] yahoo [dot] co [dot] uk.
 //
@@ -27,8 +26,11 @@ package org.billthefarmer.tuner;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,6 +56,29 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity
 {
+    private static final String PREF_SOURCE = "pref_source";
+    private static final String PREF_REFERENCE = "pref_reference";
+
+    private static final String PREF_FILTER = "pref_filter";
+    private static final String PREF_DOWNSAMPLE = "pref_downsample";
+    private static final String PREF_MULTIPLE = "pref_multiple";
+    private static final String PREF_SCREEN = "pref_screen";
+    private static final String PREF_STROBE = "pref_strobe";
+    private static final String PREF_ZOOM = "pref_zoom";
+
+    private static final String PREF_COLOUR = "pref_colour";
+    private static final String PREF_CUSTOM = "pref_custom";
+
+    // Note values for display
+
+    private static final String notes[] =
+    {"C", "C", "D", "E", "E", "F",
+     "F", "G", "A", "A", "B", "B"};
+
+    private static final String sharps[] =
+    {"", "\u266F", "", "\u266D", "", "",
+     "\u266F", "", "\u266D", "", "\u266D", ""};
+ 
     private Spectrum spectrum;
     private Display display;
     private Strobe strobe;
@@ -169,9 +194,9 @@ public class MainActivity extends Activity
 			audio.downsample = !audio.downsample;
 
 			if (audio.downsample)
-			    showToast(R.string.down_on);
+			    showToast(R.string.downsample_on);
 			else
-			    showToast(R.string.down_off);
+			    showToast(R.string.downsample_off);
 
 			return true;
 		    }
@@ -239,25 +264,37 @@ public class MainActivity extends Activity
 	    meter.setOnClickListener(new OnClickListener()
 		{
 		    @Override
-		    public void onClick(View v)
+		    public void onClick(View arg0)
 		    {
-			audio.screen = !audio.screen;
-
-			if (audio.screen)
-			    showToast(R.string.screen_on);
-
-			else
-			    showToast(R.string.screen_off);
-
-			Window window = getWindow();
-
-			if (audio.screen)
-			    window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-			else
-			    window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+			audio.copyToClipboard();
+			showToast(R.string.copied_clip);
 		    }
 		});
+
+	meter.setOnLongClickListener(new OnLongClickListener()
+	    {
+		@Override
+		public boolean onLongClick(View v)
+		{
+		    audio.screen = !audio.screen;
+
+		    if (audio.screen)
+			showToast(R.string.screen_on);
+
+		    else
+			showToast(R.string.screen_off);
+
+		    Window window = getWindow();
+
+		    if (audio.screen)
+			window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+		    else
+			window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+		    return true;
+		}
+	    });
     }
 
     // Show toast.
@@ -352,12 +389,12 @@ public class MainActivity extends Activity
 
 	Editor editor = preferences.edit();
 
-	editor.putBoolean("pref_filter", audio.filter);
-	editor.putBoolean("pref_down", audio.downsample);
-	editor.putBoolean("pref_multiple", audio.multiple);
-	editor.putBoolean("pref_screen", audio.screen);
-	editor.putBoolean("pref_strobe", audio.strobe);
-	editor.putBoolean("pref_zoom", audio.zoom);
+	editor.putBoolean(PREF_FILTER, audio.filter);
+	editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
+	editor.putBoolean(PREF_MULTIPLE, audio.multiple);
+	editor.putBoolean(PREF_SCREEN, audio.screen);
+	editor.putBoolean(PREF_STROBE, audio.strobe);
+	editor.putBoolean(PREF_ZOOM, audio.zoom);
 
 	editor.commit();
     }
@@ -377,18 +414,14 @@ public class MainActivity extends Activity
 
 	if (audio != null)
 	{
-	    audio.source = preferences.getInt("pref_source", 0);
-	    audio.reference = preferences.getInt("pref_reference", 440);
-
-	    audio.sample =
-		Double.valueOf(preferences.getString("pref_sample", "11025.0"));
-
-	    audio.filter = preferences.getBoolean("pref_filter", false);
-	    audio.downsample = preferences.getBoolean("pref_down", false);
-	    audio.multiple = preferences.getBoolean("pref_multiple", false);
-	    audio.screen = preferences.getBoolean("pref_screen", false);
-	    audio.strobe = preferences.getBoolean("pref_strobe", false);
-	    audio.zoom = preferences.getBoolean("pref_zoom", true);
+	    audio.source = preferences.getInt(PREF_SOURCE, 0);
+	    audio.reference = preferences.getInt(PREF_REFERENCE, 440);
+	    audio.filter = preferences.getBoolean(PREF_FILTER, false);
+	    audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
+	    audio.multiple = preferences.getBoolean(PREF_MULTIPLE, false);
+	    audio.screen = preferences.getBoolean(PREF_SCREEN, false);
+	    audio.strobe = preferences.getBoolean(PREF_STROBE, false);
+	    audio.zoom = preferences.getBoolean(PREF_ZOOM, true);
 
 	    // Check screen
 
@@ -409,7 +442,7 @@ public class MainActivity extends Activity
 	    if (strobe != null)
 	    {
 		strobe.colour =
-		    Integer.valueOf(preferences.getString("pref_colour", "0"));
+		    Integer.valueOf(preferences.getString(PREF_COLOUR, "0"));
 
 		if (strobe.colour == 3)
 		{
@@ -418,7 +451,7 @@ public class MainActivity extends Activity
 		    try
 		    {
 			custom =
-			    new JSONArray(preferences.getString("pref_custom",
+			    new JSONArray(preferences.getString(PREF_CUSTOM,
 								null));
 
 			strobe.foreground = custom.getInt(0);
@@ -525,6 +558,7 @@ public class MainActivity extends Activity
 	private static final int STEP = SAMPLES / OVERSAMPLE;
 	private static final int SIZE = 4096;
 
+	private static final int OCTAVE = 12;
 	private static final int C5_OFFSET = 57;
 	private static final long TIMER_COUNT = 24; 
 	private static final double MIN = 0.5;
@@ -1135,6 +1169,52 @@ public class MainActivity extends Activity
 		    }
 		}
 	    }
+	}
+
+	// Copy to clipboard
+
+	@SuppressLint("DefaultLocale")
+	protected void copyToClipboard()
+	{
+	    String text = "";
+
+	    if (multiple)
+	    {
+		for (int i = 0; i < count; i++)
+		{
+		    // Calculate cents
+
+		    double cents = -12.0 * log2(maxima.r[i] /
+						maxima.f[i]) * 100.0;
+		    // Ignore silly values
+
+		    if (Double.isNaN(cents))
+			continue;
+
+		    text +=
+			String.format("%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+				      notes[maxima.n[i] % OCTAVE], sharps[maxima.n[i] % OCTAVE],
+				      maxima.n[i] / OCTAVE, cents, maxima.r[i], maxima.f[i],
+				      maxima.r[i] - maxima.f[i]);
+		}
+
+		if (count == 0)
+		    text =
+			String.format("%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+				      notes[n % OCTAVE], sharps[n % OCTAVE], n / OCTAVE, cents,
+				      nearest, frequency, difference);
+	    }
+
+	    else
+		text =
+		    String.format("%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+				  notes[n % OCTAVE], sharps[n % OCTAVE], n / OCTAVE, cents,
+				  nearest, frequency, difference);
+
+	    ClipboardManager clipboard =
+		(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+
+	    clipboard.setPrimaryClip(ClipData.newPlainText("Tuner clip", text));
 	}
     }
 

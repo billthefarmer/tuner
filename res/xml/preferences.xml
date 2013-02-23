@@ -21,10 +21,10 @@
 	android:summary="@string/pref_filter_summ"
 	android:defaultValue="false" />
     <CheckBoxPreference
-	android:key="pref_down"
+	android:key="pref_downsample"
 	android:icon="@drawable/ic_pref_downsample"
-	android:title="@string/pref_down"
-	android:summary="@string/pref_down_summ"
+	android:title="@string/pref_downsample"
+	android:summary="@string/pref_downsample_summ"
 	android:defaultValue="false" />
   </PreferenceCategory>
   <PreferenceCategory

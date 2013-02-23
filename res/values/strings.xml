@@ -22,11 +22,13 @@
   <string name="strobe_on">Strobe on</string>
   <string name="strobe_off">Strobe off</string>
 
-  <string name="down_on">Downsampling on</string>
-  <string name="down_off">Downsampling off</string>
+  <string name="downsample_on">Downsampling on</string>
+  <string name="downsample_off">Downsampling off</string>
 
   <string name="multiple_on">Multiple notes on</string>
   <string name="multiple_off">Multiple notes off</string>
+
+  <string name="copied_clip">Data copied to clipboard</string>
 
   <string name="sample_rate">Sample rate: %1.0f samples/sec</string>
 
@@ -48,8 +50,8 @@
   <string name="pref_filter">Audio filter</string>
   <string name="pref_filter_summ">Filter input audio from microphone</string>
 
-  <string name="pref_down">Downsample</string>
-  <string name="pref_down_summ">Downsample output before analysis</string>
+  <string name="pref_downsample">Downsample</string>
+  <string name="pref_downsample_summ">Downsample output before analysis</string>
 
   <string name="pref_display">Display</string>
 

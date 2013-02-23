@@ -6,7 +6,7 @@
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 2 of the License, or
+//  the Free Software Foundation; either version 3 of the License, or
 //  (at your option) any later version.
 //
 //  This program is distributed in the hope that it will be useful,
@@ -14,9 +14,8 @@
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU General Public License for more details.
 //
-//  You should have received a copy of the GNU General Public License along
-//  with this program; if not, write to the Free Software Foundation, Inc.,
-//  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 //  Bill Farmer	 william j farmer [at] yahoo [dot] co [dot] uk.
 //
@@ -56,8 +55,8 @@ public class Display extends TunerView
      "F", "G", "A", "A", "B", "B"};
 
     private static final String sharps[] =
-    	{"", "\u266F", "", "\u266D", "", "",
-    	"\u266F", "", "\u266D", "", "\u266D", ""};
+    {"", "\u266F", "", "\u266D", "", "",
+     "\u266F", "", "\u266D", "", "\u266D", ""};
  
     // Constructor
 
@@ -166,7 +165,7 @@ public class Display extends TunerView
 
 		// Draw sharp/flat
 
-	    paint.setTextSize(small / 2);
+		paint.setTextSize(small / 2);
 		s = String.format("%s", sharps[audio.maxima.n[i] % OCTAVE]);
 		canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
 
@@ -177,7 +176,7 @@ public class Display extends TunerView
 
 		// Draw cents
 
-	    paint.setTextSize(small);
+		paint.setTextSize(small);
 		s = String.format("%+5.2f\u00A2", cents);
 		x = width * 2 / 23;
 		canvas.drawText(s, x, 0, paint);
@@ -197,7 +196,7 @@ public class Display extends TunerView
 		// Draw difference
 
 		x = width - margin / 2;
-	    paint.setTextAlign(Align.RIGHT);
+		paint.setTextAlign(Align.RIGHT);
 		s = String.format("%+5.2fHz", audio.maxima.r[i] -
 				  audio.maxima.f[i]);
 		canvas.drawText(s, x, 0, paint);
@@ -219,7 +218,7 @@ public class Display extends TunerView
 
 		// Draw sharp/flat
 
-	    paint.setTextSize(small / 2);
+		paint.setTextSize(small / 2);
 		s = String.format("%s", sharps[audio.n % OCTAVE]);
 		canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
 
@@ -230,7 +229,7 @@ public class Display extends TunerView
 
 		// Draw cents
 
-	    paint.setTextSize(small);
+		paint.setTextSize(small);
 		s = String.format("%+5.2f\u00A2", audio.cents);
 		x = width * 2 / 23;
 		canvas.drawText(s, x, 0, paint);
@@ -250,7 +249,7 @@ public class Display extends TunerView
 		// Draw difference
 
 		x = width - margin / 2;
-	    paint.setTextAlign(Align.RIGHT);
+		paint.setTextAlign(Align.RIGHT);
 		s = String.format("%+5.2fHz", audio.difference);
 		canvas.drawText(s, x, 0, paint);
 	    }
@@ -295,7 +294,7 @@ public class Display extends TunerView
 	    // Set up text
 
 	    paint.setTextSize(large);
-//	    paint.setTypeface(Typeface.DEFAULT);
+	    //	    paint.setTypeface(Typeface.DEFAULT);
 	    paint.setTextAlign(Align.RIGHT);
 
 	    // Draw cents
