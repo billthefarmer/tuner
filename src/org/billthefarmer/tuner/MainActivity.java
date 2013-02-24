@@ -542,7 +542,7 @@ public class MainActivity extends Activity
 	protected double fps;
 
 	protected int count;
-	protected int n;
+	protected int note;
 
 	// Private data
 
@@ -674,12 +674,6 @@ public class MainActivity extends Activity
 		}
 	    }
 
-	    // Calculate fps
-
-	    fps = (double)sample / (double)SAMPLES;
-	    final double expect = 2.0 * Math.PI *
-		(double)STEP / (double)SAMPLES;
-
 	    // Set divisor according to sample rate
 	    
 	    switch ((int)sample)
@@ -700,6 +694,12 @@ public class MainActivity extends Activity
 		data = new short[STEP * divisor];
 		break;
 	    }
+
+	    // Calculate fps
+
+	    fps = (sample / divisor) / (double)SAMPLES;
+	    final double expect = 2.0 * Math.PI *
+		(double)STEP / (double)SAMPLES;
 
 	    // Create the AudioRecord object
 
@@ -972,7 +972,6 @@ public class MainActivity extends Activity
 		// Found flag
 
 		boolean found = false;
-		n = 0;
 
 		// Do the note and cents calculations
 
@@ -1009,9 +1008,9 @@ public class MainActivity extends Activity
 
 		    // Note number
 
-		    n = (int)Math.round(cf) + C5_OFFSET;
+		    note = (int)Math.round(cf) + C5_OFFSET;
 
-		    if (n < 0)
+		    if (note < 0)
 			found = false;
 
 		    // Find nearest maximum to reference note
@@ -1091,7 +1090,7 @@ public class MainActivity extends Activity
 			    lower = 0.0;
 			    cents = 0.0;
 			    count = 0;
-			    n = 0;
+			    note = 0;
 
 			    // Update display
 
@@ -1201,14 +1200,14 @@ public class MainActivity extends Activity
 		if (count == 0)
 		    text =
 			String.format("%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-				      notes[n % OCTAVE], sharps[n % OCTAVE], n / OCTAVE, cents,
+				      notes[note % OCTAVE], sharps[note % OCTAVE], note / OCTAVE, cents,
 				      nearest, frequency, difference);
 	    }
 
 	    else
 		text =
 		    String.format("%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-				  notes[n % OCTAVE], sharps[n % OCTAVE], n / OCTAVE, cents,
+				  notes[note % OCTAVE], sharps[note % OCTAVE], note / OCTAVE, cents,
 				  nearest, frequency, difference);
 
 	    ClipboardManager clipboard =
