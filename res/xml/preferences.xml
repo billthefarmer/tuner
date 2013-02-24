@@ -33,8 +33,8 @@
     <CheckBoxPreference
 	android:key="pref_screen"
 	android:icon="@drawable/ic_pref_screen"
-	android:title="@string/pref_screen"
- 	android:summary="@string/pref_screen_summ"
+	android:title="@string/pref_backlight"
+ 	android:summary="@string/pref_backlight_summ"
 	android:persistent="true"
 	android:defaultValue="false" />
    <CheckBoxPreference

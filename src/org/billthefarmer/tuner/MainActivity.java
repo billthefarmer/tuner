@@ -62,7 +62,7 @@ public class MainActivity extends Activity
     private static final String PREF_FILTER = "pref_filter";
     private static final String PREF_DOWNSAMPLE = "pref_downsample";
     private static final String PREF_MULTIPLE = "pref_multiple";
-    private static final String PREF_SCREEN = "pref_screen";
+    private static final String PREF_BACKLIGHT = "pref_backlight";
     private static final String PREF_STROBE = "pref_strobe";
     private static final String PREF_ZOOM = "pref_zoom";
 
@@ -276,9 +276,9 @@ public class MainActivity extends Activity
 		@Override
 		public boolean onLongClick(View v)
 		{
-		    audio.screen = !audio.screen;
+		    audio.backlight = !audio.backlight;
 
-		    if (audio.screen)
+		    if (audio.backlight)
 			showToast(R.string.screen_on);
 
 		    else
@@ -286,7 +286,7 @@ public class MainActivity extends Activity
 
 		    Window window = getWindow();
 
-		    if (audio.screen)
+		    if (audio.backlight)
 			window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		    else
@@ -392,7 +392,7 @@ public class MainActivity extends Activity
 	editor.putBoolean(PREF_FILTER, audio.filter);
 	editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
 	editor.putBoolean(PREF_MULTIPLE, audio.multiple);
-	editor.putBoolean(PREF_SCREEN, audio.screen);
+	editor.putBoolean(PREF_BACKLIGHT, audio.backlight);
 	editor.putBoolean(PREF_STROBE, audio.strobe);
 	editor.putBoolean(PREF_ZOOM, audio.zoom);
 
@@ -419,13 +419,13 @@ public class MainActivity extends Activity
 	    audio.filter = preferences.getBoolean(PREF_FILTER, false);
 	    audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
 	    audio.multiple = preferences.getBoolean(PREF_MULTIPLE, false);
-	    audio.screen = preferences.getBoolean(PREF_SCREEN, false);
+	    audio.backlight = preferences.getBoolean(PREF_BACKLIGHT, false);
 	    audio.strobe = preferences.getBoolean(PREF_STROBE, false);
 	    audio.zoom = preferences.getBoolean(PREF_ZOOM, true);
 
 	    // Check screen
 
-	    if (audio.screen)
+	    if (audio.backlight)
 	    {
 		Window window = getWindow();
 		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -517,9 +517,9 @@ public class MainActivity extends Activity
 	protected boolean lock;
 	protected boolean zoom;
 	protected boolean filter;
-	protected boolean screen;
 	protected boolean strobe;
 	protected boolean multiple;
+	protected boolean backlight;
 	protected boolean downsample;
 
 	protected double reference;

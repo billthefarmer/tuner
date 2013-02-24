@@ -151,9 +151,9 @@ public class Status extends View
 
 	// Screen
 
-	if (audio.screen)
+	if (audio.backlight)
 	{
-		s = resources.getString(R.string.screen);
+		s = resources.getString(R.string.display);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
