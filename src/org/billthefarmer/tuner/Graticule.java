@@ -106,10 +106,6 @@ public class Graticule extends TunerView
 
 	source.drawBitmap(rounded, 0, 0, xferPaint);
 
-	// Translate to the clip rect
-
-	canvas.translate(clipRect.left, clipRect.top);
-
 	// Draw the result on the canvas
 
 	canvas.drawBitmap(bitmap, 0, 0, null);

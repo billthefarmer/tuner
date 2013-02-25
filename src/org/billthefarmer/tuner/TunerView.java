@@ -87,5 +87,9 @@ public class TunerView extends View
 	// Set the cliprect
 
 	canvas.clipRect(clipRect);
+
+	// Translate to the clip rect
+
+	canvas.translate(clipRect.left, clipRect.top);
     }
 }

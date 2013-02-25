@@ -240,10 +240,6 @@ public class Strobe extends TunerView
 	if (offset < 0.0)
 	    offset = size * 16;
 
-	// Translate to the clip rect
-
-	canvas.translate(clipRect.left, clipRect.top);
-
 	// Draw strobe
 
 	drawStrobe(source);

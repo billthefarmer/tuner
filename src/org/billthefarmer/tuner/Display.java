@@ -27,12 +27,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 
 // Display
@@ -47,6 +47,7 @@ public class Display extends TunerView
     private int small;
     
     private int margin;
+    private Bitmap bitmap;
 
     // Note values for display
 
@@ -63,6 +64,10 @@ public class Display extends TunerView
     public Display(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
+
+    Resources resources = getResources();
+    bitmap = BitmapFactory.decodeResource(resources,
+    		R.drawable.ic_locked);
     }
 
     // On size changed
@@ -117,18 +122,8 @@ public class Display extends TunerView
 	paint.setTextAlign(Align.LEFT);
 	paint.setStyle(Style.FILL);
 
-	// Translate to the clip rect
-
-	canvas.translate(clipRect.left, clipRect.top);
-
 	if (audio.lock)
-	{
-	    Resources resources = getResources();
-	    BitmapDrawable drawable =
-		(BitmapDrawable)resources.getDrawable(R.drawable.ic_locked);
-	    Bitmap bitmap = drawable.getBitmap();
 	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
-	}
 
 	// Multiple values
 
