@@ -31,11 +31,10 @@ import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 
 // Colour picker
 
-public class ColourPicker extends View
+public class ColourPicker extends PreferenceView
 {
     private Paint mCirclePaint;
     private Paint mCentrePaint;
@@ -51,9 +50,6 @@ public class ColourPicker extends View
 
     private float hsv[] = {0, 1, 1};
 
-    private final static int WIDTH = 160;
-    private final static int HEIGHT = 160;
-    
     // Colour change listener
 
     private ColourChangeListener listener;
@@ -84,7 +80,9 @@ public class ColourPicker extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	setMeasuredDimension(WIDTH, HEIGHT);
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+    setMeasuredDimension(maxWidth / 3, maxWidth / 3);
     }
 
     // On size changed
@@ -139,7 +137,7 @@ public class ColourPicker extends View
     // On touch event
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
+	public boolean onTouchEvent(MotionEvent event)
     {
 	float x = event.getX() - mOffset;
 	float y = event.getY() - mCircleRadius;

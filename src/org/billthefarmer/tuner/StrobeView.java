@@ -37,9 +37,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
-import android.view.View;
 
-public class StrobeView extends View
+public class StrobeView extends PreferenceView
 {
 
     protected int foreground;
@@ -65,16 +64,12 @@ public class StrobeView extends View
 
     private static final int DELAY = 40;
 
-    private static final int WIDTH = 128;
-    private static final int HEIGHT = 128;
-
     public StrobeView(Context context, AttributeSet attrs)
     {
 	super(context, attrs);
 
 	foreground = Color.BLUE;
 	background = Color.CYAN;
-
     }
 
     // On measure
@@ -82,7 +77,8 @@ public class StrobeView extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	setMeasuredDimension(WIDTH, HEIGHT);
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    setMeasuredDimension(maxWidth / 4, maxWidth / 4);
     }
 
     // On size changed
