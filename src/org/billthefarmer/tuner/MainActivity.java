@@ -961,7 +961,10 @@ public class MainActivity extends Activity
 			// Don't use if negative
 
 			if (maxima.n[count] < 0)
+			{
+			    maxima.n[count] = 0;
 			    continue;
+			}
 
 			// Set limit to octave above
 
@@ -1014,8 +1017,10 @@ public class MainActivity extends Activity
 		    note = (int)Math.round(cf) + C5_OFFSET;
 
 		    if (note < 0)
+		    {
+			note = 0;
 			found = false;
-
+		    }
 		    // Find nearest maximum to reference note
 
 		    double df = 1000.0;
@@ -1107,8 +1112,6 @@ public class MainActivity extends Activity
 			    spectrum.postInvalidate();
 		    }
 		}
-
-		timer++;
 	    }
 
 	    // Stop and release the audio recorder
