@@ -23,6 +23,8 @@
 
 package org.billthefarmer.tuner;
 
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -39,6 +41,7 @@ import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
+import android.view.animation.LinearInterpolator;
 
 public class Strobe extends TunerView
 {
@@ -55,11 +58,15 @@ public class Strobe extends TunerView
     private static final float MEDIUM = 30;
     private static final float FAST = 40;
 
+    private static final float SCALE_VALUE = 1000;
+
     private Matrix matrix;
     private Canvas source;
     private Bitmap bitmap;
     private Bitmap rounded;
     private Paint xferPaint;
+
+    private ValueAnimator animator;
 
     private BitmapShader smallShader;
     private BitmapShader mediumShader;
@@ -71,11 +78,9 @@ public class Strobe extends TunerView
     private LinearGradient smallBlurGradient;
 
     private int size;
-    private double scale;
-    private double offset;
+    private float offset;
+    private float scale;
     private double cents;
-
-    private static final int DELAY = 40;
 
     // Constructor
 
@@ -98,7 +103,7 @@ public class Strobe extends TunerView
 	// Calculate size and scale
 
 	size = height / 4;
-	scale = width / 500.0;
+	scale = width / SCALE_VALUE;
 
 	// Create rounded bitmap
 
@@ -121,9 +126,36 @@ public class Strobe extends TunerView
 
 	matrix = new Matrix();
 
+	// Create animator
+
+	animator = ValueAnimator.ofFloat(0, 1);
+	animator.setInterpolator(new LinearInterpolator());
+	animator.setRepeatCount(ValueAnimator.INFINITE);
+	animator.setRepeatMode(ValueAnimator.RESTART);
+	animator.setDuration(10000);
+	
+	animator.addUpdateListener(new AnimatorUpdateListener()
+	{
+		public void onAnimationUpdate(ValueAnimator animator)
+		{
+			invalidate();
+		}
+	});
+
+	animator.start();
+
 	// Create the shaders
 
 	createShaders();
+    }
+
+    // Setter method for animator
+
+    void setOffset(float v)
+    {
+    	offset = v;
+
+    	invalidate();
     }
 
     // Create shaders
@@ -216,10 +248,6 @@ public class Strobe extends TunerView
     {
 	super.onDraw(canvas);
 
-	// Post invalidate after delay
-
-	postInvalidateDelayed(DELAY);
-
 	// Don't draw if turned off
 
 	if (audio == null || !audio.strobe)
@@ -232,12 +260,12 @@ public class Strobe extends TunerView
 
 	// Calculate offset
 
-	offset = offset + (cents * scale);
+	offset = offset + ((float)cents * scale);
 
 	if (offset > size * 16)
-	    offset = 0.0;
+	    offset = 0;
 
-	if (offset < 0.0)
+	if (offset < 0)
 	    offset = size * 16;
 
 	// Draw strobe

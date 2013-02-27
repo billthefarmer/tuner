@@ -23,6 +23,8 @@
 
 package org.billthefarmer.tuner;
 
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -38,6 +40,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.animation.LinearInterpolator;
 
 // Meter
 
@@ -47,11 +50,11 @@ public class Meter extends TunerView
     private Bitmap bitmap;
     private Rect barRect;
     private Path path;
+    
+    private ValueAnimator animator;
 
     private double cents;
     private float medium;
-
-    private static final int DELAY = 40;
 
     // Constructor
 
@@ -113,6 +116,24 @@ public class Meter extends TunerView
 	// Scale the path
 
 	path.transform(matrix);
+
+	// Create animator
+
+	animator = ValueAnimator.ofFloat(0, 1);
+	animator.setInterpolator(new LinearInterpolator());
+	animator.setRepeatCount(ValueAnimator.INFINITE);
+	animator.setRepeatMode(ValueAnimator.RESTART);
+	animator.setDuration(10000);
+	
+	animator.addUpdateListener(new AnimatorUpdateListener()
+	{
+		public void onAnimationUpdate(ValueAnimator animator)
+		{
+			invalidate();
+		}
+	});
+
+	animator.start();
     }
 
     // OnDraw
@@ -121,10 +142,6 @@ public class Meter extends TunerView
     protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);
-
-	// Post invalidate after delay
-
-	postInvalidateDelayed(DELAY);
 
 	if (audio != null && audio.backlight)
 	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);

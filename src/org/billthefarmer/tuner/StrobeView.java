@@ -23,6 +23,7 @@
 
 package org.billthefarmer.tuner;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -37,6 +38,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
+import android.view.animation.LinearInterpolator;
 
 public class StrobeView extends PreferenceView
 {
@@ -51,6 +53,8 @@ public class StrobeView extends PreferenceView
     private Bitmap rounded;
     private Paint xferPaint;
 
+    private ObjectAnimator animator; 
+
     private BitmapShader smallShader;
     private BitmapShader mediumShader;
     private BitmapShader largeShader;
@@ -58,11 +62,9 @@ public class StrobeView extends PreferenceView
 
     private int size;
     private int width;
-    private double scale;
-    private double offset;
-    private double cents;
+    private float offset;
 
-    private static final int DELAY = 40;
+//    private static final int DELAY = 40;
 
     public StrobeView(Context context, AttributeSet attrs)
     {
@@ -78,6 +80,9 @@ public class StrobeView extends PreferenceView
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+    // Get the max width from the superclass
+
     setMeasuredDimension(maxWidth / 4, maxWidth / 4);
     }
 
@@ -88,10 +93,9 @@ public class StrobeView extends PreferenceView
 
 	width = w;
 	
-	// Calculate size and scale
+	// Calculate size
 
 	size = h / 4;
-	scale = w / 500.0;
 
 	// Create paint
 
@@ -118,12 +122,31 @@ public class StrobeView extends PreferenceView
 
 	matrix = new Matrix();
 
+	// Create animator
+
+	animator = ObjectAnimator.ofFloat(this, "offset", 0, size * 16);
+	animator.setInterpolator(new LinearInterpolator());
+	animator.setRepeatCount(ObjectAnimator.INFINITE);
+	animator.setRepeatMode(ObjectAnimator.RESTART);
+	animator.setDuration(10000);
+	animator.start();
+
 	// Create the shaders
 
 	createShaders();
     }
 
+    // Setter method for animator
+
+    void setOffset(float v)
+    {
+    	offset = v;
+
+    	invalidate();
+    }
+
     // Create shaders
+
     protected void createShaders()
     {
 
@@ -171,25 +194,6 @@ public class StrobeView extends PreferenceView
 
     protected void onDraw(Canvas canvas)
     {
-
-	// Post invalidate after delay
-
-	postInvalidateDelayed(DELAY);
-
-	// Do inertia calculation
-
-	cents = (cents * 19.0 + 10.0) / 20.0;
-
-	// Calculate offset
-
-	offset = offset + (cents * scale);
-
-	if (offset > size * 16)
-	    offset = 0.0;
-
-	if (offset < 0.0)
-	    offset = size * 16;
-
 	// Reset the paint
 
 	paint.setStrokeWidth(1);
@@ -198,7 +202,7 @@ public class StrobeView extends PreferenceView
 
 	// Translate
 
-	matrix.setTranslate((float)offset, 0);
+	matrix.setTranslate(offset, 0);
 
 	// Draw the strobe chequers
 	// on the source bitmap

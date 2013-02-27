@@ -23,6 +23,8 @@ public class PreferenceView extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
+    // Get the largest width offered so a valid calculation can be made
+
     int w = MeasureSpec.getSize(widthMeasureSpec);
 
     if (maxWidth < w)

@@ -641,8 +641,10 @@ public class MainActivity extends Activity
 
 	    thread = Thread.currentThread();
 
+	    // Sample rates to try
+
 	    int rates[] =
-		{11025, 8000, 22050, 16000, 44100};
+		{11025, 8000, 22050, 16000, 32000, 44100};
 
 	    int size;
 	    for (int rate: rates)
@@ -689,6 +691,7 @@ public class MainActivity extends Activity
 		data = new short[STEP * divisor];
 		break;
 
+	    case 32000:
 	    case 44100:
 		divisor = 4;
 		data = new short[STEP * divisor];

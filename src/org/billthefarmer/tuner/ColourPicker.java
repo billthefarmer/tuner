@@ -82,6 +82,8 @@ public class ColourPicker extends PreferenceView
     {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
+    // Get the max width from the superclass
+
     setMeasuredDimension(maxWidth / 3, maxWidth / 3);
     }
 
