@@ -1112,6 +1112,8 @@ public class MainActivity extends Activity
 			    spectrum.postInvalidate();
 		    }
 		}
+
+		timer++;
 	    }
 
 	    // Stop and release the audio recorder
