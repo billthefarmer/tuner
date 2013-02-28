@@ -617,30 +617,34 @@ public class MainActivity extends Activity
 	{
 	    // Start the thread
 
-	    new Thread(new Runnable()
+	    thread = new Thread(new Runnable()
 		{
 		    public void run()
 		    {
 			processAudio();
 		    }
-		}, "Audio").start();
+		}, "Audio");
+
+	    thread.start();
 	}
 
 	// Stop
 
 	void stop()
 	{
+		Thread t = thread;
 	    thread = null;
+
+	    // Wait for the thread to exit
+
+	    while (t != null && t.isAlive())
+	    	Thread.yield();
 	}
 
 	// Process Audio
 
 	void processAudio()
 	{
-	    // Save the thread
-
-	    thread = Thread.currentThread();
-
 	    // Sample rates to try
 
 	    int rates[] =

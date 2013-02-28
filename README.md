@@ -5,7 +5,8 @@ Android Tuner
 
 This project has been tested on the android emulator and a Nexus 7,
 nothing else. The emulator worked fine at 8000 samples a second, the
-Nexus at 8000, 11025, 16000, 22050 and 44100.
+Nexus at 8000, 11025, 16000, 22050 and 44100. The apk may be found on
+[F-Droid](http://f-droid.org/repository/browse/?fdcategory=Multimedia&fdid=org.billthefarmer.tuner&fdpage=1).
 
 To import this project into the Android ADT you will need to add a
 .project file here. The easiest way to do that is to copy one from
