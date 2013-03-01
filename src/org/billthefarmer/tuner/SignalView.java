@@ -95,7 +95,7 @@ public class SignalView extends View
 	width = w;
 	height = h;
 
-	hMargin = width / 3;
+	hMargin = width * 3 / 8;
 	vMargin = height / 8;
 
 
@@ -130,7 +130,8 @@ public class SignalView extends View
 
 	// Rect to draw the coloured bars
 
-	rect = new RectF(0, 0, width / 3, height * 3 / 4);
+	rect = new RectF(hMargin, vMargin,
+			 hMargin + width / 4, vMargin + height * 3 / 4);
 
 	// Create animator
 
@@ -174,10 +175,14 @@ public class SignalView extends View
 
 	paint.setShader(shader);
 	paint.setStyle(Style.FILL);
-	canvas.translate(hMargin, vMargin);
+	//	canvas.translate(hMargin, vMargin);
 	int max = height * 3 / 4;
 	float v = (float)(Math.log(signal) / YSCALE);
-	rect.top = max * v;
+
+	rect.top = vMargin + max * v;
+	if (rect.top < 0)
+	    rect.top = 0;
+
 	canvas.drawRoundRect(rect, 3, 3, paint);
 
 	// Show dead audio after short delay
