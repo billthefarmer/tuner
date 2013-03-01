@@ -41,7 +41,8 @@ import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
-import android.view.animation.LinearInterpolator;
+
+// Strobe
 
 public class Strobe extends TunerView
 {
@@ -128,8 +129,7 @@ public class Strobe extends TunerView
 
 	// Create animator
 
-	animator = ValueAnimator.ofFloat(0, 1);
-	animator.setInterpolator(new LinearInterpolator());
+	animator = ValueAnimator.ofInt(0, 10000);
 	animator.setRepeatCount(ValueAnimator.INFINITE);
 	animator.setRepeatMode(ValueAnimator.RESTART);
 	animator.setDuration(10000);

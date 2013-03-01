@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -79,6 +80,7 @@ public class MainActivity extends Activity
     {"", "\u266F", "", "\u266D", "", "",
      "\u266F", "", "\u266D", "", "\u266D", ""};
  
+    private SignalView signal;
     private Spectrum spectrum;
     private Display display;
     private Strobe strobe;
@@ -106,6 +108,14 @@ public class MainActivity extends Activity
 	meter = (Meter)findViewById(R.id.meter);
 	scope = (Scope)findViewById(R.id.scope);
 
+	// Add custom view to action bar
+
+	ActionBar actionBar = getActionBar();
+	actionBar.setCustomView(R.layout.signal_view);
+	actionBar.setDisplayShowCustomEnabled(true);
+
+	signal = (SignalView)actionBar.getCustomView();
+
 	// Create audio
 
 	audio = new Audio();
@@ -123,6 +133,9 @@ public class MainActivity extends Activity
 
 	if (status != null)
 	    status.audio = audio;
+
+	if (signal != null)
+		signal.audio = audio;
 
 	if (meter != null)
 	    meter.audio = audio;
@@ -569,9 +582,10 @@ public class MainActivity extends Activity
 	private double xv[];
 	private double yv[];
 
-	private double dmax;
-
 	private Complex x;
+
+	private double dmax;
+	protected double signal;
 
 	protected Maxima maxima;
 
@@ -778,8 +792,12 @@ public class MainActivity extends Activity
 		    buffer[(SAMPLES - STEP) + i] =
 			audio.filter? yv[1]: (double)data[i * divisor];
 		}
+		
+		// Signal value
 
-		// Maximum data value
+		signal = dmax;
+
+		// Maximum value
 
 		if (dmax < 4096.0)
 		    dmax = 4096.0;
@@ -787,6 +805,7 @@ public class MainActivity extends Activity
 		// Calculate normalising value
 
 		double norm = dmax;
+
 		dmax = 0.0;
 
 		// Copy data to FFT input arrays for tuner

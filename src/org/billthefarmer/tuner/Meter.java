@@ -40,7 +40,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.view.animation.LinearInterpolator;
 
 // Meter
 
@@ -119,8 +118,7 @@ public class Meter extends TunerView
 
 	// Create animator
 
-	animator = ValueAnimator.ofFloat(0, 1);
-	animator.setInterpolator(new LinearInterpolator());
+	animator = ValueAnimator.ofInt(0, 10000);
 	animator.setRepeatCount(ValueAnimator.INFINITE);
 	animator.setRepeatMode(ValueAnimator.RESTART);
 	animator.setDuration(10000);

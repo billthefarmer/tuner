@@ -40,9 +40,10 @@ import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
+// Strobe view
+
 public class StrobeView extends PreferenceView
 {
-
     protected int foreground;
     protected int background;
 
