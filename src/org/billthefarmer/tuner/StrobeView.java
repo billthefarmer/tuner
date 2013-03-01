@@ -65,7 +65,7 @@ public class StrobeView extends PreferenceView
     private int width;
     private float offset;
 
-//    private static final int DELAY = 40;
+    //	  private static final int DELAY = 40;
 
     public StrobeView(Context context, AttributeSet attrs)
     {
@@ -80,11 +80,11 @@ public class StrobeView extends PreferenceView
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-    // Get the max width from the superclass
+	// Get the max width from the superclass
 
-    setMeasuredDimension(maxWidth / 4, maxWidth / 4);
+	setMeasuredDimension(maxWidth / 4, maxWidth / 4);
     }
 
     // On size changed
@@ -141,9 +141,9 @@ public class StrobeView extends PreferenceView
 
     void setOffset(float v)
     {
-    	offset = v;
+	offset = v;
 
-    	invalidate();
+	invalidate();
     }
 
     // Create shaders

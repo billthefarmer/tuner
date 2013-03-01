@@ -608,8 +608,7 @@ public class MainActivity extends Activity
 
 	private Complex x;
 
-	private double dmax;
-	protected double signal;
+	protected float signal;
 
 	protected Maxima maxima;
 
@@ -776,6 +775,10 @@ public class MainActivity extends Activity
 
 	    audioRecord.startRecording();
 
+	    // Max data
+
+	    double dmax = 0.0;
+
 	    // Continue until the thread is stopped
 
 	    while (thread != null)
@@ -801,12 +804,16 @@ public class MainActivity extends Activity
 
 		System.arraycopy(buffer, STEP, buffer, 0, SAMPLES - STEP);
 
+		// Max signal
+
+		float smax = 0;
+
 		// Butterworth filter, 3dB/octave
 
 		for (int i = 0; i < STEP; i++)
 		{
 		    xv[0] = xv[1];
-		    xv[1] = (double)data[i] / G;
+		    xv[1] = data[i] / G;
 
 		    yv[0] = yv[1];
 		    yv[1] = (xv[0] + xv[1]) + (K * yv[0]);
@@ -814,12 +821,17 @@ public class MainActivity extends Activity
 		    // Choose filtered/unfiltered data
 
 		    buffer[(SAMPLES - STEP) + i] =
-			audio.filter? yv[1]: (double)data[i * divisor];
+			audio.filter? yv[1]: data[i * divisor];
+
+		    // Find max signal
+
+		    if (smax < Math.abs(data[i * divisor]))
+			smax = Math.abs(data[i * divisor]);
 		}
 		
 		// Signal value
 
-		signal = dmax;
+		signal = smax / 4096;
 
 		// Maximum value
 

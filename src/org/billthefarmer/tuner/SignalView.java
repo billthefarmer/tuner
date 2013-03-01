@@ -45,6 +45,7 @@ import android.view.View;
 // Signal view
 
 public class SignalView extends View
+    implements AnimatorUpdateListener
 {
     Audio audio;
 
@@ -61,8 +62,7 @@ public class SignalView extends View
     private Paint paint;
     private RectF rect;
 
-    private static final float YSCALE = (float)Math.log(32768);
-    private static final float THRESHOLD = (float)Math.pow(Math.E, 6);
+    private static final float YSCALE = (float)Math.log(0.125);
 
     // Constructor
 
@@ -141,38 +141,43 @@ public class SignalView extends View
 
 	// Update the display
 
-	animator.addUpdateListener(new AnimatorUpdateListener()
-	    {
-		public void onAnimationUpdate(ValueAnimator animator)
-		{
-		    invalidate();
-		}
-	    });
+	animator.addUpdateListener(this);
 
 	// Start the animator
 
 	animator.start();
     }
 
+    // Animation update
+
     @Override
-    protected void onDraw(Canvas canvas)
+    public void onAnimationUpdate(ValueAnimator animator)
     {
 	// Do VU meter style calculation
 
-	if (signal < audio.signal)
-	    signal = ((signal * 4) + audio.signal) / 5;
+	if (audio != null)
+	{
+	    if (signal < audio.signal)
+		signal = ((signal * 4) + audio.signal) / 5;
 
-	else
-	    signal = ((signal * 9) + audio.signal) / 10;
+	    else
+		signal = ((signal * 9) + audio.signal) / 10;
+	}
 
+	invalidate();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas)
+    {
 	// Draw the coloured column
 
 	paint.setShader(shader);
 	paint.setStyle(Style.FILL);
 	canvas.translate(hMargin, vMargin);
 	int max = height * 3 / 4;
-	float v = (float)(Math.log(signal - THRESHOLD) / YSCALE);
-	rect.top = max - max * v;
+	float v = (float)(Math.log(signal) / YSCALE);
+	rect.top = max * v;
 	canvas.drawRoundRect(rect, 3, 3, paint);
 
 	// Show dead audio after short delay
@@ -192,7 +197,7 @@ public class SignalView extends View
 	}
 
 	if (audio != null && audio.thread != null)
-		timer = 0;
+	    timer = 0;
 
 	timer++;
     }

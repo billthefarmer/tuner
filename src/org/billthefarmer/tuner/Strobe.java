@@ -45,6 +45,7 @@ import android.util.AttributeSet;
 // Strobe
 
 public class Strobe extends TunerView
+    implements AnimatorUpdateListener
 {
     protected int colour;
     protected int foreground;
@@ -134,13 +135,7 @@ public class Strobe extends TunerView
 	animator.setRepeatMode(ValueAnimator.RESTART);
 	animator.setDuration(10000);
 	
-	animator.addUpdateListener(new AnimatorUpdateListener()
-	{
-		public void onAnimationUpdate(ValueAnimator animator)
-		{
-			invalidate();
-		}
-	});
+	animator.addUpdateListener(this);
 
 	animator.start();
 
@@ -149,13 +144,17 @@ public class Strobe extends TunerView
 	createShaders();
     }
 
-    // Setter method for animator
+    // Animation update
 
-    void setOffset(float v)
+    @Override
+    public void onAnimationUpdate(ValueAnimator animator)
     {
-    	offset = v;
+	// Do inertia calculation
 
-    	invalidate();
+	if (audio != null)
+	    cents = (cents * 19.0 + audio.cents) / 20.0;
+
+	invalidate();
     }
 
     // Create shaders
@@ -252,11 +251,6 @@ public class Strobe extends TunerView
 
 	if (audio == null || !audio.strobe)
 	    return;
-
-	// Do inertia calculation
-
-	if (audio != null)
-	    cents = (cents * 19.0 + audio.cents) / 20.0;
 
 	// Calculate offset
 

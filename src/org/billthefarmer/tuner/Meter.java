@@ -44,6 +44,7 @@ import android.util.AttributeSet;
 // Meter
 
 public class Meter extends TunerView
+    implements AnimatorUpdateListener
 {
     private Matrix matrix;
     private Bitmap bitmap;
@@ -75,9 +76,9 @@ public class Meter extends TunerView
 	// Create a matrix for scaling
 
 	matrix = new Matrix();
-    Resources resources = getResources();
+	Resources resources = getResources();
 	bitmap = BitmapFactory.decodeResource(resources,
-    		R.drawable.ic_pref_screen);
+					      R.drawable.ic_pref_screen);
     }
 
     // OnSizeChanged
@@ -123,15 +124,19 @@ public class Meter extends TunerView
 	animator.setRepeatMode(ValueAnimator.RESTART);
 	animator.setDuration(10000);
 	
-	animator.addUpdateListener(new AnimatorUpdateListener()
-	{
-		public void onAnimationUpdate(ValueAnimator animator)
-		{
-			invalidate();
-		}
-	});
-
+	animator.addUpdateListener(this);
 	animator.start();
+    }
+
+    @Override
+    public void onAnimationUpdate(ValueAnimator animator)
+    {
+	// Do the inertia calculation
+
+	if (audio != null)
+	    cents = ((cents * 19.0) + audio.cents) / 20.0;
+
+	invalidate();
     }
 
     // OnDraw
@@ -211,11 +216,6 @@ public class Meter extends TunerView
 	paint.setStyle(Style.STROKE);
 	paint.setStrokeWidth(2);
 	canvas.drawRect(barRect, paint);
-
-	// Do the inertia calculation
-
-	if (audio != null)
-	    cents = ((cents * 19.0) + audio.cents) / 20.0;
 
 	// Translate the canvas to
 	// the scaled cents value
