@@ -52,6 +52,7 @@ public class SignalView extends View
     private int height;
     private int hMargin;
     private int vMargin;
+    private long timer;
 
     private double signal;
 
@@ -174,9 +175,9 @@ public class SignalView extends View
 	rect.top = max - max * v;
 	canvas.drawRoundRect(rect, 3, 3, paint);
 
-	// Show dead audio
+	// Show dead audio after short delay
 
-	if (audio.thread == null)
+	if (audio != null && audio.thread == null && timer > 10)
 	{
 	    paint.setShader(null);
 	    paint.setColor(Color.RED);
@@ -184,10 +185,15 @@ public class SignalView extends View
 	    paint.setStrokeWidth(7);
 	    paint.setStrokeCap(Cap.ROUND);
 	    canvas.translate(-hMargin, -vMargin);
-	    canvas.drawLine(width / 5, height / 5,
-			    width * 4 / 5, height * 4 / 5, paint);
-	    canvas.drawLine(width * 4 / 5, height / 5,
-			    width / 5, height * 4 / 5, paint);
+	    canvas.drawLine(width / 3, height / 3,
+			    width * 3 / 4, height * 3 / 4, paint);
+	    canvas.drawLine(width * 3 / 4, height / 3,
+			    width / 3, height * 3 / 4, paint);
 	}
+
+	if (audio != null && audio.thread != null)
+		timer = 0;
+
+	timer++;
     }
 }

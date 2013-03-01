@@ -135,7 +135,7 @@ public class MainActivity extends Activity
 	    status.audio = audio;
 
 	if (signal != null)
-		signal.audio = audio;
+	    signal.audio = audio;
 
 	if (meter != null)
 	    meter.audio = audio;
@@ -383,6 +383,30 @@ public class MainActivity extends Activity
     protected void onStop()
     {
 	super.onStop();
+    }
+
+    // On destroy
+
+    @Override
+    protected void onDestroy()
+    {
+	super.onDestroy();
+
+	// Get rid of all those pesky objects
+
+	audio = null;
+	scope = null;
+	spectrum = null;
+	display = null;
+	strobe = null;
+	meter = null;
+	status = null;
+	signal = null;
+	toast = null;
+
+	// Hint that it might be a good idea
+
+	System.runFinalization();
     }
 
     // On settings click
@@ -646,13 +670,13 @@ public class MainActivity extends Activity
 
 	void stop()
 	{
-		Thread t = thread;
+	    Thread t = thread;
 	    thread = null;
 
 	    // Wait for the thread to exit
 
 	    while (t != null && t.isAlive())
-	    	Thread.yield();
+		Thread.yield();
 	}
 
 	// Process Audio
