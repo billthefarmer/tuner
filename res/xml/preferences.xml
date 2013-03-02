@@ -35,10 +35,10 @@
 	android:key="pref_screen"
 	android:icon="@drawable/ic_pref_screen"
 	android:title="@string/pref_screen"
- 	android:summary="@string/pref_screen_summ"
+	android:summary="@string/pref_screen_summ"
 	android:persistent="true"
 	android:defaultValue="false" />
-   <CheckBoxPreference
+    <CheckBoxPreference
 	android:key="pref_zoom"
 	android:icon="@drawable/ic_pref_zoom"
 	android:title="@string/pref_zoom"
@@ -51,18 +51,17 @@
 	android:summary="@string/pref_multiple_summ"
 	android:persistent="false"
 	android:defaultValue="false" />
-    <CheckBoxPreference
-	android:key="pref_strobe"
+    <PreferenceScreen
+	android:key="pref_strobe_screen"
 	android:icon="@drawable/ic_pref_strobe"
 	android:title="@string/pref_strobe"
-	android:summary="@string/pref_strobe_summ"
-	android:defaultValue="true" />
-    <PreferenceScreen
-	android:key="pref_colour_screen"
-	android:icon="@drawable/ic_pref_blue"
-	android:title="@string/pref_colour"
-	android:summary="@string/pref_colour_summ"
-	android:dependency="pref_strobe">
+	android:summary="@string/pref_strobe_screen" >
+      <CheckBoxPreference
+	  android:key="pref_strobe"
+	  android:icon="@drawable/ic_pref_strobe"
+	  android:title="@string/pref_strobe"
+	  android:summary="@string/pref_strobe_summ"
+	  android:defaultValue="true" />
       <ListPreference
 	  android:key="pref_colour"
 	  android:dependency="pref_strobe"
@@ -100,13 +99,13 @@
   <PreferenceCategory 
       android:key="pref_about_category"
       android:title="@string/pref_about">
-      <org.billthefarmer.tuner.AboutPreference
-          android:key="pref_about"
-          android:icon="@drawable/ic_about"
-          android:dialogIcon="@drawable/ic_about"
-          android:negativeButtonText=""
-          android:title="@string/pref_about"
-          android:summary="@string/pref_about_summ"
-          android:dialogLayout="@layout/about_dialog" />
+    <org.billthefarmer.tuner.AboutPreference
+	android:key="pref_about"
+	android:icon="@drawable/ic_about"
+	android:dialogIcon="@drawable/ic_about"
+	android:negativeButtonText=""
+	android:title="@string/pref_about"
+	android:summary="@string/pref_about_summ"
+	android:dialogLayout="@layout/about_dialog" />
   </PreferenceCategory>
 </PreferenceScreen>
