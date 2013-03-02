@@ -23,6 +23,7 @@
 
 package org.billthefarmer.tuner;
 
+import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -57,13 +58,13 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity
 {
-    private static final String PREF_SOURCE = "pref_source";
+    private static final String PREF_INPUT = "pref_input";
     private static final String PREF_REFERENCE = "pref_reference";
 
     private static final String PREF_FILTER = "pref_filter";
     private static final String PREF_DOWNSAMPLE = "pref_downsample";
     private static final String PREF_MULTIPLE = "pref_multiple";
-    private static final String PREF_BACKLIGHT = "pref_backlight";
+    private static final String PREF_SCREEN = "pref_screen";
     private static final String PREF_STROBE = "pref_strobe";
     private static final String PREF_ZOOM = "pref_zoom";
 
@@ -289,9 +290,9 @@ public class MainActivity extends Activity
 		@Override
 		public boolean onLongClick(View v)
 		{
-		    audio.backlight = !audio.backlight;
+		    audio.screen = !audio.screen;
 
-		    if (audio.backlight)
+		    if (audio.screen)
 			showToast(R.string.screen_on);
 
 		    else
@@ -299,7 +300,7 @@ public class MainActivity extends Activity
 
 		    Window window = getWindow();
 
-		    if (audio.backlight)
+		    if (audio.screen)
 			window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		    else
@@ -429,7 +430,7 @@ public class MainActivity extends Activity
 	editor.putBoolean(PREF_FILTER, audio.filter);
 	editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
 	editor.putBoolean(PREF_MULTIPLE, audio.multiple);
-	editor.putBoolean(PREF_BACKLIGHT, audio.backlight);
+	editor.putBoolean(PREF_SCREEN, audio.screen);
 	editor.putBoolean(PREF_STROBE, audio.strobe);
 	editor.putBoolean(PREF_ZOOM, audio.zoom);
 
@@ -451,18 +452,18 @@ public class MainActivity extends Activity
 
 	if (audio != null)
 	{
-	    audio.source = preferences.getInt(PREF_SOURCE, 0);
+	    audio.input = Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
 	    audio.reference = preferences.getInt(PREF_REFERENCE, 440);
 	    audio.filter = preferences.getBoolean(PREF_FILTER, false);
 	    audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
 	    audio.multiple = preferences.getBoolean(PREF_MULTIPLE, false);
-	    audio.backlight = preferences.getBoolean(PREF_BACKLIGHT, false);
+	    audio.screen = preferences.getBoolean(PREF_SCREEN, false);
 	    audio.strobe = preferences.getBoolean(PREF_STROBE, false);
 	    audio.zoom = preferences.getBoolean(PREF_ZOOM, true);
 
 	    // Check screen
 
-	    if (audio.backlight)
+	    if (audio.screen)
 	    {
 		Window window = getWindow();
 		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -549,14 +550,14 @@ public class MainActivity extends Activity
     {
 	// Preferences
 
-	protected int source;
+	protected int input;
 
 	protected boolean lock;
 	protected boolean zoom;
 	protected boolean filter;
+	protected boolean screen;
 	protected boolean strobe;
 	protected boolean multiple;
-	protected boolean backlight;
 	protected boolean downsample;
 
 	protected double reference;
@@ -684,8 +685,8 @@ public class MainActivity extends Activity
 	{
 	    // Sample rates to try
 
-	    int rates[] =
-		{11025, 8000, 22050, 16000, 32000, 44100};
+	    Resources resources = getResources();
+	    int rates[] = resources.getIntArray(R.array.sample_rates);
 
 	    int size;
 	    for (int rate: rates)
@@ -718,26 +719,16 @@ public class MainActivity extends Activity
 	    }
 
 	    // Set divisor according to sample rate
-	    
-	    switch ((int)sample)
-	    {
-	    case 8000:
-	    case 11025:
-		divisor = 1;
-		break;
 
-	    case 16000:
-	    case 22050:
-		divisor = 2;
-		data = new short[STEP * divisor];
-		break;
+	    // If you change the sample rates, make sure that this code
+	    // still works correctly, as both arrays get sorted as there
+	    // is no array.getIndexOf()
 
-	    case 32000:
-	    case 44100:
-		divisor = 4;
-		data = new short[STEP * divisor];
-		break;
-	    }
+	    Arrays.sort(rates);
+	    int index = Arrays.binarySearch(rates, (int)sample);
+	    int divisors[] = resources.getIntArray(R.array.divisors);
+	    Arrays.sort(divisors);
+	    divisor = divisors[index];
 
 	    // Calculate fps
 
@@ -748,7 +739,7 @@ public class MainActivity extends Activity
 	    // Create the AudioRecord object
 
 	    audioRecord =
-		new AudioRecord(source, (int)sample,
+		new AudioRecord(input, (int)sample,
 				AudioFormat.CHANNEL_IN_MONO,
 				AudioFormat.ENCODING_PCM_16BIT,
 				SIZE * divisor);
@@ -806,14 +797,14 @@ public class MainActivity extends Activity
 
 		// Max signal
 
-		float smax = 0;
+		double rm = 0;
 
 		// Butterworth filter, 3dB/octave
 
 		for (int i = 0; i < STEP; i++)
 		{
 		    xv[0] = xv[1];
-		    xv[1] = data[i] / G;
+		    xv[1] = data[i * divisor] / G;
 
 		    yv[0] = yv[1];
 		    yv[1] = (xv[0] + xv[1]) + (K * yv[0]);
@@ -823,15 +814,16 @@ public class MainActivity extends Activity
 		    buffer[(SAMPLES - STEP) + i] =
 			audio.filter? yv[1]: data[i * divisor];
 
-		    // Find max signal
+		    // Find root mean signal
 
-		    if (smax < Math.abs(data[i * divisor]))
-			smax = Math.abs(data[i * divisor]);
+		    double v = data[i * divisor] / 32768.0;
+		    rm += v * v;
 		}
 		
 		// Signal value
 
-		signal = smax / 4096;
+		rm /= STEP;
+		signal = (float)Math.sqrt(rm);
 
 		// Maximum value
 

@@ -146,7 +146,7 @@ public class Meter extends TunerView
     {
 	super.onDraw(canvas);
 
-	if (audio != null && audio.backlight)
+	if (audio != null && audio.screen)
 	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
 
 	// Reset the paint to black

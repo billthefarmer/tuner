@@ -28,6 +28,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.util.AttributeSet;
 
@@ -150,6 +151,7 @@ public class Spectrum extends Graticule
 
 	    paint.setTextAlign(Align.CENTER);
 	    paint.setColor(Color.YELLOW);
+	    paint.setStyle(Style.FILL);
 	    paint.setAntiAlias(false);
 	    paint.setStrokeWidth(1);
 
@@ -190,6 +192,7 @@ public class Spectrum extends Graticule
 
 	    // Yellow pen for frequency trace
 
+	    paint.setStyle(Style.STROKE);
 	    paint.setAntiAlias(true);
 	    paint.setStrokeWidth(2);
 
@@ -242,6 +245,55 @@ public class Spectrum extends Graticule
 	    paint.setStrokeWidth(2);
 	    paint.setAntiAlias(true);
 	    paint.setColor(Color.GREEN);
+
+	    // Draw path
+
+	    canvas.drawPath(path, paint);
+	    path.rewind();
+
+	    // Yellow pen for frequency trace
+
+	    paint.setTextAlign(Align.CENTER);
+	    paint.setColor(Color.YELLOW);
+	    paint.setStyle(Style.FILL);
+	    paint.setAntiAlias(false);
+	    paint.setStrokeWidth(1);
+
+	    // Create lines for each frequency
+
+	    for (int i = 0; i < audio.count; i++)
+	    {
+		// Draw line for each
+
+		float x =
+		    (float)(audio.maxima.f[i] / audio.fps / xscale);
+
+		path.moveTo(x, 0);
+		path.lineTo(x, -height);
+
+		double f = audio.maxima.f[i];
+
+		// Reference freq
+
+		double fr = audio.maxima.r[i];
+		double c = -12.0 * log2(fr / f);
+
+		// Ignore silly values
+
+		if (Double.isNaN(c))
+		    continue;
+
+		// Draw cents value
+
+		String s = String.format("%+1.0f", c * 100.0);
+		canvas.drawText(s, x, 0, paint);
+	    }
+
+	    // Yellow pen for frequency trace
+
+	    paint.setStyle(Style.STROKE);
+	    paint.setAntiAlias(true);
+	    paint.setStrokeWidth(2);
 
 	    // Draw path
 

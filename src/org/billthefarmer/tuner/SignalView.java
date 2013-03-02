@@ -35,7 +35,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.graphics.Shader.TileMode;
@@ -47,13 +46,11 @@ import android.view.View;
 public class SignalView extends View
     implements AnimatorUpdateListener
 {
-    Audio audio;
+    protected Audio audio;
 
     private int width;
     private int height;
-    private int hMargin;
-    private int vMargin;
-    private long timer;
+    private int margin;
 
     private double signal;
 
@@ -62,7 +59,7 @@ public class SignalView extends View
     private Paint paint;
     private RectF rect;
 
-    private static final float YSCALE = (float)Math.log(0.125);
+    private static final float SCALE = (float)Math.log(0.01);
 
     // Constructor
 
@@ -82,7 +79,7 @@ public class SignalView extends View
 
 	// Set size to offered height
 
-	setMeasuredDimension(h, h);
+	setMeasuredDimension(h / 2, h);
     }
 
     // On size changed
@@ -95,9 +92,7 @@ public class SignalView extends View
 	width = w;
 	height = h;
 
-	hMargin = width * 3 / 8;
-	vMargin = height / 8;
-
+	margin = width / 4;
 
 	// Colours for gradient
 
@@ -128,10 +123,12 @@ public class SignalView extends View
 	shader = new BitmapShader(bitmap,
 				  TileMode.CLAMP, TileMode.CLAMP);
 
+	paint.setShader(shader);
+
 	// Rect to draw the coloured bars
 
-	rect = new RectF(hMargin, vMargin,
-			 hMargin + width / 4, vMargin + height * 3 / 4);
+	rect = new RectF(margin, margin,
+			 margin + width / 2, margin + height * 3 / 4);
 
 	// Create animator
 
@@ -173,37 +170,14 @@ public class SignalView extends View
     {
 	// Draw the coloured column
 
-	paint.setShader(shader);
 	paint.setStyle(Style.FILL);
-	//	canvas.translate(hMargin, vMargin);
 	int max = height * 3 / 4;
-	float v = (float)(Math.log(signal) / YSCALE);
+	float v = (float)(Math.log(signal) / SCALE);
 
-	rect.top = vMargin + max * v;
+	rect.top = margin + max * v;
 	if (rect.top < 0)
 	    rect.top = 0;
 
 	canvas.drawRoundRect(rect, 3, 3, paint);
-
-	// Show dead audio after short delay
-
-	if (audio != null && audio.thread == null && timer > 10)
-	{
-	    paint.setShader(null);
-	    paint.setColor(Color.RED);
-	    paint.setStyle(Style.STROKE);
-	    paint.setStrokeWidth(7);
-	    paint.setStrokeCap(Cap.ROUND);
-	    canvas.translate(-hMargin, -vMargin);
-	    canvas.drawLine(width / 3, height / 3,
-			    width * 3 / 4, height * 3 / 4, paint);
-	    canvas.drawLine(width * 3 / 4, height / 3,
-			    width / 3, height * 3 / 4, paint);
-	}
-
-	if (audio != null && audio.thread != null)
-	    timer = 0;
-
-	timer++;
     }
 }

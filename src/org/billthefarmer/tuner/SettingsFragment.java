@@ -65,7 +65,7 @@ public class SettingsFragment extends PreferenceFragment
 	Preference custom = findPreference(KEY_PREF_CUSTOM);
 	preference.setSummary(preference.getEntry());
 
-	// Disable colourpickers
+	// Disable colour pickers
 
 	custom.setEnabled(false);
 
