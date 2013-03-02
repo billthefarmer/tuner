@@ -114,7 +114,7 @@ public class Scope extends Graticule
 
 	// Create the trace
 
-	for (int i = 0; i <= Math.min(width, audio.data.length - n); i++)
+	for (int i = 0; i < Math.min(width, audio.data.length - n); i++)
 	{
 	    // Get max value
 

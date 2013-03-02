@@ -60,19 +60,19 @@
 	  android:layout_height="0dp"
 	  android:layout_weight="0.44"
 	  android:layout_marginLeft="8dp"
-	  android:layout_marginRight="8dp"
-	  android:layout_marginBottom="8dp" />
+	  android:layout_marginRight="8dp" />
+      <View
+	  android:layout_width="match_parent"
+	  android:layout_height="0dp"
+	  android:layout_weight="0.06" />
       <org.billthefarmer.tuner.Meter
 	  android:id="@+id/meter"
 	  android:layout_width="match_parent"
 	  android:layout_height="0dp"
 	  android:layout_weight="0.52"
 	  android:layout_marginLeft="8dp"
-	  android:layout_marginRight="8dp" />
-      <View
-	  android:layout_width="match_parent"
-	  android:layout_height="0dp"
-	  android:layout_weight="0.06" />
+	  android:layout_marginRight="8dp"
+	  android:layout_marginBottom="8dp" />
     </LinearLayout>
   </LinearLayout>
 
