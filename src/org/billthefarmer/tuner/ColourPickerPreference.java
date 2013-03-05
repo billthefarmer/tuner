@@ -159,4 +159,18 @@ public class ColourPickerPreference extends DialogPreference
 	    persistString(mColours.toString());
 	}
     }
+
+    // Get foreground
+
+    protected int getForeground()
+    {
+    	return mStrobe.foreground;
+    }
+
+    // Get background
+
+    protected int getBackground()
+    {
+    	return mStrobe.background;
+    }
 }

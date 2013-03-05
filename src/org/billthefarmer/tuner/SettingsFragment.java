@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -42,7 +41,6 @@ public class SettingsFragment extends PreferenceFragment
 
     private String refSummary;
 
-    @SuppressLint("DefaultLocale")
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -97,7 +95,7 @@ public class SettingsFragment extends PreferenceFragment
 	    break;
 	}
 
-	NumberPickerPreference picker =
+	NumberPickerPreference picker = 
 	    (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
 	refSummary = (String)picker.getSummary();
 
