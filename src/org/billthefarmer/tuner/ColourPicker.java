@@ -163,7 +163,7 @@ public class ColourPicker extends PreferenceView
 	    {
 		float angle = (float)Math.toDegrees(Math.atan2(y, -x));
 
-		// need to turn angle +-180 to 0-360
+		// Need to turn angle +-180 to 0-360
 
 		hsv[0] = angle + 180;
 

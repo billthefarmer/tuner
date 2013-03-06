@@ -25,6 +25,7 @@ package org.billthefarmer.tuner;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -34,6 +35,11 @@ import android.preference.PreferenceManager;
 public class SettingsFragment extends PreferenceFragment
     implements OnSharedPreferenceChangeListener
 {
+    private static final int BLUE = 0;
+    private static final int OLIVE = 1;
+    private static final int MAGENTA = 2;
+    private static final int CUSTOM = 3;
+
     private static final String KEY_PREF_INPUT = "pref_input";
     private static final String KEY_PREF_COLOUR = "pref_colour";
     private static final String KEY_PREF_REFERENCE = "pref_reference";
@@ -60,7 +66,8 @@ public class SettingsFragment extends PreferenceFragment
 	preference.setSummary(preference.getEntry());
 
 	preference = (ListPreference)findPreference(KEY_PREF_COLOUR);
-	Preference custom = findPreference(KEY_PREF_CUSTOM);
+	ColourPickerPreference custom =
+	    (ColourPickerPreference)findPreference(KEY_PREF_CUSTOM);
 	preference.setSummary(preference.getEntry());
 
 	// Disable colour pickers
@@ -70,26 +77,27 @@ public class SettingsFragment extends PreferenceFragment
 	int v = Integer.valueOf(preference.getValue());
 	switch (v)
 	{
-	case 0:
+	case BLUE:
 	    preference.setIcon(R.drawable.ic_pref_blue);
 	    preference.setDialogIcon(R.drawable.ic_pref_blue);
 	    break;
 
-	case 1:
+	case OLIVE:
 	    preference.setIcon(R.drawable.ic_pref_olive);
 	    preference.setDialogIcon(R.drawable.ic_pref_olive);
 	    break;
 
-	case 2:
+	case MAGENTA:
 	    preference.setIcon(R.drawable.ic_pref_magenta);
 	    preference.setDialogIcon(R.drawable.ic_pref_magenta);
 	    break;
 
-	case 3:
-	    preference.setIcon(R.drawable.ic_pref_colour);
-	    preference.setDialogIcon(R.drawable.ic_pref_colour);
+	case CUSTOM:
+	    Drawable d = custom.getIcon();
+	    preference.setDialogIcon(d);
+	    preference.setIcon(d);
 
-	    // Enable colourpickers
+	    // Enable colour pickers
 
 	    custom.setEnabled(true);
 	    break;
@@ -121,7 +129,8 @@ public class SettingsFragment extends PreferenceFragment
 	if (key.equals(KEY_PREF_COLOUR))
 	{
 	    ListPreference preference = (ListPreference)findPreference(key);
-	    Preference custom = findPreference(KEY_PREF_CUSTOM);
+	    ColourPickerPreference custom =
+		(ColourPickerPreference)findPreference(KEY_PREF_CUSTOM);
 
 	    custom.setEnabled(false);
 
@@ -130,28 +139,45 @@ public class SettingsFragment extends PreferenceFragment
 	    int v = Integer.valueOf(((ListPreference)preference).getValue());
 	    switch (v)
 	    {
-	    case 0:
+	    case BLUE:
 		preference.setIcon(R.drawable.ic_pref_blue);
 		preference.setDialogIcon(R.drawable.ic_pref_blue);
 		break;
 
-	    case 1:
+	    case OLIVE:
 		preference.setIcon(R.drawable.ic_pref_olive);
 		preference.setDialogIcon(R.drawable.ic_pref_olive);
 		break;
 
-	    case 2:
+	    case MAGENTA:
 		preference.setIcon(R.drawable.ic_pref_magenta);
 		preference.setDialogIcon(R.drawable.ic_pref_magenta);
 		break;
 
-	    case 3:
-		preference.setIcon(R.drawable.ic_pref_colour);
-		preference.setDialogIcon(R.drawable.ic_pref_colour);
+	    case CUSTOM:
+		Drawable d = custom.getIcon();
+		preference.setDialogIcon(d);
+		preference.setIcon(d);
+
+	    // Enable colour pickers
 
 		custom.setEnabled(true);
 		break;
 	    }
+	}
+
+	if (key.equals(KEY_PREF_CUSTOM))
+	{
+	    ColourPickerPreference custom =
+		(ColourPickerPreference)findPreference(key);
+
+	    // Change the list preference icons
+
+	    Drawable d = custom.getIcon();
+	    ListPreference preference =
+		(ListPreference)findPreference(KEY_PREF_COLOUR);
+	    preference.setDialogIcon(d);
+	    preference.setIcon(d);
 	}
 
 	if (key.equals(KEY_PREF_REFERENCE))
