@@ -546,7 +546,7 @@ public class MainActivity extends Activity
 
     // Audio
 
-    protected class Audio
+    protected class Audio implements Runnable
     {
 	// Preferences
 
@@ -626,7 +626,7 @@ public class MainActivity extends Activity
 
 	// Constructor
 
-	Audio()
+	protected Audio()
 	{
 	    buffer = new double[SAMPLES];
 	    data = new short[STEP];
@@ -651,24 +651,25 @@ public class MainActivity extends Activity
 
 	// Start audio
 
-	void start()
+	protected void start()
 	{
 	    // Start the thread
 
-	    thread = new Thread(new Runnable()
-		{
-		    public void run()
-		    {
-			processAudio();
-		    }
-		}, "Audio");
-
+	    thread = new Thread(this, "Audio");
 	    thread.start();
+	}
+
+	// Run
+
+	@Override
+	public void run()
+	{
+		processAudio();
 	}
 
 	// Stop
 
-	void stop()
+	protected void stop()
 	{
 	    Thread t = thread;
 	    thread = null;
@@ -681,7 +682,7 @@ public class MainActivity extends Activity
 
 	// Process Audio
 
-	void processAudio()
+	protected void processAudio()
 	{
 	    // Sample rates to try
 

@@ -75,11 +75,11 @@
       <org.billthefarmer.tuner.ColourPickerPreference
 	  android:key="pref_custom"
 	  android:dependency="pref_strobe"
-	  android:icon="@drawable/ic_pref_blue"
+	  android:icon="@drawable/ic_pref_spectrum"
 	  android:title="@string/pref_custom"
 	  android:dialogLayout="@layout/colour_picker_preference"
 	  android:summary="@string/pref_custom_summ"
-	  android:dialogIcon="@drawable/ic_pref_blue"
+	  android:dialogIcon="@drawable/ic_pref_spectrum"
 	  android:defaultValue="@string/def_custom" />
     </PreferenceScreen>
   </PreferenceCategory>

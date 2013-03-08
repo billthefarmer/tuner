@@ -93,9 +93,8 @@ public class SettingsFragment extends PreferenceFragment
 	    break;
 
 	case CUSTOM:
-	    Drawable d = custom.getIcon();
-	    preference.setDialogIcon(d);
-	    preference.setIcon(d);
+	    preference.setIcon(R.drawable.ic_pref_spectrum);
+	    preference.setDialogIcon(R.drawable.ic_pref_spectrum);
 
 	    // Enable colour pickers
 
@@ -155,9 +154,8 @@ public class SettingsFragment extends PreferenceFragment
 		break;
 
 	    case CUSTOM:
-		Drawable d = custom.getIcon();
-		preference.setDialogIcon(d);
-		preference.setIcon(d);
+		preference.setIcon(R.drawable.ic_pref_spectrum);
+		preference.setDialogIcon(R.drawable.ic_pref_spectrum);
 
 	    // Enable colour pickers
 

@@ -38,7 +38,7 @@ public class ColourPicker extends PreferenceView
 {
     private Paint mCirclePaint;
     private Paint mCentrePaint;
-    private final int[] mColours =
+    private final static int[] mColours =
     {Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN,
      Color.GREEN, Color.YELLOW, Color.RED};
 
