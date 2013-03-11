@@ -24,6 +24,8 @@
 package org.billthefarmer.tuner;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -43,6 +45,7 @@ import android.view.animation.LinearInterpolator;
 // Strobe view
 
 public class StrobeView extends PreferenceView
+implements AnimatorUpdateListener
 {
     protected int foreground;
     protected int background;
@@ -54,7 +57,7 @@ public class StrobeView extends PreferenceView
     private Bitmap rounded;
     private Paint xferPaint;
 
-    private ObjectAnimator animator; 
+    private ValueAnimator animator; 
 
     private BitmapShader smallShader;
     private BitmapShader mediumShader;
@@ -125,17 +128,30 @@ public class StrobeView extends PreferenceView
 
 	// Create animator
 
-	animator = ObjectAnimator.ofFloat(this, "offset", 0, size * 16);
+	animator = ValueAnimator.ofFloat(0, size * 16);
 	animator.setInterpolator(new LinearInterpolator());
 	animator.setRepeatCount(ObjectAnimator.INFINITE);
 	animator.setRepeatMode(ObjectAnimator.RESTART);
 	animator.setDuration(10000);
+	
+	animator.addUpdateListener(this);
+
 	animator.start();
 
 	// Create the shaders
 
 	createShaders();
     }
+
+    // Animation update
+
+	@Override
+	public void onAnimationUpdate(ValueAnimator animation)
+	{
+		offset = (Float) animator.getAnimatedValue();
+
+		invalidate();
+	}
 
     // Setter method for animator
 
