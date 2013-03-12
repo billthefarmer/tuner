@@ -23,8 +23,12 @@
 
 package org.billthefarmer.tuner;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -44,6 +48,7 @@ public class SettingsFragment extends PreferenceFragment
     private static final String KEY_PREF_COLOUR = "pref_colour";
     private static final String KEY_PREF_REFERENCE = "pref_reference";
     private static final String KEY_PREF_CUSTOM = "pref_custom";
+    private static final String KEY_PREF_ABOUT = "pref_about";
 
     private String refSummary;
 
@@ -109,6 +114,29 @@ public class SettingsFragment extends PreferenceFragment
 	v = picker.getValue();
 	String s = String.format(refSummary, v);
 	picker.setSummary(s);
+	
+	Preference about = findPreference(KEY_PREF_ABOUT);
+	String sum = (String) about.getSummary();
+
+	Context context = about.getContext();
+	PackageManager manager = context.getPackageManager();
+
+	PackageInfo info = null;
+	try
+	{
+		 info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
+	}
+	
+	catch (NameNotFoundException e)
+	{
+		e.printStackTrace();
+	}
+
+	if (info != null)
+	{
+	s = String.format(sum, info.versionName);
+	about.setSummary(s);
+	}
     }
 
     // On shared preference changed
