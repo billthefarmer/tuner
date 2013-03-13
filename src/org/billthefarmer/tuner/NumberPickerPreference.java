@@ -29,6 +29,7 @@ import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
 public class NumberPickerPreference extends DialogPreference
@@ -78,7 +79,7 @@ public class NumberPickerPreference extends DialogPreference
 	    });
 
 	mPicker.setWrapSelectorWheel(false);
-	mPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+	mPicker.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
 	return mPicker;
     }

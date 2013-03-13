@@ -50,7 +50,7 @@ public class SettingsFragment extends PreferenceFragment
     private static final String KEY_PREF_CUSTOM = "pref_custom";
     private static final String KEY_PREF_ABOUT = "pref_about";
 
-    private String refSummary;
+    private String summary;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -109,38 +109,49 @@ public class SettingsFragment extends PreferenceFragment
 
 	NumberPickerPreference picker = 
 	    (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
-	refSummary = (String)picker.getSummary();
+	summary = (String)picker.getSummary();
+
+	// Set number picker summary
 
 	v = picker.getValue();
-	String s = String.format(refSummary, v);
+	String s = String.format(summary, v);
 	picker.setSummary(s);
-	
+
+	// Get about summary
+
 	Preference about = findPreference(KEY_PREF_ABOUT);
 	String sum = (String) about.getSummary();
 
-	Context context = about.getContext();
+	// Get context and package manager
+
+	Context context = getActivity();
 	PackageManager manager = context.getPackageManager();
+
+	// Get info
 
 	PackageInfo info = null;
 	try
 	{
-		 info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
+	    info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
 	}
 	
 	catch (NameNotFoundException e)
 	{
-		e.printStackTrace();
+	    e.printStackTrace();
 	}
+
+	// Set version in text view
 
 	if (info != null)
 	{
-	s = String.format(sum, info.versionName);
-	about.setSummary(s);
+	    s = String.format(sum, info.versionName);
+	    about.setSummary(s);
 	}
     }
 
     // On shared preference changed
 
+    @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences,
 					  String key)
     {
@@ -163,7 +174,7 @@ public class SettingsFragment extends PreferenceFragment
 
 	    // Get the value and set the dialog icon
 
-	    int v = Integer.valueOf(((ListPreference)preference).getValue());
+	    int v = Integer.valueOf(preference.getValue());
 	    switch (v)
 	    {
 	    case BLUE:
@@ -185,7 +196,7 @@ public class SettingsFragment extends PreferenceFragment
 		preference.setIcon(R.drawable.ic_pref_spectrum);
 		preference.setDialogIcon(R.drawable.ic_pref_spectrum);
 
-	    // Enable colour pickers
+		// Enable colour pickers
 
 		custom.setEnabled(true);
 		break;
@@ -214,7 +225,7 @@ public class SettingsFragment extends PreferenceFragment
 	    // Get the value and set the summary
 
 	    int v = preference.getValue();
-	    String s = String.format(refSummary, v);
+	    String s = String.format(summary, v);
 	    preference.setSummary(s);
 	}
     }

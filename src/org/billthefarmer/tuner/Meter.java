@@ -27,11 +27,9 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
@@ -50,7 +48,7 @@ public class Meter extends TunerView
     private Bitmap bitmap;
     private Rect barRect;
     private Path path;
-    
+
     private ValueAnimator animator;
 
     private double cents;
@@ -76,14 +74,14 @@ public class Meter extends TunerView
 	// Create a matrix for scaling
 
 	matrix = new Matrix();
-	Resources resources = getResources();
 	bitmap = BitmapFactory.decodeResource(resources,
 					      R.drawable.ic_pref_screen);
     }
 
     // OnSizeChanged
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    @Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
@@ -141,7 +139,8 @@ public class Meter extends TunerView
 
     // OnDraw
 
-    @SuppressLint("DefaultLocale")
+    @Override
+	@SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);
@@ -152,7 +151,7 @@ public class Meter extends TunerView
 	// Reset the paint to black
 
 	paint.setStrokeWidth(1);
-	paint.setColor(Color.BLACK);
+	paint.setColor(resources.getColor(android.R.color.primary_text_light));
 	paint.setStyle(Style.FILL);
 
 	// Translate the canvas down
@@ -209,7 +208,7 @@ public class Meter extends TunerView
 
 	// Set the paint colour to grey
 
-	paint.setColor(Color.GRAY);
+	paint.setColor(resources.getColor(android.R.color.darker_gray));
 
 	// Draw the bar outline
 
@@ -231,14 +230,14 @@ public class Meter extends TunerView
 	// Set fill style and fill
 	// the thumb
 
-	paint.setColor(Color.WHITE);
+	paint.setColor(resources.getColor(android.R.color.background_light));
 	paint.setStyle(Style.FILL);
 	canvas.drawPath(path, paint);
 
 	// Draw the thumb outline
 
 	paint.setStrokeWidth(3);
-	paint.setColor(Color.BLACK);
+	paint.setColor(resources.getColor(android.R.color.primary_text_light));
 	paint.setStyle(Style.STROKE);
 	canvas.drawPath(path, paint);
     }

@@ -51,7 +51,8 @@ public class Spectrum extends Graticule
 
     // Draw trace
 
-    @SuppressLint("DefaultLocale")
+    @Override
+	@SuppressLint("DefaultLocale")
     protected void drawTrace(Canvas canvas)
     {
 
@@ -85,7 +86,7 @@ public class Spectrum extends Graticule
 
 	// Calculate the scaling
 
-	float yscale = (float)(height / max);
+	float yscale = (height / max);
 
 	max = 0.0f;
 

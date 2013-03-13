@@ -5,17 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     <TextView
+        android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_gravity="center"
         android:text="@string/pref_about_summ" />
     <TextView 
+        android:id="@+id/copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/copyright" />
     <TextView 
+        android:id="@+id/licence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

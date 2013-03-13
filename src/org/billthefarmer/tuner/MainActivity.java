@@ -739,7 +739,8 @@ public class MainActivity extends Activity
 		{
 		    runOnUiThread(new Runnable()
 			{
-			    public void run()
+			    @Override
+				public void run()
 			    {
 				showAlert(R.string.app_name,
 					  R.string.error_buffer);
@@ -765,9 +766,9 @@ public class MainActivity extends Activity
 
 	    // Calculate fps
 
-	    fps = (sample / divisor) / (double)SAMPLES;
+	    fps = (sample / divisor) / SAMPLES;
 	    final double expect = 2.0 * Math.PI *
-		(double)STEP / (double)SAMPLES;
+		STEP / SAMPLES;
 
 	    // Create the AudioRecord object
 
@@ -784,6 +785,7 @@ public class MainActivity extends Activity
 	    {
 		runOnUiThread(new Runnable()
 		    {
+			@Override
 			public void run()
 			{
 			    showAlert(R.string.app_name, R.string.error_init);
@@ -911,7 +913,7 @@ public class MainActivity extends Activity
 
 		    // Calculate phase difference
 
-		    dp -= (double)i * expect;
+		    dp -= i * expect;
 
 		    int qpd = (int)(dp / Math.PI);
 
@@ -921,7 +923,7 @@ public class MainActivity extends Activity
 		    else
 			qpd -= qpd & 1;
 
-		    dp -=  Math.PI * (double)qpd;
+		    dp -=  Math.PI * qpd;
 
 		    // Calculate frequency difference
 

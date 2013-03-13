@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
@@ -92,7 +91,8 @@ implements AnimatorUpdateListener
 
     // On size changed
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    @Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 
 	width = w;
@@ -130,8 +130,8 @@ implements AnimatorUpdateListener
 
 	animator = ValueAnimator.ofFloat(0, size * 16);
 	animator.setInterpolator(new LinearInterpolator());
-	animator.setRepeatCount(ObjectAnimator.INFINITE);
-	animator.setRepeatMode(ObjectAnimator.RESTART);
+	animator.setRepeatCount(ValueAnimator.INFINITE);
+	animator.setRepeatMode(ValueAnimator.RESTART);
 	animator.setDuration(10000);
 	
 	animator.addUpdateListener(this);
@@ -209,7 +209,8 @@ implements AnimatorUpdateListener
 
     // On draw
 
-    protected void onDraw(Canvas canvas)
+    @Override
+	protected void onDraw(Canvas canvas)
     {
 	// Reset the paint
 

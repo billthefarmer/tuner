@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import org.billthefarmer.tuner.ColourPicker.ColourChangeListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -84,7 +83,7 @@ public class ColourPickerPreference extends DialogPreference
 
 	// Set the listeners
 
-	mForegroundPicker.setListener(new ColourChangeListener()
+	mForegroundPicker.setListener(new ColourPicker.ColourChangeListener()
 	    {
 		public void onColourChanged(int c)
 		{
@@ -93,7 +92,7 @@ public class ColourPickerPreference extends DialogPreference
 		}
 	    });
 
-	mBackgroundPicker.setListener(new ColourChangeListener()
+	mBackgroundPicker.setListener(new ColourPicker.ColourChangeListener()
 	    {
 		public void onColourChanged(int c)
 		{

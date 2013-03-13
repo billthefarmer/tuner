@@ -29,7 +29,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -45,6 +44,7 @@ public class Status extends View
     private int margin;
 
     private Paint paint;
+    private Resources resources;
 
     // Constructor
 
@@ -53,11 +53,13 @@ public class Status extends View
 	super(context, attrs);
 
 	paint = new Paint();
+	resources = getResources();
     }
 
     // On size changed
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    @Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	width = w;
 	height = h;
@@ -67,7 +69,8 @@ public class Status extends View
 
     // On draw
 
-    @SuppressLint("DefaultLocale")
+    @Override
+	@SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
 	String s;
@@ -75,7 +78,7 @@ public class Status extends View
 	// Draw separator line
 
 	paint.setStrokeWidth(3);
-	paint.setColor(Color.GRAY);
+	paint.setColor(resources.getColor(android.R.color.darker_gray));
 	paint.setAntiAlias(true);
 	paint.setStyle(Paint.Style.STROKE);
 	canvas.drawLine(0, 0, width, 0, paint);
@@ -88,7 +91,7 @@ public class Status extends View
 	// Set up text
 
 	paint.setStrokeWidth(1);
-	paint.setColor(Color.BLACK);
+	paint.setColor(resources.getColor(android.R.color.primary_text_light));
 	paint.setTextSize(height / 2);
 	paint.setStyle(Paint.Style.FILL);
 
@@ -98,7 +101,6 @@ public class Status extends View
 
 	// Draw sample rate text
 
-	Resources resources = getResources();
 	s = String.format(resources.getString(R.string.sample_rate),
 			  audio.sample);
 	canvas.drawText(s, margin, 0, paint);
