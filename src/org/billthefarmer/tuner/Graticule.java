@@ -56,7 +56,7 @@ public class Graticule extends TunerView
     // On Size Changed
 
     @Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
@@ -87,7 +87,7 @@ public class Graticule extends TunerView
     // On Draw
 
     @Override
-	protected void onDraw(Canvas canvas)
+    protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);
 

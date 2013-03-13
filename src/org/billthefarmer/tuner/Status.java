@@ -59,7 +59,7 @@ public class Status extends View
     // On size changed
 
     @Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	width = w;
 	height = h;
@@ -70,7 +70,7 @@ public class Status extends View
     // On draw
 
     @Override
-	@SuppressLint("DefaultLocale")
+    @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
 	String s;
@@ -146,7 +146,7 @@ public class Status extends View
 
 	if (audio.multiple)
 	{
-		s = resources.getString(R.string.multiple);
+	    s = resources.getString(R.string.multiple);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}
@@ -155,7 +155,7 @@ public class Status extends View
 
 	if (audio.screen)
 	{
-		s = resources.getString(R.string.display);
+	    s = resources.getString(R.string.display);
 	    canvas.drawText(s, x, 0, paint);
 	    x += paint.measureText(s + " ");
 	}

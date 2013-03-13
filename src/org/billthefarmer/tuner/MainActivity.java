@@ -319,7 +319,7 @@ public class MainActivity extends Activity
 	    break;
 	}
 	return true;
-   }
+    }
 
     // On options item
 
@@ -740,7 +740,7 @@ public class MainActivity extends Activity
 		    runOnUiThread(new Runnable()
 			{
 			    @Override
-				public void run()
+			    public void run()
 			    {
 				showAlert(R.string.app_name,
 					  R.string.error_buffer);

@@ -52,7 +52,7 @@ public class Spectrum extends Graticule
     // Draw trace
 
     @Override
-	@SuppressLint("DefaultLocale")
+    @SuppressLint("DefaultLocale")
     protected void drawTrace(Canvas canvas)
     {
 

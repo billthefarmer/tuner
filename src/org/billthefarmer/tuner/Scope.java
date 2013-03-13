@@ -48,7 +48,7 @@ public class Scope extends Graticule
     // Draw trace
 
     @Override
-	protected void drawTrace(Canvas canvas)
+    protected void drawTrace(Canvas canvas)
     {
 
 	// Check for data

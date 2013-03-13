@@ -163,11 +163,11 @@ public class ColourPickerPreference extends DialogPreference
 	    mStrobe.foreground = mForegroundPicker.getColour();
 	    mStrobe.background = mBackgroundPicker.getColour();
 
-		mColours = new JSONArray();
+	    mColours = new JSONArray();
 
-		// Save the colours
+	    // Save the colours
 
-		mColours.put(mForegroundPicker.getColour());
+	    mColours.put(mForegroundPicker.getColour());
 	    mColours.put(mBackgroundPicker.getColour());
 
 	    persistString(mColours.toString());

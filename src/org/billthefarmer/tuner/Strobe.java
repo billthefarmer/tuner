@@ -94,7 +94,7 @@ public class Strobe extends TunerView
     // On size changed
 
     @Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
@@ -245,7 +245,7 @@ public class Strobe extends TunerView
     // On draw
 
     @Override
-	protected void onDraw(Canvas canvas)
+    protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);
 

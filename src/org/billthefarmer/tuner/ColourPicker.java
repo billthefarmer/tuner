@@ -80,11 +80,11 @@ public class ColourPicker extends PreferenceView
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-    // Get the max width from the superclass
+	// Get the max width from the superclass
 
-    setMeasuredDimension(maxWidth / 3, maxWidth / 3);
+	setMeasuredDimension(maxWidth / 3, maxWidth / 3);
     }
 
     // On size changed
@@ -139,7 +139,7 @@ public class ColourPicker extends PreferenceView
     // On touch event
 
     @Override
-	public boolean onTouchEvent(MotionEvent event)
+    public boolean onTouchEvent(MotionEvent event)
     {
 	float x = event.getX() - mOffset;
 	float y = event.getY() - mCircleRadius;

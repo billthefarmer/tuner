@@ -63,14 +63,14 @@ public class Display extends TunerView
     {
 	super(context, attrs);
 
-    bitmap = BitmapFactory.decodeResource(resources,
-    		R.drawable.ic_locked);
+	bitmap = BitmapFactory.decodeResource(resources,
+					      R.drawable.ic_locked);
     }
 
     // On size changed
 
     @Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
@@ -104,7 +104,7 @@ public class Display extends TunerView
     // On draw
 
     @Override
-	@SuppressLint("DefaultLocale")
+    @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);

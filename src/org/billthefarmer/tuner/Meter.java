@@ -81,7 +81,7 @@ public class Meter extends TunerView
     // OnSizeChanged
 
     @Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 	super.onSizeChanged(w, h, oldw, oldh);
 
@@ -140,7 +140,7 @@ public class Meter extends TunerView
     // OnDraw
 
     @Override
-	@SuppressLint("DefaultLocale")
+    @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
 	super.onDraw(canvas);

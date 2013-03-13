@@ -44,7 +44,7 @@ import android.view.animation.LinearInterpolator;
 // Strobe view
 
 public class StrobeView extends PreferenceView
-implements AnimatorUpdateListener
+    implements AnimatorUpdateListener
 {
     protected int foreground;
     protected int background;
@@ -92,7 +92,7 @@ implements AnimatorUpdateListener
     // On size changed
 
     @Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 
 	width = w;
@@ -145,13 +145,13 @@ implements AnimatorUpdateListener
 
     // Animation update
 
-	@Override
-	public void onAnimationUpdate(ValueAnimator animation)
-	{
-		offset = (Float) animator.getAnimatedValue();
+    @Override
+    public void onAnimationUpdate(ValueAnimator animation)
+    {
+	offset = (Float) animator.getAnimatedValue();
 
-		invalidate();
-	}
+	invalidate();
+    }
 
     // Setter method for animator
 
@@ -210,7 +210,7 @@ implements AnimatorUpdateListener
     // On draw
 
     @Override
-	protected void onDraw(Canvas canvas)
+    protected void onDraw(Canvas canvas)
     {
 	// Reset the paint
 
