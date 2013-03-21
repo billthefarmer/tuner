@@ -37,7 +37,7 @@ import android.util.AttributeSet;
 
 // Graticule
 
-public class Graticule extends TunerView
+public abstract class Graticule extends TunerView
 {
     private static final int SIZE = 10;
 
@@ -139,8 +139,5 @@ public class Graticule extends TunerView
 
     // Draw trace
 
-    protected void drawTrace(Canvas canvas)
-    {
-	// Dummy method
-    }
+    protected abstract void drawTrace(Canvas canvas);
 }

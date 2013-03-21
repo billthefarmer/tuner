@@ -37,7 +37,7 @@ import android.view.View;
 
 // Tuner View
 
-public class TunerView extends View
+public abstract class TunerView extends View
 {
     protected Audio audio;
     protected Resources resources;

@@ -27,7 +27,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class PreferenceView extends View
+public abstract class PreferenceView extends View
 {
 
     protected static int maxWidth;
