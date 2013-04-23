@@ -23,6 +23,8 @@
 
 package org.billthefarmer.tuner;
 
+import android.app.ActionBar;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -35,6 +37,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 
 public class SettingsFragment extends PreferenceFragment
     implements OnSharedPreferenceChangeListener
@@ -147,6 +150,24 @@ public class SettingsFragment extends PreferenceFragment
 	    s = String.format(sum, info.versionName);
 	    about.setSummary(s);
 	}
+    }
+
+    // On preference tree click
+
+    @Override
+	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+    		Preference preference)
+    {
+    	boolean result = super.onPreferenceTreeClick(preferenceScreen, preference);
+
+    	if (preference instanceof PreferenceScreen)
+    	{
+    	Dialog dialog = ((PreferenceScreen)preference).getDialog();
+    	ActionBar actionBar = dialog.getActionBar();
+    	actionBar.setDisplayHomeAsUpEnabled(false);
+    	}
+
+    	return result;
     }
 
     // On shared preference changed

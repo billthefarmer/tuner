@@ -238,7 +238,8 @@ public class MainActivity extends Activity
 
 	case R.id.display:
 	    audio.lock = !audio.lock;
-	    display.invalidate();
+	    if (display != null)
+		display.invalidate();
 
 	    if (audio.lock)
 		showToast(R.string.lock_on);
@@ -484,7 +485,8 @@ public class MainActivity extends Activity
 
 	if (audio != null)
 	{
-	    audio.input = Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
+	    audio.input =
+		Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
 	    audio.reference = preferences.getInt(PREF_REFERENCE, 440);
 	    audio.filter = preferences.getBoolean(PREF_FILTER, false);
 	    audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
