@@ -30,6 +30,7 @@ import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.Path.Direction;
 import android.util.AttributeSet;
 
 // Spectrum
@@ -129,6 +130,7 @@ public class Spectrum extends Graticule
 		    float x = (float)((i - lower) * xscale); 
 
 		    path.lineTo(x, y);
+		    path.addCircle(x, y, 1, Direction.CW);
 		}
 	    }
 
