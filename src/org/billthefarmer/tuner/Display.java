@@ -64,7 +64,7 @@ public class Display extends TunerView
 	super(context, attrs);
 
 	bitmap = BitmapFactory.decodeResource(resources,
-					      R.drawable.ic_locked);
+					      android.R.drawable.ic_lock_lock);
     }
 
     // On size changed

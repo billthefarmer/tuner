@@ -133,7 +133,7 @@ public abstract class Graticule extends TunerView
 	for (int i = (width % SIZE) / 2; i <= width; i += SIZE)
 	    canvas.drawLine(i, 0, i, height, paint);
 
-	for (int i = (height % SIZE) / 2; i <= height; i +=SIZE)
+	for (int i = (height % SIZE) / 2; i <= height; i += SIZE)
 	    canvas.drawLine(0, i, width, i, paint);
     }
 

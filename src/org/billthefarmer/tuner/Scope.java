@@ -108,6 +108,10 @@ public class Scope extends Graticule
 
 	max = 0;
 
+	// Calculate x scale
+
+	float xscale = (float)Math.ceil((double)width / audio.data.length);
+
 	// Rewind the path
 
 	path.rewind();
@@ -123,8 +127,9 @@ public class Scope extends Graticule
 		max = Math.abs(audio.data[n + i]);
 
 	    float y = -audio.data[n + i] / yscale;
+	    float x = i * xscale;
 
-	    path.lineTo(i, y);
+	    path.lineTo(x, y);
 	}
 
 	// Color green

@@ -3,7 +3,7 @@
 
   <string name="app_name">Tuner</string>
   <string name="settings">Settings</string>
-  <string name="copyright">Copyright \u00A9 2013 Bill Farmer</string>
+  <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
   <string name="licence">Licence: GNU GPLv3</string>
 
   <string name="error_buffer">Error from audio recording! Cannot find a working input sample rate.</string>
