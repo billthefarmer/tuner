@@ -754,6 +754,22 @@ public class MainActivity extends Activity
 		}
 	    }
 
+	    if (size == AudioRecord.ERROR_BAD_VALUE)
+	    {
+		runOnUiThread(new Runnable()
+		    {
+			@Override
+			public void run()
+			{
+			    showAlert(R.string.app_name,
+				      R.string.error_buffer);
+			}
+		    });
+
+		thread = null;
+		return;
+	    }
+
 	    // Set divisor according to sample rate
 
 	    // If you change the sample rates, make sure that this code
