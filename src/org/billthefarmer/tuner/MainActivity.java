@@ -723,7 +723,7 @@ public class MainActivity extends Activity
 	    Resources resources = getResources();
 	    int rates[] = resources.getIntArray(R.array.sample_rates);
 
-	    int size;
+	    int size = 0;
 	    for (int rate: rates)
 	    {
 		sample = rate;
