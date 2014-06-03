@@ -31,7 +31,7 @@
   <string name="multiple_off">Multiple notes off</string>
 
   <string name="copied_clip">Data copied to clipboard</string>
-  <string name="sample_rate">Sample rate: %1.0f samples/sec</string>
+  <string name="sample_rate">Sample rate: %d samples/sec</string>
 
   <string name="filter">filter</string>
   <string name="zoom">zoom</string>

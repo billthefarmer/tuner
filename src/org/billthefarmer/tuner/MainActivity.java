@@ -24,6 +24,7 @@
 package org.billthefarmer.tuner;
 
 import java.util.Arrays;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -42,7 +43,6 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -595,13 +595,13 @@ public class MainActivity extends Activity
 	protected boolean downsample;
 
 	protected double reference;
-	protected double sample;
 
 	// Data
 
 	protected Thread thread;
 	protected double buffer[];
 	protected short data[];
+	protected int sample;
 
 	// Output data
 
@@ -663,7 +663,6 @@ public class MainActivity extends Activity
 	protected Audio()
 	{
 	    buffer = new double[SAMPLES];
-	    data = new short[STEP];
 	    
 	    xv = new double[2];
 	    yv = new double[2];
@@ -721,18 +720,22 @@ public class MainActivity extends Activity
 	    // Sample rates to try
 
 	    Resources resources = getResources();
+
 	    int rates[] = resources.getIntArray(R.array.sample_rates);
+	    int divisors[] = resources.getIntArray(R.array.divisors);
 
 	    int size = 0;
 	    for (int rate: rates)
 	    {
-		sample = rate;
 		size =
-		    AudioRecord.getMinBufferSize((int)sample,
+		    AudioRecord.getMinBufferSize(rate,
 						 AudioFormat.CHANNEL_IN_MONO,
 						 AudioFormat.ENCODING_PCM_16BIT);
 		if (size > 0)
+		{
+		    sample = rate;
 		    break;
+		}
 
 		if (size == AudioRecord.ERROR_BAD_VALUE)
 		    continue;
@@ -772,26 +775,27 @@ public class MainActivity extends Activity
 
 	    // Set divisor according to sample rate
 
-	    // If you change the sample rates, make sure that this code
-	    // still works correctly, as both arrays get sorted as there
-	    // is no array.getIndexOf()
+	    // If you change the sample rates, make sure that this
+	    // code still works correctly, as both arrays get sorted
+	    // as there is no array.indexOf(), or Arrays.indexOf().
+	    // Arrays.asList(int[]).indexOf(int) doesn't work either.
 
 	    Arrays.sort(rates);
-	    int index = Arrays.binarySearch(rates, (int)sample);
-	    int divisors[] = resources.getIntArray(R.array.divisors);
 	    Arrays.sort(divisors);
+
+	    int index = Arrays.binarySearch(rates, sample);
 	    divisor = divisors[index];
 
 	    // Calculate fps
 
-	    fps = (sample / divisor) / SAMPLES;
+	    fps = ((double)sample / divisor) / SAMPLES;
 	    final double expect = 2.0 * Math.PI *
 		STEP / SAMPLES;
 
 	    // Create the AudioRecord object
 
 	    audioRecord =
-		new AudioRecord(input, (int)sample,
+		new AudioRecord(input, sample,
 				AudioFormat.CHANNEL_IN_MONO,
 				AudioFormat.ENCODING_PCM_16BIT,
 				SIZE * divisor);
@@ -814,6 +818,10 @@ public class MainActivity extends Activity
 		thread = null;
 		return;
 	    }
+
+	    // Create buffer for input data
+
+	    data = new short[STEP * divisor];
 
 	    // Start recording
 
