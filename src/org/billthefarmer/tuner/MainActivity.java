@@ -23,8 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import java.util.Arrays;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -725,20 +723,25 @@ public class MainActivity extends Activity
 	    int divisors[] = resources.getIntArray(R.array.divisors);
 
 	    int size = 0;
+	    int state = 0;
+	    int index = 0;
 	    for (int rate: rates)
 	    {
+		// Check sample rate
+
 		size =
 		    AudioRecord.getMinBufferSize(rate,
 						 AudioFormat.CHANNEL_IN_MONO,
 						 AudioFormat.ENCODING_PCM_16BIT);
-		if (size > 0)
-		{
-		    sample = rate;
-		    break;
-		}
+		// Loop if invalid sample rate
 
 		if (size == AudioRecord.ERROR_BAD_VALUE)
+		{
+		    index++;
 		    continue;
+		}
+
+		// Check valid input selected, or other error
 
 		if (size == AudioRecord.ERROR)
 		{
@@ -755,7 +758,32 @@ public class MainActivity extends Activity
 		    thread = null;
 		    return;
 		}
+
+		// Create the AudioRecord object
+
+		audioRecord =
+		    new AudioRecord(input, rate,
+				    AudioFormat.CHANNEL_IN_MONO,
+				    AudioFormat.ENCODING_PCM_16BIT,
+				    SIZE * divisor);
+		// Check state
+
+		state = audioRecord.getState(); 
+		if (state != AudioRecord.STATE_INITIALIZED)
+		{
+		    audioRecord.release();
+		    index++;
+		    continue;
+		}
+
+		// Must be a valid sample rate
+
+		sample = rate;
+		divisor = divisors[index];
+		break;
 	    }
+
+	    // Check valid sample rate
 
 	    if (size == AudioRecord.ERROR_BAD_VALUE)
 	    {
@@ -773,35 +801,7 @@ public class MainActivity extends Activity
 		return;
 	    }
 
-	    // Set divisor according to sample rate
-
-	    // If you change the sample rates, make sure that this
-	    // code still works correctly, as both arrays get sorted
-	    // as there is no array.indexOf(), or Arrays.indexOf().
-	    // Arrays.asList(int[]).indexOf(int) doesn't work either.
-
-	    Arrays.sort(rates);
-	    Arrays.sort(divisors);
-
-	    int index = Arrays.binarySearch(rates, sample);
-	    divisor = divisors[index];
-
-	    // Calculate fps
-
-	    fps = ((double)sample / divisor) / SAMPLES;
-	    final double expect = 2.0 * Math.PI *
-		STEP / SAMPLES;
-
-	    // Create the AudioRecord object
-
-	    audioRecord =
-		new AudioRecord(input, sample,
-				AudioFormat.CHANNEL_IN_MONO,
-				AudioFormat.ENCODING_PCM_16BIT,
-				SIZE * divisor);
-	    // Check state
-
-	    int state = audioRecord.getState(); 
+	    // Check AudioRecord initialised
 
 	    if (state != AudioRecord.STATE_INITIALIZED)
 	    {
@@ -810,7 +810,8 @@ public class MainActivity extends Activity
 			@Override
 			public void run()
 			{
-			    showAlert(R.string.app_name, R.string.error_init);
+			    showAlert(R.string.app_name,
+				      R.string.error_init);
 			}
 		    });
 
@@ -818,6 +819,12 @@ public class MainActivity extends Activity
 		thread = null;
 		return;
 	    }
+
+	    // Calculate fps and expect
+
+	    fps = ((double)sample / divisor) / SAMPLES;
+	    final double expect = 2.0 * Math.PI *
+		STEP / SAMPLES;
 
 	    // Create buffer for input data
 
