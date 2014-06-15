@@ -759,13 +759,17 @@ public class MainActivity extends Activity
 		    return;
 		}
 
+		// Set divisor
+
+		divisor = divisors[index];
+
 		// Create the AudioRecord object
 
 		audioRecord =
 		    new AudioRecord(input, rate,
 				    AudioFormat.CHANNEL_IN_MONO,
 				    AudioFormat.ENCODING_PCM_16BIT,
-				    SIZE * divisor);
+				    Math.max(size, SIZE * divisor));
 		// Check state
 
 		state = audioRecord.getState(); 
@@ -779,7 +783,6 @@ public class MainActivity extends Activity
 		// Must be a valid sample rate
 
 		sample = rate;
-		divisor = divisors[index];
 		break;
 	    }
 

@@ -29,6 +29,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.LinearGradient;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint.Align;
@@ -37,6 +38,7 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
 
 // Meter
@@ -44,10 +46,11 @@ import android.util.AttributeSet;
 public class Meter extends TunerView
     implements AnimatorUpdateListener
 {
+    private LinearGradient gradient;
     private Matrix matrix;
     private Bitmap bitmap;
-    private Rect barRect;
-    private Path path;
+    private Rect bar;
+    private Path thumb;
 
     private ValueAnimator animator;
 
@@ -62,14 +65,22 @@ public class Meter extends TunerView
 
 	// Create a path for the thumb
 
-	path = new Path();
+	thumb = new Path();
 
-	path.moveTo(0, -1);
-	path.lineTo(1, 0);
-	path.lineTo(1, 1);
-	path.lineTo(-1, 1);
-	path.lineTo(-1, 0);
-	path.close();
+	thumb.moveTo(0, -2);
+	thumb.lineTo(1, -1);
+	thumb.lineTo(1, 2);
+	thumb.lineTo(-1, 2);
+	thumb.lineTo(-1, -1);
+	thumb.close();
+
+	// Create a gradient for the thumb
+
+	gradient = new
+	    LinearGradient(0, 0, 0, 4,
+			   resources.getColor(android.R.color.background_light),
+			   resources.getColor(android.R.color.primary_text_light),
+			   TileMode.MIRROR);
 
 	// Create a matrix for scaling
 
@@ -103,17 +114,20 @@ public class Meter extends TunerView
 
 	// Create a rect for the horizontal bar
 
-	barRect = new Rect(width / 36 - width / 2, -height / 64,
-			   width / 2 - width / 36, height / 64);
+	bar = new Rect(width / 36 - width / 2, -height / 128,
+		       width / 2 - width / 36, height / 128);
 
-	// Create a matrix to scale the path,
-	// a bit narrower than the height
+	// Create a matrix to scale the thumb
 
-	matrix.setScale(height / 24, height / 8);
+	matrix.setScale(height / 16, height / 16);
 
-	// Scale the path
+	// Scale the thumb
 
-	path.transform(matrix);
+	thumb.transform(matrix);
+
+	// Scale the gradient
+
+	gradient.setLocalMatrix(matrix);
 
 	// Create animator
 
@@ -206,15 +220,20 @@ public class Meter extends TunerView
 
 	canvas.translate(0, medium / 2.0f);
 
-	// Set the paint colour to grey
+	// Set fill style and fill
+	// the bar
 
-	paint.setColor(resources.getColor(android.R.color.darker_gray));
+	paint.setShader(gradient);
+	paint.setStyle(Style.FILL);
+	canvas.drawRect(bar, paint);
+	paint.setShader(null);
 
 	// Draw the bar outline
 
-	paint.setStyle(Style.STROKE);
 	paint.setStrokeWidth(2);
-	canvas.drawRect(barRect, paint);
+	paint.setColor(resources.getColor(android.R.color.darker_gray));
+	paint.setStyle(Style.STROKE);
+	canvas.drawRect(bar, paint);
 
 	// Translate the canvas to
 	// the scaled cents value
@@ -226,19 +245,20 @@ public class Meter extends TunerView
 
 	paint.setStrokeCap(Cap.ROUND);
 	paint.setStrokeJoin(Join.ROUND);
-	
+
 	// Set fill style and fill
 	// the thumb
 
-	paint.setColor(resources.getColor(android.R.color.background_light));
+	paint.setShader(gradient);
 	paint.setStyle(Style.FILL);
-	canvas.drawPath(path, paint);
+	canvas.drawPath(thumb, paint);
+	paint.setShader(null);
 
 	// Draw the thumb outline
 
-	paint.setStrokeWidth(3);
-	paint.setColor(resources.getColor(android.R.color.primary_text_light));
+	paint.setStrokeWidth(2);
+	paint.setColor(resources.getColor(android.R.color.darker_gray));
 	paint.setStyle(Style.STROKE);
-	canvas.drawPath(path, paint);
+	canvas.drawPath(thumb, paint);
     }
 }
