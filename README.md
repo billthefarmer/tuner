@@ -1,9 +1,9 @@
 Android Tuner
 =============
 
-![](http://github.com/billthefarmer/tuner/wiki/images/Tuner-portrait.png)
+![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Tuner-portrait.png)
 &nbsp;
-![](http://github.com/billthefarmer/tuner/wiki/images/Tuner-settings.png)
+![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Tuner-settings.png)
 
 This project has been tested on the android emulator, a Nexus 10 and a
 Nexus 7, nothing else. The emulator worked fine at 8000 samples a
