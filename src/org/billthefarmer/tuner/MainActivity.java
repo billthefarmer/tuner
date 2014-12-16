@@ -1143,6 +1143,7 @@ public class MainActivity extends Activity
 			note = 0;
 			found = false;
 		    }
+
 		    // Find nearest maximum to reference note
 
 		    double df = 1000.0;

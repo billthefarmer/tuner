@@ -210,28 +210,32 @@ public class Spectrum extends Graticule
 	{
 	    // Calculate x scale
 
-	    float xscale = (float)audio.xa.length / (float)width;
+	    float xscale = (float)Math.log(audio.xa.length) / width;
 
 	    // Create trace
 
+	    int last = 1;
 	    for (int x = 0; x < width; x++)
 	    {
 		float value = 0.0f;
 
-		// Don't show DC component
-
-		if (x > 0)
+		int index = (int)Math.round(Math.pow(Math.E, x * xscale));
+		for (int i = last; i <= index; i++)
 		{
-		    // Find max value for each vertex
+		    // Don't show DC component and don't overflow
 
-		    for (int j = 0; j < xscale; j++)
+		    if (i > 0 && i < audio.xa.length)
 		    {
-			int n = (int)(x * xscale) + j;
+			// Find max value for each vertex
 
-			if (value < audio.xa[n])
-			    value = (float)audio.xa[n];
+			if (value < audio.xa[i])
+			    value = (float)audio.xa[i];
 		    }
 		}
+
+		// Update last index
+
+		last = index + 1;
 
 		// Get max value
 
@@ -269,7 +273,7 @@ public class Spectrum extends Graticule
 		// Draw line for each
 
 		float x =
-		    (float)(audio.maxima.f[i] / audio.fps / xscale);
+		    (float)Math.log(audio.maxima.f[i] / audio.fps) / xscale;
 
 		path.moveTo(x, 0);
 		path.lineTo(x, -height);
