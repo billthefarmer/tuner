@@ -112,6 +112,7 @@ public class Strobe extends TunerView
 
 	rounded = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 	Canvas canvas = new Canvas(rounded);
+	paint.reset();
 	paint.setColor(Color.WHITE);
 	canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);	
 
@@ -275,7 +276,6 @@ public class Strobe extends TunerView
 	// Draw the result on the canvas
 
 	canvas.drawBitmap(bitmap, 0, 0, null);
-	paint.setShader(null);
     }
 
     // Draw strobe
@@ -353,5 +353,6 @@ public class Strobe extends TunerView
 	largerShader.setLocalMatrix(matrix);
 	paint.setShader(largerShader);
 	canvas.drawRect(0, size * 3, width, size * 4, paint);
+	paint.setShader(null);
     }
 }
