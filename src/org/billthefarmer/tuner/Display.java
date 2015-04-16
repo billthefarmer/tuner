@@ -90,6 +90,7 @@ public class Display extends TunerView
 	// Make sure the text will fit the width
 
 	paint.setTextSize(medium);
+	paint.setTextScaleX(1.0f);
 	float dx = paint.measureText("0000.00Hz");
 	
 	// Scale the text if it won't fit

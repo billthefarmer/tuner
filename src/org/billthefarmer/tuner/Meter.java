@@ -63,25 +63,6 @@ public class Meter extends TunerView
     {
 	super(context, attrs);
 
-	// Create a path for the thumb
-
-	thumb = new Path();
-
-	thumb.moveTo(0, -2);
-	thumb.lineTo(1, -1);
-	thumb.lineTo(1, 2);
-	thumb.lineTo(-1, 2);
-	thumb.lineTo(-1, -1);
-	thumb.close();
-
-	// Create a gradient for the thumb
-
-	gradient = new
-	    LinearGradient(0, 0, 0, 4,
-			   resources.getColor(android.R.color.background_light),
-			   resources.getColor(android.R.color.primary_text_light),
-			   TileMode.MIRROR);
-
 	// Create a matrix for scaling
 
 	matrix = new Matrix();
@@ -116,6 +97,25 @@ public class Meter extends TunerView
 
 	bar = new Rect(width / 36 - width / 2, -height / 128,
 		       width / 2 - width / 36, height / 128);
+
+	// Create a path for the thumb
+
+	thumb = new Path();
+
+	thumb.moveTo(0, -2);
+	thumb.lineTo(1, -1);
+	thumb.lineTo(1, 2);
+	thumb.lineTo(-1, 2);
+	thumb.lineTo(-1, -1);
+	thumb.close();
+
+	// Create a gradient for the thumb
+
+	gradient = new
+	    LinearGradient(0, 0, 0, 4,
+			   resources.getColor(android.R.color.background_light),
+			   resources.getColor(android.R.color.primary_text_light),
+			   TileMode.MIRROR);
 
 	// Create a matrix to scale the thumb
 
