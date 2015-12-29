@@ -5,6 +5,6 @@
 
   <integer name="def_ref">440</integer>
   <integer name="max_ref">480</integer>
-  <integer name="min_ref">430</integer>
+  <integer name="min_ref">420</integer>
 
 </resources>
