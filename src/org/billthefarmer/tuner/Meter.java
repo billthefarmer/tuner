@@ -223,10 +223,10 @@ public class Meter extends TunerView
 	// Set fill style and fill
 	// the bar
 
-	paint.setShader(gradient);
-	paint.setStyle(Style.FILL);
-	canvas.drawRect(bar, paint);
-	paint.setShader(null);
+	// paint.setShader(gradient);
+	// paint.setStyle(Style.FILL);
+	// canvas.drawRect(bar, paint);
+	// paint.setShader(null);
 
 	// Draw the bar outline
 
