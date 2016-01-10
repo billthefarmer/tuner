@@ -330,6 +330,11 @@ public class MainActivity extends Activity
 	int id = item.getItemId();
 	switch (id)
 	{
+	    // Help
+
+	case R.id.help:
+	    return onHelpClick(item);
+
 	    // Settings
 
 	case R.id.settings:
@@ -338,6 +343,16 @@ public class MainActivity extends Activity
 	default:
 	    return false;
 	}
+    }
+
+    // On help click
+
+    private boolean onHelpClick(MenuItem item)
+    {
+	Intent intent = new Intent(this, HelpActivity.class);
+	startActivity(intent);
+
+	return true;
     }
 
     // On settings click

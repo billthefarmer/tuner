@@ -26,6 +26,9 @@
       </intent-filter>
     </activity>
     <activity
+        android:name="org.billthefarmer.tuner.HelpActivity" >
+    </activity>
+    <activity
         android:name="org.billthefarmer.tuner.SettingsActivity" >
     </activity>
   </application>
