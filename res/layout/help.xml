@@ -11,7 +11,7 @@
       android:id="@+id/help"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:textSize="16sp"
+      android:textSize="18sp"
       android:textIsSelectable="true" />
 
 </ScrollView>
