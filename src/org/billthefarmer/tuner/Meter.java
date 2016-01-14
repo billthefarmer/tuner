@@ -66,6 +66,9 @@ public class Meter extends TunerView
 	// Create a matrix for scaling
 
 	matrix = new Matrix();
+
+	// Get display icon
+
 	bitmap = BitmapFactory.decodeResource(resources,
 					      R.drawable.ic_pref_screen);
     }
@@ -159,7 +162,9 @@ public class Meter extends TunerView
     {
 	super.onDraw(canvas);
 
-	if (audio != null && audio.screen)
+	// Draw display icon
+
+	if (audio != null && audio.screen && bitmap != null)
 	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
 
 	// Reset the paint to black

@@ -63,8 +63,10 @@ public class Display extends TunerView
     {
 	super(context, attrs);
 
+	// Get lock icon
+
 	bitmap = BitmapFactory.decodeResource(resources,
-					      android.R.drawable.ic_lock_lock);
+					      R.drawable.ic_locked);
     }
 
     // On size changed
@@ -115,15 +117,17 @@ public class Display extends TunerView
 	if (audio == null)
 	    return;
 
+	// Draw lock icon
+
+	if (audio.lock && bitmap != null)
+	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+
 	// Set up paint
 
 	paint.setStrokeWidth(1);
 	paint.setColor(resources.getColor(android.R.color.primary_text_light));
 	paint.setTextAlign(Align.LEFT);
 	paint.setStyle(Style.FILL);
-
-	if (audio.lock)
-	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
 
 	// Multiple values
 

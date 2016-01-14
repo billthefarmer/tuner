@@ -2,8 +2,8 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.billthefarmer.tuner"
-    android:versionCode="107"
-    android:versionName="1.07" >
+    android:versionCode="108"
+    android:versionName="1.08" >
 
   <uses-sdk
       android:minSdkVersion="11"
