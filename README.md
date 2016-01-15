@@ -6,7 +6,9 @@ Windows, Mac and the Android version of this project are also on
 [Google code](https://code.google.com/p/ctuner
 "https://code.google.com/p/ctuner"). The app is available on
 [F-Droid](http://f-droid.org/repository/browse/?fdid=org.billthefarmer.tuner)
-and [here](https://github.com/billthefarmer/tuner/releases).
+and [here](https://github.com/billthefarmer/tuner/releases). See the
+[Wiki](https://github.com/billthefarmer/tuner/wiki) or the app help
+screen for detailed documentation.
 
 ![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Tuner-portrait.png)
 &nbsp;
