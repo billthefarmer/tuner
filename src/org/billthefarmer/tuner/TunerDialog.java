@@ -4,9 +4,9 @@
 //
 //  Copyright (C) 2013	Bill Farmer
 //
-//  This program is free software; you can redistribute it and/or modify
+//  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation; either version 3 of the License, or
+//  the Free Software Foundation, either version 3 of the License, or
 //  (at your option) any later version.
 //
 //  This program is distributed in the hope that it will be useful,
@@ -24,30 +24,22 @@
 package org.billthefarmer.tuner;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.os.Bundle;
+import android.app.Dialog;
+import android.content.Context;
 import android.view.MenuItem;
 
-public class SettingsActivity extends Activity
+public class TunerDialog extends Dialog
 {
-    // On create
+    // Constructor
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public TunerDialog(Context context, int themeResId)
     {
-	super.onCreate(savedInstanceState);
-
-	// Display the fragment as the main content.
-
-	getFragmentManager().beginTransaction()
-	    .replace(android.R.id.content, new SettingsFragment())
-	    .commit();
+	super(context, themeResId);
 
 	// Enable back navigation on action bar
 
 	ActionBar actionBar = getActionBar();
 	actionBar.setDisplayHomeAsUpEnabled(true);
-
     }
 
     // On options item selected
@@ -60,8 +52,7 @@ public class SettingsActivity extends Activity
 	switch (item.getItemId())
 	{
 	case android.R.id.home:
-	    // app icon in action bar clicked; go home
-	    finish();
+	    dismiss();
 	    return true;
 
 	default:
