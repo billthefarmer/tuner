@@ -1,5 +1,4 @@
-Android Tuner
-=============
+# Android Tuner [![Build Status](https://travis-ci.org/billthefarmer/tuner.svg?branch=master)](https://travis-ci.org/billthefarmer/tuner)
 
 An android accordion tuner with strobe and multiple notes. The
 Windows, Mac and the Android version of this project are also on
