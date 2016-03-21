@@ -35,7 +35,6 @@ import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -46,16 +45,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.Window;
-import android.view.WindowManager.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 // Main Activity
 
 public class MainActivity extends Activity
-    implements OnClickListener, OnLongClickListener
+    implements View.OnClickListener, View.OnLongClickListener
 {
     private static final String PREF_INPUT = "pref_input";
     private static final String PREF_REFERENCE = "pref_reference";
@@ -311,10 +308,10 @@ public class MainActivity extends Activity
 	    Window window = getWindow();
 
 	    if (audio.screen)
-		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 	    else
-		window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	    break;
 	}
 	return true;
@@ -471,7 +468,7 @@ public class MainActivity extends Activity
 	SharedPreferences preferences =
 	    PreferenceManager.getDefaultSharedPreferences(this);
 
-	Editor editor = preferences.edit();
+	SharedPreferences.Editor editor = preferences.edit();
 
 	editor.putBoolean(PREF_FILTER, audio.filter);
 	editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
@@ -513,13 +510,13 @@ public class MainActivity extends Activity
 	    if (audio.screen)
 	    {
 		Window window = getWindow();
-		window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	    }
 
 	    else
 	    {
 		Window window = getWindow();
-		window.clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	    }
 
 	    // Check for strobe before setting colours

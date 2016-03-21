@@ -26,7 +26,6 @@ package org.billthefarmer.tuner;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
@@ -64,7 +63,7 @@ public class AboutPreference extends DialogPreference
 	    info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
 	}
 		
-	catch (NameNotFoundException e)
+	catch (Exception e)
 	{
 	    e.printStackTrace();
 	}

@@ -27,10 +27,8 @@ import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -40,7 +38,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
 public class SettingsFragment extends PreferenceFragment
-    implements OnSharedPreferenceChangeListener
+    implements SharedPreferences.OnSharedPreferenceChangeListener
 {
     private static final int BLUE = 0;
     private static final int OLIVE = 1;
@@ -138,7 +136,7 @@ public class SettingsFragment extends PreferenceFragment
 	    info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
 	}
 	
-	catch (NameNotFoundException e)
+	catch (Exception e)
 	{
 	    e.printStackTrace();
 	}
@@ -158,13 +156,14 @@ public class SettingsFragment extends PreferenceFragment
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
     		Preference preference)
     {
-    	boolean result = super.onPreferenceTreeClick(preferenceScreen, preference);
+    	boolean result =
+	    super.onPreferenceTreeClick(preferenceScreen, preference);
 
     	if (preference instanceof PreferenceScreen)
     	{
-    	Dialog dialog = ((PreferenceScreen)preference).getDialog();
-    	ActionBar actionBar = dialog.getActionBar();
-    	actionBar.setDisplayHomeAsUpEnabled(false);
+	    Dialog dialog = ((PreferenceScreen)preference).getDialog();
+	    ActionBar actionBar = dialog.getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(false);
     	}
 
     	return result;
