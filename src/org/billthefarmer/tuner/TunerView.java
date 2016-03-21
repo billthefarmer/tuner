@@ -29,7 +29,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -85,7 +84,7 @@ public abstract class TunerView extends View
 	paint.setStrokeWidth(3);
 	paint.setAntiAlias(true);
 	paint.setColor(resources.getColor(android.R.color.darker_gray));
-	paint.setStyle(Style.STROKE);
+	paint.setStyle(Paint.Style.STROKE);
 	canvas.drawRoundRect(outlineRect, 10, 10, paint);
 
 	// Set the cliprect

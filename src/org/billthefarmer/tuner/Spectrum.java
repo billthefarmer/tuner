@@ -27,10 +27,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint.Align;
-import android.graphics.Paint.Style;
+import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Path.Direction;
 import android.util.AttributeSet;
 
 // Spectrum
@@ -69,7 +67,7 @@ public class Spectrum extends Graticule
 	    // Color yellow
 
 	    paint.setStrokeWidth(1);
-	    paint.setTextAlign(Align.LEFT);
+	    paint.setTextAlign(Paint.Align.LEFT);
 	    paint.setColor(Color.YELLOW);
 
 	    float height = paint.getFontMetrics(null);
@@ -130,7 +128,7 @@ public class Spectrum extends Graticule
 		    float x = (float)((i - lower) * xscale); 
 
 		    path.lineTo(x, y);
-		    path.addCircle(x, y, 1, Direction.CW);
+		    path.addCircle(x, y, 1, Path.Direction.CW);
 		}
 	    }
 
@@ -152,9 +150,9 @@ public class Spectrum extends Graticule
 
 	    // Yellow pen for frequency trace
 
-	    paint.setTextAlign(Align.CENTER);
+	    paint.setTextAlign(Paint.Align.CENTER);
 	    paint.setColor(Color.YELLOW);
-	    paint.setStyle(Style.FILL);
+	    paint.setStyle(Paint.Style.FILL);
 	    paint.setAntiAlias(false);
 	    paint.setStrokeWidth(1);
 
@@ -195,7 +193,7 @@ public class Spectrum extends Graticule
 
 	    // Yellow pen for frequency trace
 
-	    paint.setStyle(Style.STROKE);
+	    paint.setStyle(Paint.Style.STROKE);
 	    paint.setAntiAlias(true);
 	    paint.setStrokeWidth(2);
 
@@ -260,9 +258,9 @@ public class Spectrum extends Graticule
 
 	    // Yellow pen for frequency trace
 
-	    paint.setTextAlign(Align.CENTER);
+	    paint.setTextAlign(Paint.Align.CENTER);
 	    paint.setColor(Color.YELLOW);
-	    paint.setStyle(Style.FILL);
+	    paint.setStyle(Paint.Style.FILL);
 	    paint.setAntiAlias(false);
 	    paint.setStrokeWidth(1);
 
@@ -298,7 +296,7 @@ public class Spectrum extends Graticule
 
 	    // Yellow pen for frequency trace
 
-	    paint.setStyle(Style.STROKE);
+	    paint.setStyle(Paint.Style.STROKE);
 	    paint.setAntiAlias(true);
 	    paint.setStrokeWidth(2);
 

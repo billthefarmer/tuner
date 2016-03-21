@@ -26,25 +26,22 @@ package org.billthefarmer.tuner;
 import org.billthefarmer.tuner.MainActivity.Audio;
 
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.RectF;
-import android.graphics.Shader.TileMode;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
 // Signal view
 
 public class SignalView extends View
-    implements AnimatorUpdateListener
+    implements ValueAnimator.AnimatorUpdateListener
 {
     protected Audio audio;
 
@@ -103,11 +100,12 @@ public class SignalView extends View
 
 	LinearGradient gradient =
 	    new LinearGradient(0, 0, 0, height,
-			       colours, null, TileMode.CLAMP);
+			       colours, null, Shader.TileMode.CLAMP);
 
 	// Bitmap to draw coloured bars in
 
-	Bitmap bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+	Bitmap bitmap = Bitmap.createBitmap(width, height,
+					    Bitmap.Config.ARGB_8888);
 	Canvas canvas = new Canvas(bitmap);
 	paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	paint.setShader(gradient);
@@ -121,7 +119,7 @@ public class SignalView extends View
 	// Create shader from coloured bars
 
 	shader = new BitmapShader(bitmap,
-				  TileMode.CLAMP, TileMode.CLAMP);
+				  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
 	paint.setShader(shader);
 
@@ -170,7 +168,7 @@ public class SignalView extends View
     {
 	// Draw the coloured column
 
-	paint.setStyle(Style.FILL);
+	paint.setStyle(Paint.Style.FILL);
 	int max = height * 3 / 4;
 	float v = (float)(Math.log(signal) / SCALE);
 

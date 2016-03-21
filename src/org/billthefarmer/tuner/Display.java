@@ -28,8 +28,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint.Align;
-import android.graphics.Paint.Style;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
@@ -126,8 +125,8 @@ public class Display extends TunerView
 
 	paint.setStrokeWidth(1);
 	paint.setColor(resources.getColor(android.R.color.primary_text_light));
-	paint.setTextAlign(Align.LEFT);
-	paint.setStyle(Style.FILL);
+	paint.setTextAlign(Paint.Align.LEFT);
+	paint.setStyle(Paint.Style.FILL);
 
 	// Multiple values
 
@@ -144,7 +143,7 @@ public class Display extends TunerView
 	    {
 		// Move down
 
-		paint.setTextAlign(Align.LEFT);
+		paint.setTextAlign(Paint.Align.LEFT);
 		canvas.translate(0, small);
 
 		// Calculate cents
@@ -195,7 +194,7 @@ public class Display extends TunerView
 		// Draw difference
 
 		x = width - margin / 2;
-		paint.setTextAlign(Align.RIGHT);
+		paint.setTextAlign(Paint.Align.RIGHT);
 		s = String.format("%+5.2fHz", audio.maxima.r[i] -
 				  audio.maxima.f[i]);
 		canvas.drawText(s, x, 0, paint);
@@ -248,7 +247,7 @@ public class Display extends TunerView
 		// Draw difference
 
 		x = width - margin / 2;
-		paint.setTextAlign(Align.RIGHT);
+		paint.setTextAlign(Paint.Align.RIGHT);
 		s = String.format("%+5.2fHz", audio.difference);
 		canvas.drawText(s, x, 0, paint);
 	    }
@@ -294,7 +293,7 @@ public class Display extends TunerView
 
 	    paint.setTextSize(large);
 	    //	    paint.setTypeface(Typeface.DEFAULT);
-	    paint.setTextAlign(Align.RIGHT);
+	    paint.setTextAlign(Paint.Align.RIGHT);
 
 	    // Draw cents
 
@@ -305,7 +304,7 @@ public class Display extends TunerView
 	    // Set up text
 
 	    paint.setTextSize(medium);
-	    paint.setTextAlign(Align.LEFT);
+	    paint.setTextAlign(Paint.Align.LEFT);
 	    paint.setTypeface(Typeface.DEFAULT);
 
 	    // Move down
@@ -319,7 +318,7 @@ public class Display extends TunerView
 
 	    // Draw frequency
 
-	    paint.setTextAlign(Align.RIGHT);
+	    paint.setTextAlign(Paint.Align.RIGHT);
 	    s = String.format("%4.2fHz", audio.frequency);
 	    // dx = paint.measureText(s);
 	    canvas.drawText(s, width - margin, 0, paint);
@@ -327,7 +326,7 @@ public class Display extends TunerView
 	    // Set up text
 
 	    paint.setTextSize(medium);
-	    paint.setTextAlign(Align.LEFT);
+	    paint.setTextAlign(Paint.Align.LEFT);
 
 	    // Move down
 
@@ -340,7 +339,7 @@ public class Display extends TunerView
 
 	    // Draw difference
 
-	    paint.setTextAlign(Align.RIGHT);
+	    paint.setTextAlign(Paint.Align.RIGHT);
 	    s = String.format("%+5.2fHz", audio.difference);
 	    // dx = paint.measureText(s);
 	    canvas.drawText(s, width - margin, 0, paint);

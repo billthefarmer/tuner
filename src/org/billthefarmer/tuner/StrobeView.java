@@ -24,7 +24,6 @@
 package org.billthefarmer.tuner;
 
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -32,19 +31,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Bitmap.Config;
-import android.graphics.Paint.Style;
-import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.graphics.Shader.TileMode;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
 // Strobe view
 
 public class StrobeView extends PreferenceView
-    implements AnimatorUpdateListener
+    implements ValueAnimator.AnimatorUpdateListener
 {
     protected int foreground;
     protected int background;
@@ -107,7 +104,7 @@ public class StrobeView extends PreferenceView
 
 	// Create rounded bitmap
 
-	rounded = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	rounded = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 	Canvas canvas = new Canvas(rounded);	
 	paint.setColor(Color.WHITE);
 	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);	
@@ -115,11 +112,11 @@ public class StrobeView extends PreferenceView
 	// Create magic paint
 
 	xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	xferPaint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
+	xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
 	// Create a bitmap to draw on
 
-	bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+	bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 	source = new Canvas(bitmap);
 
 	// Create matrix for translating shaders
@@ -172,19 +169,19 @@ public class StrobeView extends PreferenceView
 	smallShader =
 	    new BitmapShader(createShaderBitmap(size,
 						size, foreground, background),
-			     TileMode.REPEAT, TileMode.CLAMP);
+			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
 	mediumShader =
 	    new BitmapShader(createShaderBitmap(size * 2,
 						size, foreground, background),
-			     TileMode.REPEAT, TileMode.CLAMP);
+			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
 	largeShader =
 	    new BitmapShader(createShaderBitmap(size * 4,
 						size, foreground, background),
-			     TileMode.REPEAT, TileMode.CLAMP);
+			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
 	largerShader =
 	    new BitmapShader(createShaderBitmap(size * 8,
 						size, foreground, background),
-			     TileMode.REPEAT, TileMode.CLAMP);
+			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
     }
 
     // Create shader bitmap
@@ -194,7 +191,7 @@ public class StrobeView extends PreferenceView
 	// Create bitmap twice as wide as the block
 
 	Bitmap bitmap =
-	    Bitmap.createBitmap(width * 2, height, Config.ARGB_8888);
+	    Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
 	Canvas canvas = new Canvas(bitmap);
 	Paint paint = new Paint();
 
@@ -216,7 +213,7 @@ public class StrobeView extends PreferenceView
 
 	paint.setStrokeWidth(1);
 	paint.setAntiAlias(true);
-	paint.setStyle(Style.FILL);
+	paint.setStyle(Paint.Style.FILL);
 
 	// Translate
 

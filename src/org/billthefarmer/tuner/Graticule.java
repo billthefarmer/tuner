@@ -28,11 +28,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.graphics.Bitmap.Config;
-import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 
 // Graticule
@@ -67,20 +65,20 @@ public abstract class Graticule extends TunerView
 
 	// Create rounded bitmap
 
-	rounded = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+	rounded = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 	Canvas canvas = new Canvas(rounded);	
-	paint.setStyle(Style.FILL);
+	paint.setStyle(Paint.Style.FILL);
 	paint.setColor(Color.WHITE);
 	canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);	
 
 	// Create magic paint
 
 	xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	xferPaint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
+	xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
 	// Create a bitmap to draw on
 
-	bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
+	bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 	source = new Canvas(bitmap);
     }
 
@@ -124,7 +122,7 @@ public abstract class Graticule extends TunerView
 	// Set up paint for dark green thin lines
 
 	paint.setAntiAlias(false);
-	paint.setStyle(Style.STROKE);
+	paint.setStyle(Paint.Style.STROKE);
 	paint.setColor(0xff007f00);
 	paint.setStrokeWidth(1);
 
