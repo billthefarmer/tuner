@@ -1132,7 +1132,10 @@ public class MainActivity extends Activity
 		    // Don't count silly values
 
 		    if (Double.isNaN(cf))
-			continue;
+		    {
+			cf = 0.0;
+			found = false;
+		    }
 
 		    // Reference note
 
