@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Tuner</string>
+  <string name="help">Súgó</string>
+  <string name="settings">Beállítások</string>
+  <string name="copyright">Szerzői jogok: \u00A9 2014 Bill Farmer</string>
+  <string name="licence">Licensz: GNU GPLv3</string>
+
+  <string name="error_buffer">Hangfelvételi hiba! Nem található használható bemeneti mintavételezési frekvencia.</string>
+  <string name="error_init">Hangfelvevő elindítása sikertelen! Lehet, hogy a kiválasztott jelforrás nem elérhető, vagy nem használható a mintavételi frekvenciája.</string>
+
+  <string name="filter_on">Hangfrekvenciás szűrő be</string>
+  <string name="filter_off">Hangfrekvenciás szűrő ki</string>
+
+  <string name="zoom_on">Spektrumra közelítés be</string>
+  <string name="zoom_off">Spektrumra közelítés ki</string>
+
+  <string name="lock_on">Kijelző zárása be</string>
+  <string name="lock_off">Kijelző zárása ki</string>
+
+  <string name="screen_on">Kijelző bekapcsolva tartása</string>
+  <string name="screen_off">Kijelző ne maradjon bekapcsolva</string>
+
+  <string name="strobe_on">Stroboszkóp be</string>
+  <string name="strobe_off">Stroboszkóp ki</string>
+
+  <string name="downsample_on">Alulmintavételezés be</string>
+  <string name="downsample_off">Alulmintavételezés ki</string>
+
+  <string name="multiple_on">Több hang be</string>
+  <string name="multiple_off">Több hang ki</string>
+
+  <string name="copied_clip">Adatok a vágólapra másolva</string>
+  <string name="sample_rate">Mintavételi frekvencia: %d db/mp</string>
+
+  <string name="filter">szűrő</string>
+  <string name="zoom">közelítés</string>
+  <string name="lock">zárás</string>
+  <string name="display">kijelző</string>
+  <string name="strobe">strobe</string>
+  <string name="downsample">alulmintavételezés</string>
+  <string name="multiple">több</string>
+
+  <string name="def_custom">[-1073807360,-1090518785]</string>
+
+  <string name="pref_input_category">Bemenet</string>
+
+  <string name="pref_input">Bemeneti jel</string>
+  <string name="pref_input_summ">%s"</string>
+
+  <string name="pref_filter">Hangfrekvenciás szűrő</string>
+  <string name="pref_filter_summ">Bemeneti jel szűrése</string>
+
+  <string name="pref_downsample">Alulmintavételezés</string>
+  <string name="pref_downsample_summ">Bemeneti jel alulmintavételezése kiértékelés előtt</string>
+
+  <string name="pref_display">Kijelző</string>
+
+  <string name="pref_screen">Kijelző</string>
+  <string name="pref_screen_summ">Kijelző bekapcsolva tartása</string>
+
+  <string name="pref_zoom">Spektrumra közelítés</string>
+  <string name="pref_zoom_summ">Az aktuális hangra ráközelítés a spektrumban</string>
+
+  <string name="pref_multiple">Több hang</string>
+  <string name="pref_multiple_summ">Több hang mutatása a kijelzőn</string>
+
+  <string name="pref_strobe">Stroboszkóp</string>
+  <string name="pref_strobe_screen">Stroboszkóp beállításai</string>
+  <string name="pref_strobe_summ">Stroboszkóp mutatása</string>
+
+  <string name="pref_colour">Stroboszkóp színei</string>
+  <string name="pref_colour_summ">Stroboszkóp színeinek beállítása</string>
+
+  <string name="pref_custom">Egyéni</string>
+  <string name="pref_custom_summ">Egyéni színek</string>
+
+  <string name="pref_ref">Referencia</string>
+  <string name="pref_ref_summ">%dHz</string>
+
+  <string name="pref_about">Információk</string>
+  <string name="pref_about_summ">%s</string>
+
+</resources>
