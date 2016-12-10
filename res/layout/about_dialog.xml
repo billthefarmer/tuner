@@ -18,6 +18,12 @@
         android:layout_gravity="center"
         android:text="@string/copyright" />
     <TextView 
+        android:id="@+id/translation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/translation" />
+    <TextView 
         android:id="@+id/licence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
