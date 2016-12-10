@@ -5,6 +5,10 @@
   <string name="help">Ayuda</string>
   <string name="settings">Ajustes</string>
   <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
+  <string name="translation">
+    Traducción al español por Suso Comesaña\n
+    Traducción al húngaro por András Lengyel-Nagy
+  </string>
   <string name="licence">Licence: GNU GPLv3</string>
 
   <string name="error_buffer">¡Error de grabación de audio! No se puede encontrar una frecuencia de muestreo de entrada funcional.</string>

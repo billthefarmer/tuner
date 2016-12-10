@@ -5,6 +5,10 @@
   <string name="help">Súgó</string>
   <string name="settings">Beállítások</string>
   <string name="copyright">Szerzői jogok: \u00A9 2014 Bill Farmer</string>
+  <string name="translation">
+    Spanyol fordítás Suso Comesaña\n
+    Magyar fordítás András Lengyel-Nagy
+  </string>
   <string name="licence">Licensz: GNU GPLv3</string>
 
   <string name="error_buffer">Hangfelvételi hiba! Nem található használható bemeneti mintavételezési frekvencia.</string>
