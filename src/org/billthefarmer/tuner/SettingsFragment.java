@@ -36,9 +36,11 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.view.View;
 
 public class SettingsFragment extends PreferenceFragment
-    implements SharedPreferences.OnSharedPreferenceChangeListener
+    implements SharedPreferences.OnSharedPreferenceChangeListener,
+	       View.OnClickListener
 {
     private static final int BLUE = 0;
     private static final int OLIVE = 1;
@@ -52,6 +54,7 @@ public class SettingsFragment extends PreferenceFragment
     private static final String KEY_PREF_ABOUT = "pref_about";
 
     private String summary;
+    private Dialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -161,9 +164,13 @@ public class SettingsFragment extends PreferenceFragment
 
     	if (preference instanceof PreferenceScreen)
     	{
-	    Dialog dialog = ((PreferenceScreen)preference).getDialog();
+	    dialog = ((PreferenceScreen)preference).getDialog();
 	    ActionBar actionBar = dialog.getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(false);
+	    actionBar.setDisplayHomeAsUpEnabled(true);
+
+	    View view = dialog.findViewById(android.R.id.home);
+	    if (view != null)
+		view.setOnClickListener(this);
     	}
 
     	return result;
@@ -248,5 +255,12 @@ public class SettingsFragment extends PreferenceFragment
 	    String s = String.format(summary, v);
 	    preference.setSummary(s);
 	}
+    }
+
+    // On click
+
+    public void onClick(View v)
+    {
+	dialog.dismiss();
     }
 }
