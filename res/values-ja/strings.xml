@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Tuner</string>
+  <string name="help">ヘルプ</string>
+  <string name="settings">設定</string>
+  <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
+  <string name="translation">
+    スペイン語翻訳 by Suso Comesaña\n
+    ハンガリー語翻訳 by András Lengyel-Nagy
+  </string>
+  <string name="licence">ライセンス: GNU GPLv3</string>
+
+  <string name="error_buffer">音声録音からエラー! 動作中の入力サンプルレートが見つかりません。</string>
+  <string name="error_init">オーディオレコーダーが初期化されていません! 選択された入力音源が利用できないか、動作中の入力サンプルレートが見つからない可能性があります。</string>
+
+  <string name="filter_on">オーディオフィルター オン</string>
+  <string name="filter_off">オーディオフィルター オフ</string>
+
+  <string name="zoom_on">スペクトルズーム オン</string>
+  <string name="zoom_off">スペクトルズーム オフ</string>
+
+  <string name="lock_on">ディスプレイロック オン</string>
+  <string name="lock_off">ディスプレイロック オフ</string>
+
+  <string name="screen_on">画面をオンのままにする</string>
+  <string name="screen_off">画面をオンのままにしない</string>
+
+  <string name="strobe_on">ストロボ オン</string>
+  <string name="strobe_off">ストロボ オフ</string>
+
+  <string name="downsample_on">ダウンサンプリング オン</string>
+  <string name="downsample_off">ダウンサンプリング オフ</string>
+
+  <string name="multiple_on">複数音符 オン</string>
+  <string name="multiple_off">複数音符 オフ</string>
+
+  <string name="copied_clip">データをクリップボードにコピーしました</string>
+  <string name="sample_rate">サンプルレート: %d サンプル/秒</string>
+
+  <string name="filter">フィルター</string>
+  <string name="zoom">ズーム</string>
+  <string name="lock">ロック</string>
+  <string name="display">画面</string>
+  <string name="strobe">ストロボ</string>
+  <string name="downsample">ダウンサンプル</string>
+  <string name="multiple">複数</string>
+
+  <string name="def_custom">[-1073807360,-1090518785]</string>
+
+  <string name="pref_input_category">入力</string>
+
+  <string name="pref_input">入力音源</string>
+  <string name="pref_input_summ">%s"</string>
+
+  <string name="pref_filter">オーディオフィルター</string>
+  <string name="pref_filter_summ">入力オーディオをフィルター</string>
+
+  <string name="pref_downsample">ダウンサンプル</string>
+  <string name="pref_downsample_summ">解析前に入力をダウンサンプル</string>
+
+  <string name="pref_display">ディスプレイ</string>
+
+  <string name="pref_screen">画面</string>
+  <string name="pref_screen_summ">画面をオンのままにする</string>
+
+  <string name="pref_zoom">スペクトルのズーム</string>
+  <string name="pref_zoom_summ">スペクトル表示の現在の音符にズームイン</string>
+
+  <string name="pref_multiple">複数音符</string>
+  <string name="pref_multiple_summ">ディスプレイに複数音符を表示</string>
+
+  <string name="pref_strobe">ストロボ</string>
+  <string name="pref_strobe_screen">ストロボ設定</string>
+  <string name="pref_strobe_summ">ストロボを表示</string>
+
+  <string name="pref_colour">ストロボの色</string>
+  <string name="pref_colour_summ">ストロボの色を変更</string>
+
+  <string name="pref_custom">カスタム</string>
+  <string name="pref_custom_summ">カスタム色</string>
+
+  <string name="pref_ref">基準</string>
+  <string name="pref_ref_summ">%dHz</string>
+
+  <string name="pref_about">アプリについて</string>
+  <string name="pref_about_summ">Tuner version %s</string>
+
+</resources>

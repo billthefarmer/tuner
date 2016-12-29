@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <string-array name="pref_input_entries">
+    <item>デフォルト音源</item>
+    <item>マイク音源</item>
+    <item>音声通話アップリンク + ダウンリンク音源</item>
+    <item>音声通話ダウンリンク (Rx) 音源</item>
+    <item>音声通話アップリンク (Tx) 音源</item>
+    <item>可能であればカメラと同じ向きのマイク音源、それ以外の場合は主デバイスマイク</item>
+  </string-array>
+  <string-array name="pref_input_entry_values">
+    <item>0</item>
+    <item>1</item>
+    <item>4</item>
+    <item>3</item>
+    <item>2</item>
+    <item>5</item>
+  </string-array>
+
+  <string-array name="pref_colour_entries">
+    <item>ブルー/シアン (デフォルト)</item>
+    <item>オリーブ/アクアマリン</item>
+    <item>マゼンタ/イエロー</item>
+    <item>カスタム</item>
+  </string-array>
+  <string-array name="pref_colour_entry_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+  </string-array>
+
+  <integer-array name="sample_rates">
+      <item>11025</item>
+      <item>22050</item>
+      <item>8000</item>
+      <item>16000</item>
+      <item>44100</item>
+      <item>32000</item>
+  </integer-array>
+
+  <integer-array name="divisors">
+      <item>1</item>
+      <item>2</item>
+      <item>1</item>
+      <item>2</item>
+      <item>4</item>
+      <item>4</item>
+  </integer-array>
+
+  <integer-array name="foreground_colours">
+      <item>0xbf0000ff</item>
+      <item>0xbf6f6f00</item>
+      <item>0xbfff00ff</item>
+      <item>0xbf0000ff</item>
+  </integer-array>
+  <integer-array name="background_colours">
+      <item>0xbf00ffff</item>
+      <item>0xbfbfffbf</item>
+      <item>0xbfffff00</item>
+      <item>0xbf0000ff</item>
+  </integer-array>
+
+</resources>
