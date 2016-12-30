@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
   <string name="app_name">Tuner</string>
@@ -7,12 +7,17 @@
   <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
   <string name="translation">
     スペイン語翻訳 by Suso Comesaña\n
-    ハンガリー語翻訳 by András Lengyel-Nagy
+    ハンガリー語翻訳 by András Lengyel-Nagy\n
+    日本語翻訳 by naofum
   </string>
   <string name="licence">ライセンス: GNU GPLv3</string>
 
-  <string name="error_buffer">音声録音からエラー! 動作中の入力サンプルレートが見つかりません。</string>
-  <string name="error_init">オーディオレコーダーが初期化されていません! 選択された入力音源が利用できないか、動作中の入力サンプルレートが見つからない可能性があります。</string>
+  <string name="error_buffer">
+    音声録音からエラー! 動作中の入力サンプルレートが見つかりません。
+  </string>
+  <string name="error_init">
+    オーディオレコーダーが初期化されていません! 選択された入力音源が利用できないか、動作中の入力サンプルレートが見つからない可能性があります。
+  </string>
 
   <string name="filter_on">オーディオフィルター オン</string>
   <string name="filter_off">オーディオフィルター オフ</string>
