@@ -1,12 +1,18 @@
 
+
 language: android
+
+jdk:
+  - oraclejdk8
+
 android:
   components:
     - platform-tools
     - tools
 
-    - build-tools-23.0.2
+    - build-tools-24.0.2
 
     - android-17
 
-script: ant release
+script:
+    - ./gradlew build
