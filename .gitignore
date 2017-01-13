@@ -2,6 +2,7 @@
 .*
 *.apk
 bin
+build
 gen
 libs
 local.properties

@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.2'
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 'android-17'
+    buildToolsVersion '24.0.2'
+
+    lintOptions {
+	disable 'IconDensities'
+	abortOnError false
+    }
+}
