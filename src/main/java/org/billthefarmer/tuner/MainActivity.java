@@ -481,7 +481,7 @@ public class MainActivity extends Activity
         editor.putBoolean(PREF_STROBE, audio.strobe);
         editor.putBoolean(PREF_ZOOM, audio.zoom);
 
-        editor.commit();
+        editor.apply();
     }
 
     // Get preferences

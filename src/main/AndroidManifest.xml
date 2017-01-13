@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.billthefarmer.tuner"
+    tools:ignore="GoogleAppIndexingWarning"
     android:versionCode="114"
     android:versionName="1.14"
     android:installLocation="auto" >
 
   <uses-sdk
       android:minSdkVersion="11"
-      android:targetSdkVersion="17" />
+      android:targetSdkVersion="25" />
 
   <uses-permission
       android:name="android.permission.RECORD_AUDIO" />
 
   <application
+      tools:ignore="AllowBackup"
       android:allowBackup="true"
-      android:icon="@drawable/ic_tuner"
+      android:icon="@drawable/ic_launcher"
       android:label="@string/app_name"
       android:theme="@style/AppTheme">
     <activity

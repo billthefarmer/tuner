@@ -69,7 +69,7 @@ public class Display extends TunerView
         // Get lock icon
 
         bitmap = BitmapFactory.decodeResource(resources,
-                                              R.drawable.ic_locked);
+                                              R.drawable.ic_action_secure);
     }
 
     // On size changed

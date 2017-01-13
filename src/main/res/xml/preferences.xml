@@ -8,22 +8,22 @@
       android:title="@string/pref_input_category">
     <ListPreference
 	android:key="pref_input"
-	android:icon="@drawable/ic_pref_mic"
+	android:icon="@drawable/ic_action_mic"
 	android:title="@string/pref_input"
 	android:summary="@string/pref_input_summ"
 	android:entries="@array/pref_input_entries"
 	android:entryValues="@array/pref_input_entry_values"
-	android:dialogIcon="@drawable/ic_pref_mic"
+	android:dialogIcon="@drawable/ic_action_mic"
 	android:defaultValue="@integer/def_input" />
     <CheckBoxPreference
-	android:icon="@drawable/ic_pref_filter"
+	android:icon="@drawable/ic_action_network_cell"
 	android:key="pref_filter"
 	android:title="@string/pref_filter"
 	android:summary="@string/pref_filter_summ"
 	android:defaultValue="false" />
     <CheckBoxPreference
 	android:key="pref_downsample"
-	android:icon="@drawable/ic_pref_downsample"
+	android:icon="@drawable/ic_action_reply_all"
 	android:title="@string/pref_downsample"
 	android:summary="@string/pref_downsample_summ"
 	android:defaultValue="false" />
@@ -33,20 +33,20 @@
       android:title="@string/pref_display">
     <CheckBoxPreference
 	android:key="pref_screen"
-	android:icon="@drawable/ic_pref_screen"
+	android:icon="@drawable/ic_action_brightness_low"
 	android:title="@string/pref_screen"
 	android:summary="@string/pref_screen_summ"
 	android:persistent="true"
 	android:defaultValue="false" />
     <CheckBoxPreference
 	android:key="pref_zoom"
-	android:icon="@drawable/ic_pref_zoom"
+	android:icon="@drawable/ic_action_expand"
 	android:title="@string/pref_zoom"
 	android:summary="@string/pref_zoom_summ"
 	android:defaultValue="true" />
     <CheckBoxPreference
 	android:key="pref_multiple"
-	android:icon="@drawable/ic_pref_multiple"
+	android:icon="@drawable/ic_action_sort_by_size"
 	android:title="@string/pref_multiple"
 	android:summary="@string/pref_multiple_summ"
 	android:persistent="false"
@@ -88,8 +88,8 @@
       android:title="@string/pref_ref">
     <org.billthefarmer.tuner.NumberPickerPreference
 	android:key="pref_reference"
-	android:icon="@drawable/ic_pref_ref"
-	android:dialogIcon="@drawable/ic_pref_ref"
+	android:icon="@drawable/ic_action_collapse"
+	android:dialogIcon="@drawable/ic_action_collapse"
 	android:title="@string/pref_ref"
 	android:summary="@string/pref_ref_summ"
 	android:defaultValue="@integer/def_ref"
@@ -101,8 +101,8 @@
       android:title="@string/pref_about">
     <org.billthefarmer.tuner.AboutPreference
 	android:key="pref_about"
-	android:icon="@drawable/ic_about"
-	android:dialogIcon="@drawable/ic_about"
+	android:icon="@drawable/ic_action_about"
+	android:dialogIcon="@drawable/ic_action_about"
 	android:negativeButtonText=""
 	android:title="@string/pref_about"
 	android:summary="@string/pref_about_summ"

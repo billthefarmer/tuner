@@ -37,7 +37,9 @@
   <string name="multiple_off">Desactivar múltiple notas</string>
 
   <string name="copied_clip">Datos copiados en el portapapeles</string>
-  <string name="sample_rate">Frecuencia de muestreo: %d muestras/seegundo</string>
+  <string name="sample_rate">
+    Frecuencia de muestreo (muestras/seegundo): %d
+  </string>
 
   <string name="filter">filtro</string>
   <string name="zoom">zoom</string>

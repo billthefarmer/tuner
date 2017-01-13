@@ -41,7 +41,7 @@
   <string name="multiple_off">複数音符 オフ</string>
 
   <string name="copied_clip">データをクリップボードにコピーしました</string>
-  <string name="sample_rate">サンプルレート: %d サンプル/秒</string>
+  <string name="sample_rate">サンプルレート (サンプル/秒): %d</string>
 
   <string name="filter">フィルター</string>
   <string name="zoom">ズーム</string>
