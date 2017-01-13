@@ -1,5 +1,6 @@
 *.*~
 .*
+*.orig
 *.apk
 bin
 build

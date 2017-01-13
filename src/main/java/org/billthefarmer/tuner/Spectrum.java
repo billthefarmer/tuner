@@ -43,9 +43,9 @@ public class Spectrum extends Graticule
 
     public Spectrum(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	path = new Path();
+        path = new Path();
     }
 
     // Draw trace
@@ -55,261 +55,261 @@ public class Spectrum extends Graticule
     protected void drawTrace(Canvas canvas)
     {
 
-	// Check for data
+        // Check for data
 
-	if (audio == null || audio.xa == null)
-	    return;
+        if (audio == null || audio.xa == null)
+            return;
 
-	// Draw D if downsample
+        // Draw D if downsample
 
-	if (audio.downsample)
-	{
-	    // Color yellow
+        if (audio.downsample)
+        {
+            // Color yellow
 
-	    paint.setStrokeWidth(1);
-	    paint.setTextAlign(Paint.Align.LEFT);
-	    paint.setColor(Color.YELLOW);
+            paint.setStrokeWidth(1);
+            paint.setTextAlign(Paint.Align.LEFT);
+            paint.setColor(Color.YELLOW);
 
-	    float height = paint.getFontMetrics(null);
-	    canvas.drawText("D", 4, height - 2, paint);
-	}
+            float height = paint.getFontMetrics(null);
+            canvas.drawText("D", 4, height - 2, paint);
+        }
 
-	// Translate camvas
+        // Translate camvas
 
-	canvas.translate(0, height);
+        canvas.translate(0, height);
 
-	// Chack max value
+        // Chack max value
 
-	if (max < 1.0f)
-	    max = 1.0f;
+        if (max < 1.0f)
+            max = 1.0f;
 
-	// Calculate the scaling
+        // Calculate the scaling
 
-	float yscale = (height / max);
+        float yscale = (height / max);
 
-	max = 0.0f;
+        max = 0.0f;
 
-	// Rewind path
+        // Rewind path
 
-	path.rewind();
-	path.moveTo(0, 0);
+        path.rewind();
+        path.moveTo(0, 0);
 
-	// If zoomed
+        // If zoomed
 
-	if (audio.zoom)
-	{
-	    // Calculate limits
+        if (audio.zoom)
+        {
+            // Calculate limits
 
-	    double lower = audio.lower / audio.fps;
-	    double higher = audio.higher / audio.fps;
-	    double nearest = audio.nearest / audio.fps;
-	    
-	    // Calculate scale
+            double lower = audio.lower / audio.fps;
+            double higher = audio.higher / audio.fps;
+            double nearest = audio.nearest / audio.fps;
 
-	    float xscale = (float)((width / (nearest - lower)) / 2.0);
+            // Calculate scale
 
-	    int lo = (int)Math.floor(lower);
-	    int hi = (int)Math.ceil(higher);
+            float xscale = (float)((width / (nearest - lower)) / 2.0);
 
-	    // Create trace
+            int lo = (int)Math.floor(lower);
+            int hi = (int)Math.ceil(higher);
 
-	    for (int i = lo; i <= hi; i++)
-	    {
-		if (i > 0 && i < audio.xa.length)
-		{
-		    float value = (float)audio.xa[i];
+            // Create trace
 
-		    // Get max value
+            for (int i = lo; i <= hi; i++)
+            {
+                if (i > 0 && i < audio.xa.length)
+                {
+                    float value = (float)audio.xa[i];
 
-		    if (max < value)
-			max = value;
+                    // Get max value
 
-		    float y = -value * yscale;
-		    float x = (float)((i - lower) * xscale); 
+                    if (max < value)
+                        max = value;
 
-		    path.lineTo(x, y);
-		    path.addCircle(x, y, 1, Path.Direction.CW);
-		}
-	    }
+                    float y = -value * yscale;
+                    float x = (float)((i - lower) * xscale);
 
-	    // Create centre line
+                    path.lineTo(x, y);
+                    path.addCircle(x, y, 1, Path.Direction.CW);
+                }
+            }
 
-	    path.moveTo(width / 2, 0);
-	    path.lineTo(width / 2, -height);
+            // Create centre line
 
-	    // Color green
+            path.moveTo(width / 2, 0);
+            path.lineTo(width / 2, -height);
 
-	    paint.setStrokeWidth(2);
-	    paint.setAntiAlias(true);
-	    paint.setColor(Color.GREEN);
+            // Color green
 
-	    // Draw trace
+            paint.setStrokeWidth(2);
+            paint.setAntiAlias(true);
+            paint.setColor(Color.GREEN);
 
-	    canvas.drawPath(path, paint);
-	    path.rewind();
+            // Draw trace
 
-	    // Yellow pen for frequency trace
+            canvas.drawPath(path, paint);
+            path.rewind();
 
-	    paint.setTextAlign(Paint.Align.CENTER);
-	    paint.setColor(Color.YELLOW);
-	    paint.setStyle(Paint.Style.FILL);
-	    paint.setAntiAlias(false);
-	    paint.setStrokeWidth(1);
+            // Yellow pen for frequency trace
 
-	    // Create lines for each frequency
+            paint.setTextAlign(Paint.Align.CENTER);
+            paint.setColor(Color.YELLOW);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAntiAlias(false);
+            paint.setStrokeWidth(1);
 
-	    for (int i = 0; i < audio.count; i++)
-	    {
-		// Draw line for each that are in range
+            // Create lines for each frequency
 
-		if (audio.maxima.f[i] > audio.lower &&
-		    audio.maxima.f[i] < audio.higher)
-		{
-		    float x =
-			(float)((audio.maxima.f[i] - audio.lower) /
-				audio.fps * xscale);
+            for (int i = 0; i < audio.count; i++)
+            {
+                // Draw line for each that are in range
 
-		    path.moveTo(x, 0);
-		    path.lineTo(x, -height);
+                if (audio.maxima.f[i] > audio.lower &&
+                        audio.maxima.f[i] < audio.higher)
+                {
+                    float x =
+                        (float)((audio.maxima.f[i] - audio.lower) /
+                                audio.fps * xscale);
 
-		    double f = audio.maxima.f[i];
+                    path.moveTo(x, 0);
+                    path.lineTo(x, -height);
 
-		    // Reference freq
+                    double f = audio.maxima.f[i];
 
-		    double fr = audio.maxima.r[i];
-		    double c = -12.0 * log2(fr / f);
+                    // Reference freq
 
-		    // Ignore silly values
+                    double fr = audio.maxima.r[i];
+                    double c = -12.0 * log2(fr / f);
 
-		    if (Double.isNaN(c))
-			continue;
+                    // Ignore silly values
 
-		    // Draw cents value
+                    if (Double.isNaN(c))
+                        continue;
 
-		    String s = String.format("%+1.0f", c * 100.0);
-		    canvas.drawText(s, x, 0, paint);
-		}
-	    }
+                    // Draw cents value
 
-	    // Yellow pen for frequency trace
+                    String s = String.format("%+1.0f", c * 100.0);
+                    canvas.drawText(s, x, 0, paint);
+                }
+            }
 
-	    paint.setStyle(Paint.Style.STROKE);
-	    paint.setAntiAlias(true);
-	    paint.setStrokeWidth(2);
+            // Yellow pen for frequency trace
 
-	    // Draw path
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setAntiAlias(true);
+            paint.setStrokeWidth(2);
 
-	    canvas.drawPath(path, paint);
-	}
+            // Draw path
 
-	// Not zoomed
+            canvas.drawPath(path, paint);
+        }
 
-	else
-	{
-	    // Calculate x scale
+        // Not zoomed
 
-	    float xscale = (float)Math.log(audio.xa.length) / width;
+        else
+        {
+            // Calculate x scale
 
-	    // Create trace
+            float xscale = (float)Math.log(audio.xa.length) / width;
 
-	    int last = 1;
-	    for (int x = 0; x < width; x++)
-	    {
-		float value = 0.0f;
+            // Create trace
 
-		int index = (int)Math.round(Math.pow(Math.E, x * xscale));
-		for (int i = last; i <= index; i++)
-		{
-		    // Don't show DC component and don't overflow
+            int last = 1;
+            for (int x = 0; x < width; x++)
+            {
+                float value = 0.0f;
 
-		    if (i > 0 && i < audio.xa.length)
-		    {
-			// Find max value for each vertex
+                int index = (int)Math.round(Math.pow(Math.E, x * xscale));
+                for (int i = last; i <= index; i++)
+                {
+                    // Don't show DC component and don't overflow
 
-			if (value < audio.xa[i])
-			    value = (float)audio.xa[i];
-		    }
-		}
+                    if (i > 0 && i < audio.xa.length)
+                    {
+                        // Find max value for each vertex
 
-		// Update last index
+                        if (value < audio.xa[i])
+                            value = (float)audio.xa[i];
+                    }
+                }
 
-		last = index + 1;
+                // Update last index
 
-		// Get max value
+                last = index + 1;
 
-		if (max < value)
-		    max = value;
+                // Get max value
 
-		float y = -value * yscale;
+                if (max < value)
+                    max = value;
 
-		path.lineTo(x, y);
-	    }
+                float y = -value * yscale;
 
-	    // Color green
+                path.lineTo(x, y);
+            }
 
-	    paint.setStrokeWidth(2);
-	    paint.setAntiAlias(true);
-	    paint.setColor(Color.GREEN);
+            // Color green
 
-	    // Draw path
+            paint.setStrokeWidth(2);
+            paint.setAntiAlias(true);
+            paint.setColor(Color.GREEN);
 
-	    canvas.drawPath(path, paint);
-	    path.rewind();
+            // Draw path
 
-	    // Yellow pen for frequency trace
+            canvas.drawPath(path, paint);
+            path.rewind();
 
-	    paint.setTextAlign(Paint.Align.CENTER);
-	    paint.setColor(Color.YELLOW);
-	    paint.setStyle(Paint.Style.FILL);
-	    paint.setAntiAlias(false);
-	    paint.setStrokeWidth(1);
+            // Yellow pen for frequency trace
 
-	    // Create lines for each frequency
+            paint.setTextAlign(Paint.Align.CENTER);
+            paint.setColor(Color.YELLOW);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAntiAlias(false);
+            paint.setStrokeWidth(1);
 
-	    for (int i = 0; i < audio.count; i++)
-	    {
-		// Draw line for each
+            // Create lines for each frequency
 
-		float x =
-		    (float)Math.log(audio.maxima.f[i] / audio.fps) / xscale;
+            for (int i = 0; i < audio.count; i++)
+            {
+                // Draw line for each
 
-		path.moveTo(x, 0);
-		path.lineTo(x, -height);
+                float x =
+                    (float)Math.log(audio.maxima.f[i] / audio.fps) / xscale;
 
-		double f = audio.maxima.f[i];
+                path.moveTo(x, 0);
+                path.lineTo(x, -height);
 
-		// Reference freq
+                double f = audio.maxima.f[i];
 
-		double fr = audio.maxima.r[i];
-		double c = -12.0 * log2(fr / f);
+                // Reference freq
 
-		// Ignore silly values
+                double fr = audio.maxima.r[i];
+                double c = -12.0 * log2(fr / f);
 
-		if (Double.isNaN(c))
-		    continue;
+                // Ignore silly values
 
-		// Draw cents value
+                if (Double.isNaN(c))
+                    continue;
 
-		String s = String.format("%+1.0f", c * 100.0);
-		canvas.drawText(s, x, 0, paint);
-	    }
+                // Draw cents value
 
-	    // Yellow pen for frequency trace
+                String s = String.format("%+1.0f", c * 100.0);
+                canvas.drawText(s, x, 0, paint);
+            }
 
-	    paint.setStyle(Paint.Style.STROKE);
-	    paint.setAntiAlias(true);
-	    paint.setStrokeWidth(2);
+            // Yellow pen for frequency trace
 
-	    // Draw path
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setAntiAlias(true);
+            paint.setStrokeWidth(2);
 
-	    canvas.drawPath(path, paint);
-	}
+            // Draw path
+
+            canvas.drawPath(path, paint);
+        }
     }
 
     // Log2
 
     protected double log2(double d)
     {
-	return Math.log(d) / Math.log(2.0);
+        return Math.log(d) / Math.log(2.0);
     }
 }

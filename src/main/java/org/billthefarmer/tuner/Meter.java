@@ -57,16 +57,16 @@ public class Meter extends TunerView
 
     public Meter(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	// Create a matrix for scaling
+        // Create a matrix for scaling
 
-	matrix = new Matrix();
+        matrix = new Matrix();
 
-	// Get display icon
+        // Get display icon
 
-	bitmap = BitmapFactory.decodeResource(resources,
-					      R.drawable.ic_pref_screen);
+        bitmap = BitmapFactory.decodeResource(resources,
+                                              R.drawable.ic_pref_screen);
     }
 
     // OnSizeChanged
@@ -74,80 +74,80 @@ public class Meter extends TunerView
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
-	super.onSizeChanged(w, h, oldw, oldh);
+        super.onSizeChanged(w, h, oldw, oldh);
 
-	// Recalculate dimensions
+        // Recalculate dimensions
 
-	width = clipRect.right - clipRect.left;
-	height = clipRect.bottom - clipRect.top;
+        width = clipRect.right - clipRect.left;
+        height = clipRect.bottom - clipRect.top;
 
-	// Recalculate text size
+        // Recalculate text size
 
-	medium = height / 3.0f;
-	paint.setTextSize(medium);
+        medium = height / 3.0f;
+        paint.setTextSize(medium);
 
-	// Scale text if necessary to fit it in
+        // Scale text if necessary to fit it in
 
-	float dx = paint.measureText("50");
-	if (dx >= width / 11)
-	    paint.setTextScaleX((width / 12) / dx);
+        float dx = paint.measureText("50");
+        if (dx >= width / 11)
+            paint.setTextScaleX((width / 12) / dx);
 
-	// Create a rect for the horizontal bar
+        // Create a rect for the horizontal bar
 
-	bar = new Rect(width / 36 - width / 2, -height / 128,
-		       width / 2 - width / 36, height / 128);
+        bar = new Rect(width / 36 - width / 2, -height / 128,
+                       width / 2 - width / 36, height / 128);
 
-	// Create a path for the thumb
+        // Create a path for the thumb
 
-	thumb = new Path();
+        thumb = new Path();
 
-	thumb.moveTo(0, -2);
-	thumb.lineTo(1, -1);
-	thumb.lineTo(1, 2);
-	thumb.lineTo(-1, 2);
-	thumb.lineTo(-1, -1);
-	thumb.close();
+        thumb.moveTo(0, -2);
+        thumb.lineTo(1, -1);
+        thumb.lineTo(1, 2);
+        thumb.lineTo(-1, 2);
+        thumb.lineTo(-1, -1);
+        thumb.close();
 
-	// Create a gradient for the thumb
+        // Create a gradient for the thumb
 
-	gradient = new
-	    LinearGradient(0, 0, 0, 4,
-			   resources.getColor(android.R.color.background_light),
-			   resources.getColor(android.R.color.primary_text_light),
-			   Shader.TileMode.MIRROR);
+        gradient = new
+        LinearGradient(0, 0, 0, 4,
+                       resources.getColor(android.R.color.background_light),
+                       resources.getColor(android.R.color.primary_text_light),
+                       Shader.TileMode.MIRROR);
 
-	// Create a matrix to scale the thumb
+        // Create a matrix to scale the thumb
 
-	matrix.setScale(height / 16, height / 16);
+        matrix.setScale(height / 16, height / 16);
 
-	// Scale the thumb
+        // Scale the thumb
 
-	thumb.transform(matrix);
+        thumb.transform(matrix);
 
-	// Scale the gradient
+        // Scale the gradient
 
-	gradient.setLocalMatrix(matrix);
+        gradient.setLocalMatrix(matrix);
 
-	// Create animator
+        // Create animator
 
-	animator = ValueAnimator.ofInt(0, 10000);
-	animator.setRepeatCount(ValueAnimator.INFINITE);
-	animator.setRepeatMode(ValueAnimator.RESTART);
-	animator.setDuration(10000);
-	
-	animator.addUpdateListener(this);
-	animator.start();
+        animator = ValueAnimator.ofInt(0, 10000);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatMode(ValueAnimator.RESTART);
+        animator.setDuration(10000);
+
+        animator.addUpdateListener(this);
+        animator.start();
     }
 
     @Override
     public void onAnimationUpdate(ValueAnimator animator)
     {
-	// Do the inertia calculation
+        // Do the inertia calculation
 
-	if (audio != null)
-	    cents = ((cents * 19.0) + audio.cents) / 20.0;
+        if (audio != null)
+            cents = ((cents * 19.0) + audio.cents) / 20.0;
 
-	invalidate();
+        invalidate();
     }
 
     // OnDraw
@@ -156,110 +156,110 @@ public class Meter extends TunerView
     @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
-	super.onDraw(canvas);
+        super.onDraw(canvas);
 
-	// Draw display icon
+        // Draw display icon
 
-	if (audio != null && audio.screen && bitmap != null)
-	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+        if (audio != null && audio.screen && bitmap != null)
+            canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
 
-	// Reset the paint to black
+        // Reset the paint to black
 
-	paint.setStrokeWidth(1);
-	paint.setColor(resources.getColor(android.R.color.primary_text_light));
-	paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(1);
+        paint.setColor(resources.getColor(android.R.color.primary_text_light));
+        paint.setStyle(Paint.Style.FILL);
 
-	// Translate the canvas down
-	// and to the centre
+        // Translate the canvas down
+        // and to the centre
 
-	canvas.translate(width / 2, medium);
+        canvas.translate(width / 2, medium);
 
-	// Calculate x scale
+        // Calculate x scale
 
-	float xscale = width / 11;
+        float xscale = width / 11;
 
-	// Draw the scale legend
+        // Draw the scale legend
 
-	for (int i = 0; i <= 5; i++)
-	{
-	    String s = String.format("%d", i * 10);
-	    float x = i * xscale;
+        for (int i = 0; i <= 5; i++)
+        {
+            String s = String.format("%d", i * 10);
+            float x = i * xscale;
 
-	    paint.setTextAlign(Paint.Align.CENTER);
-	    canvas.drawText(s, x, 0, paint);
-	    canvas.drawText(s, -x, 0, paint);
-	}
+            paint.setTextAlign(Paint.Align.CENTER);
+            canvas.drawText(s, x, 0, paint);
+            canvas.drawText(s, -x, 0, paint);
+        }
 
-	// Wider lines for the scale
+        // Wider lines for the scale
 
-	paint.setStrokeWidth(3);
-	paint.setStyle(Paint.Style.STROKE);
-	canvas.translate(0, medium / 1.5f);
+        paint.setStrokeWidth(3);
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.translate(0, medium / 1.5f);
 
-	// Draw the scale
+        // Draw the scale
 
-	for (int i = 0; i <= 5; i++)
-	{
-	    float x = i * xscale;
+        for (int i = 0; i <= 5; i++)
+        {
+            float x = i * xscale;
 
-	    canvas.drawLine(x, 0, x, -medium / 2, paint);
-	    canvas.drawLine(-x, 0, -x, -medium / 2, paint);
-	}
+            canvas.drawLine(x, 0, x, -medium / 2, paint);
+            canvas.drawLine(-x, 0, -x, -medium / 2, paint);
+        }
 
-	// Draw the fine scale
+        // Draw the fine scale
 
-	for (int i = 0; i <= 25; i++)
-	{
-	    float x = i * xscale / 5;
+        for (int i = 0; i <= 25; i++)
+        {
+            float x = i * xscale / 5;
 
-	    canvas.drawLine(x, 0, x, -medium / 4, paint);
-	    canvas.drawLine(-x, 0, -x, -medium / 4, paint);
-	}
+            canvas.drawLine(x, 0, x, -medium / 4, paint);
+            canvas.drawLine(-x, 0, -x, -medium / 4, paint);
+        }
 
-	// Transform the canvas down
-	// for the meter pointer
+        // Transform the canvas down
+        // for the meter pointer
 
-	canvas.translate(0, medium / 2.0f);
+        canvas.translate(0, medium / 2.0f);
 
-	// Set fill style and fill
-	// the bar
+        // Set fill style and fill
+        // the bar
 
-	// paint.setShader(gradient);
-	// paint.setStyle(Paint.Style.FILL);
-	// canvas.drawRect(bar, paint);
-	// paint.setShader(null);
+        // paint.setShader(gradient);
+        // paint.setStyle(Paint.Style.FILL);
+        // canvas.drawRect(bar, paint);
+        // paint.setShader(null);
 
-	// Draw the bar outline
+        // Draw the bar outline
 
-	paint.setStrokeWidth(2);
-	paint.setColor(resources.getColor(android.R.color.darker_gray));
-	paint.setStyle(Paint.Style.STROKE);
-	canvas.drawRect(bar, paint);
+        paint.setStrokeWidth(2);
+        paint.setColor(resources.getColor(android.R.color.darker_gray));
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawRect(bar, paint);
 
-	// Translate the canvas to
-	// the scaled cents value
+        // Translate the canvas to
+        // the scaled cents value
 
-	canvas.translate((float)cents * (xscale / 10), -height / 64);
+        canvas.translate((float)cents * (xscale / 10), -height / 64);
 
-	// Set up the paint for
-	// rounded corners
+        // Set up the paint for
+        // rounded corners
 
-	paint.setStrokeCap(Paint.Cap.ROUND);
-	paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeJoin(Paint.Join.ROUND);
 
-	// Set fill style and fill
-	// the thumb
+        // Set fill style and fill
+        // the thumb
 
-	paint.setShader(gradient);
-	paint.setStyle(Paint.Style.FILL);
-	canvas.drawPath(thumb, paint);
-	paint.setShader(null);
+        paint.setShader(gradient);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawPath(thumb, paint);
+        paint.setShader(null);
 
-	// Draw the thumb outline
+        // Draw the thumb outline
 
-	paint.setStrokeWidth(2);
-	paint.setColor(resources.getColor(android.R.color.darker_gray));
-	paint.setStyle(Paint.Style.STROKE);
-	canvas.drawPath(thumb, paint);
+        paint.setStrokeWidth(2);
+        paint.setColor(resources.getColor(android.R.color.darker_gray));
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawPath(thumb, paint);
     }
 }

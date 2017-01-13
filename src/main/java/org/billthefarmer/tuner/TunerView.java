@@ -51,10 +51,10 @@ public abstract class TunerView extends View
 
     protected TunerView(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	paint = new Paint();
-	resources = getResources();
+        paint = new Paint();
+        resources = getResources();
     }
 
     // On Size Changed
@@ -62,16 +62,16 @@ public abstract class TunerView extends View
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
-	// Save the new width and height
+        // Save the new width and height
 
-	width = w;
-	height = h;
+        width = w;
+        height = h;
 
-	// Create some rects for
-	// the outline and clipping
+        // Create some rects for
+        // the outline and clipping
 
-	outlineRect = new RectF(1, 1, width - 1, height - 1);
-	clipRect = new Rect(3, 3, width - 3, height - 3);
+        outlineRect = new RectF(1, 1, width - 1, height - 1);
+        clipRect = new Rect(3, 3, width - 3, height - 3);
     }
 
     // On Draw
@@ -79,20 +79,20 @@ public abstract class TunerView extends View
     @Override
     protected void onDraw(Canvas canvas)
     {
-	// Set up the paint and draw the outline
+        // Set up the paint and draw the outline
 
-	paint.setStrokeWidth(3);
-	paint.setAntiAlias(true);
-	paint.setColor(resources.getColor(android.R.color.darker_gray));
-	paint.setStyle(Paint.Style.STROKE);
-	canvas.drawRoundRect(outlineRect, 10, 10, paint);
+        paint.setStrokeWidth(3);
+        paint.setAntiAlias(true);
+        paint.setColor(resources.getColor(android.R.color.darker_gray));
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawRoundRect(outlineRect, 10, 10, paint);
 
-	// Set the cliprect
+        // Set the cliprect
 
-	canvas.clipRect(clipRect);
+        canvas.clipRect(clipRect);
 
-	// Translate to the clip rect
+        // Translate to the clip rect
 
-	canvas.translate(clipRect.left, clipRect.top);
+        canvas.translate(clipRect.left, clipRect.top);
     }
 }

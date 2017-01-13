@@ -38,7 +38,7 @@ public class AboutPreference extends DialogPreference
 
     public AboutPreference(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
     }
 
     // On bind dialog view
@@ -46,35 +46,35 @@ public class AboutPreference extends DialogPreference
     @Override
     protected void onBindDialogView(View view)
     {
-	// Get version text view
+        // Get version text view
 
-	TextView version = (TextView) view.findViewById(R.id.about);
+        TextView version = (TextView) view.findViewById(R.id.about);
 
-	// Get context and package manager
+        // Get context and package manager
 
-	Context context = getContext();
-	PackageManager manager = context.getPackageManager();
+        Context context = getContext();
+        PackageManager manager = context.getPackageManager();
 
-	// Get info
+        // Get info
 
-	PackageInfo info = null;
-	try
-	{
-	    info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
-	}
-		
-	catch (Exception e)
-	{
-	    e.printStackTrace();
-	}
+        PackageInfo info = null;
+        try
+        {
+            info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
+        }
 
-	// Set version in text view
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-	if (info != null)
-	{
-	    String v = (String) version.getText();
-	    String s = String.format(v, info.versionName);
-	    version.setText(s);
-	}
+        // Set version in text view
+
+        if (info != null)
+        {
+            String v = (String) version.getText();
+            String s = String.format(v, info.versionName);
+            version.setText(s);
+        }
     }
 }

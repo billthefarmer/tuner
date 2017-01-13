@@ -42,30 +42,34 @@ public class Display extends TunerView
     private int large;
     private int medium;
     private int small;
-    
+
     private int margin;
     private Bitmap bitmap;
 
     // Note values for display
 
     private static final String notes[] =
-    {"C", "C", "D", "E", "E", "F",
-     "F", "G", "A", "A", "B", "B"};
+    {
+        "C", "C", "D", "E", "E", "F",
+        "F", "G", "A", "A", "B", "B"
+    };
 
     private static final String sharps[] =
-    {"", "\u266F", "", "\u266D", "", "",
-     "\u266F", "", "\u266D", "", "\u266D", ""};
- 
+    {
+        "", "\u266F", "", "\u266D", "", "",
+        "\u266F", "", "\u266D", "", "\u266D", ""
+    };
+
     // Constructor
 
     public Display(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	// Get lock icon
+        // Get lock icon
 
-	bitmap = BitmapFactory.decodeResource(resources,
-					      R.drawable.ic_locked);
+        bitmap = BitmapFactory.decodeResource(resources,
+                                              R.drawable.ic_locked);
     }
 
     // On size changed
@@ -73,34 +77,34 @@ public class Display extends TunerView
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
-	super.onSizeChanged(w, h, oldw, oldh);
+        super.onSizeChanged(w, h, oldw, oldh);
 
-	// Recalculate dimensions
+        // Recalculate dimensions
 
-	width = clipRect.right - clipRect.left;
-	height = clipRect.bottom - clipRect.top;
+        width = clipRect.right - clipRect.left;
+        height = clipRect.bottom - clipRect.top;
 
-	// Calculate text sizes
-	
-	larger = height / 2;
-	large = height / 3;
-	medium = height / 5;
-	small = height / 9;
-	margin = width / 32;
+        // Calculate text sizes
 
-	// Make sure the text will fit the width
+        larger = height / 2;
+        large = height / 3;
+        medium = height / 5;
+        small = height / 9;
+        margin = width / 32;
 
-	paint.setTextSize(medium);
-	paint.setTextScaleX(1.0f);
-	float dx = paint.measureText("0000.00Hz");
-	
-	// Scale the text if it won't fit
+        // Make sure the text will fit the width
 
-	if (dx + (margin * 2) >= width / 2)
-	{
-	    float xscale = (width / 2) / (dx + (margin * 2));
-	    paint.setTextScaleX(xscale);
-	}
+        paint.setTextSize(medium);
+        paint.setTextScaleX(1.0f);
+        float dx = paint.measureText("0000.00Hz");
+
+        // Scale the text if it won't fit
+
+        if (dx + (margin * 2) >= width / 2)
+        {
+            float xscale = (width / 2) / (dx + (margin * 2));
+            paint.setTextScaleX(xscale);
+        }
     }
 
     // On draw
@@ -109,247 +113,247 @@ public class Display extends TunerView
     @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
-	super.onDraw(canvas);
+        super.onDraw(canvas);
 
-	// No display if no audio
+        // No display if no audio
 
-	if (audio == null)
-	    return;
+        if (audio == null)
+            return;
 
-	// Draw lock icon
+        // Draw lock icon
 
-	if (audio.lock && bitmap != null)
-	    canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+        if (audio.lock && bitmap != null)
+            canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
 
-	// Set up paint
+        // Set up paint
 
-	paint.setStrokeWidth(1);
-	paint.setColor(resources.getColor(android.R.color.primary_text_light));
-	paint.setTextAlign(Paint.Align.LEFT);
-	paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(1);
+        paint.setColor(resources.getColor(android.R.color.primary_text_light));
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setStyle(Paint.Style.FILL);
 
-	// Multiple values
+        // Multiple values
 
-	if (audio.multiple)
-	{
-	    String s;
-	    float x;
+        if (audio.multiple)
+        {
+            String s;
+            float x;
 
-	    // Set text size
+            // Set text size
 
-	    paint.setTextSize(small);
+            paint.setTextSize(small);
 
-	    for (int i = 0; i < audio.count; i++)
-	    {
-		// Move down
+            for (int i = 0; i < audio.count; i++)
+            {
+                // Move down
 
-		paint.setTextAlign(Paint.Align.LEFT);
-		canvas.translate(0, small);
+                paint.setTextAlign(Paint.Align.LEFT);
+                canvas.translate(0, small);
 
-		// Calculate cents
+                // Calculate cents
 
-		double cents = -12.0 * log2(audio.maxima.r[i] /
-					    audio.maxima.f[i]) * 100.0;
-		// Ignore silly values
+                double cents = -12.0 * log2(audio.maxima.r[i] /
+                                            audio.maxima.f[i]) * 100.0;
+                // Ignore silly values
 
-		if (Double.isNaN(cents))
-		    continue;
+                if (Double.isNaN(cents))
+                    continue;
 
-		// Draw note
+                // Draw note
 
-		s = String.format("%s", notes[audio.maxima.n[i] % OCTAVE]);
-		canvas.drawText(s, margin / 2, 0, paint);
-		float dx = paint.measureText(s);
+                s = String.format("%s", notes[audio.maxima.n[i] % OCTAVE]);
+                canvas.drawText(s, margin / 2, 0, paint);
+                float dx = paint.measureText(s);
 
-		// Draw sharp/flat
+                // Draw sharp/flat
 
-		paint.setTextSize(small / 2);
-		s = String.format("%s", sharps[audio.maxima.n[i] % OCTAVE]);
-		canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
+                paint.setTextSize(small / 2);
+                s = String.format("%s", sharps[audio.maxima.n[i] % OCTAVE]);
+                canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
 
-		// Draw octave
+                // Draw octave
 
-		s = String.format("%d", audio.maxima.n[i] / OCTAVE);
-		canvas.drawText(s, margin / 2 + dx, 0, paint);
+                s = String.format("%d", audio.maxima.n[i] / OCTAVE);
+                canvas.drawText(s, margin / 2 + dx, 0, paint);
 
-		// Draw cents
+                // Draw cents
 
-		paint.setTextSize(small);
-		s = String.format("%+5.2f\u00A2", cents);
-		x = width * 2 / 23;
-		canvas.drawText(s, x, 0, paint);
+                paint.setTextSize(small);
+                s = String.format("%+5.2f\u00A2", cents);
+                x = width * 2 / 23;
+                canvas.drawText(s, x, 0, paint);
 
-		// Draw nearest
+                // Draw nearest
 
-		s = String.format("%4.2fHz", audio.maxima.r[i]);
-		x = width * 25 / 92;
-		canvas.drawText(s, x, 0, paint);
+                s = String.format("%4.2fHz", audio.maxima.r[i]);
+                x = width * 25 / 92;
+                canvas.drawText(s, x, 0, paint);
 
-		// Draw frequency
+                // Draw frequency
 
-		s = String.format("%4.2fHz", audio.maxima.f[i]);
-		x = width * 12 / 23;
-		canvas.drawText(s, x, 0, paint);
+                s = String.format("%4.2fHz", audio.maxima.f[i]);
+                x = width * 12 / 23;
+                canvas.drawText(s, x, 0, paint);
 
-		// Draw difference
+                // Draw difference
 
-		x = width - margin / 2;
-		paint.setTextAlign(Paint.Align.RIGHT);
-		s = String.format("%+5.2fHz", audio.maxima.r[i] -
-				  audio.maxima.f[i]);
-		canvas.drawText(s, x, 0, paint);
-	    }
+                x = width - margin / 2;
+                paint.setTextAlign(Paint.Align.RIGHT);
+                s = String.format("%+5.2fHz", audio.maxima.r[i] -
+                                  audio.maxima.f[i]);
+                canvas.drawText(s, x, 0, paint);
+            }
 
-	    // If multiple and no data, don't have a blank display
+            // If multiple and no data, don't have a blank display
 
-	    if (audio.count == 0)
-	    {
-		// Move down
+            if (audio.count == 0)
+            {
+                // Move down
 
-		canvas.translate(0, small);
+                canvas.translate(0, small);
 
-		// Draw note
+                // Draw note
 
-		s = String.format("%s", notes[audio.note % OCTAVE]);
-		canvas.drawText(s, margin / 2, 0, paint);
-		float dx = paint.measureText(s);
+                s = String.format("%s", notes[audio.note % OCTAVE]);
+                canvas.drawText(s, margin / 2, 0, paint);
+                float dx = paint.measureText(s);
 
-		// Draw sharp/flat
+                // Draw sharp/flat
 
-		paint.setTextSize(small / 2);
-		s = String.format("%s", sharps[audio.note % OCTAVE]);
-		canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
+                paint.setTextSize(small / 2);
+                s = String.format("%s", sharps[audio.note % OCTAVE]);
+                canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
 
-		// Draw octave
+                // Draw octave
 
-		s = String.format("%d", audio.note / OCTAVE);
-		canvas.drawText(s, margin / 2 + dx, 0, paint);
+                s = String.format("%d", audio.note / OCTAVE);
+                canvas.drawText(s, margin / 2 + dx, 0, paint);
 
-		// Draw cents
+                // Draw cents
 
-		paint.setTextSize(small);
-		s = String.format("%+5.2f\u00A2", audio.cents);
-		x = width * 2 / 23;
-		canvas.drawText(s, x, 0, paint);
-				
-		// Draw nearest
-	
-		s = String.format("%4.2fHz", audio.nearest);
-		x = width * 107 / 368;
-		canvas.drawText(s, x, 0, paint);
+                paint.setTextSize(small);
+                s = String.format("%+5.2f\u00A2", audio.cents);
+                x = width * 2 / 23;
+                canvas.drawText(s, x, 0, paint);
 
-		// Draw frequency
+                // Draw nearest
 
-		s = String.format("%4.2fHz", audio.frequency);
-		x = width * 12 / 23;
-		canvas.drawText(s, x, 0, paint);
+                s = String.format("%4.2fHz", audio.nearest);
+                x = width * 107 / 368;
+                canvas.drawText(s, x, 0, paint);
 
-		// Draw difference
+                // Draw frequency
 
-		x = width - margin / 2;
-		paint.setTextAlign(Paint.Align.RIGHT);
-		s = String.format("%+5.2fHz", audio.difference);
-		canvas.drawText(s, x, 0, paint);
-	    }
-	}
+                s = String.format("%4.2fHz", audio.frequency);
+                x = width * 12 / 23;
+                canvas.drawText(s, x, 0, paint);
 
-	// Not multiple
+                // Draw difference
 
-	else
-	{
-	    String s;
+                x = width - margin / 2;
+                paint.setTextAlign(Paint.Align.RIGHT);
+                s = String.format("%+5.2fHz", audio.difference);
+                canvas.drawText(s, x, 0, paint);
+            }
+        }
 
-	    // Set up text
+        // Not multiple
 
-	    paint.setTextSize(larger);
-	    paint.setTypeface(Typeface.DEFAULT_BOLD);
+        else
+        {
+            String s;
 
-	    // Move down
+            // Set up text
 
-	    canvas.translate(0, larger);
+            paint.setTextSize(larger);
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
 
-	    // Draw note
+            // Move down
 
-	    canvas.drawText(notes[audio.note % OCTAVE], margin, 0, paint);
+            canvas.translate(0, larger);
 
-	    // Measure text
+            // Draw note
 
-	    float dx = paint.measureText(notes[audio.note % OCTAVE]);
+            canvas.drawText(notes[audio.note % OCTAVE], margin, 0, paint);
 
-	    // Draw sharps/flats
+            // Measure text
 
-	    paint.setTextSize(larger / 2);
-	    s = String.format("%s", sharps[audio.note % OCTAVE]);
-	    canvas.translate(0, paint.ascent());
-	    canvas.drawText(s, margin + dx, 0, paint);
+            float dx = paint.measureText(notes[audio.note % OCTAVE]);
 
-	    // Dar octave
+            // Draw sharps/flats
 
-	    s = String.format("%d", audio.note / OCTAVE);
-	    canvas.translate(0, -paint.ascent());
-	    canvas.drawText(s, margin + dx, 0, paint);
+            paint.setTextSize(larger / 2);
+            s = String.format("%s", sharps[audio.note % OCTAVE]);
+            canvas.translate(0, paint.ascent());
+            canvas.drawText(s, margin + dx, 0, paint);
 
-	    // Set up text
+            // Dar octave
 
-	    paint.setTextSize(large);
-	    //	    paint.setTypeface(Typeface.DEFAULT);
-	    paint.setTextAlign(Paint.Align.RIGHT);
+            s = String.format("%d", audio.note / OCTAVE);
+            canvas.translate(0, -paint.ascent());
+            canvas.drawText(s, margin + dx, 0, paint);
 
-	    // Draw cents
+            // Set up text
 
-	    s = String.format("%+5.2f\u00A2", audio.cents);
-	    // dx = paint.measureText(s);
-	    canvas.drawText(s, width - margin, 0, paint);
+            paint.setTextSize(large);
+            //	    paint.setTypeface(Typeface.DEFAULT);
+            paint.setTextAlign(Paint.Align.RIGHT);
 
-	    // Set up text
+            // Draw cents
 
-	    paint.setTextSize(medium);
-	    paint.setTextAlign(Paint.Align.LEFT);
-	    paint.setTypeface(Typeface.DEFAULT);
+            s = String.format("%+5.2f\u00A2", audio.cents);
+            // dx = paint.measureText(s);
+            canvas.drawText(s, width - margin, 0, paint);
 
-	    // Move down
+            // Set up text
 
-	    canvas.translate(0, medium);
+            paint.setTextSize(medium);
+            paint.setTextAlign(Paint.Align.LEFT);
+            paint.setTypeface(Typeface.DEFAULT);
 
-	    // Draw nearest
+            // Move down
 
-	    s = String.format("%4.2fHz", audio.nearest);
-	    canvas.drawText(s, margin, 0, paint);
+            canvas.translate(0, medium);
 
-	    // Draw frequency
+            // Draw nearest
 
-	    paint.setTextAlign(Paint.Align.RIGHT);
-	    s = String.format("%4.2fHz", audio.frequency);
-	    // dx = paint.measureText(s);
-	    canvas.drawText(s, width - margin, 0, paint);
+            s = String.format("%4.2fHz", audio.nearest);
+            canvas.drawText(s, margin, 0, paint);
 
-	    // Set up text
+            // Draw frequency
 
-	    paint.setTextSize(medium);
-	    paint.setTextAlign(Paint.Align.LEFT);
+            paint.setTextAlign(Paint.Align.RIGHT);
+            s = String.format("%4.2fHz", audio.frequency);
+            // dx = paint.measureText(s);
+            canvas.drawText(s, width - margin, 0, paint);
 
-	    // Move down
+            // Set up text
 
-	    canvas.translate(0, medium);
+            paint.setTextSize(medium);
+            paint.setTextAlign(Paint.Align.LEFT);
 
-	    // Draw reference
+            // Move down
 
-	    s = String.format("%4.2fHz", audio.reference);
-	    canvas.drawText(s, margin, 0, paint);
+            canvas.translate(0, medium);
 
-	    // Draw difference
+            // Draw reference
 
-	    paint.setTextAlign(Paint.Align.RIGHT);
-	    s = String.format("%+5.2fHz", audio.difference);
-	    // dx = paint.measureText(s);
-	    canvas.drawText(s, width - margin, 0, paint);
-	}
+            s = String.format("%4.2fHz", audio.reference);
+            canvas.drawText(s, margin, 0, paint);
+
+            // Draw difference
+
+            paint.setTextAlign(Paint.Align.RIGHT);
+            s = String.format("%+5.2fHz", audio.difference);
+            // dx = paint.measureText(s);
+            canvas.drawText(s, width - margin, 0, paint);
+        }
     }
 
     // Log2
 
     protected double log2(double d)
     {
-	return Math.log(d) / Math.log(2.0);
+        return Math.log(d) / Math.log(2.0);
     }
 }

@@ -36,9 +36,9 @@ public abstract class PreferenceView extends View
 
     public PreferenceView(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	maxWidth = 0;
+        maxWidth = 0;
     }
 
     // On measure
@@ -46,13 +46,13 @@ public abstract class PreferenceView extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	// Get the largest width offered so a valid calculation can be made
+        // Get the largest width offered so a valid calculation can be made
 
-	int w = MeasureSpec.getSize(widthMeasureSpec);
+        int w = MeasureSpec.getSize(widthMeasureSpec);
 
-	if (maxWidth < w)
-	    maxWidth = w;
+        if (maxWidth < w)
+            maxWidth = w;
 
-	setMeasuredDimension(maxWidth / 4, maxWidth / 4);
+        setMeasuredDimension(maxWidth / 4, maxWidth / 4);
     }
 }

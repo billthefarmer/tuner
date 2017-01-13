@@ -48,7 +48,7 @@ public abstract class Graticule extends TunerView
 
     protected Graticule(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
     }
 
     // On Size Changed
@@ -56,30 +56,30 @@ public abstract class Graticule extends TunerView
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
-	super.onSizeChanged(w, h, oldw, oldh);
+        super.onSizeChanged(w, h, oldw, oldh);
 
-	// Calculate indented width and height
+        // Calculate indented width and height
 
-	width = (clipRect.right - clipRect.left);
-	height = (clipRect.bottom - clipRect.top);
+        width = (clipRect.right - clipRect.left);
+        height = (clipRect.bottom - clipRect.top);
 
-	// Create rounded bitmap
+        // Create rounded bitmap
 
-	rounded = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-	Canvas canvas = new Canvas(rounded);	
-	paint.setStyle(Paint.Style.FILL);
-	paint.setColor(Color.WHITE);
-	canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);	
+        rounded = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(rounded);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);
 
-	// Create magic paint
+        // Create magic paint
 
-	xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
-	// Create a bitmap to draw on
+        // Create a bitmap to draw on
 
-	bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-	source = new Canvas(bitmap);
+        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        source = new Canvas(bitmap);
     }
 
     // On Draw
@@ -87,52 +87,52 @@ public abstract class Graticule extends TunerView
     @Override
     protected void onDraw(Canvas canvas)
     {
-	super.onDraw(canvas);
+        super.onDraw(canvas);
 
-	// Reset the canvas transform
+        // Reset the canvas transform
 
-	source.setMatrix(null);
+        source.setMatrix(null);
 
-	// Draw on the canvas
+        // Draw on the canvas
 
-	drawGraticule(source);
-	drawTrace(source);
+        drawGraticule(source);
+        drawTrace(source);
 
-	// Reset the canvas transform again
+        // Reset the canvas transform again
 
-	source.setMatrix(null);
+        source.setMatrix(null);
 
-	// Use the magic paint
+        // Use the magic paint
 
-	source.drawBitmap(rounded, 0, 0, xferPaint);
+        source.drawBitmap(rounded, 0, 0, xferPaint);
 
-	// Draw the result on the canvas
+        // Draw the result on the canvas
 
-	canvas.drawBitmap(bitmap, 0, 0, null);
+        canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
     // Draw graticule
 
     private void drawGraticule(Canvas canvas)
     {
-	// Draw black rectangle
+        // Draw black rectangle
 
-	canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.BLACK);
 
-	// Set up paint for dark green thin lines
+        // Set up paint for dark green thin lines
 
-	paint.setAntiAlias(false);
-	paint.setStyle(Paint.Style.STROKE);
-	paint.setColor(0xff007f00);
-	paint.setStrokeWidth(1);
+        paint.setAntiAlias(false);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(0xff007f00);
+        paint.setStrokeWidth(1);
 
-	// Draw the graticule
+        // Draw the graticule
 
-	for (int i = (width % SIZE) / 2; i <= width; i += SIZE)
-	    canvas.drawLine(i, 0, i, height, paint);
+        for (int i = (width % SIZE) / 2; i <= width; i += SIZE)
+            canvas.drawLine(i, 0, i, height, paint);
 
-	for (int i = (height % SIZE) / 2; i <= height; i += SIZE)
-	    canvas.drawLine(0, i, width, i, paint);
+        for (int i = (height % SIZE) / 2; i <= height; i += SIZE)
+            canvas.drawLine(0, i, width, i, paint);
     }
 
     // Draw trace

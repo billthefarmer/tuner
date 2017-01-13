@@ -39,24 +39,24 @@ public class RawTextReader
 
     public static String read(Context context, int resId)
     {
-	InputStream stream = context.getResources().openRawResource(resId);
-	InputStreamReader reader = new InputStreamReader(stream);
-	BufferedReader buff = new BufferedReader(reader);
+        InputStream stream = context.getResources().openRawResource(resId);
+        InputStreamReader reader = new InputStreamReader(stream);
+        BufferedReader buff = new BufferedReader(reader);
 
-	String line;
-	StringBuilder text = new StringBuilder();
+        String line;
+        StringBuilder text = new StringBuilder();
 
-	try
-	{
-	    while ((line = buff.readLine()) != null)
-		text.append(line + "\n" );
-	}
+        try
+        {
+            while ((line = buff.readLine()) != null)
+                text.append(line + "\n" );
+        }
 
-	catch (Exception e)
-	{
-	    return "";
-	}
+        catch (Exception e)
+        {
+            return "";
+        }
 
-	return text.toString();
+        return text.toString();
     }
 }

@@ -50,10 +50,10 @@ public class Status extends View
 
     public Status(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	paint = new Paint();
-	resources = getResources();
+        paint = new Paint();
+        resources = getResources();
     }
 
     // On size changed
@@ -61,10 +61,10 @@ public class Status extends View
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
-	width = w;
-	height = h;
+        width = w;
+        height = h;
 
-	margin = width / 32;
+        margin = width / 32;
     }
 
     // On draw
@@ -73,101 +73,101 @@ public class Status extends View
     @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
-	String s;
+        String s;
 
-	// Draw separator line
+        // Draw separator line
 
-	paint.setStrokeWidth(3);
-	paint.setColor(resources.getColor(android.R.color.darker_gray));
-	paint.setAntiAlias(true);
-	paint.setStyle(Paint.Style.STROKE);
-	canvas.drawLine(0, 0, width, 0, paint);
+        paint.setStrokeWidth(3);
+        paint.setColor(resources.getColor(android.R.color.darker_gray));
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawLine(0, 0, width, 0, paint);
 
-	// Check for audio
+        // Check for audio
 
-	if (audio == null)
-	    return;
+        if (audio == null)
+            return;
 
-	// Set up text
+        // Set up text
 
-	paint.setStrokeWidth(1);
-	paint.setColor(resources.getColor(android.R.color.primary_text_light));
-	paint.setTextSize(height / 2);
-	paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(1);
+        paint.setColor(resources.getColor(android.R.color.primary_text_light));
+        paint.setTextSize(height / 2);
+        paint.setStyle(Paint.Style.FILL);
 
-	// Move down
+        // Move down
 
-	canvas.translate(0, height * 2 / 3);
+        canvas.translate(0, height * 2 / 3);
 
-	// Draw sample rate text
+        // Draw sample rate text
 
-	s = String.format(resources.getString(R.string.sample_rate),
-			  audio.sample);
-	canvas.drawText(s, margin, 0, paint);
-	float x = margin + paint.measureText(s + "   ");
+        s = String.format(resources.getString(R.string.sample_rate),
+                          audio.sample);
+        canvas.drawText(s, margin, 0, paint);
+        float x = margin + paint.measureText(s + "   ");
 
-	// Filter
+        // Filter
 
-	if (audio.filter)
-	{
-	    s = resources.getString(R.string.filter);
-	    canvas.drawText(s, x, 0, paint);
-	    x += paint.measureText(s + " ");
-	}
+        if (audio.filter)
+        {
+            s = resources.getString(R.string.filter);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
 
-	// Downsample
+        // Downsample
 
-	if (audio.downsample)
-	{
-	    s = resources.getString(R.string.downsample);
-	    canvas.drawText(s, x, 0, paint);
-	    x += paint.measureText(s + " ");
-	}
+        if (audio.downsample)
+        {
+            s = resources.getString(R.string.downsample);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
 
-	// Zoom
+        // Zoom
 
-	if (audio.zoom)
-	{
-	    s = resources.getString(R.string.zoom);
-	    canvas.drawText(s, x, 0, paint);
-	    x += paint.measureText(s + " ");
-	}
+        if (audio.zoom)
+        {
+            s = resources.getString(R.string.zoom);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
 
-	// Lock
+        // Lock
 
-	if (audio.lock)
-	{
-	    s = resources.getString(R.string.lock);
-	    canvas.drawText(s, x, 0, paint);
-	    x += paint.measureText(s + " ");
-	}
+        if (audio.lock)
+        {
+            s = resources.getString(R.string.lock);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
 
-	// Multiple
+        // Multiple
 
-	if (audio.multiple)
-	{
-	    s = resources.getString(R.string.multiple);
-	    canvas.drawText(s, x, 0, paint);
-	    x += paint.measureText(s + " ");
-	}
+        if (audio.multiple)
+        {
+            s = resources.getString(R.string.multiple);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
 
-	// Screen
+        // Screen
 
-	if (audio.screen)
-	{
-	    s = resources.getString(R.string.display);
-	    canvas.drawText(s, x, 0, paint);
-	    x += paint.measureText(s + " ");
-	}
+        if (audio.screen)
+        {
+            s = resources.getString(R.string.display);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
 
-	// Strobe
+        // Strobe
 
-	if (audio.strobe)
-	{
-	    s = resources.getString(R.string.strobe);
-	    canvas.drawText(s, x, 0, paint);
-	    x += paint.measureText(s + " ");
-	}
+        if (audio.strobe)
+        {
+            s = resources.getString(R.string.strobe);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
 
     }
 }

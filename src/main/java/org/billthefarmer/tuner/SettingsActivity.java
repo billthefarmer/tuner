@@ -35,18 +35,18 @@ public class SettingsActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-	// Display the fragment as the main content.
+        // Display the fragment as the main content.
 
-	getFragmentManager().beginTransaction()
-	    .replace(android.R.id.content, new SettingsFragment())
-	    .commit();
+        getFragmentManager().beginTransaction()
+        .replace(android.R.id.content, new SettingsFragment())
+        .commit();
 
-	// Enable back navigation on action bar
+        // Enable back navigation on action bar
 
-	ActionBar actionBar = getActionBar();
-	actionBar.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -55,17 +55,17 @@ public class SettingsActivity extends Activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-	// Switch on item id
+        // Switch on item id
 
-	switch (item.getItemId())
-	{
-	case android.R.id.home:
-	    // app icon in action bar clicked; go home
-	    finish();
-	    return true;
+        switch (item.getItemId())
+        {
+        case android.R.id.home:
+            // app icon in action bar clicked; go home
+            finish();
+            return true;
 
-	default:
-	    return super.onOptionsItemSelected(item);
-	}
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

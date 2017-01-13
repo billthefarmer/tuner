@@ -40,7 +40,7 @@ import android.view.View;
 
 public class SettingsFragment extends PreferenceFragment
     implements SharedPreferences.OnSharedPreferenceChangeListener,
-	       View.OnClickListener
+    View.OnClickListener
 {
     private static final int BLUE = 0;
     private static final int OLIVE = 1;
@@ -59,208 +59,208 @@ public class SettingsFragment extends PreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-	super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-	// Load the preferences from an XML resource
+        // Load the preferences from an XML resource
 
-	addPreferencesFromResource(R.xml.preferences);
-	
-	SharedPreferences preferences =
-	    PreferenceManager.getDefaultSharedPreferences(getActivity());
+        addPreferencesFromResource(R.xml.preferences);
 
-	preferences.registerOnSharedPreferenceChangeListener(this);
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-	ListPreference preference =
-	    (ListPreference)findPreference(KEY_PREF_INPUT);
-	preference.setSummary(preference.getEntry());
+        preferences.registerOnSharedPreferenceChangeListener(this);
 
-	preference = (ListPreference)findPreference(KEY_PREF_COLOUR);
-	ColourPickerPreference custom =
-	    (ColourPickerPreference)findPreference(KEY_PREF_CUSTOM);
-	preference.setSummary(preference.getEntry());
+        ListPreference preference =
+            (ListPreference)findPreference(KEY_PREF_INPUT);
+        preference.setSummary(preference.getEntry());
 
-	// Disable colour pickers
+        preference = (ListPreference)findPreference(KEY_PREF_COLOUR);
+        ColourPickerPreference custom =
+            (ColourPickerPreference)findPreference(KEY_PREF_CUSTOM);
+        preference.setSummary(preference.getEntry());
 
-	custom.setEnabled(false);
+        // Disable colour pickers
 
-	int v = Integer.valueOf(preference.getValue());
-	switch (v)
-	{
-	case BLUE:
-	    preference.setIcon(R.drawable.ic_pref_blue);
-	    preference.setDialogIcon(R.drawable.ic_pref_blue);
-	    break;
+        custom.setEnabled(false);
 
-	case OLIVE:
-	    preference.setIcon(R.drawable.ic_pref_olive);
-	    preference.setDialogIcon(R.drawable.ic_pref_olive);
-	    break;
+        int v = Integer.valueOf(preference.getValue());
+        switch (v)
+        {
+        case BLUE:
+            preference.setIcon(R.drawable.ic_pref_blue);
+            preference.setDialogIcon(R.drawable.ic_pref_blue);
+            break;
 
-	case MAGENTA:
-	    preference.setIcon(R.drawable.ic_pref_magenta);
-	    preference.setDialogIcon(R.drawable.ic_pref_magenta);
-	    break;
+        case OLIVE:
+            preference.setIcon(R.drawable.ic_pref_olive);
+            preference.setDialogIcon(R.drawable.ic_pref_olive);
+            break;
 
-	case CUSTOM:
-	    preference.setIcon(R.drawable.ic_pref_spectrum);
-	    preference.setDialogIcon(R.drawable.ic_pref_spectrum);
+        case MAGENTA:
+            preference.setIcon(R.drawable.ic_pref_magenta);
+            preference.setDialogIcon(R.drawable.ic_pref_magenta);
+            break;
 
-	    // Enable colour pickers
+        case CUSTOM:
+            preference.setIcon(R.drawable.ic_pref_spectrum);
+            preference.setDialogIcon(R.drawable.ic_pref_spectrum);
 
-	    custom.setEnabled(true);
-	    break;
-	}
+            // Enable colour pickers
 
-	NumberPickerPreference picker = 
-	    (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
-	summary = (String)picker.getSummary();
+            custom.setEnabled(true);
+            break;
+        }
 
-	// Set number picker summary
+        NumberPickerPreference picker =
+            (NumberPickerPreference)findPreference(KEY_PREF_REFERENCE);
+        summary = (String)picker.getSummary();
 
-	v = picker.getValue();
-	String s = String.format(summary, v);
-	picker.setSummary(s);
+        // Set number picker summary
 
-	// Get about summary
+        v = picker.getValue();
+        String s = String.format(summary, v);
+        picker.setSummary(s);
 
-	Preference about = findPreference(KEY_PREF_ABOUT);
-	String sum = (String) about.getSummary();
+        // Get about summary
 
-	// Get context and package manager
+        Preference about = findPreference(KEY_PREF_ABOUT);
+        String sum = (String) about.getSummary();
 
-	Context context = getActivity();
-	PackageManager manager = context.getPackageManager();
+        // Get context and package manager
 
-	// Get info
+        Context context = getActivity();
+        PackageManager manager = context.getPackageManager();
 
-	PackageInfo info = null;
-	try
-	{
-	    info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
-	}
-	
-	catch (Exception e)
-	{
-	    e.printStackTrace();
-	}
+        // Get info
 
-	// Set version in text view
+        PackageInfo info = null;
+        try
+        {
+            info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
+        }
 
-	if (info != null)
-	{
-	    s = String.format(sum, info.versionName);
-	    about.setSummary(s);
-	}
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        // Set version in text view
+
+        if (info != null)
+        {
+            s = String.format(sum, info.versionName);
+            about.setSummary(s);
+        }
     }
 
     // On preference tree click
 
     @Override
-	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-    		Preference preference)
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+                                         Preference preference)
     {
-    	boolean result =
-	    super.onPreferenceTreeClick(preferenceScreen, preference);
+        boolean result =
+            super.onPreferenceTreeClick(preferenceScreen, preference);
 
-    	if (preference instanceof PreferenceScreen)
-    	{
-	    dialog = ((PreferenceScreen)preference).getDialog();
-	    ActionBar actionBar = dialog.getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(true);
+        if (preference instanceof PreferenceScreen)
+        {
+            dialog = ((PreferenceScreen)preference).getDialog();
+            ActionBar actionBar = dialog.getActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
-	    View view = dialog.findViewById(android.R.id.home);
-	    if (view != null)
-		view.setOnClickListener(this);
-    	}
+            View view = dialog.findViewById(android.R.id.home);
+            if (view != null)
+                view.setOnClickListener(this);
+        }
 
-    	return result;
+        return result;
     }
 
     // On shared preference changed
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences,
-					  String key)
+                                          String key)
     {
-	if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_COLOUR))
-	{
-	    Preference preference = findPreference(key);
+        if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_COLOUR))
+        {
+            Preference preference = findPreference(key);
 
-	    // Set summary to be the user-description for the selected value
+            // Set summary to be the user-description for the selected value
 
-	    preference.setSummary(((ListPreference) preference).getEntry());
-	}
+            preference.setSummary(((ListPreference) preference).getEntry());
+        }
 
-	if (key.equals(KEY_PREF_COLOUR))
-	{
-	    ListPreference preference = (ListPreference)findPreference(key);
-	    ColourPickerPreference custom =
-		(ColourPickerPreference)findPreference(KEY_PREF_CUSTOM);
+        if (key.equals(KEY_PREF_COLOUR))
+        {
+            ListPreference preference = (ListPreference)findPreference(key);
+            ColourPickerPreference custom =
+                (ColourPickerPreference)findPreference(KEY_PREF_CUSTOM);
 
-	    custom.setEnabled(false);
+            custom.setEnabled(false);
 
-	    // Get the value and set the dialog icon
+            // Get the value and set the dialog icon
 
-	    int v = Integer.valueOf(preference.getValue());
-	    switch (v)
-	    {
-	    case BLUE:
-		preference.setIcon(R.drawable.ic_pref_blue);
-		preference.setDialogIcon(R.drawable.ic_pref_blue);
-		break;
+            int v = Integer.valueOf(preference.getValue());
+            switch (v)
+            {
+            case BLUE:
+                preference.setIcon(R.drawable.ic_pref_blue);
+                preference.setDialogIcon(R.drawable.ic_pref_blue);
+                break;
 
-	    case OLIVE:
-		preference.setIcon(R.drawable.ic_pref_olive);
-		preference.setDialogIcon(R.drawable.ic_pref_olive);
-		break;
+            case OLIVE:
+                preference.setIcon(R.drawable.ic_pref_olive);
+                preference.setDialogIcon(R.drawable.ic_pref_olive);
+                break;
 
-	    case MAGENTA:
-		preference.setIcon(R.drawable.ic_pref_magenta);
-		preference.setDialogIcon(R.drawable.ic_pref_magenta);
-		break;
+            case MAGENTA:
+                preference.setIcon(R.drawable.ic_pref_magenta);
+                preference.setDialogIcon(R.drawable.ic_pref_magenta);
+                break;
 
-	    case CUSTOM:
-		preference.setIcon(R.drawable.ic_pref_spectrum);
-		preference.setDialogIcon(R.drawable.ic_pref_spectrum);
+            case CUSTOM:
+                preference.setIcon(R.drawable.ic_pref_spectrum);
+                preference.setDialogIcon(R.drawable.ic_pref_spectrum);
 
-		// Enable colour pickers
+                // Enable colour pickers
 
-		custom.setEnabled(true);
-		break;
-	    }
-	}
+                custom.setEnabled(true);
+                break;
+            }
+        }
 
-	if (key.equals(KEY_PREF_CUSTOM))
-	{
-	    ColourPickerPreference custom =
-		(ColourPickerPreference)findPreference(key);
+        if (key.equals(KEY_PREF_CUSTOM))
+        {
+            ColourPickerPreference custom =
+                (ColourPickerPreference)findPreference(key);
 
-	    // Change the list preference icons
+            // Change the list preference icons
 
-	    Drawable d = custom.getIcon();
-	    ListPreference preference =
-		(ListPreference)findPreference(KEY_PREF_COLOUR);
-	    preference.setDialogIcon(d);
-	    preference.setIcon(d);
-	}
+            Drawable d = custom.getIcon();
+            ListPreference preference =
+                (ListPreference)findPreference(KEY_PREF_COLOUR);
+            preference.setDialogIcon(d);
+            preference.setIcon(d);
+        }
 
-	if (key.equals(KEY_PREF_REFERENCE))
-	{
-	    NumberPickerPreference preference =
-		(NumberPickerPreference)findPreference(key);
+        if (key.equals(KEY_PREF_REFERENCE))
+        {
+            NumberPickerPreference preference =
+                (NumberPickerPreference)findPreference(key);
 
-	    // Get the value and set the summary
+            // Get the value and set the summary
 
-	    int v = preference.getValue();
-	    String s = String.format(summary, v);
-	    preference.setSummary(s);
-	}
+            int v = preference.getValue();
+            String s = String.format(summary, v);
+            preference.setSummary(s);
+        }
     }
 
     // On click
 
     public void onClick(View v)
     {
-	dialog.dismiss();
+        dialog.dismiss();
     }
 }

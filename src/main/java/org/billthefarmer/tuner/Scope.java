@@ -40,9 +40,9 @@ public class Scope extends Graticule
 
     public Scope(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	path = new Path();
+        path = new Path();
     }
 
     // Draw trace
@@ -51,95 +51,95 @@ public class Scope extends Graticule
     protected void drawTrace(Canvas canvas)
     {
 
-	// Check for data
+        // Check for data
 
-	if (audio == null || audio.data == null)
-	    return;
+        if (audio == null || audio.data == null)
+            return;
 
-	// Draw F if filter
+        // Draw F if filter
 
-	if (audio.filter)
-	{
-	    // Color yellow
+        if (audio.filter)
+        {
+            // Color yellow
 
-	    paint.setStrokeWidth(2);
-	    paint.setAntiAlias(true);
-	    paint.setColor(Color.YELLOW);
+            paint.setStrokeWidth(2);
+            paint.setAntiAlias(true);
+            paint.setColor(Color.YELLOW);
 
-	    float height = paint.getFontMetrics(null);
-	    canvas.drawText("F", 4, height - 2, paint);
-	}
+            float height = paint.getFontMetrics(null);
+            canvas.drawText("F", 4, height - 2, paint);
+        }
 
-	// Initialise sync
+        // Initialise sync
 
-	int maxdx = 0;
-	int dx = 0;
-	int n = 0;
+        int maxdx = 0;
+        int dx = 0;
+        int n = 0;
 
-	// Look for zero crossing
+        // Look for zero crossing
 
-	for (int i = 1; i < audio.data.length; i++)
-	{
-	    dx = audio.data[i] - audio.data[i - 1];
-	    if (maxdx < dx)
-	    {
-		maxdx = dx;
-		n = i;
-	    }
+        for (int i = 1; i < audio.data.length; i++)
+        {
+            dx = audio.data[i] - audio.data[i - 1];
+            if (maxdx < dx)
+            {
+                maxdx = dx;
+                n = i;
+            }
 
-	    if (maxdx > 0 && dx < 0)
-		break;
-	}
+            if (maxdx > 0 && dx < 0)
+                break;
+        }
 
-	// Translate camvas
+        // Translate camvas
 
-	canvas.translate(0, height / 2);
+        canvas.translate(0, height / 2);
 
-	// Check max value
+        // Check max value
 
-	if (max < 4096)
-	    max = 4096;
+        if (max < 4096)
+            max = 4096;
 
-	// Calculate y scale
+        // Calculate y scale
 
-	float yscale = max / (height / 2);
+        float yscale = max / (height / 2);
 
-	// Reset max value
+        // Reset max value
 
-	max = 0;
+        max = 0;
 
-	// Calculate x scale
+        // Calculate x scale
 
-	float xscale = (float)Math.ceil((double)width / audio.data.length);
+        float xscale = (float)Math.ceil((double)width / audio.data.length);
 
-	// Rewind the path
+        // Rewind the path
 
-	path.rewind();
-	path.moveTo(0, 0);
+        path.rewind();
+        path.moveTo(0, 0);
 
-	// Create the trace
+        // Create the trace
 
-	for (int i = 0; i < Math.min(width, audio.data.length - n); i++)
-	{
-	    // Get max value
+        for (int i = 0; i < Math.min(width, audio.data.length - n); i++)
+        {
+            // Get max value
 
-	    if (max < Math.abs(audio.data[n + i]))
-		max = Math.abs(audio.data[n + i]);
+            if (max < Math.abs(audio.data[n + i]))
+                max = Math.abs(audio.data[n + i]);
 
-	    float y = -audio.data[n + i] / yscale;
-	    float x = i * xscale;
+            float y = -audio.data[n + i] / yscale;
+            float x = i * xscale;
 
-	    path.lineTo(x, y);
-	}
+            path.lineTo(x, y);
+        }
 
-	// Color green
+        // Color green
 
-	paint.setStrokeWidth(2);
-	paint.setAntiAlias(true);
-	paint.setColor(Color.GREEN);
+        paint.setStrokeWidth(2);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.GREEN);
 
-	// Draw trace
+        // Draw trace
 
-	canvas.drawPath(path, paint);
+        canvas.drawPath(path, paint);
     }
 }

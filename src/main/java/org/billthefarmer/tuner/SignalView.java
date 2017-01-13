@@ -62,7 +62,7 @@ public class SignalView extends View
 
     public SignalView(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
     }
 
     // On measure
@@ -70,13 +70,13 @@ public class SignalView extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	// Get offered height
+        // Get offered height
 
-	int h = MeasureSpec.getSize(heightMeasureSpec);
+        int h = MeasureSpec.getSize(heightMeasureSpec);
 
-	// Set size to offered height
+        // Set size to offered height
 
-	setMeasuredDimension(h / 2, h);
+        setMeasuredDimension(h / 2, h);
     }
 
     // On size changed
@@ -84,64 +84,64 @@ public class SignalView extends View
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
-	// Get dimensions
+        // Get dimensions
 
-	width = w;
-	height = h;
+        width = w;
+        height = h;
 
-	margin = width / 4;
+        margin = width / 4;
 
-	// Colours for gradient
+        // Colours for gradient
 
-	int colours[] =
-	    {Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK};
+        int colours[] =
+        {Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK};
 
-	// Coloured gradient
+        // Coloured gradient
 
-	LinearGradient gradient =
-	    new LinearGradient(0, 0, 0, height,
-			       colours, null, Shader.TileMode.CLAMP);
+        LinearGradient gradient =
+            new LinearGradient(0, 0, 0, height,
+                               colours, null, Shader.TileMode.CLAMP);
 
-	// Bitmap to draw coloured bars in
+        // Bitmap to draw coloured bars in
 
-	Bitmap bitmap = Bitmap.createBitmap(width, height,
-					    Bitmap.Config.ARGB_8888);
-	Canvas canvas = new Canvas(bitmap);
-	paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	paint.setShader(gradient);
-	paint.setStrokeWidth(2);
+        Bitmap bitmap = Bitmap.createBitmap(width, height,
+                                            Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setShader(gradient);
+        paint.setStrokeWidth(2);
 
-	// Draw coloured bars
+        // Draw coloured bars
 
-	for (int i = 0; i <= bitmap.getHeight(); i += 3)
-	    canvas.drawLine(0, i, bitmap.getWidth(), i, paint);
+        for (int i = 0; i <= bitmap.getHeight(); i += 3)
+            canvas.drawLine(0, i, bitmap.getWidth(), i, paint);
 
-	// Create shader from coloured bars
+        // Create shader from coloured bars
 
-	shader = new BitmapShader(bitmap,
-				  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        shader = new BitmapShader(bitmap,
+                                  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
-	paint.setShader(shader);
+        paint.setShader(shader);
 
-	// Rect to draw the coloured bars
+        // Rect to draw the coloured bars
 
-	rect = new RectF(margin, margin,
-			 margin + width / 2, margin + height * 3 / 4);
+        rect = new RectF(margin, margin,
+                         margin + width / 2, margin + height * 3 / 4);
 
-	// Create animator
+        // Create animator
 
-	animator = ValueAnimator.ofInt(0, 10000);
-	animator.setRepeatCount(ValueAnimator.INFINITE);
-	animator.setRepeatMode(ValueAnimator.RESTART);
-	animator.setDuration(10000);
+        animator = ValueAnimator.ofInt(0, 10000);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatMode(ValueAnimator.RESTART);
+        animator.setDuration(10000);
 
-	// Update the display
+        // Update the display
 
-	animator.addUpdateListener(this);
+        animator.addUpdateListener(this);
 
-	// Start the animator
+        // Start the animator
 
-	animator.start();
+        animator.start();
     }
 
     // Animation update
@@ -149,33 +149,33 @@ public class SignalView extends View
     @Override
     public void onAnimationUpdate(ValueAnimator animator)
     {
-	// Do VU meter style calculation
+        // Do VU meter style calculation
 
-	if (audio != null)
-	{
-	    if (signal < audio.signal)
-		signal = ((signal * 4) + audio.signal) / 5;
+        if (audio != null)
+        {
+            if (signal < audio.signal)
+                signal = ((signal * 4) + audio.signal) / 5;
 
-	    else
-		signal = ((signal * 9) + audio.signal) / 10;
-	}
+            else
+                signal = ((signal * 9) + audio.signal) / 10;
+        }
 
-	invalidate();
+        invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas)
     {
-	// Draw the coloured column
+        // Draw the coloured column
 
-	paint.setStyle(Paint.Style.FILL);
-	int max = height * 3 / 4;
-	float v = (float)(Math.log(signal) / SCALE);
+        paint.setStyle(Paint.Style.FILL);
+        int max = height * 3 / 4;
+        float v = (float)(Math.log(signal) / SCALE);
 
-	rect.top = margin + max * v;
-	if (rect.top < 0)
-	    rect.top = 0;
+        rect.top = margin + max * v;
+        if (rect.top < 0)
+            rect.top = 0;
 
-	canvas.drawRoundRect(rect, 3, 3, paint);
+        canvas.drawRoundRect(rect, 3, 3, paint);
     }
 }

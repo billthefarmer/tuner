@@ -53,7 +53,7 @@ public class StrobeView extends PreferenceView
     private Bitmap rounded;
     private Paint xferPaint;
 
-    private ValueAnimator animator; 
+    private ValueAnimator animator;
 
     private BitmapShader smallShader;
     private BitmapShader mediumShader;
@@ -68,10 +68,10 @@ public class StrobeView extends PreferenceView
 
     public StrobeView(Context context, AttributeSet attrs)
     {
-	super(context, attrs);
+        super(context, attrs);
 
-	foreground = Color.BLUE;
-	background = Color.CYAN;
+        foreground = Color.BLUE;
+        background = Color.CYAN;
     }
 
     // On measure
@@ -79,11 +79,11 @@ public class StrobeView extends PreferenceView
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-	super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-	// Get the max width from the superclass
+        // Get the max width from the superclass
 
-	setMeasuredDimension(maxWidth / 4, maxWidth / 4);
+        setMeasuredDimension(maxWidth / 4, maxWidth / 4);
     }
 
     // On size changed
@@ -92,52 +92,52 @@ public class StrobeView extends PreferenceView
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
 
-	width = w;
-	
-	// Calculate size
+        width = w;
 
-	size = h / 4;
+        // Calculate size
 
-	// Create paint
+        size = h / 4;
 
-	paint = new Paint();
+        // Create paint
 
-	// Create rounded bitmap
+        paint = new Paint();
 
-	rounded = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-	Canvas canvas = new Canvas(rounded);	
-	paint.setColor(Color.WHITE);
-	canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);	
+        // Create rounded bitmap
 
-	// Create magic paint
+        rounded = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(rounded);
+        paint.setColor(Color.WHITE);
+        canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);
 
-	xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        // Create magic paint
 
-	// Create a bitmap to draw on
+        xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
-	bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-	source = new Canvas(bitmap);
+        // Create a bitmap to draw on
 
-	// Create matrix for translating shaders
+        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        source = new Canvas(bitmap);
 
-	matrix = new Matrix();
+        // Create matrix for translating shaders
 
-	// Create animator
+        matrix = new Matrix();
 
-	animator = ValueAnimator.ofFloat(0, size * 16);
-	animator.setInterpolator(new LinearInterpolator());
-	animator.setRepeatCount(ValueAnimator.INFINITE);
-	animator.setRepeatMode(ValueAnimator.RESTART);
-	animator.setDuration(10000);
-	
-	animator.addUpdateListener(this);
+        // Create animator
 
-	animator.start();
+        animator = ValueAnimator.ofFloat(0, size * 16);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatMode(ValueAnimator.RESTART);
+        animator.setDuration(10000);
 
-	// Create the shaders
+        animator.addUpdateListener(this);
 
-	createShaders();
+        animator.start();
+
+        // Create the shaders
+
+        createShaders();
     }
 
     // Animation update
@@ -145,18 +145,18 @@ public class StrobeView extends PreferenceView
     @Override
     public void onAnimationUpdate(ValueAnimator animation)
     {
-	offset = (Float) animator.getAnimatedValue();
+        offset = (Float) animator.getAnimatedValue();
 
-	invalidate();
+        invalidate();
     }
 
     // Setter method for animator
 
     void setOffset(float v)
     {
-	offset = v;
+        offset = v;
 
-	invalidate();
+        invalidate();
     }
 
     // Create shaders
@@ -164,44 +164,44 @@ public class StrobeView extends PreferenceView
     protected void createShaders()
     {
 
-	// Create the bitmap shaders
+        // Create the bitmap shaders
 
-	smallShader =
-	    new BitmapShader(createShaderBitmap(size,
-						size, foreground, background),
-			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
-	mediumShader =
-	    new BitmapShader(createShaderBitmap(size * 2,
-						size, foreground, background),
-			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
-	largeShader =
-	    new BitmapShader(createShaderBitmap(size * 4,
-						size, foreground, background),
-			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
-	largerShader =
-	    new BitmapShader(createShaderBitmap(size * 8,
-						size, foreground, background),
-			     Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+        smallShader =
+            new BitmapShader(createShaderBitmap(size,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+        mediumShader =
+            new BitmapShader(createShaderBitmap(size * 2,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+        largeShader =
+            new BitmapShader(createShaderBitmap(size * 4,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+        largerShader =
+            new BitmapShader(createShaderBitmap(size * 8,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
     }
 
     // Create shader bitmap
 
     private Bitmap createShaderBitmap(int width, int height, int f, int b)
     {
-	// Create bitmap twice as wide as the block
+        // Create bitmap twice as wide as the block
 
-	Bitmap bitmap =
-	    Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
-	Canvas canvas = new Canvas(bitmap);
-	Paint paint = new Paint();
+        Bitmap bitmap =
+            Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
 
-	// Draw the bitmap
+        // Draw the bitmap
 
-	canvas.drawColor(b);
-	paint.setColor(f);
-	canvas.drawRect(0, 0, width, height, paint);
+        canvas.drawColor(b);
+        paint.setColor(f);
+        canvas.drawRect(0, 0, width, height, paint);
 
-	return bitmap;
+        return bitmap;
     }
 
     // On draw
@@ -209,42 +209,42 @@ public class StrobeView extends PreferenceView
     @Override
     protected void onDraw(Canvas canvas)
     {
-	// Reset the paint
+        // Reset the paint
 
-	paint.setStrokeWidth(1);
-	paint.setAntiAlias(true);
-	paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(1);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.FILL);
 
-	// Translate
+        // Translate
 
-	matrix.setTranslate(offset, 0);
+        matrix.setTranslate(offset, 0);
 
-	// Draw the strobe chequers
-	// on the source bitmap
+        // Draw the strobe chequers
+        // on the source bitmap
 
-	smallShader.setLocalMatrix(matrix);
-	paint.setShader(smallShader);
-	source.drawRect(0, 0, width, size, paint);
+        smallShader.setLocalMatrix(matrix);
+        paint.setShader(smallShader);
+        source.drawRect(0, 0, width, size, paint);
 
-	mediumShader.setLocalMatrix(matrix);
-	paint.setShader(mediumShader);
-	source.drawRect(0, size, width, size * 2, paint);
+        mediumShader.setLocalMatrix(matrix);
+        paint.setShader(mediumShader);
+        source.drawRect(0, size, width, size * 2, paint);
 
-	largeShader.setLocalMatrix(matrix);
-	paint.setShader(largeShader);
-	source.drawRect(0, size * 2, width, size * 3, paint);
+        largeShader.setLocalMatrix(matrix);
+        paint.setShader(largeShader);
+        source.drawRect(0, size * 2, width, size * 3, paint);
 
-	largerShader.setLocalMatrix(matrix);
-	paint.setShader(largerShader);
-	source.drawRect(0, size * 3, width, size * 4, paint);
+        largerShader.setLocalMatrix(matrix);
+        paint.setShader(largerShader);
+        source.drawRect(0, size * 3, width, size * 4, paint);
 
-	// Use the magic paint
+        // Use the magic paint
 
-	source.drawBitmap(rounded, 0, 0, xferPaint);
+        source.drawBitmap(rounded, 0, 0, xferPaint);
 
-	// Draw the result on the canvas
+        // Draw the result on the canvas
 
-	canvas.drawBitmap(bitmap, 0, 0, null);
-	paint.setShader(null);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        paint.setShader(null);
     }
 }
