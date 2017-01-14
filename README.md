@@ -1,4 +1,4 @@
-# ![Logo](res/drawable-mdpi/ic_tuner.png) Tuner [![Build Status](https://travis-ci.org/billthefarmer/tuner.svg?branch=master)](https://travis-ci.org/billthefarmer/tuner)
+# ![Logo](src/main/res/drawable-mdpi/ic_launcher.png) Tuner [![Build Status](https://travis-ci.org/billthefarmer/tuner.svg?branch=master)](https://travis-ci.org/billthefarmer/tuner)
 
 An android accordion tuner with strobe and multiple notes. The
 Windows, Mac and the Android version of this project are also on
