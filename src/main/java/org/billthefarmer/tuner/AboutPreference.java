@@ -46,7 +46,7 @@ public class AboutPreference extends DialogPreference
     @Override
     protected void onBindDialogView(View view)
     {
-	super.onBindDialogView(view);
+        super.onBindDialogView(view);
 
         // Get version text view
 
