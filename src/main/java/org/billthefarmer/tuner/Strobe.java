@@ -40,7 +40,6 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 
 // Strobe
-
 public class Strobe extends TunerView
     implements ValueAnimator.AnimatorUpdateListener
 {
@@ -82,31 +81,26 @@ public class Strobe extends TunerView
     private double cents;
 
     // Constructor
-
     public Strobe(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
 
     // On size changed
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Recalculate dimensions
-
         width = clipRect.right - clipRect.left;
         height = clipRect.bottom - clipRect.top;
 
         // Calculate size and scale
-
         size = height / 4;
         scale = width / SCALE_VALUE;
 
         // Create rounded bitmap
-
         rounded = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(rounded);
         paint.reset();
@@ -114,21 +108,17 @@ public class Strobe extends TunerView
         canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);
 
         // Create magic paint
-
         xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
         // Create a bitmap to draw on
-
         bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         source = new Canvas(bitmap);
 
         // Create matrix for translating shaders
-
         matrix = new Matrix();
 
         // Create animator
-
         animator = ValueAnimator.ofInt(0, 10000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
@@ -139,7 +129,6 @@ public class Strobe extends TunerView
         animator.start();
 
         // Create the shaders
-
         createShaders();
     }
 
@@ -157,11 +146,9 @@ public class Strobe extends TunerView
     }
 
     // Create shaders
-
     protected void createShaders()
     {
         // Get the colours
-
         if (audio != null)
         {
             Resources resources = getResources();
@@ -177,7 +164,6 @@ public class Strobe extends TunerView
         }
 
         // Create the bitmap shaders
-
         smallShader =
             new BitmapShader(createShaderBitmap(size,
                                                 size, foreground, background),
@@ -196,7 +182,6 @@ public class Strobe extends TunerView
                              Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
 
         // Create the gradients
-
         smallGradient = new LinearGradient(0, 0, size, 0,
                                            background, foreground,
                                            Shader.TileMode.MIRROR);
@@ -208,7 +193,6 @@ public class Strobe extends TunerView
                                            Shader.TileMode.MIRROR);
 
         // Calculate intermediate colours for the small gradient
-
         int red = (Color.red(foreground) + Color.red(background)) / 2;
         int green = (Color.green(foreground) + Color.green(background)) / 2;
         int blue = (Color.blue(foreground) + Color.blue(background)) / 2;
@@ -221,18 +205,15 @@ public class Strobe extends TunerView
     }
 
     // Create shader bitmap
-
     private Bitmap createShaderBitmap(int width, int height, int f, int b)
     {
         // Create bitmap twice as wide as the block
-
         Bitmap bitmap =
             Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
 
         // Draw the bitmap
-
         canvas.drawColor(b);
         paint.setColor(f);
         canvas.drawRect(0, 0, width, height, paint);
@@ -241,19 +222,16 @@ public class Strobe extends TunerView
     }
 
     // On draw
-
     @Override
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
 
         // Don't draw if turned off
-
         if (audio == null || !audio.strobe)
             return;
 
         // Calculate offset
-
         offset = offset + ((float)cents * scale);
 
         if (offset > size * 16)
@@ -263,34 +241,27 @@ public class Strobe extends TunerView
             offset = size * 16;
 
         // Draw strobe
-
         drawStrobe(source);
 
         // Use the magic paint
-
         source.drawBitmap(rounded, 0, 0, xferPaint);
 
         // Draw the result on the canvas
-
         canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
     // Draw strobe
-
     private void drawStrobe(Canvas canvas)
     {
         // Reset the paint
-
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
 
         // Translate
-
         matrix.setTranslate(offset, 0);
 
         // Draw the strobe chequers
-
         if (Math.abs(cents) < SLOW)
         {
             smallShader.setLocalMatrix(matrix);

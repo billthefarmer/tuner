@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
@@ -32,17 +31,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
+import java.util.Locale;
+
+// NumberPickerPreference
 public class NumberPickerPreference extends DialogPreference
 {
-    private final int mMaxValue;
-    private final int mMinValue;
+    private final int maxValue;
+    private final int minValue;
 
-    private int mValue;
+    private int value;
 
-    private NumberPicker mPicker;
+    private NumberPicker picker;
 
-    // Constructors
-
+    // Constructor
     public NumberPickerPreference(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -50,38 +51,36 @@ public class NumberPickerPreference extends DialogPreference
         TypedArray a =
             context.obtainStyledAttributes(attrs,
                                            R.styleable.NumberPickerPreference);
-        mMaxValue =
+        maxValue =
             a.getInt(R.styleable.NumberPickerPreference_maxValue, 0);
-        mMinValue =
+        minValue =
             a.getInt(R.styleable.NumberPickerPreference_minValue, 0);
         a.recycle();
     }
 
     // On create dialog view
-
     @Override
     protected View onCreateDialogView()
     {
-        mPicker = new NumberPicker(getContext());
+        picker = new NumberPicker(getContext());
 
-        mPicker.setMaxValue(mMaxValue);
-        mPicker.setMinValue(mMinValue);
-        mPicker.setValue(mValue);
+        picker.setMaxValue(maxValue);
+        picker.setMinValue(minValue);
+        picker.setValue(value);
 
-        mPicker.setFormatter(new NumberPicker.Formatter()
+        picker.setFormatter(new NumberPicker.Formatter()
         {
-            @SuppressLint("DefaultLocale")
             @Override
             public String format(int value)
             {
-                return String.format("%dHz", value);
+                return String.format(Locale.getDefault(), "%dHz", value);
             }
         });
 
-        mPicker.setWrapSelectorWheel(false);
-        mPicker.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        picker.setWrapSelectorWheel(false);
+        picker.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
-        return mPicker;
+        return picker;
     }
 
     // On get default value
@@ -89,11 +88,10 @@ public class NumberPickerPreference extends DialogPreference
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index)
     {
-        return a.getInteger(index, mValue);
+        return a.getInteger(index, value);
     }
 
     // On set initial value
-
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue,
                                      Object defaultValue)
@@ -101,37 +99,32 @@ public class NumberPickerPreference extends DialogPreference
         if (restorePersistedValue)
         {
             // Restore existing state
-
-            mValue = getPersistedInt(0);
+            value = getPersistedInt(0);
         }
 
         else
         {
             // Set default state from the XML attribute
-
-            mValue = (Integer) defaultValue;
-            persistInt(mValue);
+            value = (Integer) defaultValue;
+            persistInt(value);
         }
     }
 
     // On dialog closed
-
     @Override
     protected void onDialogClosed(boolean positiveResult)
     {
         // When the user selects "OK", persist the new value
-
         if (positiveResult)
         {
-            mValue = mPicker.getValue();
-            persistInt(mValue);
+            value = picker.getValue();
+            persistInt(value);
         }
     }
 
     // Get value
-
     protected int getValue()
     {
-        return mValue;
+        return value;
     }
 }

@@ -38,6 +38,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.view.View;
 
+// SettingsFragment
 public class SettingsFragment extends PreferenceFragment
     implements SharedPreferences.OnSharedPreferenceChangeListener,
     View.OnClickListener
@@ -56,13 +57,13 @@ public class SettingsFragment extends PreferenceFragment
     private String summary;
     private Dialog dialog;
 
+    // On create
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
-
         addPreferencesFromResource(R.xml.preferences);
 
         SharedPreferences preferences =
@@ -80,7 +81,6 @@ public class SettingsFragment extends PreferenceFragment
         preference.setSummary(preference.getEntry());
 
         // Disable colour pickers
-
         custom.setEnabled(false);
 
         int v = Integer.valueOf(preference.getValue());
@@ -106,7 +106,6 @@ public class SettingsFragment extends PreferenceFragment
             preference.setDialogIcon(R.drawable.ic_pref_spectrum);
 
             // Enable colour pickers
-
             custom.setEnabled(true);
             break;
         }
@@ -116,45 +115,20 @@ public class SettingsFragment extends PreferenceFragment
         summary = (String)picker.getSummary();
 
         // Set number picker summary
-
         v = picker.getValue();
         String s = String.format(summary, v);
         picker.setSummary(s);
 
         // Get about summary
-
         Preference about = findPreference(KEY_PREF_ABOUT);
         String sum = (String) about.getSummary();
 
-        // Get context and package manager
-
-        Context context = getActivity();
-        PackageManager manager = context.getPackageManager();
-
-        // Get info
-
-        PackageInfo info = null;
-        try
-        {
-            info = manager.getPackageInfo("org.billthefarmer.tuner", 0);
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
         // Set version in text view
-
-        if (info != null)
-        {
-            s = String.format(sum, info.versionName);
-            about.setSummary(s);
-        }
+        s = String.format(sum, BuildConfig.VERSION_NAME);
+        about.setSummary(s);
     }
 
     // On preference tree click
-
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
                                          Preference preference)
@@ -177,7 +151,6 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     // On shared preference changed
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences,
                                           String key)
@@ -187,7 +160,6 @@ public class SettingsFragment extends PreferenceFragment
             Preference preference = findPreference(key);
 
             // Set summary to be the user-description for the selected value
-
             preference.setSummary(((ListPreference) preference).getEntry());
         }
 
@@ -200,7 +172,6 @@ public class SettingsFragment extends PreferenceFragment
             custom.setEnabled(false);
 
             // Get the value and set the dialog icon
-
             int v = Integer.valueOf(preference.getValue());
             switch (v)
             {
@@ -224,7 +195,6 @@ public class SettingsFragment extends PreferenceFragment
                 preference.setDialogIcon(R.drawable.ic_pref_spectrum);
 
                 // Enable colour pickers
-
                 custom.setEnabled(true);
                 break;
             }
@@ -236,7 +206,6 @@ public class SettingsFragment extends PreferenceFragment
                 (ColourPickerPreference)findPreference(key);
 
             // Change the list preference icons
-
             Drawable d = custom.getIcon();
             ListPreference preference =
                 (ListPreference)findPreference(KEY_PREF_COLOUR);
@@ -250,7 +219,6 @@ public class SettingsFragment extends PreferenceFragment
                 (NumberPickerPreference)findPreference(key);
 
             // Get the value and set the summary
-
             int v = preference.getValue();
             String s = String.format(summary, v);
             preference.setSummary(s);
@@ -258,7 +226,6 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     // On click
-
     public void onClick(View v)
     {
         dialog.dismiss();

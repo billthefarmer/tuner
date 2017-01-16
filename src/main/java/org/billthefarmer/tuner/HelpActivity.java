@@ -31,11 +31,11 @@ import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+// HelpActivity
 public class HelpActivity extends Activity
 {
 
     // On create
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -57,17 +57,14 @@ public class HelpActivity extends Activity
     }
 
     // On options item selected
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         // Get id
-
         int id = item.getItemId();
         switch (id)
         {
         // Home
-
         case android.R.id.home:
             finish();
             break;

@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,16 +30,15 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 
-// Spectrum
+import java.util.Locale;
 
+// Spectrum
 public class Spectrum extends Graticule
 {
     private Path path;
-
     private float max;
 
     // Constructor
-
     public Spectrum(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -49,23 +47,18 @@ public class Spectrum extends Graticule
     }
 
     // Draw trace
-
     @Override
-    @SuppressLint("DefaultLocale")
     protected void drawTrace(Canvas canvas)
     {
 
         // Check for data
-
         if (audio == null || audio.xa == null)
             return;
 
         // Draw D if downsample
-
         if (audio.downsample)
         {
             // Color yellow
-
             paint.setStrokeWidth(1);
             paint.setTextAlign(Paint.Align.LEFT);
             paint.setColor(Color.YELLOW);
@@ -75,44 +68,36 @@ public class Spectrum extends Graticule
         }
 
         // Translate camvas
-
         canvas.translate(0, height);
 
         // Chack max value
-
         if (max < 1.0f)
             max = 1.0f;
 
         // Calculate the scaling
-
         float yscale = (height / max);
 
         max = 0.0f;
 
         // Rewind path
-
         path.rewind();
         path.moveTo(0, 0);
 
         // If zoomed
-
         if (audio.zoom)
         {
             // Calculate limits
-
             double lower = audio.lower / audio.fps;
             double higher = audio.higher / audio.fps;
             double nearest = audio.nearest / audio.fps;
 
             // Calculate scale
-
             float xscale = (float)((width / (nearest - lower)) / 2.0);
 
             int lo = (int)Math.floor(lower);
             int hi = (int)Math.ceil(higher);
 
             // Create trace
-
             for (int i = lo; i <= hi; i++)
             {
                 if (i > 0 && i < audio.xa.length)
@@ -120,7 +105,6 @@ public class Spectrum extends Graticule
                     float value = (float)audio.xa[i];
 
                     // Get max value
-
                     if (max < value)
                         max = value;
 
@@ -133,23 +117,19 @@ public class Spectrum extends Graticule
             }
 
             // Create centre line
-
             path.moveTo(width / 2, 0);
             path.lineTo(width / 2, -height);
 
             // Color green
-
             paint.setStrokeWidth(2);
             paint.setAntiAlias(true);
             paint.setColor(Color.GREEN);
 
             // Draw trace
-
             canvas.drawPath(path, paint);
             path.rewind();
 
             // Yellow pen for frequency trace
-
             paint.setTextAlign(Paint.Align.CENTER);
             paint.setColor(Color.YELLOW);
             paint.setStyle(Paint.Style.FILL);
@@ -157,11 +137,9 @@ public class Spectrum extends Graticule
             paint.setStrokeWidth(1);
 
             // Create lines for each frequency
-
             for (int i = 0; i < audio.count; i++)
             {
                 // Draw line for each that are in range
-
                 if (audio.maxima.f[i] > audio.lower &&
                         audio.maxima.f[i] < audio.higher)
                 {
@@ -175,43 +153,36 @@ public class Spectrum extends Graticule
                     double f = audio.maxima.f[i];
 
                     // Reference freq
-
                     double fr = audio.maxima.r[i];
                     double c = -12.0 * log2(fr / f);
 
                     // Ignore silly values
-
                     if (Double.isNaN(c))
                         continue;
 
                     // Draw cents value
-
-                    String s = String.format("%+1.0f", c * 100.0);
+                    String s = String.format(Locale.getDefault(),
+                                             "%+1.0f", c * 100.0);
                     canvas.drawText(s, x, 0, paint);
                 }
             }
 
             // Yellow pen for frequency trace
-
             paint.setStyle(Paint.Style.STROKE);
             paint.setAntiAlias(true);
             paint.setStrokeWidth(2);
 
             // Draw path
-
             canvas.drawPath(path, paint);
         }
 
         // Not zoomed
-
         else
         {
             // Calculate x scale
-
             float xscale = (float)Math.log(audio.xa.length) / width;
 
             // Create trace
-
             int last = 1;
             for (int x = 0; x < width; x++)
             {
@@ -221,22 +192,18 @@ public class Spectrum extends Graticule
                 for (int i = last; i <= index; i++)
                 {
                     // Don't show DC component and don't overflow
-
                     if (i > 0 && i < audio.xa.length)
                     {
                         // Find max value for each vertex
-
                         if (value < audio.xa[i])
                             value = (float)audio.xa[i];
                     }
                 }
 
                 // Update last index
-
                 last = index + 1;
 
                 // Get max value
-
                 if (max < value)
                     max = value;
 
@@ -246,18 +213,15 @@ public class Spectrum extends Graticule
             }
 
             // Color green
-
             paint.setStrokeWidth(2);
             paint.setAntiAlias(true);
             paint.setColor(Color.GREEN);
 
             // Draw path
-
             canvas.drawPath(path, paint);
             path.rewind();
 
             // Yellow pen for frequency trace
-
             paint.setTextAlign(Paint.Align.CENTER);
             paint.setColor(Color.YELLOW);
             paint.setStyle(Paint.Style.FILL);
@@ -265,11 +229,9 @@ public class Spectrum extends Graticule
             paint.setStrokeWidth(1);
 
             // Create lines for each frequency
-
             for (int i = 0; i < audio.count; i++)
             {
                 // Draw line for each
-
                 float x =
                     (float)Math.log(audio.maxima.f[i] / audio.fps) / xscale;
 
@@ -279,35 +241,30 @@ public class Spectrum extends Graticule
                 double f = audio.maxima.f[i];
 
                 // Reference freq
-
                 double fr = audio.maxima.r[i];
                 double c = -12.0 * log2(fr / f);
 
                 // Ignore silly values
-
                 if (Double.isNaN(c))
                     continue;
 
                 // Draw cents value
-
-                String s = String.format("%+1.0f", c * 100.0);
+                String s = String.format(Locale.getDefault(),
+                                         "%+1.0f", c * 100.0);
                 canvas.drawText(s, x, 0, paint);
             }
 
             // Yellow pen for frequency trace
-
             paint.setStyle(Paint.Style.STROKE);
             paint.setAntiAlias(true);
             paint.setStrokeWidth(2);
 
             // Draw path
-
             canvas.drawPath(path, paint);
         }
     }
 
     // Log2
-
     protected double log2(double d)
     {
         return Math.log(d) / Math.log(2.0);

@@ -39,7 +39,6 @@ import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
 // Strobe view
-
 public class StrobeView extends PreferenceView
     implements ValueAnimator.AnimatorUpdateListener
 {
@@ -66,6 +65,7 @@ public class StrobeView extends PreferenceView
 
     //	  private static final int DELAY = 40;
 
+    // Constructor
     public StrobeView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -75,19 +75,16 @@ public class StrobeView extends PreferenceView
     }
 
     // On measure
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         // Get the max width from the superclass
-
         setMeasuredDimension(maxWidth / 4, maxWidth / 4);
     }
 
     // On size changed
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
@@ -95,36 +92,29 @@ public class StrobeView extends PreferenceView
         width = w;
 
         // Calculate size
-
         size = h / 4;
 
         // Create paint
-
         paint = new Paint();
 
         // Create rounded bitmap
-
         rounded = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(rounded);
         paint.setColor(Color.WHITE);
         canvas.drawRoundRect(new RectF(0, 0, w, h), 20, 20, paint);
 
         // Create magic paint
-
         xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
         // Create a bitmap to draw on
-
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         source = new Canvas(bitmap);
 
         // Create matrix for translating shaders
-
         matrix = new Matrix();
 
         // Create animator
-
         animator = ValueAnimator.ofFloat(0, size * 16);
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(ValueAnimator.INFINITE);
@@ -136,12 +126,10 @@ public class StrobeView extends PreferenceView
         animator.start();
 
         // Create the shaders
-
         createShaders();
     }
 
     // Animation update
-
     @Override
     public void onAnimationUpdate(ValueAnimator animation)
     {
@@ -151,7 +139,6 @@ public class StrobeView extends PreferenceView
     }
 
     // Setter method for animator
-
     void setOffset(float v)
     {
         offset = v;
@@ -160,12 +147,10 @@ public class StrobeView extends PreferenceView
     }
 
     // Create shaders
-
     protected void createShaders()
     {
 
         // Create the bitmap shaders
-
         smallShader =
             new BitmapShader(createShaderBitmap(size,
                                                 size, foreground, background),
@@ -185,18 +170,15 @@ public class StrobeView extends PreferenceView
     }
 
     // Create shader bitmap
-
     private Bitmap createShaderBitmap(int width, int height, int f, int b)
     {
         // Create bitmap twice as wide as the block
-
         Bitmap bitmap =
             Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
 
         // Draw the bitmap
-
         canvas.drawColor(b);
         paint.setColor(f);
         canvas.drawRect(0, 0, width, height, paint);
@@ -205,23 +187,19 @@ public class StrobeView extends PreferenceView
     }
 
     // On draw
-
     @Override
     protected void onDraw(Canvas canvas)
     {
         // Reset the paint
-
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
 
         // Translate
-
         matrix.setTranslate(offset, 0);
 
         // Draw the strobe chequers
         // on the source bitmap
-
         smallShader.setLocalMatrix(matrix);
         paint.setShader(smallShader);
         source.drawRect(0, 0, width, size, paint);
@@ -239,11 +217,9 @@ public class StrobeView extends PreferenceView
         source.drawRect(0, size * 3, width, size * 4, paint);
 
         // Use the magic paint
-
         source.drawBitmap(rounded, 0, 0, xferPaint);
 
         // Draw the result on the canvas
-
         canvas.drawBitmap(bitmap, 0, 0, null);
         paint.setShader(null);
     }

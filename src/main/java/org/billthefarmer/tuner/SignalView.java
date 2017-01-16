@@ -23,8 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import org.billthefarmer.tuner.MainActivity.Audio;
-
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -39,11 +37,10 @@ import android.util.AttributeSet;
 import android.view.View;
 
 // Signal view
-
 public class SignalView extends View
     implements ValueAnimator.AnimatorUpdateListener
 {
-    protected Audio audio;
+    protected MainActivity.Audio audio;
 
     private int width;
     private int height;
@@ -59,51 +56,42 @@ public class SignalView extends View
     private static final float SCALE = (float)Math.log(0.01);
 
     // Constructor
-
     public SignalView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
 
     // On measure
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         // Get offered height
-
         int h = MeasureSpec.getSize(heightMeasureSpec);
 
         // Set size to offered height
-
         setMeasuredDimension(h / 2, h);
     }
 
     // On size changed
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         // Get dimensions
-
         width = w;
         height = h;
 
         margin = width / 4;
 
         // Colours for gradient
-
         int colours[] =
         {Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK};
 
         // Coloured gradient
-
         LinearGradient gradient =
             new LinearGradient(0, 0, 0, height,
                                colours, null, Shader.TileMode.CLAMP);
 
         // Bitmap to draw coloured bars in
-
         Bitmap bitmap = Bitmap.createBitmap(width, height,
                                             Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -112,45 +100,37 @@ public class SignalView extends View
         paint.setStrokeWidth(2);
 
         // Draw coloured bars
-
         for (int i = 0; i <= bitmap.getHeight(); i += 3)
             canvas.drawLine(0, i, bitmap.getWidth(), i, paint);
 
         // Create shader from coloured bars
-
         shader = new BitmapShader(bitmap,
                                   Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
         paint.setShader(shader);
 
         // Rect to draw the coloured bars
-
         rect = new RectF(margin, margin,
                          margin + width / 2, margin + height * 3 / 4);
 
         // Create animator
-
         animator = ValueAnimator.ofInt(0, 10000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
         animator.setDuration(10000);
 
         // Update the display
-
         animator.addUpdateListener(this);
 
         // Start the animator
-
         animator.start();
     }
 
     // Animation update
-
     @Override
     public void onAnimationUpdate(ValueAnimator animator)
     {
         // Do VU meter style calculation
-
         if (audio != null)
         {
             if (signal < audio.signal)
@@ -167,7 +147,6 @@ public class SignalView extends View
     protected void onDraw(Canvas canvas)
     {
         // Draw the coloured column
-
         paint.setStyle(Paint.Style.FILL);
         int max = height * 3 / 4;
         float v = (float)(Math.log(signal) / SCALE);

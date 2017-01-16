@@ -33,27 +33,25 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 // Colour picker
-
 public class ColourPicker extends PreferenceView
 {
-    private Paint mCirclePaint;
-    private Paint mCentrePaint;
-    private final static int[] mColours =
+    private Paint circlePaint;
+    private Paint centrePaint;
+    private final static int[] colours =
     {
         Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN,
         Color.GREEN, Color.YELLOW, Color.RED
     };
 
-    private boolean mTrackingCentre;
-    private int mCircleRadius;
-    private int mStrokeWidth;
-    private int mCentreRadius;
-    private int mOffset;
+    private boolean trackingCentre;
+    private int circleRadius;
+    private int strokeWidth;
+    private int centreRadius;
+    private int offset;
 
     private float hsv[] = {0, 1, 1};
 
     // Colour change listener
-
     private ColourChangeListener listener;
 
     protected interface ColourChangeListener
@@ -62,23 +60,21 @@ public class ColourPicker extends PreferenceView
     }
 
     // Constructor
-
     public ColourPicker(Context context, AttributeSet attrs)
     {
         super(context, attrs);
 
-        Shader shader = new SweepGradient(0, 0, mColours, null);
+        Shader shader = new SweepGradient(0, 0, colours, null);
 
-        mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mCirclePaint.setShader(shader);
-        mCirclePaint.setStyle(Paint.Style.STROKE);
+        circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        circlePaint.setShader(shader);
+        circlePaint.setStyle(Paint.Style.STROKE);
 
-        mCentrePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mCentrePaint.setStrokeWidth(8);
+        centrePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        centrePaint.setStrokeWidth(8);
     }
 
     // On measure
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
@@ -90,78 +86,71 @@ public class ColourPicker extends PreferenceView
     }
 
     // On size changed
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         // Calculate the dimensions based on the given values
+        circleRadius = h / 2;
+        strokeWidth = w / 5;
+        centreRadius = w / 6;
+        offset = w / 2;
 
-        mCircleRadius = h / 2;
-        mStrokeWidth = w / 5;
-        mCentreRadius = w / 6;
-        mOffset = w / 2;
-
-        mCirclePaint.setStrokeWidth(mStrokeWidth);
+        circlePaint.setStrokeWidth(strokeWidth);
     }
 
     // On draw
-
     @Override
     protected void onDraw(Canvas canvas)
     {
-        float r = mCircleRadius - mStrokeWidth * 0.5f;
+        float r = circleRadius - strokeWidth * 0.5f;
 
-        canvas.translate(mOffset, mCircleRadius);
+        canvas.translate(offset, circleRadius);
 
-        canvas.drawCircle(0, 0, r, mCirclePaint);
-        canvas.drawCircle(0, 0, mCentreRadius, mCentrePaint);
+        canvas.drawCircle(0, 0, r, circlePaint);
+        canvas.drawCircle(0, 0, centreRadius, centrePaint);
     }
 
     // Set listener
-
     protected void setListener(ColourChangeListener l)
     {
         listener = l;
     }
 
     // Set colour
-
     protected void setColour(int c)
     {
-        mCentrePaint.setColor(c);
+        centrePaint.setColor(c);
     }
 
     // Get colour
-
     protected int getColour()
     {
-        return mCentrePaint.getColor();
+        return centrePaint.getColor();
     }
 
     // On touch event
-
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        float x = event.getX() - mOffset;
-        float y = event.getY() - mCircleRadius;
+        float x = event.getX() - offset;
+        float y = event.getY() - circleRadius;
 
-        boolean inCentre = Math.sqrt(x * x + y * y) <= mCentreRadius;
+        boolean inCentre = Math.sqrt(x * x + y * y) <= centreRadius;
 
         switch (event.getAction())
         {
         case MotionEvent.ACTION_DOWN:
-            mTrackingCentre = inCentre;
+            trackingCentre = inCentre;
             if (inCentre)
             {
                 if (listener != null)
-                    listener.onColourChanged(mCentrePaint.getColor());
+                    listener.onColourChanged(centrePaint.getColor());
 
                 break;
             }
 
         case MotionEvent.ACTION_MOVE:
-            if (!mTrackingCentre)
+            if (!trackingCentre)
             {
                 float angle = (float)Math.toDegrees(Math.atan2(y, -x));
 
@@ -169,15 +158,15 @@ public class ColourPicker extends PreferenceView
 
                 hsv[0] = angle + 180;
 
-                mCentrePaint.setColor(Color.HSVToColor(hsv));
+                centrePaint.setColor(Color.HSVToColor(hsv));
                 invalidate();
             }
             break;
 
         case MotionEvent.ACTION_UP:
-            if (mTrackingCentre)
+            if (trackingCentre)
             {
-                mTrackingCentre = false;
+                trackingCentre = false;
                 invalidate();
             }
             break;

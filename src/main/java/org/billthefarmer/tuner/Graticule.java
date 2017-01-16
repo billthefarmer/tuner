@@ -34,7 +34,6 @@ import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 
 // Graticule
-
 public abstract class Graticule extends TunerView
 {
     private static final int SIZE = 10;
@@ -51,15 +50,13 @@ public abstract class Graticule extends TunerView
         super(context, attrs);
     }
 
-    // On Size Changed
-
+    // On size shanged
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Calculate indented width and height
-
         width = (clipRect.right - clipRect.left);
         height = (clipRect.bottom - clipRect.top);
 
@@ -72,42 +69,34 @@ public abstract class Graticule extends TunerView
         canvas.drawRoundRect(new RectF(0, 0, width, height), 10, 10, paint);
 
         // Create magic paint
-
         xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         xferPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 
         // Create a bitmap to draw on
-
         bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         source = new Canvas(bitmap);
     }
 
-    // On Draw
-
+    // On draw
     @Override
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
 
         // Reset the canvas transform
-
         source.setMatrix(null);
 
         // Draw on the canvas
-
         drawGraticule(source);
         drawTrace(source);
 
         // Reset the canvas transform again
-
         source.setMatrix(null);
 
         // Use the magic paint
-
         source.drawBitmap(rounded, 0, 0, xferPaint);
 
         // Draw the result on the canvas
-
         canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
@@ -116,18 +105,15 @@ public abstract class Graticule extends TunerView
     private void drawGraticule(Canvas canvas)
     {
         // Draw black rectangle
-
         canvas.drawColor(Color.BLACK);
 
         // Set up paint for dark green thin lines
-
         paint.setAntiAlias(false);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(0xff007f00);
         paint.setStrokeWidth(1);
 
         // Draw the graticule
-
         for (int i = (width % SIZE) / 2; i <= width; i += SIZE)
             canvas.drawLine(i, 0, i, height, paint);
 
@@ -136,6 +122,5 @@ public abstract class Graticule extends TunerView
     }
 
     // Draw trace
-
     protected abstract void drawTrace(Canvas canvas);
 }

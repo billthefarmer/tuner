@@ -30,14 +30,12 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 
 // Scope
-
 public class Scope extends Graticule
 {
     private Path path;
     private int max;
 
     // Constructor
-
     public Scope(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -46,22 +44,18 @@ public class Scope extends Graticule
     }
 
     // Draw trace
-
     @Override
     protected void drawTrace(Canvas canvas)
     {
 
         // Check for data
-
         if (audio == null || audio.data == null)
             return;
 
         // Draw F if filter
-
         if (audio.filter)
         {
             // Color yellow
-
             paint.setStrokeWidth(2);
             paint.setAntiAlias(true);
             paint.setColor(Color.YELLOW);
@@ -71,13 +65,11 @@ public class Scope extends Graticule
         }
 
         // Initialise sync
-
         int maxdx = 0;
         int dx = 0;
         int n = 0;
 
         // Look for zero crossing
-
         for (int i = 1; i < audio.data.length; i++)
         {
             dx = audio.data[i] - audio.data[i - 1];
@@ -92,37 +84,29 @@ public class Scope extends Graticule
         }
 
         // Translate camvas
-
         canvas.translate(0, height / 2);
 
         // Check max value
-
         if (max < 4096)
             max = 4096;
 
         // Calculate y scale
-
         float yscale = max / (height / 2);
 
         // Reset max value
-
         max = 0;
 
         // Calculate x scale
-
         float xscale = (float)Math.ceil((double)width / audio.data.length);
 
         // Rewind the path
-
         path.rewind();
         path.moveTo(0, 0);
 
         // Create the trace
-
         for (int i = 0; i < Math.min(width, audio.data.length - n); i++)
         {
             // Get max value
-
             if (max < Math.abs(audio.data[n + i]))
                 max = Math.abs(audio.data[n + i]);
 
@@ -133,13 +117,11 @@ public class Scope extends Graticule
         }
 
         // Color green
-
         paint.setStrokeWidth(2);
         paint.setAntiAlias(true);
         paint.setColor(Color.GREEN);
 
         // Draw trace
-
         canvas.drawPath(path, paint);
     }
 }

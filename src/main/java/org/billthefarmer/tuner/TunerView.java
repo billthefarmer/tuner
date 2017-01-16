@@ -23,8 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import org.billthefarmer.tuner.MainActivity.Audio;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -38,7 +36,7 @@ import android.view.View;
 
 public abstract class TunerView extends View
 {
-    protected Audio audio;
+    protected MainActivity.Audio audio;
     protected Resources resources;
 
     protected int width;
@@ -48,7 +46,6 @@ public abstract class TunerView extends View
     private RectF outlineRect;
 
     // Constructor
-
     protected TunerView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -58,29 +55,24 @@ public abstract class TunerView extends View
     }
 
     // On Size Changed
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         // Save the new width and height
-
         width = w;
         height = h;
 
         // Create some rects for
         // the outline and clipping
-
         outlineRect = new RectF(1, 1, width - 1, height - 1);
         clipRect = new Rect(3, 3, width - 3, height - 3);
     }
 
     // On Draw
-
     @Override
     protected void onDraw(Canvas canvas)
     {
         // Set up the paint and draw the outline
-
         paint.setStrokeWidth(3);
         paint.setAntiAlias(true);
         paint.setColor(resources.getColor(android.R.color.darker_gray));
@@ -88,11 +80,9 @@ public abstract class TunerView extends View
         canvas.drawRoundRect(outlineRect, 10, 10, paint);
 
         // Set the cliprect
-
         canvas.clipRect(clipRect);
 
         // Translate to the clip rect
-
         canvas.translate(clipRect.left, clipRect.top);
     }
 }

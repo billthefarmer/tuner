@@ -33,42 +33,37 @@ import android.util.AttributeSet;
 import android.view.View;
 
 // Colour picker preference
-
 public class ColourPickerPreference extends DialogPreference
 {
-    private JSONArray mColours;
-    private StrobeView mStrobe;
-    private ColourPicker mForegroundPicker;
-    private ColourPicker mBackgroundPicker;
+    private JSONArray colours;
+    private StrobeView strobe;
+    private ColourPicker foregroundPicker;
+    private ColourPicker backgroundPicker;
 
     // Constructor
-
     public ColourPickerPreference(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
 
     // On bind dialog view
-
     @Override
     protected void onBindDialogView(View view)
     {
         super.onBindDialogView(view);
 
         // Get the views
-
-        mStrobe = (StrobeView)view.findViewById(R.id.strobe);
-        mForegroundPicker =
+        strobe = (StrobeView)view.findViewById(R.id.strobe);
+        foregroundPicker =
             (ColourPicker)view.findViewById(R.id.foreground_picker);
-        mBackgroundPicker =
+        backgroundPicker =
             (ColourPicker)view.findViewById(R.id.background_picker);
 
         // Set the picker colours
-
         try
         {
-            mForegroundPicker.setColour(mColours.getInt(0));
-            mBackgroundPicker.setColour(mColours.getInt(1));
+            foregroundPicker.setColour(colours.getInt(0));
+            backgroundPicker.setColour(colours.getInt(1));
         }
 
         catch (JSONException e)
@@ -77,33 +72,30 @@ public class ColourPickerPreference extends DialogPreference
         }
 
         // Set the dummy strobe colours
-
-        mStrobe.foreground = mForegroundPicker.getColour();
-        mStrobe.background = mBackgroundPicker.getColour();
+        strobe.foreground = foregroundPicker.getColour();
+        strobe.background = backgroundPicker.getColour();
 
         // Set the listeners
-
-        mForegroundPicker.setListener(new ColourPicker.ColourChangeListener()
+        foregroundPicker.setListener(new ColourPicker.ColourChangeListener()
         {
             public void onColourChanged(int c)
             {
-                mStrobe.foreground = c;
-                mStrobe.createShaders();
+                strobe.foreground = c;
+                strobe.createShaders();
             }
         });
 
-        mBackgroundPicker.setListener(new ColourPicker.ColourChangeListener()
+        backgroundPicker.setListener(new ColourPicker.ColourChangeListener()
         {
             public void onColourChanged(int c)
             {
-                mStrobe.background = c;
-                mStrobe.createShaders();
+                strobe.background = c;
+                strobe.createShaders();
             }
         });
     }
 
     // On get default value
-
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index)
     {
@@ -111,7 +103,6 @@ public class ColourPickerPreference extends DialogPreference
     }
 
     // On set initial value
-
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue,
                                      Object defaultValue)
@@ -119,10 +110,9 @@ public class ColourPickerPreference extends DialogPreference
         if (restorePersistedValue)
         {
             // Restore existing state
-
             try
             {
-                mColours = new JSONArray(getPersistedString(null));
+                colours = new JSONArray(getPersistedString(null));
             }
 
             catch (JSONException e)
@@ -134,10 +124,9 @@ public class ColourPickerPreference extends DialogPreference
         else
         {
             // Set default state from the XML attribute
-
             try
             {
-                mColours = new JSONArray((String)defaultValue);
+                colours = new JSONArray((String)defaultValue);
             }
 
             catch (JSONException e)
@@ -145,12 +134,11 @@ public class ColourPickerPreference extends DialogPreference
                 e.printStackTrace();
             }
 
-            persistString(mColours.toString());
+            persistString(colours.toString());
         }
     }
 
     // On dialog closed
-
     @Override
     protected void onDialogClosed(boolean positiveResult)
     {
@@ -160,17 +148,17 @@ public class ColourPickerPreference extends DialogPreference
         {
             // Change the dummy strobe colours
 
-            mStrobe.foreground = mForegroundPicker.getColour();
-            mStrobe.background = mBackgroundPicker.getColour();
+            strobe.foreground = foregroundPicker.getColour();
+            strobe.background = backgroundPicker.getColour();
 
-            mColours = new JSONArray();
+            colours = new JSONArray();
 
             // Save the colours
 
-            mColours.put(mForegroundPicker.getColour());
-            mColours.put(mBackgroundPicker.getColour());
+            colours.put(foregroundPicker.getColour());
+            colours.put(backgroundPicker.getColour());
 
-            persistString(mColours.toString());
+            persistString(colours.toString());
         }
     }
 }

@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
+// RawTextReader
 public class RawTextReader
 {
     /* ********************************************************************
@@ -37,6 +38,7 @@ public class RawTextReader
      * source: http://stackoverflow.com/questions/4087674/android-read-text-raw-resource-file
      */
 
+    // read
     public static String read(Context context, int resId)
     {
         InputStream stream = context.getResources().openRawResource(resId);

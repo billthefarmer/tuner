@@ -23,9 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import org.billthefarmer.tuner.MainActivity.Audio;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -33,11 +30,12 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-// Status
+import java.util.Locale;
 
+// Status
 public class Status extends View
 {
-    protected Audio audio;
+    protected MainActivity.Audio audio;
 
     private int width;
     private int height;
@@ -47,7 +45,6 @@ public class Status extends View
     private Resources resources;
 
     // Constructor
-
     public Status(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -57,7 +54,6 @@ public class Status extends View
     }
 
     // On size changed
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
@@ -68,15 +64,12 @@ public class Status extends View
     }
 
     // On draw
-
     @Override
-    @SuppressLint("DefaultLocale")
     protected void onDraw(Canvas canvas)
     {
         String s;
 
         // Draw separator line
-
         paint.setStrokeWidth(3);
         paint.setColor(resources.getColor(android.R.color.darker_gray));
         paint.setAntiAlias(true);
@@ -84,30 +77,26 @@ public class Status extends View
         canvas.drawLine(0, 0, width, 0, paint);
 
         // Check for audio
-
         if (audio == null)
             return;
 
         // Set up text
-
         paint.setStrokeWidth(1);
         paint.setColor(resources.getColor(android.R.color.primary_text_light));
         paint.setTextSize(height / 2);
         paint.setStyle(Paint.Style.FILL);
 
         // Move down
-
         canvas.translate(0, height * 2 / 3);
 
         // Draw sample rate text
-
-        s = String.format(resources.getString(R.string.sample_rate),
+        s = String.format(Locale.getDefault(),
+                          resources.getString(R.string.sample_rate),
                           audio.sample);
         canvas.drawText(s, margin, 0, paint);
         float x = margin + paint.measureText(s + "   ");
 
         // Filter
-
         if (audio.filter)
         {
             s = resources.getString(R.string.filter);
@@ -116,7 +105,6 @@ public class Status extends View
         }
 
         // Downsample
-
         if (audio.downsample)
         {
             s = resources.getString(R.string.downsample);
@@ -125,7 +113,6 @@ public class Status extends View
         }
 
         // Zoom
-
         if (audio.zoom)
         {
             s = resources.getString(R.string.zoom);
@@ -134,7 +121,6 @@ public class Status extends View
         }
 
         // Lock
-
         if (audio.lock)
         {
             s = resources.getString(R.string.lock);
@@ -143,7 +129,6 @@ public class Status extends View
         }
 
         // Multiple
-
         if (audio.multiple)
         {
             s = resources.getString(R.string.multiple);
@@ -161,7 +146,6 @@ public class Status extends View
         }
 
         // Strobe
-
         if (audio.strobe)
         {
             s = resources.getString(R.string.strobe);
