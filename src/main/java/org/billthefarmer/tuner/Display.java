@@ -143,19 +143,22 @@ public class Display extends TunerView
 
                 // Draw note
                 s = String.format(Locale.getDefault(),
-                                  "%s", notes[audio.maxima.n[i] % OCTAVE]);
+                                  "%s", notes[(audio.maxima.n[i] +
+                                               audio.transpose) % OCTAVE]);
                 canvas.drawText(s, margin / 2, 0, paint);
                 float dx = paint.measureText(s);
 
                 // Draw sharp/flat
                 paint.setTextSize(small / 2);
                 s = String.format(Locale.getDefault(),
-                                  "%s", sharps[audio.maxima.n[i] % OCTAVE]);
+                                  "%s", sharps[(audio.maxima.n[i] +
+                                                audio.transpose) % OCTAVE]);
                 canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
 
                 // Draw octave
                 s = String.format(Locale.getDefault(),
-                                  "%d", audio.maxima.n[i] / OCTAVE);
+                                  "%d", (audio.maxima.n[i] +
+                                         audio.transpose) / OCTAVE);
                 canvas.drawText(s, margin / 2 + dx, 0, paint);
 
                 // Draw cents
@@ -194,19 +197,22 @@ public class Display extends TunerView
 
                 // Draw note
                 s = String.format(Locale.getDefault(),
-                                  "%s", notes[audio.note % OCTAVE]);
+                                  "%s", notes[(audio.note +
+                                               audio.transpose) % OCTAVE]);
                 canvas.drawText(s, margin / 2, 0, paint);
                 float dx = paint.measureText(s);
 
                 // Draw sharp/flat
                 paint.setTextSize(small / 2);
                 s = String.format(Locale.getDefault(),
-                                  "%s", sharps[audio.note % OCTAVE]);
+                                  "%s", sharps[(audio.note +
+                                                audio.transpose) % OCTAVE]);
                 canvas.drawText(s, margin / 2 + dx, paint.ascent(), paint);
 
                 // Draw octave
                 s = String.format(Locale.getDefault(),
-                                  "%d", audio.note / OCTAVE);
+                                  "%d", (audio.note +
+                                         audio.transpose) / OCTAVE);
                 canvas.drawText(s, margin / 2 + dx, 0, paint);
 
                 // Draw cents
@@ -252,21 +258,26 @@ public class Display extends TunerView
             canvas.translate(0, larger);
 
             // Draw note
-            canvas.drawText(notes[audio.note % OCTAVE], margin, 0, paint);
+            canvas.drawText(notes[(audio.note +
+                                   audio.transpose) % OCTAVE],
+                            margin, 0, paint);
 
             // Measure text
-            float dx = paint.measureText(notes[audio.note % OCTAVE]);
+            float dx = paint.measureText(notes[(audio.note +
+                                                audio.transpose) % OCTAVE]);
 
             // Draw sharps/flats
             paint.setTextSize(larger / 2);
             s = String.format(Locale.getDefault(),
-                              "%s", sharps[audio.note % OCTAVE]);
+                              "%s", sharps[(audio.note +
+                                            audio.transpose) % OCTAVE]);
             canvas.translate(0, paint.ascent());
             canvas.drawText(s, margin + dx, 0, paint);
 
-            // Dar octave
+            // Draw octave
             s = String.format(Locale.getDefault(),
-                              "%d", audio.note / OCTAVE);
+                              "%d", (audio.note +
+                                     audio.transpose) / OCTAVE);
             canvas.translate(0, -paint.ascent());
             canvas.drawText(s, margin + dx, 0, paint);
 

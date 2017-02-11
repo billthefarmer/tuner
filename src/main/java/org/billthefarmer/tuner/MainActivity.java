@@ -59,6 +59,7 @@ public class MainActivity extends Activity
 {
     private static final String PREF_INPUT = "pref_input";
     private static final String PREF_REFERENCE = "pref_reference";
+    private static final String PREF_TRANSPOSE = "pref_transpose";
 
     private static final String PREF_FILTER = "pref_filter";
     private static final String PREF_DOWNSAMPLE = "pref_downsample";
@@ -488,6 +489,9 @@ public class MainActivity extends Activity
             audio.input =
                 Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
             audio.reference = preferences.getInt(PREF_REFERENCE, 440);
+            audio.transpose =
+                Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
+
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
             audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
             audio.multiple = preferences.getBoolean(PREF_MULTIPLE, false);
@@ -574,6 +578,7 @@ public class MainActivity extends Activity
     {
         // Preferences
         protected int input;
+        protected int transpose;
 
         protected boolean lock;
         protected boolean zoom;
@@ -1231,9 +1236,12 @@ public class MainActivity extends Activity
                     text +=
                         String.format(Locale.getDefault(),
                                       "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                      notes[maxima.n[i] % OCTAVE],
-                                      sharps[maxima.n[i] % OCTAVE],
-                                      maxima.n[i] / OCTAVE, cents,
+                                      notes[(maxima.n[i] +
+                                             transpose) % OCTAVE],
+                                      sharps[(maxima.n[i] +
+                                              transpose) % OCTAVE],
+                                      (maxima.n[i] +
+                                       audio.transpose) / OCTAVE, cents,
                                       maxima.r[i], maxima.f[i],
                                       maxima.r[i] - maxima.f[i]);
                 }
@@ -1242,9 +1250,9 @@ public class MainActivity extends Activity
                     text =
                         String.format(Locale.getDefault(),
                                       "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                      notes[note % OCTAVE],
-                                      sharps[note % OCTAVE],
-                                      note / OCTAVE, cents,
+                                      notes[(note + transpose) % OCTAVE],
+                                      sharps[(note + transpose) % OCTAVE],
+                                      (note + transpose) / OCTAVE, cents,
                                       nearest, frequency, difference);
             }
 
@@ -1252,8 +1260,9 @@ public class MainActivity extends Activity
                 text =
                     String.format(Locale.getDefault(),
                                   "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                  notes[note % OCTAVE],
-                                  sharps[note % OCTAVE], note / OCTAVE, cents,
+                                  notes[(note + transpose) % OCTAVE],
+                                  sharps[(note + transpose) % OCTAVE],
+                                  (note + transpose) / OCTAVE, cents,
                                   nearest, frequency, difference);
 
             ClipboardManager clipboard =
