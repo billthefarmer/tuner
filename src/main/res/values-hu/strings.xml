@@ -93,6 +93,9 @@
   <string name="pref_reference">Referencia</string>
   <string name="pref_reference_summ">%dHz</string>
 
+  <string name="pref_transpose">Átültetés</string>
+  <string name="pref_transpose_summ">%s</string>
+
   <string name="pref_about">Információk</string>
   <string name="pref_about_summ">Tuner változat %s</string>
 
