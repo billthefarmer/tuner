@@ -92,8 +92,8 @@
   <string name="pref_custom">Personalizar</string>
   <string name="pref_custom_summ">Colores personalizados</string>
 
-  <string name="pref_ref">Referencia</string>
-  <string name="pref_ref_summ">%dHz</string>
+  <string name="pref_reference">Referencia</string>
+  <string name="pref_reference_summ">%dHz</string>
 
   <string name="pref_about">Sobre</string>
   <string name="pref_about_summ">Versión de Tuner %s</string>
