@@ -368,11 +368,14 @@ public class MainActivity extends Activity
     {
         super.onStart();
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.RECORD_AUDIO},
-                    PERMISSIONS_REQUEST_RECORD_AUDIO);
+        if (ActivityCompat
+            .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat
+                .requestPermissions(this,
+                                    new String[]
+                    {Manifest.permission.RECORD_AUDIO},
+                                    PERMISSIONS_REQUEST_RECORD_AUDIO);
     }
 
     // On Resume
@@ -388,15 +391,17 @@ public class MainActivity extends Activity
         if (status != null)
             status.invalidate();
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat
+            .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+            == PackageManager.PERMISSION_GRANTED)
             // Start the audio thread
             audio.start();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults)
+                                           String permissions[],
+                                           int[] grantResults)
     {
         if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO)
 

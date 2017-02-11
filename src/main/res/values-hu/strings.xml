@@ -12,8 +12,17 @@
   </string>
   <string name="licence">Licensz: GNU GPLv3</string>
 
-  <string name="error_buffer">Hangfelvételi hiba! Nem található használható bemeneti mintavételezési frekvencia.</string>
-  <string name="error_init">Hangfelvevő elindítása sikertelen! Lehet, hogy a kiválasztott jelforrás nem elérhető, vagy nem használható a mintavételi frekvenciája.</string>
+  <string name="error_buffer">
+    Hangfelvételi hiba! Nem található használható bemeneti
+    mintavételezési frekvencia.
+  </string>
+  <string name="error_init">
+    Hangfelvevő elindítása sikertelen! Lehet, hogy a kiválasztott
+    jelforrás nem elérhető, vagy nem használható a mintavételi
+    frekvenciája.
+  </string>
+
+  <string name="permission_denied">hozzáférés megtagadva</string>
 
   <string name="filter_on">Hangfrekvenciás szűrő be</string>
   <string name="filter_off">Hangfrekvenciás szűrő ki</string>

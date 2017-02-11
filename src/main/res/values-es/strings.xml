@@ -12,8 +12,17 @@
   </string>
   <string name="licence">Licence: GNU GPLv3</string>
 
-  <string name="error_buffer">¡Error de grabación de audio! No se puede encontrar una frecuencia de muestreo de entrada funcional.</string>
-  <string name="error_init">¡Grabador de audio no inicializado! Tal vez la fuente de entrada seleccionada no está disponible, o no se pudo encontrar una frecuencia de muestreo de entrada funcional.</string>
+  <string name="error_buffer">
+    ¡Error de grabación de audio! No se puede encontrar una frecuencia
+    de muestreo de entrada funcional.
+  </string>
+  <string name="error_init">
+    ¡Grabador de audio no inicializado! Tal vez la fuente de entrada
+    seleccionada no está disponible, o no se pudo encontrar una
+    frecuencia de muestreo de entrada funcional.
+  </string>
+
+  <string name="permission_denied">Permiso denegado</string>
 
   <string name="filter_on">Encender el filtro de audio</string>
   <string name="filter_off">Apagar el filtro de audio</string>

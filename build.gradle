@@ -15,7 +15,7 @@ android {
 
     lintOptions {
 	disable 'IconDensities', 'ClickableViewAccessibility'
-	// abortOnError false
+	abortOnError false
     }
 }
 

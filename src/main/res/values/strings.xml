@@ -12,8 +12,15 @@
   </string>
   <string name="licence">Licence: GNU GPLv3</string>
 
-  <string name="error_buffer">Error from audio recording! Cannot find a working input sample rate.</string>
-  <string name="error_init">Audio recorder not initialised! Maybe the selected input source is not available, or a working input sample rate could not be found.</string>
+  <string name="error_buffer">
+    Error from audio recording! Cannot find a working input sample rate.
+  </string>
+  <string name="error_init">
+    Audio recorder not initialised! Maybe the selected input source is
+    not available, or a working input sample rate could not be found.
+  </string>
+
+  <string name="permission_denied">Permission denied</string>
 
   <string name="filter_on">Audio filter on</string>
   <string name="filter_off">Audio filter off</string>
@@ -86,7 +93,5 @@
 
   <string name="pref_about">About</string>
   <string name="pref_about_summ">Tuner version %s</string>
-
-  <string name="permission_denied">Permission denied</string>
 
 </resources>
