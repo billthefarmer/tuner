@@ -32,6 +32,37 @@
     <item>3</item>
   </string-array>
 
+  <string-array name="pref_transpose_entries">
+    <item>+6[Kulcs:F\u266F]</item>
+    <item>+5[Kulcs:F]</item>
+    <item>+4[Kulcs:E]</item>
+    <item>+3[Kulcs:E\u266D]</item>
+    <item>+2[Kulcs:D]</item>
+    <item>+1[Kulcs:C\u266F]</item>
+    <item>+0[Kulcs:C]</item>
+    <item>-1[Kulcs:B]</item>
+    <item>-2[Kulcs:B\u266D]</item>
+    <item>-3[Kulcs:A]</item>
+    <item>-4[Kulcs:A\u266D]</item>
+    <item>-5[Kulcs:G]</item>
+    <item>-6[Kulcs:F\u266F]</item>
+  </string-array>
+  <string-array name="pref_transpose_entry_values">
+    <item>6</item>
+    <item>5</item>
+    <item>4</item>
+    <item>3</item>
+    <item>2</item>
+    <item>1</item>
+    <item>0</item>
+    <item>-1</item>
+    <item>-2</item>
+    <item>-3</item>
+    <item>-4</item>
+    <item>-5</item>
+    <item>-6</item>
+  </string-array>
+
   <integer-array name="sample_rates">
       <item>11025</item>
       <item>22050</item>

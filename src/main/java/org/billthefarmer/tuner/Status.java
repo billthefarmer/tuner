@@ -94,7 +94,32 @@ public class Status extends View
                           resources.getString(R.string.sample_rate),
                           audio.sample);
         canvas.drawText(s, margin, 0, paint);
-        float x = margin + paint.measureText(s + "   ");
+        float x = margin + paint.measureText(s + "  ");
+
+        // Transpose
+        if (audio.transpose != 0)
+        {
+            String entries[] = resources.getStringArray(R.array.pref_transpose_entries);
+            String values[] = resources.getStringArray(R.array.pref_transpose_entry_values);
+
+            s = resources.getString(R.string.pref_transpose);
+            canvas.drawText(s + ":", x, 0, paint);
+            x += paint.measureText(s + ": ");
+
+            int index = 0;
+            for (String v: values)
+            {
+                if (Integer.parseInt(v) == audio.transpose)
+                {
+                    s = entries[index];
+                    break;
+                }
+                index++;
+            }
+
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + "  ");
+        }
 
         // Filter
         if (audio.filter)
@@ -152,6 +177,5 @@ public class Status extends View
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
-
     }
 }

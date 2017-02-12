@@ -46,7 +46,7 @@
   <string name="multiple_off">Több hang ki</string>
 
   <string name="copied_clip">Adatok a vágólapra másolva</string>
-  <string name="sample_rate">Mintavételi frekvencia (db/mp): %d</string>
+  <string name="sample_rate">Mintavételi frekvencia: %d</string>
 
   <string name="filter">szűrő</string>
   <string name="zoom">közelítés</string>
@@ -90,8 +90,11 @@
   <string name="pref_custom">Egyéni</string>
   <string name="pref_custom_summ">Egyéni színek</string>
 
-  <string name="pref_ref">Referencia</string>
-  <string name="pref_ref_summ">%dHz</string>
+  <string name="pref_reference">Referencia</string>
+  <string name="pref_reference_summ">%dHz</string>
+
+  <string name="pref_transpose">Átültetés</string>
+  <string name="pref_transpose_summ">%s</string>
 
   <string name="pref_about">Információk</string>
   <string name="pref_about_summ">Tuner változat %s</string>

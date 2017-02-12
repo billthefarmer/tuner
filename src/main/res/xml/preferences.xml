@@ -14,7 +14,7 @@
 	android:entries="@array/pref_input_entries"
 	android:entryValues="@array/pref_input_entry_values"
 	android:dialogIcon="@drawable/ic_action_mic"
-	android:defaultValue="@integer/def_input" />
+	android:defaultValue="@integer/default_input" />
     <CheckBoxPreference
 	android:icon="@drawable/ic_action_network_cell"
 	android:key="pref_filter"
@@ -85,16 +85,25 @@
   </PreferenceCategory>
   <PreferenceCategory
       android:key="pref_ref_category"
-      android:title="@string/pref_ref">
+      android:title="@string/pref_reference">
     <org.billthefarmer.tuner.NumberPickerPreference
 	android:key="pref_reference"
 	android:icon="@drawable/ic_action_collapse"
 	android:dialogIcon="@drawable/ic_action_collapse"
-	android:title="@string/pref_ref"
-	android:summary="@string/pref_ref_summ"
-	android:defaultValue="@integer/def_ref"
-	tuner:maxValue="@integer/max_ref"
-	tuner:minValue="@integer/min_ref" />
+	android:title="@string/pref_reference"
+	android:summary="@string/pref_reference_summ"
+	android:defaultValue="@integer/default_reference"
+	tuner:maxValue="@integer/max_reference"
+	tuner:minValue="@integer/min_reference" />
+    <ListPreference
+	android:key="pref_transpose"
+	android:icon="@drawable/ic_action_import_export"
+	android:title="@string/pref_transpose"
+	android:summary="@string/pref_transpose_summ"
+	android:entries="@array/pref_transpose_entries"
+	android:entryValues="@array/pref_transpose_entry_values"
+	android:dialogIcon="@drawable/ic_action_import_export"
+	android:defaultValue="@integer/default_transpose" />
   </PreferenceCategory>
   <PreferenceCategory 
       android:key="pref_about_category"
