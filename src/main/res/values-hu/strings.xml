@@ -46,7 +46,7 @@
   <string name="multiple_off">Több hang ki</string>
 
   <string name="copied_clip">Adatok a vágólapra másolva</string>
-  <string name="sample_rate">Mintavételi frekvencia (db/mp): %d</string>
+  <string name="sample_rate">Mintavételi frekvencia: %d</string>
 
   <string name="filter">szűrő</string>
   <string name="zoom">közelítés</string>
