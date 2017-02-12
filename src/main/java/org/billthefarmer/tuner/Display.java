@@ -275,8 +275,7 @@ public class Display extends TunerView
 
             // Draw octave
             s = String.format(Locale.getDefault(), "%d",
-                              (audio.note - audio.transpose +
-                               OCTAVE) / OCTAVE);
+                              (audio.note - audio.transpose) / OCTAVE);
             canvas.translate(0, -paint.ascent());
             canvas.drawText(s, margin + dx, 0, paint);
 
