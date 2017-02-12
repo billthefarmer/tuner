@@ -690,12 +690,29 @@ public class MainActivity extends Activity
         // Stop
         protected void stop()
         {
+            cleanUpAudioRecord();
+
             Thread t = thread;
             thread = null;
 
             // Wait for the thread to exit
             while (t != null && t.isAlive())
                 Thread.yield();
+        }
+
+        // Stop and release the audio recorder
+        private void cleanUpAudioRecord()
+        {
+            if (audioRecord != null && audioRecord.getState() == AudioRecord.STATE_INITIALIZED)
+            {
+
+                if (audioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING)
+                {
+                    audioRecord.stop();
+                }
+
+                audioRecord.release();
+            }
         }
 
         // Process Audio
@@ -835,10 +852,13 @@ public class MainActivity extends Activity
             while (thread != null)
             {
                 // Read a buffer of data
+                // NOTE: audioRecord.read(short[], int, int) can block
+                // indefinitely, until audioRecord.stop() is called
+                // from another thread
                 size = audioRecord.read(data, 0, STEP * divisor);
 
-                // Stop the thread if no data
-                if (size == 0)
+                // Stop the thread if no data or error state
+                if (size <= 0)
                 {
                     thread = null;
                     break;
@@ -1175,12 +1195,7 @@ public class MainActivity extends Activity
                 timer++;
             }
 
-            // Stop and release the audio recorder
-            if (audioRecord != null)
-            {
-                audioRecord.stop();
-                audioRecord.release();
-            }
+            cleanUpAudioRecord();
         }
 
         // Real to complex FFT, ignores imaginary values in input array
