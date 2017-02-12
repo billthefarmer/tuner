@@ -1236,11 +1236,11 @@ public class MainActivity extends Activity
                     text +=
                         String.format(Locale.getDefault(),
                                       "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                      notes[(maxima.n[i] - transpose +
+                                      notes[(maxima.n[i] + transpose +
                                              OCTAVE) % OCTAVE],
-                                      sharps[(maxima.n[i] - transpose +
+                                      sharps[(maxima.n[i] + transpose +
                                              OCTAVE) % OCTAVE],
-                                      (maxima.n[i] - transpose) / OCTAVE, cents,
+                                      (maxima.n[i] + transpose) / OCTAVE, cents,
                                       maxima.r[i], maxima.f[i],
                                       maxima.r[i] - maxima.f[i]);
                 }
@@ -1249,11 +1249,11 @@ public class MainActivity extends Activity
                     text =
                         String.format(Locale.getDefault(),
                                       "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                      notes[(note - transpose +
+                                      notes[(note + transpose +
                                              OCTAVE) % OCTAVE],
-                                      sharps[(note - transpose +
+                                      sharps[(note + transpose +
                                              OCTAVE) % OCTAVE],
-                                      (note - transpose) / OCTAVE, cents,
+                                      (note + transpose) / OCTAVE, cents,
                                       nearest, frequency, difference);
             }
 
@@ -1261,11 +1261,11 @@ public class MainActivity extends Activity
                 text =
                     String.format(Locale.getDefault(),
                                   "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                  notes[(note - transpose +
+                                  notes[(note + transpose +
                                              OCTAVE) % OCTAVE],
-                                  sharps[(note - transpose +
+                                  sharps[(note + transpose +
                                              OCTAVE) % OCTAVE],
-                                  (note - transpose) / OCTAVE, cents,
+                                  (note + transpose) / OCTAVE, cents,
                                   nearest, frequency, difference);
 
             ClipboardManager clipboard =
