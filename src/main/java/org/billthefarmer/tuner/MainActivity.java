@@ -745,11 +745,29 @@ public class MainActivity extends Activity
                 divisor = divisors[index];
 
                 // Create the AudioRecord object
-                audioRecord =
-                    new AudioRecord(input, rate,
+                try
+                {
+                    audioRecord =
+                            new AudioRecord(input, rate,
                                     AudioFormat.CHANNEL_IN_MONO,
                                     AudioFormat.ENCODING_PCM_16BIT,
                                     Math.max(size, SIZE * divisor));
+                }
+
+                catch (IllegalArgumentException e)
+                {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showAlert(R.string.app_name,
+                                    R.string.error_init);
+                        }
+                    });
+
+                    thread = null;
+                    return;
+                }
+
                 // Check state
                 state = audioRecord.getState();
                 if (state != AudioRecord.STATE_INITIALIZED)
