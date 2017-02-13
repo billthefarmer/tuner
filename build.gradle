@@ -10,15 +10,11 @@ buildscript {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion "android-25"
+    compileSdkVersion "android-17"
     buildToolsVersion '24.0.2'
 
     lintOptions {
 	disable 'IconDensities', 'ClickableViewAccessibility'
 	abortOnError false
     }
-}
-
-dependencies {
-    compile 'com.android.support:support-compat:25.1.1'
 }

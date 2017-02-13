@@ -20,8 +20,6 @@
     not available, or a working input sample rate could not be found.
   </string>
 
-  <string name="permission_denied">Permission denied</string>
-
   <string name="filter_on">Audio filter on</string>
   <string name="filter_off">Audio filter off</string>
 

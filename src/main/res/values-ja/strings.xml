@@ -19,8 +19,6 @@
     オーディオレコーダーが初期化されていません! 選択された入力音源が利用できないか、動作中の入力サンプルレートが見つからない可能性があります。
   </string>
 
-  <string name="permission_denied">アクセス拒否</string>
-
   <string name="filter_on">オーディオフィルター オン</string>
   <string name="filter_off">オーディオフィルター オフ</string>
 

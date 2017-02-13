@@ -9,8 +9,9 @@
     android:installLocation="auto" >
 
   <uses-sdk
+      tools:ignore="OldTargetApi"
       android:minSdkVersion="11"
-      android:targetSdkVersion="25" />
+      android:targetSdkVersion="22" />
 
   <uses-permission
       android:name="android.permission.RECORD_AUDIO" />

@@ -22,8 +22,6 @@
     frekvenciája.
   </string>
 
-  <string name="permission_denied">hozzáférés megtagadva</string>
-
   <string name="filter_on">Hangfrekvenciás szűrő be</string>
   <string name="filter_off">Hangfrekvenciás szűrő ki</string>
 

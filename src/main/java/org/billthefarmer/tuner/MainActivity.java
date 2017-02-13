@@ -38,7 +38,6 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,8 +69,6 @@ public class MainActivity extends Activity
 
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
-
-    private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
 
     // Note values for display
     private static final String notes[] =
@@ -367,15 +364,6 @@ public class MainActivity extends Activity
     protected void onStart()
     {
         super.onStart();
-
-        if (ActivityCompat
-                .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat
-            .requestPermissions(this,
-                                new String[]
-                                {Manifest.permission.RECORD_AUDIO},
-                                PERMISSIONS_REQUEST_RECORD_AUDIO);
     }
 
     // On Resume
@@ -391,23 +379,8 @@ public class MainActivity extends Activity
         if (status != null)
             status.invalidate();
 
-        if (ActivityCompat
-                .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                == PackageManager.PERMISSION_GRANTED)
-            // Start the audio thread
-            audio.start();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[],
-                                           int[] grantResults)
-    {
-        if (requestCode == PERMISSIONS_REQUEST_RECORD_AUDIO)
-
-            // Permission denied
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED)
-                showToast(R.string.permission_denied);
+        // Start the audio thread
+        audio.start();
     }
 
     @Override
@@ -772,7 +745,8 @@ public class MainActivity extends Activity
                                         Math.max(size, SIZE * divisor));
                 }
 
-                catch (IllegalArgumentException e)
+                // Exception
+                catch (Exception e)
                 {
                     runOnUiThread(new Runnable()
                     {
