@@ -107,7 +107,7 @@ public class Status extends View
             x += paint.measureText(s + ": ");
 
             int index = 0;
-            for (String v: values)
+            for (String v : values)
             {
                 if (Integer.parseInt(v) == audio.transpose)
                 {

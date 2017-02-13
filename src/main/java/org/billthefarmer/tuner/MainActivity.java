@@ -234,7 +234,6 @@ public class MainActivity extends Activity
             break;
 
         // Strobe
-
         case R.id.strobe:
             audio.strobe = !audio.strobe;
 
@@ -370,13 +369,13 @@ public class MainActivity extends Activity
         super.onStart();
 
         if (ActivityCompat
-            .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-            != PackageManager.PERMISSION_GRANTED)
+                .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED)
             ActivityCompat
-                .requestPermissions(this,
-                                    new String[]
-                    {Manifest.permission.RECORD_AUDIO},
-                                    PERMISSIONS_REQUEST_RECORD_AUDIO);
+            .requestPermissions(this,
+                                new String[]
+                                {Manifest.permission.RECORD_AUDIO},
+                                PERMISSIONS_REQUEST_RECORD_AUDIO);
     }
 
     // On Resume
@@ -393,8 +392,8 @@ public class MainActivity extends Activity
             status.invalidate();
 
         if (ActivityCompat
-            .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-            == PackageManager.PERMISSION_GRANTED)
+                .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED)
             // Start the audio thread
             audio.start();
     }
@@ -703,10 +702,12 @@ public class MainActivity extends Activity
         // Stop and release the audio recorder
         private void cleanUpAudioRecord()
         {
-            if (audioRecord != null && audioRecord.getState() == AudioRecord.STATE_INITIALIZED)
+            if (audioRecord != null &&
+                    audioRecord.getState() == AudioRecord.STATE_INITIALIZED)
             {
 
-                if (audioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING)
+                if (audioRecord.getRecordingState() ==
+                        AudioRecord.RECORDSTATE_RECORDING)
                 {
                     audioRecord.stop();
                 }
@@ -765,19 +766,21 @@ public class MainActivity extends Activity
                 try
                 {
                     audioRecord =
-                            new AudioRecord(input, rate,
-                                    AudioFormat.CHANNEL_IN_MONO,
-                                    AudioFormat.ENCODING_PCM_16BIT,
-                                    Math.max(size, SIZE * divisor));
+                        new AudioRecord(input, rate,
+                                        AudioFormat.CHANNEL_IN_MONO,
+                                        AudioFormat.ENCODING_PCM_16BIT,
+                                        Math.max(size, SIZE * divisor));
                 }
 
                 catch (IllegalArgumentException e)
                 {
-                    runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable()
+                    {
                         @Override
-                        public void run() {
+                        public void run()
+                        {
                             showAlert(R.string.app_name,
-                                    R.string.error_init);
+                                      R.string.error_init);
                         }
                     });
 
@@ -1272,7 +1275,7 @@ public class MainActivity extends Activity
                                       notes[(maxima.n[i] - transpose +
                                              OCTAVE) % OCTAVE],
                                       sharps[(maxima.n[i] - transpose +
-                                             OCTAVE) % OCTAVE],
+                                              OCTAVE) % OCTAVE],
                                       (maxima.n[i] - transpose) / OCTAVE, cents,
                                       maxima.r[i], maxima.f[i],
                                       maxima.r[i] - maxima.f[i]);
@@ -1285,7 +1288,7 @@ public class MainActivity extends Activity
                                       notes[(note - transpose +
                                              OCTAVE) % OCTAVE],
                                       sharps[(note - transpose +
-                                             OCTAVE) % OCTAVE],
+                                              OCTAVE) % OCTAVE],
                                       (note - transpose) / OCTAVE, cents,
                                       nearest, frequency, difference);
             }
@@ -1295,9 +1298,9 @@ public class MainActivity extends Activity
                     String.format(Locale.getDefault(),
                                   "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
                                   notes[(note - transpose +
-                                             OCTAVE) % OCTAVE],
+                                         OCTAVE) % OCTAVE],
                                   sharps[(note - transpose +
-                                             OCTAVE) % OCTAVE],
+                                          OCTAVE) % OCTAVE],
                                   (note - transpose) / OCTAVE, cents,
                                   nearest, frequency, difference);
 
