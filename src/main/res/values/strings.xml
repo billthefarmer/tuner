@@ -10,7 +10,7 @@
     Hungarian translation by András Lengyel-Nagy\n
     Japanese translation by naofum
   </string>
-  <string name="licence">Licence: GNU GPLv3</string>
+  <string name="licence">License: GNU GPLv3</string>
 
   <string name="error_buffer">
     Error from audio recording! Cannot find a working input sample rate.
