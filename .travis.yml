@@ -12,9 +12,7 @@ android:
 
     - build-tools-24.0.2
 
-    - android-25
-
-    - extra-android-m2repository
+    - android-17
 
 script:
     - ./gradlew build

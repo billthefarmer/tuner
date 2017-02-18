@@ -36,6 +36,7 @@ import java.util.Locale;
 public class Spectrum extends Graticule
 {
     private Path path;
+    private Path fillPath;
     private float max;
 
     // Constructor
@@ -44,6 +45,7 @@ public class Spectrum extends Graticule
         super(context, attrs);
 
         path = new Path();
+        fillPath = new Path();
     }
 
     // Draw trace
@@ -67,10 +69,10 @@ public class Spectrum extends Graticule
             canvas.drawText("D", 4, height - 2, paint);
         }
 
-        // Translate camvas
+        // Translate canvas
         canvas.translate(0, height);
 
-        // Chack max value
+        // Check max value
         if (max < 1.0f)
             max = 1.0f;
 
@@ -82,6 +84,9 @@ public class Spectrum extends Graticule
         // Rewind path
         path.rewind();
         path.moveTo(0, 0);
+
+        // Copy path for fill
+        fillPath.set(path);
 
         // If zoomed
         if (audio.zoom)
@@ -112,9 +117,18 @@ public class Spectrum extends Graticule
                     float x = (float)((i - lower) * xscale);
 
                     path.lineTo(x, y);
+                    fillPath.lineTo(x, y);
                     path.addCircle(x, y, 1, Path.Direction.CW);
                 }
             }
+
+            // Complete path for fill
+            fillPath.lineTo(width, 0);
+            fillPath.close();
+            paint.setAntiAlias(true);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.argb(63, 0, 255, 0));
+            canvas.drawPath(fillPath, paint);
 
             // Create centre line
             path.moveTo(width / 2, 0);
@@ -124,6 +138,7 @@ public class Spectrum extends Graticule
             paint.setStrokeWidth(2);
             paint.setAntiAlias(true);
             paint.setColor(Color.GREEN);
+            paint.setStyle(Paint.Style.STROKE);
 
             // Draw trace
             canvas.drawPath(path, paint);
@@ -210,12 +225,22 @@ public class Spectrum extends Graticule
                 float y = -value * yscale;
 
                 path.lineTo(x, y);
+                fillPath.lineTo(x, y);
             }
+
+            // Complete path for fill
+            fillPath.lineTo(width, 0);
+            fillPath.close();
+            paint.setAntiAlias(true);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.argb(63, 0, 255, 0));
+            canvas.drawPath(fillPath, paint);
 
             // Color green
             paint.setStrokeWidth(2);
             paint.setAntiAlias(true);
             paint.setColor(Color.GREEN);
+            paint.setStyle(Paint.Style.STROKE);
 
             // Draw path
             canvas.drawPath(path, paint);
