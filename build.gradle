@@ -11,8 +11,8 @@ buildscript {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion "android-17"
-    buildToolsVersion '24.0.2'
+    compileSdkVersion "android-22"
+    buildToolsVersion '25.0.2'
 
     lintOptions {
 	disable 'IconDensities', 'ClickableViewAccessibility'
