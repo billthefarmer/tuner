@@ -140,7 +140,7 @@ public class SettingsFragment extends PreferenceFragment
         {
             dialog = ((PreferenceScreen)preference).getDialog();
             ActionBar actionBar = dialog.getActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
 
             View view = dialog.findViewById(android.R.id.home);
             if (view != null)

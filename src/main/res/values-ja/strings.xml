@@ -5,10 +5,8 @@
   <string name="help">ヘルプ</string>
   <string name="settings">設定</string>
   <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
-  <string name="translation">
-    スペイン語翻訳 by Suso Comesaña\n
-    ハンガリー語翻訳 by András Lengyel-Nagy\n
-    日本語翻訳 by naofum
+  <string name="translation">スペイン語翻訳 by Suso Comesaña\nハンガリー
+  語翻訳 by András Lengyel-Nagy\n日本語翻訳 by naofum
   </string>
   <string name="licence">ライセンス: GNU GPLv3</string>
 
