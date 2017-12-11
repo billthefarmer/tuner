@@ -4,6 +4,7 @@
   <string name="app_name">Tuner</string>
   <string name="help">Help</string>
   <string name="settings">Settings</string>
+  <string name="built">Built %s</string>
   <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
   <string name="translation">Spanish translation by Suso
   Comesaña\nHungarian translation by András Lengyel-Nagy\nJapanese

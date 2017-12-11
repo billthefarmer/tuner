@@ -662,7 +662,7 @@ public class MainActivity extends Activity
         // Stop
         protected void stop()
         {
-            cleanUpAudioRecord();
+            // cleanUpAudioRecord();
 
             Thread t = thread;
             thread = null;
@@ -678,14 +678,18 @@ public class MainActivity extends Activity
             if (audioRecord != null &&
                     audioRecord.getState() == AudioRecord.STATE_INITIALIZED)
             {
-
-                if (audioRecord.getRecordingState() ==
-                        AudioRecord.RECORDSTATE_RECORDING)
+                try
                 {
-                    audioRecord.stop();
+                    if (audioRecord.getRecordingState() ==
+                        AudioRecord.RECORDSTATE_RECORDING)
+                    {
+                        audioRecord.stop();
+                    }
+
+                    audioRecord.release();
                 }
 
-                audioRecord.release();
+                catch (Exception e) {}
             }
         }
 

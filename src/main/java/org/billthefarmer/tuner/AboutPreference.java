@@ -25,9 +25,12 @@ package org.billthefarmer.tuner;
 
 import android.content.Context;
 import android.preference.DialogPreference;
+import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
+import java.text.DateFormat;
 
 public class AboutPreference extends DialogPreference
 {
@@ -47,8 +50,38 @@ public class AboutPreference extends DialogPreference
         TextView version = (TextView) view.findViewById(R.id.about);
 
         // Set version in text view
-        String v = (String) version.getText();
-        String s = String.format(v, BuildConfig.VERSION_NAME);
-        version.setText(s);
+        if (version != null)
+        {
+            String v = (String) version.getText();
+            String s = String.format(v, BuildConfig.VERSION_NAME);
+            version.setText(s);
+        }
+
+        // Get built text view
+        TextView built = (TextView) view.findViewById(R.id.built);
+
+        // Set built date in text view
+        if (built != null)
+        {
+            String d = (String) built.getText();
+            DateFormat dateFormat = DateFormat.getDateTimeInstance();
+            String s =
+                String.format(d, dateFormat.format(BuildConfig.BUILT));
+            built.setText(s);
+        }
+
+        // Get copyright text view
+        TextView copyright = (TextView) view.findViewById(R.id.copyright);
+
+        // Set movement method
+        if (copyright != null)
+            copyright.setMovementMethod(LinkMovementMethod.getInstance());
+
+        // Get licence text view
+        TextView licence = (TextView) view.findViewById(R.id.licence);
+
+        // Set movement method
+        if (licence != null)
+            licence.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

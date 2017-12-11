@@ -13,6 +13,13 @@
       android:layout_marginRight="24dp"
       android:text="@string/pref_about_summ" />
   <TextView
+      android:id="@+id/built"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="24dp"
+      android:layout_marginRight="24dp"
+      android:text="@string/built" />
+  <TextView
       android:id="@+id/copyright"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
