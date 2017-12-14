@@ -5,11 +5,15 @@
   <string name="help">Súgó</string>
   <string name="settings">Beállítások</string>
   <string name="built">Épült %s</string>
-  <string name="copyright">Szerzői jogok: \u00A9 2014 Bill Farmer</string>
-  <string name="translation">Spanyol fordítás Suso Comesaña\nMagyar
-  fordítás András Lengyel-Nagy\nJapán fordítás naofum
+  <string name="copyright">Szerzői jogok \u00A9 2014 <a
+  href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="licence">Licensz: GNU GPLv3</string>
+  <string name="translation">Magyar fordítás <a
+  href="https://github.com/lna91">András Lengyel-Nagy</a>
+  </string>
+  <string name="licence">Licensz <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
 
   <string name="error_buffer">
     Hangfelvételi hiba! Nem található használható bemeneti

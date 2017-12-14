@@ -5,17 +5,23 @@
   <string name="help">ヘルプ</string>
   <string name="settings">設定</string>
   <string name="built">内蔵 %s</string>
-  <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
-  <string name="translation">スペイン語翻訳 by Suso Comesaña\nハンガリー
-  語翻訳 by András Lengyel-Nagy\n日本語翻訳 by naofum
+  <string name="copyright">Copyright \u00A9 2014 <a
+  href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="licence">ライセンス: GNU GPLv3</string>
+  <string name="translation">日本語翻訳 by <a
+  href="https://github.com/naofum">naofum</a>
+  </string>
+  <string name="licence">ライセンス <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
 
   <string name="error_buffer">
     音声録音からエラー! 動作中の入力サンプルレートが見つかりません。
   </string>
   <string name="error_init">
-    オーディオレコーダーが初期化されていません! 選択された入力音源が利用できないか、動作中の入力サンプルレートが見つからない可能性があります。
+    オーディオレコーダーが初期化されていません! 選択された入力音源が利
+    用できないか、動作中の入力サンプルレートが見つからない可能性があり
+    ます。
   </string>
 
   <string name="filter_on">オーディオフィルター オン</string>
