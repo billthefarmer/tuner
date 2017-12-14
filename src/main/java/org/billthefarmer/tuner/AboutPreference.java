@@ -77,6 +77,13 @@ public class AboutPreference extends DialogPreference
         if (copyright != null)
             copyright.setMovementMethod(LinkMovementMethod.getInstance());
 
+        // Get translation text view
+        TextView translation = (TextView) view.findViewById(R.id.translation);
+
+        // Set movement method
+        if (translation != null)
+            translation.setMovementMethod(LinkMovementMethod.getInstance());
+
         // Get licence text view
         TextView licence = (TextView) view.findViewById(R.id.licence);
 
