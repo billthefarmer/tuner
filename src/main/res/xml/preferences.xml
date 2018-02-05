@@ -16,8 +16,8 @@
 	android:dialogIcon="@drawable/ic_action_mic"
 	android:defaultValue="@integer/default_input" />
     <CheckBoxPreference
-	android:icon="@drawable/ic_action_network_cell"
 	android:key="pref_filter"
+	android:icon="@drawable/ic_action_network_cell"
 	android:title="@string/pref_filter"
 	android:summary="@string/pref_filter_summ"
 	android:defaultValue="false" />

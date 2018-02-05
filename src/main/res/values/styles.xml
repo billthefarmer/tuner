@@ -19,6 +19,50 @@
         All customizations that are NOT specific to a particular
         API-level can go here.
     -->
+
+    <item name="pref_input">@drawable/ic_action_mic</item>
+    <item name="pref_filter">@drawable/ic_action_network_cell</item>
+    <item name="pref_downsample">@drawable/ic_action_reply_all</item>
+    <item name="pref_screen">@drawable/ic_action_brightness_low</item>
+    <item name="pref_zoom">@drawable/ic_action_expand</item>
+    <item name="pref_multiple">@drawable/ic_action_sort_by_size</item>
+    <item name="pref_reference">@drawable/ic_action_collapse</item>
+    <item name="pref_transpose">@drawable/ic_action_import_export</item>
+    <item name="pref_dark">@drawable/ic_action_brightness_high</item>
+    <item name="pref_about">@drawable/ic_action_about</item>
+
+  </style>
+
+  <!--
+      Base application theme, dependent on API level. This theme is replaced
+      by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+  -->
+  <style name="AppDarkBaseTheme" parent="android:Theme.Holo">
+    <!--
+        Theme customizations available in newer API levels can go in
+        res/values-vXX/styles.xml, while customizations related to
+        backward-compatibility can go here.
+    -->
+  </style>
+
+  <!-- Application theme. -->
+  <style name="AppDarkTheme" parent="AppDarkBaseTheme">
+    <!--
+        All customizations that are NOT specific to a particular
+        API-level can go here.
+    -->
+ 
+    <item name="pref_input">@drawable/ic_action_mic_dark</item>
+    <item name="pref_filter">@drawable/ic_action_network_cell_dark</item>
+    <item name="pref_downsample">@drawable/ic_action_reply_all_dark</item>
+    <item name="pref_screen">@drawable/ic_action_brightness_low_dark</item>
+    <item name="pref_zoom">@drawable/ic_action_expand_dark</item>
+    <item name="pref_multiple">@drawable/ic_action_sort_by_size_dark</item>
+    <item name="pref_reference">@drawable/ic_action_collapse_dark</item>
+    <item name="pref_transpose">@drawable/ic_action_import_export_dark</item>
+    <item name="pref_dark">@drawable/ic_action_brightness_high_dark</item>
+    <item name="pref_about">@drawable/ic_action_about_dark</item>
+
   </style>
 
 </resources>
