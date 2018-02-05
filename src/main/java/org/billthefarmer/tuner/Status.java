@@ -25,6 +25,7 @@ package org.billthefarmer.tuner;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
@@ -40,6 +41,7 @@ public class Status extends View
     private int width;
     private int height;
     private int margin;
+    private int textColour;
 
     private Paint paint;
     private Resources resources;
@@ -49,8 +51,17 @@ public class Status extends View
     {
         super(context, attrs);
 
-        paint = new Paint();
         resources = getResources();
+
+        final TypedArray typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.Tuner, 0, 0);
+
+        textColour =
+            typedArray.getColor(R.styleable.Tuner_TextColour,
+                                resources.getColor(android.R.color.black));
+        typedArray.recycle();
+
+        paint = new Paint();
     }
 
     // On size changed
@@ -82,7 +93,7 @@ public class Status extends View
 
         // Set up text
         paint.setStrokeWidth(1);
-        paint.setColor(resources.getColor(android.R.color.primary_text_light));
+        paint.setColor(textColour);
         paint.setTextSize(height / 2);
         paint.setStyle(Paint.Style.FILL);
 
@@ -99,8 +110,10 @@ public class Status extends View
         // Transpose
         if (audio.transpose != 0)
         {
-            String entries[] = resources.getStringArray(R.array.pref_transpose_entries);
-            String values[] = resources.getStringArray(R.array.pref_transpose_entry_values);
+            String entries[] =
+                resources.getStringArray(R.array.pref_transpose_entries);
+            String values[] =
+                resources.getStringArray(R.array.pref_transpose_entry_values);
 
             s = resources.getString(R.string.pref_transpose);
             canvas.drawText(s + ":", x, 0, paint);

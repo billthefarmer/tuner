@@ -24,6 +24,7 @@
 package org.billthefarmer.tuner;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -65,8 +66,7 @@ public class Display extends TunerView
         super(context, attrs);
 
         // Get lock icon
-        bitmap = BitmapFactory.decodeResource(resources,
-                                              R.drawable.ic_action_secure);
+        bitmap = BitmapFactory.decodeResource(resources, lock);
     }
 
     // On size changed

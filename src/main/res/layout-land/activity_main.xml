@@ -18,6 +18,7 @@
       android:layout_marginLeft="8dp"
       android:layout_marginRight="8dp"
       android:layout_marginBottom="8dp"
+      app:lock="?attr/lock"
       app:TextColour="?android:attr/textColorPrimary"
       app:BackgroundColour="?android:attr/colorBackground" />
 
@@ -29,6 +30,7 @@
       android:layout_marginLeft="8dp"
       android:layout_marginRight="8dp"
       android:layout_marginBottom="8dp"
+      app:screen="?attr/screen"
       app:TextColour="?android:attr/textColorPrimary"
       app:BackgroundColour="?android:attr/colorBackground" />
 

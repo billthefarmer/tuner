@@ -62,9 +62,7 @@ public class Meter extends TunerView
         matrix = new Matrix();
 
         // Get display icon
-        bitmap =
-            BitmapFactory.decodeResource(resources,
-                                         R.drawable.ic_action_brightness_low);
+        bitmap = BitmapFactory.decodeResource(resources, screen);
     }
 
     // On size changed

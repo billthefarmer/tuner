@@ -25,6 +25,7 @@ package org.billthefarmer.tuner;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -41,6 +42,11 @@ public abstract class TunerView extends View
 
     protected int width;
     protected int height;
+    protected int textColour;
+
+    protected int lock;
+    protected int screen;
+
     protected Paint paint;
     protected Rect clipRect;
     private RectF outlineRect;
@@ -50,8 +56,23 @@ public abstract class TunerView extends View
     {
         super(context, attrs);
 
-        paint = new Paint();
         resources = getResources();
+
+        final TypedArray typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.Tuner, 0, 0);
+
+        textColour =
+            typedArray.getColor(R.styleable.Tuner_TextColour,
+                                resources.getColor(android.R.color.black));
+        lock =
+            typedArray.getInteger(R.styleable.Tuner_lock,
+                                  R.drawable.ic_action_secure);
+        screen =
+            typedArray.getInteger(R.styleable.Tuner_screen,
+                                  R.drawable.ic_action_brightness_low);
+        typedArray.recycle();
+
+        paint = new Paint();
     }
 
     // On Size Changed
