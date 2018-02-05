@@ -20,6 +20,9 @@
         API-level can go here.
     -->
 
+    <item name="screen">@drawable/ic_action_brightness_low</item>
+    <item name="lock">@drawable/ic_action_secure</item>
+
     <item name="pref_input">@drawable/ic_action_mic</item>
     <item name="pref_filter">@drawable/ic_action_network_cell</item>
     <item name="pref_downsample">@drawable/ic_action_reply_all</item>
@@ -52,7 +55,10 @@
         All customizations that are NOT specific to a particular
         API-level can go here.
     -->
- 
+
+    <item name="screen">@drawable/ic_action_brightness_low_dark</item>
+    <item name="lock">@drawable/ic_action_secure_dark</item>
+
     <item name="pref_input">@drawable/ic_action_mic_dark</item>
     <item name="pref_filter">@drawable/ic_action_network_cell_dark</item>
     <item name="pref_downsample">@drawable/ic_action_reply_all_dark</item>

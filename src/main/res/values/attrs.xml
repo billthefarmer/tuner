@@ -10,6 +10,12 @@
 
   <declare-styleable name="Tuner">
 
+    <attr name="TextColour" format="reference" />
+    <attr name="BackgroundColour" format="reference" />
+
+    <attr name="screen" format="reference" />
+    <attr name="lock" format="reference" />
+
     <attr name="pref_input" format="reference" />
     <attr name="pref_filter" format="reference" />
     <attr name="pref_downsample" format="reference" />
