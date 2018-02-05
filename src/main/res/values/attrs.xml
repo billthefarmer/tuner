@@ -16,6 +16,7 @@
     <attr name="pref_screen" format="reference" />
     <attr name="pref_zoom" format="reference" />
     <attr name="pref_multiple" format="reference" />
+    <attr name="pref_strobe" format="reference" />
     <attr name="pref_reference" format="reference" />
     <attr name="pref_transpose" format="reference" />
     <attr name="pref_dark" format="reference" />
