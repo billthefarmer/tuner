@@ -138,8 +138,8 @@ public class Meter extends TunerView
 
         // Draw display icon
         if (audio != null && audio.screen && screen != null)
-            canvas.drawBitmap(screen.getBitmap(), 2,
-                              height - screen.getIntrinsicHeight() - 2, null);
+            canvas.drawBitmap(screen.getBitmap(), 0,
+                              height - screen.getIntrinsicHeight(), null);
 
         // Reset the paint to black
         paint.setStrokeWidth(1);

@@ -107,8 +107,8 @@ public class Display extends TunerView
 
         // Draw lock icon
         if (audio.lock && lock != null)
-            canvas.drawBitmap(lock.getBitmap(), 2,
-                              height - lock.getIntrinsicHeight() - 2, null);
+            canvas.drawBitmap(lock.getBitmap(), 0,
+                              height - lock.getIntrinsicHeight(), null);
         // Set up paint
         paint.setStrokeWidth(1);
         paint.setColor(textColour);
