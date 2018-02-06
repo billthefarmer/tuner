@@ -40,7 +40,6 @@ public abstract class TunerView extends View
 {
     protected MainActivity.Audio audio;
     protected Resources resources;
-    protected AttributeSet attrs;
 
     protected int width;
     protected int height;
@@ -58,7 +57,6 @@ public abstract class TunerView extends View
     {
         super(context, attrs);
 
-        this.attrs = attrs;
         resources = getResources();
 
         final TypedArray typedArray =
