@@ -30,6 +30,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -39,13 +40,14 @@ public abstract class TunerView extends View
 {
     protected MainActivity.Audio audio;
     protected Resources resources;
+    protected AttributeSet attrs;
 
     protected int width;
     protected int height;
     protected int textColour;
 
-    protected int lock;
-    protected int screen;
+    protected BitmapDrawable lock;
+    protected BitmapDrawable screen;
 
     protected Paint paint;
     protected Rect clipRect;
@@ -56,6 +58,7 @@ public abstract class TunerView extends View
     {
         super(context, attrs);
 
+        this.attrs = attrs;
         resources = getResources();
 
         final TypedArray typedArray =
@@ -64,12 +67,10 @@ public abstract class TunerView extends View
         textColour =
             typedArray.getColor(R.styleable.Tuner_TextColour,
                                 resources.getColor(android.R.color.black));
-        lock =
-            typedArray.getInteger(R.styleable.Tuner_lock,
-                                  R.drawable.ic_action_secure);
-        screen =
-            typedArray.getInteger(R.styleable.Tuner_screen,
-                                  R.drawable.ic_action_brightness_low);
+        lock = (BitmapDrawable)
+            typedArray.getDrawable(R.styleable.Tuner_lock);
+        screen = (BitmapDrawable)
+            typedArray.getDrawable(R.styleable.Tuner_screen);
         typedArray.recycle();
 
         paint = new Paint();

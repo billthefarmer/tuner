@@ -25,18 +25,18 @@ package org.billthefarmer.tuner;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import java.util.Locale;
 
 // Display
 public class Display extends TunerView
 {
+    private static final String TAG = "Display";
     private static final int OCTAVE = 12;
 
     private int larger;
@@ -45,7 +45,6 @@ public class Display extends TunerView
     private int small;
 
     private int margin;
-    private Bitmap bitmap;
 
     // Note values for display
     private static final String notes[] =
@@ -64,9 +63,6 @@ public class Display extends TunerView
     public Display(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-
-        // Get lock icon
-        bitmap = BitmapFactory.decodeResource(resources, lock);
     }
 
     // On size changed
@@ -110,12 +106,12 @@ public class Display extends TunerView
             return;
 
         // Draw lock icon
-        if (audio.lock && bitmap != null)
-            canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
-
+        if (audio.lock && lock != null)
+            canvas.drawBitmap(lock.getBitmap(), 2,
+                              height - lock.getIntrinsicHeight() - 2, null);
         // Set up paint
         paint.setStrokeWidth(1);
-        paint.setColor(resources.getColor(android.R.color.primary_text_light));
+        paint.setColor(textColour);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setStyle(Paint.Style.FILL);
 

@@ -25,17 +25,30 @@ package org.billthefarmer.tuner;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
 // SettingsActivity
 public class SettingsActivity extends Activity
 {
+    private static final String PREF_DARK = "pref_dark";
+
     // On create
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // Get preferences
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(this);
+
+        boolean dark = preferences.getBoolean(PREF_DARK, false);
+
+        if (dark)
+            setTheme(R.style.AppDarkTheme);
 
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()

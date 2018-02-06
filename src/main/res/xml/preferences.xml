@@ -106,6 +106,16 @@
 	android:defaultValue="@integer/default_transpose" />
   </PreferenceCategory>
   <PreferenceCategory 
+      android:key="pref_theme_category"
+      android:title="@string/pref_theme">
+    <CheckBoxPreference
+	android:key="pref_dark"
+	android:icon="?attr/pref_dark"
+	android:title="@string/pref_dark"
+	android:summary="@string/pref_dark_summ"
+	android:defaultValue="false" />
+  </PreferenceCategory>
+  <PreferenceCategory 
       android:key="pref_about_category"
       android:title="@string/pref_about">
     <org.billthefarmer.tuner.AboutPreference

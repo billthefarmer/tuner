@@ -25,30 +25,29 @@ package org.billthefarmer.tuner;
 
 import android.app.ActionBar;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.view.View;
 
 // SettingsFragment
 public class SettingsFragment extends PreferenceFragment
-    implements SharedPreferences.OnSharedPreferenceChangeListener,
-    View.OnClickListener
+    implements SharedPreferences.OnSharedPreferenceChangeListener
 {
     private static final int BLUE = 0;
     private static final int OLIVE = 1;
     private static final int MAGENTA = 2;
     private static final int CUSTOM = 3;
 
+    private static final int VERSION_M = 23;
+
     private static final String KEY_PREF_INPUT = "pref_input";
+    private static final String KEY_PREF_DARK = "pref_dark";
     private static final String KEY_PREF_COLOUR = "pref_colour";
     private static final String KEY_PREF_REFERENCE = "pref_reference";
     private static final String KEY_PREF_CUSTOM = "pref_custom";
@@ -68,8 +67,6 @@ public class SettingsFragment extends PreferenceFragment
 
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        preferences.registerOnSharedPreferenceChangeListener(this);
 
         ListPreference preference =
             (ListPreference)findPreference(KEY_PREF_INPUT);
@@ -128,6 +125,24 @@ public class SettingsFragment extends PreferenceFragment
         about.setSummary(s);
     }
 
+    // on Resume
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        getPreferenceScreen().getSharedPreferences()
+            .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    // on Pause
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        getPreferenceScreen().getSharedPreferences()
+            .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
     // On preference tree click
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -141,10 +156,6 @@ public class SettingsFragment extends PreferenceFragment
             dialog = ((PreferenceScreen)preference).getDialog();
             ActionBar actionBar = dialog.getActionBar();
             actionBar.setDisplayHomeAsUpEnabled(false);
-
-            View view = dialog.findViewById(android.R.id.home);
-            if (view != null)
-                view.setOnClickListener(this);
         }
 
         return result;
@@ -223,11 +234,11 @@ public class SettingsFragment extends PreferenceFragment
             String s = String.format(summary, v);
             preference.setSummary(s);
         }
-    }
 
-    // On click
-    public void onClick(View v)
-    {
-        dialog.dismiss();
-    }
+        if (key.equals(KEY_PREF_DARK))
+        {
+            if (Build.VERSION.SDK_INT != VERSION_M)
+                getActivity().recreate();
+        }
+   }
 }

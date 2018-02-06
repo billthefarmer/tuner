@@ -44,7 +44,6 @@ public class Meter extends TunerView
 {
     private LinearGradient gradient;
     private Matrix matrix;
-    private Bitmap bitmap;
     private Rect bar;
     private Path thumb;
 
@@ -60,9 +59,6 @@ public class Meter extends TunerView
 
         // Create a matrix for scaling
         matrix = new Matrix();
-
-        // Get display icon
-        bitmap = BitmapFactory.decodeResource(resources, screen);
     }
 
     // On size changed
@@ -141,12 +137,13 @@ public class Meter extends TunerView
         super.onDraw(canvas);
 
         // Draw display icon
-        if (audio != null && audio.screen && bitmap != null)
-            canvas.drawBitmap(bitmap, 2, height - bitmap.getHeight() - 2, null);
+        if (audio != null && audio.screen && screen != null)
+            canvas.drawBitmap(screen.getBitmap(), 2,
+                              height - screen.getIntrinsicHeight() - 2, null);
 
         // Reset the paint to black
         paint.setStrokeWidth(1);
-        paint.setColor(resources.getColor(android.R.color.primary_text_light));
+        paint.setColor(textColour);
         paint.setStyle(Paint.Style.FILL);
 
         // Translate the canvas down

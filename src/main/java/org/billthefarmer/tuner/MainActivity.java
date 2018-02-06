@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,6 +35,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
@@ -50,7 +50,6 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 // Main Activity
 public class MainActivity extends Activity
@@ -66,9 +65,12 @@ public class MainActivity extends Activity
     private static final String PREF_SCREEN = "pref_screen";
     private static final String PREF_STROBE = "pref_strobe";
     private static final String PREF_ZOOM = "pref_zoom";
+    private static final String PREF_DARK = "pref_dark";
 
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
+
+    private static final int VERSION_M = 23;
 
     // Note values for display
     private static final String notes[] =
@@ -94,11 +96,20 @@ public class MainActivity extends Activity
     private Audio audio;
     private Toast toast;
 
+    private boolean dark;
+
     // On Create
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // Get preferences
+        getPreferences();
+
+        if (dark)
+            setTheme(R.style.AppDarkTheme);
+
         setContentView(R.layout.activity_main);
 
         // Find the views, not all may be present
@@ -359,21 +370,19 @@ public class MainActivity extends Activity
             status.invalidate();
     }
 
-    // On start
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-    }
-
     // On Resume
     @Override
     protected void onResume()
     {
         super.onResume();
 
+        boolean theme = dark;
+
         // Get preferences
         getPreferences();
+
+        if (dark != theme && Build.VERSION.SDK_INT != VERSION_M)
+            recreate();
 
         // Update status
         if (status != null)
@@ -383,51 +392,20 @@ public class MainActivity extends Activity
         audio.start();
     }
 
+    // onPause
     @Override
     protected void onPause()
     {
         super.onPause();
 
         // Save preferences
-
         savePreferences();
 
         // Stop audio thread
-
         audio.stop();
     }
 
-    // On stop
-
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
-    }
-
-    // On destroy
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-
-        // Get rid of all those pesky objects
-        audio = null;
-        scope = null;
-        spectrum = null;
-        display = null;
-        strobe = null;
-        meter = null;
-        status = null;
-        signal = null;
-        toast = null;
-
-        // Hint that it might be a good idea
-        System.runFinalization();
-    }
-
     // Save preferences
-
     void savePreferences()
     {
         SharedPreferences preferences =
@@ -448,12 +426,11 @@ public class MainActivity extends Activity
     // Get preferences
     void getPreferences()
     {
-        // Load preferences
-
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-
+        // Get preferences
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
+
+        dark = preferences.getBoolean(PREF_DARK, false);
 
         // Set preferences
         if (audio != null)
@@ -499,15 +476,11 @@ public class MainActivity extends Activity
                         custom =
                             new JSONArray(preferences.getString(PREF_CUSTOM,
                                                                 null));
-
                         strobe.foreground = custom.getInt(0);
                         strobe.background = custom.getInt(1);
                     }
 
-                    catch (JSONException e)
-                    {
-                        e.printStackTrace();
-                    }
+                    catch (Exception e) {}
                 }
 
                 // Ensure the view dimensions have been set
