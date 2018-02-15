@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Tuner</string>
+  <string name="help">Ajuda</string>
+  <string name="settings">Configurações</string>
+  <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
+  <string name="translation">
+    Spanish translation by Suso Comesaña\n
+    Hungarian translation by András Lengyel-Nagy\n
+    Japanese translation by naofum
+	Portuguese translation by Caio Roberto
+  </string>
+  <string name="licence">Licence: GNU GPLv3</string>
+
+  <string name="error_buffer">
+    Erro na gravação de áudio! Impossível encontrar um sample rate que funciona.
+  </string>
+  <string name="error_init">
+	Gravador de áudio não inicializado! Talvez a fonte de entrada selecionada não
+	está disponível, ou não foi possível encontrar uma taxa de amostragem funcionável.
+    Audio recorder not initialised! Maybe the selected input source is
+    not available, or a working input sample rate could not be found.
+  </string>
+
+  <string name="filter_on">Filtro de áudio ligado</string>
+  <string name="filter_off">Filtro de áudio desligado</string>
+
+  <string name="zoom_on">Zoom de espectro ligado</string>
+  <string name="zoom_off">Zoom de espectro desligado</string>
+
+  <string name="lock_on">Bloqueio de tela ligado</string>
+  <string name="lock_off">Bloqueio de tela desligado</string>
+
+  <string name="screen_on">Manter a tela ligada</string>
+  <string name="screen_off">Não manter a tela ligada</string>
+
+  <string name="strobe_on">Estroboscópio ligado</string>
+  <string name="strobe_off">Estroboscópio desligado</string>
+
+  <string name="downsample_on">Downsampling ligado</string>
+  <string name="downsample_off">Downsampling desligado</string>
+
+  <string name="multiple_on">Múltiplas notas ligado</string>
+  <string name="multiple_off">Múltiplas notas desligado</string>
+
+  <string name="copied_clip">Dados copiados para a área de transferência</string>
+  <string name="sample_rate">Taxa de amostragem: %d</string>
+
+  <string name="filter">filtro</string>
+  <string name="zoom">zoom</string>
+  <string name="lock">bloquear</string>
+  <string name="display">tela</string>
+  <string name="strobe">estroboscópio</string>
+  <string name="downsample">downsample</string>
+  <string name="multiple">múltiplas</string>
+
+  <string name="def_custom">[-1073807360,-1090518785]</string>
+
+  <string name="pref_input_category">Entrada</string>
+
+  <string name="pref_input">Fonte de entrada</string>
+  <string name="pref_input_summ">%s"</string>
+
+  <string name="pref_filter">Filtro de áudio</string>
+  <string name="pref_filter_summ">Filtrar áudio de entrada</string>
+
+  <string name="pref_downsample">Downsample</string>
+  <string name="pref_downsample_summ">Fazer Downsample da entrada antes da análise</string>
+
+  <string name="pref_display">Exibir</string>
+
+  <string name="pref_screen">Tela</string>
+  <string name="pref_screen_summ">Manter tela ligada</string>
+
+  <string name="pref_zoom">Zoom espectro</string>
+  <string name="pref_zoom_summ">Aumente o zoom para a nota atual na exibição de espectro</string>
+
+  <string name="pref_multiple">Múltiplas notas</string>
+  <string name="pref_multiple_summ">Mostrar múltiplas notas na tela</string>
+
+  <string name="pref_strobe">Estroboscópio</string>
+  <string name="pref_strobe_screen">Configurações do Estroboscópio</string>
+  <string name="pref_strobe_summ">Mostrar a exibição de estroboscópio</string>
+
+  <string name="pref_colour">Cores do estroboscópio</string>
+  <string name="pref_colour_summ">Alterar as cores do estroboscópio</string>
+
+  <string name="pref_custom">Personalização</string>
+  <string name="pref_custom_summ">Cores personalizadas</string>
+
+  <string name="pref_reference">Referência</string>
+  <string name="pref_reference_summ">%dHz</string>
+
+  <string name="pref_transpose">Transpor</string>
+  <string name="pref_transpose_summ">%s</string>
+
+  <string name="pref_about">Sobre</string>
+  <string name="pref_about_summ">Tuner versão %s</string>
+
+</resources>
