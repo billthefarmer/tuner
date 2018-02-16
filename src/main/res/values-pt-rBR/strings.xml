@@ -4,14 +4,14 @@
   <string name="app_name">Tuner</string>
   <string name="help">Ajuda</string>
   <string name="settings">Configurações</string>
-  <string name="copyright">Copyright \u00A9 2014 Bill Farmer</string>
-  <string name="translation">
-    Spanish translation by Suso Comesaña\n
-    Hungarian translation by András Lengyel-Nagy\n
-    Japanese translation by naofum
-	Portuguese translation by Caio Roberto
+  <string name="built">Construído %s</string>
+  <string name="copyright">Copyright \u00A9 2014 <a
+  href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="licence">Licence: GNU GPLv3</string>
+  <string name="translation">Portuguese translation by Caio Roberto</string>
+  <string name="licence">Licence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
 
   <string name="error_buffer">
     Erro na gravação de áudio! Impossível encontrar um sample rate que funciona.
@@ -94,6 +94,10 @@
 
   <string name="pref_transpose">Transpor</string>
   <string name="pref_transpose_summ">%s</string>
+
+  <string name="pref_theme">Tema</string>
+  <string name="pref_dark">Sombrio</string>
+  <string name="pref_dark_summ">Use o tema escuro</string>
 
   <string name="pref_about">Sobre</string>
   <string name="pref_about_summ">Tuner versão %s</string>
