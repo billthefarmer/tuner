@@ -8,7 +8,9 @@
   <string name="copyright">Copyright \u00A9 2014 <a
   href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="translation">Portuguese translation by Caio Roberto</string>
+  <string name="translation">Portuguese translation by <a
+  href="https://github.com/afmachado">Caio Roberto</a>
+  </string>
   <string name="licence">Licence <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
