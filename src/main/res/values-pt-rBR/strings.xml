@@ -18,7 +18,7 @@
   </string>
   <string name="error_init">
 	Gravador de áudio não inicializado! Talvez a fonte de entrada selecionada não
-	está disponível, ou não foi possível encontrar uma taxa de amostragem funcionável.
+	esteja disponível ou não foi possível encontrar uma taxa de amostragem adequada.
     Audio recorder not initialised! Maybe the selected input source is
     not available, or a working input sample rate could not be found.
   </string>
