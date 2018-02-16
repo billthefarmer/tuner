@@ -8,7 +8,7 @@
     <item>Fonte de áudio de ligação de voz + downlink</item>
     <item>Fonte de áudio de ligação de voz downlink (Tx)</item>
     <item>Fonte de áudio de ligação de voz uplink (Tx)</item>
-    <item>Fonte de áudio do microfone com a mesma orientação que a câmera se disponível, o microfone do dispositivo principal, caso contrário</item>
+    <item>Fonte de áudio do microfone com a mesma orientação que a câmera, se disponível. Caso contrário, microfone do dispositivo principal</item>
   </string-array>
   <string-array name="pref_input_entry_values">
     <item>0</item>
