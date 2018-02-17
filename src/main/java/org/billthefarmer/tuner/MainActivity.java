@@ -298,6 +298,13 @@ public class MainActivity extends Activity
 
         if (Build.VERSION.SDK_INT != VERSION_M)
             recreate();
+
+        else
+            if (dark)
+                showToast(R.string.dark_theme);
+
+            else
+                showToast(R.string.light_theme);
         break;
 
         // Meter

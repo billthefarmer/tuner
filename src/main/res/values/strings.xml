@@ -48,6 +48,9 @@
   <string name="multiple_on">Multiple notes on</string>
   <string name="multiple_off">Multiple notes off</string>
 
+  <string name="dark_theme">Dark theme</string>
+  <string name="light_theme">Light theme</string>
+
   <string name="copied_clip">Data copied to clipboard</string>
   <string name="sample_rate">Sample rate: %d</string>
 

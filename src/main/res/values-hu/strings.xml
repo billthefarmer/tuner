@@ -46,6 +46,9 @@
   <string name="multiple_on">Több hang be</string>
   <string name="multiple_off">Több hang ki</string>
 
+  <string name="dark_theme">Sötét téma</string>
+  <string name="light_theme">Fényes téma</string>
+
   <string name="copied_clip">Adatok a vágólapra másolva</string>
   <string name="sample_rate">Mintavételi frekvencia: %d</string>
 

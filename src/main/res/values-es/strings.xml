@@ -44,6 +44,9 @@
   <string name="multiple_on">Activar múltiples notas</string>
   <string name="multiple_off">Desactivar múltiple notas</string>
 
+  <string name="dark_theme">Tema oscuro</string>
+  <string name="light_theme">Tema de luz</string>
+
   <string name="copied_clip">Datos copiados en el portapapeles</string>
   <string name="sample_rate">Frecuencia de muestreo: %d</string>
 

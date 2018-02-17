@@ -45,6 +45,9 @@
   <string name="multiple_on">複数音符 オン</string>
   <string name="multiple_off">複数音符 オフ</string>
 
+  <string name="dark_theme">暗いテーマ</string>
+  <string name="light_theme">ライトテーマ</string>
+
   <string name="copied_clip">データをクリップボードにコピーしました</string>
   <string name="sample_rate">サンプルレート: %d</string>
 
