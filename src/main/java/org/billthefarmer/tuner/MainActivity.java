@@ -191,7 +191,10 @@ public class MainActivity extends Activity
 
         // Strobe
         if (strobe != null)
+        {
             strobe.setOnClickListener(this);
+            strobe.setOnLongClickListener(this);
+        }
 
         // Meter
         if (meter != null)
@@ -289,6 +292,14 @@ public class MainActivity extends Activity
                 showToast(R.string.multiple_off);
             break;
 
+        // Strobe
+        case R.id.strobe:
+            dark = !dark;
+
+        if (Build.VERSION.SDK_INT != VERSION_M)
+            recreate();
+        break;
+
         // Meter
         case R.id.meter:
             audio.screen = !audio.screen;
@@ -302,10 +313,11 @@ public class MainActivity extends Activity
             Window window = getWindow();
 
             if (audio.screen)
-                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+                window.addFlags(WindowManager
+                                .LayoutParams.FLAG_KEEP_SCREEN_ON);
             else
-                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                window.clearFlags(WindowManager
+                                  .LayoutParams.FLAG_KEEP_SCREEN_ON);
             break;
         }
         return true;
@@ -413,12 +425,17 @@ public class MainActivity extends Activity
 
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putBoolean(PREF_FILTER, audio.filter);
-        editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
-        editor.putBoolean(PREF_MULTIPLE, audio.multiple);
-        editor.putBoolean(PREF_SCREEN, audio.screen);
-        editor.putBoolean(PREF_STROBE, audio.strobe);
-        editor.putBoolean(PREF_ZOOM, audio.zoom);
+        editor.putBoolean(PREF_DARK, dark);
+
+        if (audio != null)
+        {
+            editor.putBoolean(PREF_FILTER, audio.filter);
+            editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
+            editor.putBoolean(PREF_MULTIPLE, audio.multiple);
+            editor.putBoolean(PREF_SCREEN, audio.screen);
+            editor.putBoolean(PREF_STROBE, audio.strobe);
+            editor.putBoolean(PREF_ZOOM, audio.zoom);
+        }
 
         editor.apply();
     }
@@ -430,9 +447,9 @@ public class MainActivity extends Activity
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
 
+        // Set preferences
         dark = preferences.getBoolean(PREF_DARK, false);
 
-        // Set preferences
         if (audio != null)
         {
             audio.input =
