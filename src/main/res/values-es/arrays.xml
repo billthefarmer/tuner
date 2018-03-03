@@ -68,9 +68,6 @@
   </string-array>
 
   <string-array name="pref_note_entries">
-    <item>A</item>
-    <item>B\u266D</item>
-    <item>B</item>
     <item>C</item>
     <item>C\u266F</item>
     <item>D</item>
@@ -80,6 +77,9 @@
     <item>F\u266F</item>
     <item>G</item>
     <item>A\u266D</item>
+    <item>A</item>
+    <item>B\u266D</item>
+    <item>B</item>
   </string-array>
   <string-array name="pref_note_entry_values">
     <item>0</item>

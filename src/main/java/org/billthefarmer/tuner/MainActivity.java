@@ -1058,11 +1058,22 @@ public class MainActivity extends Activity
                         double cf =
                             -12.0 * log2(reference / xf[i]);
 
+                        // Note number
                         int n = (int)(Math.round(cf) + C5_OFFSET);
-                        int note = n % OCTAVE;
 
+                        // Don't use if negative
+                        if (n < 0)
+                            continue;
+
+                        // Get note and octave
+                        int note = n % OCTAVE;
                         int octave = n / OCTAVE;
 
+                        // Don't use if too high
+                        if (octave >= octaveFilter.length)
+                            continue;
+
+                        // Check the filters
                         if (!noteFilter[note] ||
                             !octaveFilter[octave])
                             continue;
