@@ -52,6 +52,34 @@
 	android:persistent="false"
 	android:defaultValue="false" />
     <PreferenceScreen
+	android:key="pref_filter_screen"
+	android:icon="?attr/pref_filter"
+	android:title="@string/pref_note_filter"
+	android:summary="@string/pref_note_filter_summ" >
+      <CheckBoxPreference
+	  android:key="pref_filters"
+	  android:icon="?attr/pref_filter"
+	  android:title="@string/pref_filters"
+	  android:summary="@string/pref_filters_summ"
+	  android:defaultValue="false" />
+      <MultiSelectListPreference
+	  android:key="pref_note"
+	  android:icon="?attr/pref_filter"
+	  android:title="@string/pref_note_filter"
+	  android:summary="@string/pref_note_filter_summ"
+	  android:entries="@array/pref_note_entries"
+	  android:entryValues="@array/pref_note_entry_values"
+          android:defaultValue="@array/pref_note_entry_values" />
+      <MultiSelectListPreference
+	  android:key="pref_octave"
+	  android:icon="?attr/pref_filter"
+	  android:title="@string/pref_octave_filter"
+	  android:summary="@string/pref_octave_filter_summ"
+	  android:entries="@array/pref_octave_entries"
+	  android:entryValues="@array/pref_octave_entry_values"
+          android:defaultValue="@array/pref_octave_entry_values" />
+    </PreferenceScreen>
+    <PreferenceScreen
 	android:key="pref_strobe_screen"
 	android:icon="?attr/pref_strobe"
 	android:title="@string/pref_strobe"

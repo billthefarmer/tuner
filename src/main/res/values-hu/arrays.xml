@@ -63,6 +63,56 @@
     <item>-6</item>
   </string-array>
 
+  <string-array name="pref_note_entries">
+    <item>A</item>
+    <item>B\u266D</item>
+    <item>B</item>
+    <item>C</item>
+    <item>C\u266F</item>
+    <item>D</item>
+    <item>E\u266D</item>
+    <item>E</item>
+    <item>F</item>
+    <item>F\u266F</item>
+    <item>G</item>
+    <item>A\u266D</item>
+  </string-array>
+  <string-array name="pref_note_entry_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+    <item>11</item>
+  </string-array>
+
+  <string-array name="pref_octave_entries">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+  </string-array>
+  <string-array name="pref_octave_entry_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+  </string-array>
+
   <integer-array name="sample_rates">
       <item>11025</item>
       <item>22050</item>

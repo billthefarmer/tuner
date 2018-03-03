@@ -48,6 +48,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.util.Locale;
+import java.util.Set;
 
 import org.json.JSONArray;
 
@@ -60,12 +61,16 @@ public class MainActivity extends Activity
     private static final String PREF_TRANSPOSE = "pref_transpose";
 
     private static final String PREF_FILTER = "pref_filter";
+    private static final String PREF_FILTERS = "pref_filters";
     private static final String PREF_DOWNSAMPLE = "pref_downsample";
     private static final String PREF_MULTIPLE = "pref_multiple";
     private static final String PREF_SCREEN = "pref_screen";
     private static final String PREF_STROBE = "pref_strobe";
     private static final String PREF_ZOOM = "pref_zoom";
     private static final String PREF_DARK = "pref_dark";
+
+    private static final String PREF_NOTE = "pref_note";
+    private static final String PREF_OCTAVE = "pref_octave";
 
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
@@ -466,6 +471,7 @@ public class MainActivity extends Activity
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
 
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
+            audio.filters = preferences.getBoolean(PREF_FILTERS, false);
             audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
             audio.multiple = preferences.getBoolean(PREF_MULTIPLE, false);
             audio.screen = preferences.getBoolean(PREF_SCREEN, false);
@@ -485,32 +491,60 @@ public class MainActivity extends Activity
                 window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
 
-            // Check for strobe before setting colours
-            if (strobe != null)
+            // Note filter
+            Set<String> notes = preferences.getStringSet(PREF_NOTE, null);
+            if (notes != null)
             {
-                strobe.colour =
-                    Integer.valueOf(preferences.getString(PREF_COLOUR, "0"));
+                for (int index = 0; index < audio.noteFilter.length; index++)
+                    audio.noteFilter[index] = false;
 
-                if (strobe.colour == 3)
+                for (String note: notes)
                 {
-                    JSONArray custom;
+                    int index = Integer.parseInt(note);
+                    audio.noteFilter[index] = true;
+                }
+            }
 
-                    try
-                    {
-                        custom =
-                            new JSONArray(preferences.getString(PREF_CUSTOM,
-                                                                null));
-                        strobe.foreground = custom.getInt(0);
-                        strobe.background = custom.getInt(1);
-                    }
+            // Octave filter
+            Set<String> octaves = preferences.getStringSet(PREF_OCTAVE, null);
+            if (octaves != null)
+            {
+                for (int index = 0; index < audio.octaveFilter.length; index++)
+                    audio.octaveFilter[index] = false;
 
-                    catch (Exception e) {}
+                for (String octave: octaves)
+                {
+                    int index = Integer.parseInt(octave);
+                    audio.octaveFilter[index] = true;
+                }
+            }
+        }
+
+        // Check for strobe before setting colours
+        if (strobe != null)
+        {
+            strobe.colour =
+                Integer.valueOf(preferences.getString(PREF_COLOUR, "0"));
+
+            if (strobe.colour == 3)
+            {
+                JSONArray custom;
+
+                try
+                {
+                    custom =
+                        new JSONArray(preferences.getString(PREF_CUSTOM,
+                                                            null));
+                    strobe.foreground = custom.getInt(0);
+                    strobe.background = custom.getInt(1);
                 }
 
-                // Ensure the view dimensions have been set
-                if (strobe.width > 0 && strobe.height > 0)
-                    strobe.createShaders();
+                catch (Exception e) {}
             }
+
+            // Ensure the view dimensions have been set
+            if (strobe.width > 0 && strobe.height > 0)
+                strobe.createShaders();
         }
     }
 
@@ -554,8 +588,17 @@ public class MainActivity extends Activity
         protected boolean filter;
         protected boolean screen;
         protected boolean strobe;
+        protected boolean filters;
         protected boolean multiple;
         protected boolean downsample;
+
+        protected boolean noteFilter[] =
+        {true, true, true, true, true, true,
+         true, true, true, true, true, true};
+
+        protected boolean octaveFilter[] =
+        {true, true, true, true,
+         true, true, true, true};
 
         protected double reference;
 
@@ -1009,6 +1052,23 @@ public class MainActivity extends Activity
                 // Find maximum value, and list of maxima
                 for (int i = 1; i < limit; i++)
                 {
+                    if (filters)
+                    {
+                        // Cents relative to reference
+                        double cf =
+                            -12.0 * log2(reference / xf[i]);
+
+                        int n = (int)(Math.round(cf) + C5_OFFSET);
+                        int note = n % OCTAVE;
+
+                        int octave = n / OCTAVE;
+
+                        if (!noteFilter[note] ||
+                            !octaveFilter[octave])
+                            continue;
+                    }
+
+                    // Find maximum value
                     if (xa[i] > max)
                     {
                         max = xa[i];

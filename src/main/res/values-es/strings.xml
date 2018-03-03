@@ -82,6 +82,15 @@
   <string name="pref_multiple">Múltiple notas</string>
   <string name="pref_multiple_summ">Muestra múltiples notas en la pantalla</string>
 
+  <string name="pref_filters">Filtros</string>
+  <string name="pref_filters_summ">Usa filtros</string>
+
+  <string name="pref_note_filter">Filtro de nota</string>
+  <string name="pref_note_filter_summ">Configuración de filtro de nota</string>
+
+  <string name="pref_octave_filter">Filtro de octava</string>
+  <string name="pref_octave_filter_summ">Configuración de filtro de octava</string>
+
   <string name="pref_strobe">Stroboscopio</string>
   <string name="pref_strobe_screen">Ayustes del estroboscopio</string>
   <string name="pref_strobe_summ">Muestra el estroboscopio en la pantalla</string>
