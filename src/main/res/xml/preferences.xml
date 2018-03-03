@@ -64,6 +64,7 @@
 	  android:defaultValue="false" />
       <MultiSelectListPreference
 	  android:key="pref_note"
+	  android:dependency="pref_filters"
 	  android:icon="?attr/pref_filter"
 	  android:title="@string/pref_note_filter"
 	  android:summary="@string/pref_note_filter_summ"
@@ -72,6 +73,7 @@
           android:defaultValue="@array/pref_note_entry_values" />
       <MultiSelectListPreference
 	  android:key="pref_octave"
+	  android:dependency="pref_filters"
 	  android:icon="?attr/pref_filter"
 	  android:title="@string/pref_octave_filter"
 	  android:summary="@string/pref_octave_filter_summ"

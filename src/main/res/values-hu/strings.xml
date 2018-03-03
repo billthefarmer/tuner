@@ -84,6 +84,15 @@
   <string name="pref_multiple">Több hang</string>
   <string name="pref_multiple_summ">Több hang mutatása a kijelzőn</string>
 
+  <string name="pref_filters">Szűrők</string>
+  <string name="pref_filters_summ">Szűrők használata</string>
+
+  <string name="pref_note_filter">Hangjegy szűrő</string>
+  <string name="pref_note_filter_summ">Hangjegy szűrő beállításait</string>
+
+  <string name="pref_octave_filter">Oktávszűrő</string>
+  <string name="pref_octave_filter_summ">Octave szűrő beállítások</string>
+
   <string name="pref_strobe">Stroboszkóp</string>
   <string name="pref_strobe_screen">Stroboszkóp beállításai</string>
   <string name="pref_strobe_summ">Stroboszkóp mutatása</string>
