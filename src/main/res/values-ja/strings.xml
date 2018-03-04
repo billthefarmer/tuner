@@ -56,8 +56,8 @@
   <string name="lock">ロック</string>
   <string name="display">画面</string>
   <string name="strobe">ストロボ</string>
-  <string name="downsample">ダウンサンプル</string>
-  <string name="multiple">複数</string>
+  <string name="down">ダウンサンプル</string>
+  <string name="mult">複数</string>
 
   <string name="def_custom">[-1073807360,-1090518785]</string>
 

@@ -57,8 +57,8 @@
   <string name="lock">zárás</string>
   <string name="display">kijelző</string>
   <string name="strobe">strobe</string>
-  <string name="downsample">alulmintavételezés</string>
-  <string name="multiple">több</string>
+  <string name="down">alulmintavételezés</string>
+  <string name="mult">több</string>
 
   <string name="def_custom">[-1073807360,-1090518785]</string>
 

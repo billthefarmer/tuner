@@ -16,13 +16,15 @@
   </string>
 
   <string name="error_buffer">
-    Erro na gravação de áudio! Impossível encontrar um sample rate que funciona.
+    Erro na gravação de áudio! Impossível encontrar um sample rate que
+    funciona.
   </string>
   <string name="error_init">
-	Gravador de áudio não inicializado! Talvez a fonte de entrada selecionada não
-	esteja disponível ou não foi possível encontrar uma taxa de amostragem adequada.
-    Audio recorder not initialised! Maybe the selected input source is
-    not available, or a working input sample rate could not be found.
+    Gravador de áudio não inicializado! Talvez a fonte de entrada
+    selecionada não esteja disponível ou não foi possível encontrar
+    uma taxa de amostragem adequada.  Audio recorder not initialised!
+    Maybe the selected input source is not available, or a working
+    input sample rate could not be found.
   </string>
 
   <string name="filter_on">Filtro de áudio ligado</string>
@@ -56,9 +58,9 @@
   <string name="zoom">zoom</string>
   <string name="lock">bloquear</string>
   <string name="display">tela</string>
-  <string name="strobe">estroboscópio</string>
-  <string name="downsample">downsample</string>
-  <string name="multiple">múltiplas</string>
+  <string name="strobe">estrobo</string>
+  <string name="down">down</string>
+  <string name="mult">múlt</string>
 
   <string name="def_custom">[-1073807360,-1090518785]</string>
 
