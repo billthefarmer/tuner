@@ -30,6 +30,9 @@
   <string name="filter_on">Audio filter on</string>
   <string name="filter_off">Audio filter off</string>
 
+  <string name="fund_on">Fundamental filter on</string>
+  <string name="fund_off">Fundamental filter off</string>
+
   <string name="zoom_on">Spectrum zoom on</string>
   <string name="zoom_off">Spectrum zoom off</string>
 
@@ -55,12 +58,14 @@
   <string name="sample_rate">Sample rate: %d</string>
 
   <string name="filter">filter</string>
+  <string name="fund">fund</string>
+  <string name="note">note</string>
   <string name="zoom">zoom</string>
   <string name="lock">lock</string>
   <string name="display">screen</string>
   <string name="strobe">strobe</string>
-  <string name="downsample">downsample</string>
-  <string name="multiple">multiple</string>
+  <string name="down">down</string>
+  <string name="mult">mult</string>
 
   <string name="def_custom">[-1073807360,-1090518785]</string>
 

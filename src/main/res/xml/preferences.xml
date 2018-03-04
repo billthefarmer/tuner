@@ -36,7 +36,6 @@
 	android:icon="?attr/pref_screen"
 	android:title="@string/pref_screen"
 	android:summary="@string/pref_screen_summ"
-	android:persistent="true"
 	android:defaultValue="false" />
     <CheckBoxPreference
 	android:key="pref_zoom"
@@ -49,7 +48,6 @@
 	android:icon="?attr/pref_multiple"
 	android:title="@string/pref_multiple"
 	android:summary="@string/pref_multiple_summ"
-	android:persistent="false"
 	android:defaultValue="false" />
     <PreferenceScreen
 	android:key="pref_filter_screen"

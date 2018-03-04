@@ -179,7 +179,10 @@ public class MainActivity extends Activity
     {
         // Scope
         if (scope != null)
+        {
             scope.setOnClickListener(this);
+            scope.setOnLongClickListener(this);
+        }
 
         // Spectrum
         if (spectrum != null)
@@ -277,6 +280,16 @@ public class MainActivity extends Activity
         int id = v.getId();
         switch (id)
         {
+        // Scope
+        case R.id.scope:
+            audio.fund = !audio.fund;
+
+            if (audio.fund)
+                showToast(R.string.fund_on);
+            else
+                showToast(R.string.fund_off);
+            break;
+
         // Spectrum
         case R.id.spectrum:
             audio.downsample = !audio.downsample;
@@ -442,7 +455,9 @@ public class MainActivity extends Activity
 
         if (audio != null)
         {
+            editor.putBoolean(PREF_FUND, audio.fund);
             editor.putBoolean(PREF_FILTER, audio.filter);
+            editor.putBoolean(PREF_FILTERS, audio.filters);
             editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
             editor.putBoolean(PREF_MULTIPLE, audio.multiple);
             editor.putBoolean(PREF_SCREEN, audio.screen);

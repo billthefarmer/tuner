@@ -64,6 +64,17 @@ public class Scope extends Graticule
             canvas.drawText("F", 4, height - 2, paint);
         }
 
+        // Draw FF if fundamental filter
+        if (audio.fund)
+        {
+            // Color yellow
+            paint.setStrokeWidth(2);
+            paint.setAntiAlias(true);
+            paint.setColor(Color.YELLOW);
+
+            canvas.drawText("FF", 4, height - 4, paint);
+        }
+
         // Initialise sync
         int maxdx = 0;
         int dx = 0;

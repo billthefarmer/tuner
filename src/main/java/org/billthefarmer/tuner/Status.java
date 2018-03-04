@@ -134,7 +134,7 @@ public class Status extends View
             x += paint.measureText(s + "  ");
         }
 
-        // Filter
+        // Audio filter
         if (audio.filter)
         {
             s = resources.getString(R.string.filter);
@@ -142,10 +142,26 @@ public class Status extends View
             x += paint.measureText(s + " ");
         }
 
+        // Fundamental filter
+        if (audio.fund)
+        {
+            s = resources.getString(R.string.fund);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
+
+        // Note filter
+        if (audio.filters)
+        {
+            s = resources.getString(R.string.note);
+            canvas.drawText(s, x, 0, paint);
+            x += paint.measureText(s + " ");
+        }
+
         // Downsample
         if (audio.downsample)
         {
-            s = resources.getString(R.string.downsample);
+            s = resources.getString(R.string.down);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
@@ -169,7 +185,7 @@ public class Status extends View
         // Multiple
         if (audio.multiple)
         {
-            s = resources.getString(R.string.multiple);
+            s = resources.getString(R.string.mult);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
