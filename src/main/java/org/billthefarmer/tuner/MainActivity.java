@@ -60,6 +60,7 @@ public class MainActivity extends Activity
     private static final String PREF_REFERENCE = "pref_reference";
     private static final String PREF_TRANSPOSE = "pref_transpose";
 
+    private static final String PREF_FUND = "pref_fund";
     private static final String PREF_FILTER = "pref_filter";
     private static final String PREF_FILTERS = "pref_filters";
     private static final String PREF_DOWNSAMPLE = "pref_downsample";
@@ -470,6 +471,7 @@ public class MainActivity extends Activity
             audio.transpose =
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
 
+            audio.fund = preferences.getBoolean(PREF_FUND, false);
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
             audio.filters = preferences.getBoolean(PREF_FILTERS, false);
             audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
@@ -477,19 +479,6 @@ public class MainActivity extends Activity
             audio.screen = preferences.getBoolean(PREF_SCREEN, false);
             audio.strobe = preferences.getBoolean(PREF_STROBE, false);
             audio.zoom = preferences.getBoolean(PREF_ZOOM, true);
-
-            // Check screen
-            if (audio.screen)
-            {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-
-            else
-            {
-                Window window = getWindow();
-                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
 
             // Note filter
             Set<String> notes = preferences.getStringSet(PREF_NOTE, null);
@@ -517,6 +506,19 @@ public class MainActivity extends Activity
                     int index = Integer.parseInt(octave);
                     audio.octaveFilter[index] = true;
                 }
+            }
+
+            // Check screen
+            if (audio.screen)
+            {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+
+            else
+            {
+                Window window = getWindow();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         }
 
@@ -585,6 +587,7 @@ public class MainActivity extends Activity
 
         protected boolean lock;
         protected boolean zoom;
+        protected boolean fund;
         protected boolean filter;
         protected boolean screen;
         protected boolean strobe;
@@ -1052,19 +1055,24 @@ public class MainActivity extends Activity
                 // Find maximum value, and list of maxima
                 for (int i = 1; i < limit; i++)
                 {
+                    // Cents relative to reference
+                    double cf =
+                        -12.0 * log2(reference / xf[i]);
+
+                    // Note number
+                    int n = (int)(Math.round(cf) + C5_OFFSET);
+
+                    // Don't use if negative
+                    if (n < 0)
+                        continue;
+
+                    // Check fundamental
+                    if (fund && (count > 0) &&
+                        ((n % OCTAVE) != (maxima.n[0] % OCTAVE)))
+                        continue;
+
                     if (filters)
                     {
-                        // Cents relative to reference
-                        double cf =
-                            -12.0 * log2(reference / xf[i]);
-
-                        // Note number
-                        int n = (int)(Math.round(cf) + C5_OFFSET);
-
-                        // Don't use if negative
-                        if (n < 0)
-                            continue;
-
                         // Get note and octave
                         int note = n % OCTAVE;
                         int octave = n / OCTAVE;
@@ -1093,23 +1101,12 @@ public class MainActivity extends Activity
                     {
                         maxima.f[count] = xf[i];
 
-                        // Cents relative to reference
-                        double cf =
-                            -12.0 * log2(reference / xf[i]);
+                        // Note number
+                        maxima.n[count] = n;
 
                         // Reference note
                         maxima.r[count] = reference *
                                           Math.pow(2.0, Math.round(cf) / 12.0);
-
-                        // Note number
-                        maxima.n[count] = (int)(Math.round(cf) + C5_OFFSET);
-
-                        // Don't use if negative
-                        if (maxima.n[count] < 0)
-                        {
-                            maxima.n[count] = 0;
-                            continue;
-                        }
 
                         // Set limit to octave above
                         if (!downsample && (limit > i * 2))

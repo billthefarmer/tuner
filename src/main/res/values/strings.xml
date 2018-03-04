@@ -86,6 +86,9 @@
   <string name="pref_multiple">Multiple notes</string>
   <string name="pref_multiple_summ">Show multiple notes on display</string>
 
+  <string name="pref_fund">Fundamental</string>
+  <string name="pref_fund_summ">Use fundamental filter</string>
+
   <string name="pref_filters">Filters</string>
   <string name="pref_filters_summ">Use filters</string>
 
