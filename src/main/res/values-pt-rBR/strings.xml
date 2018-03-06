@@ -30,6 +30,9 @@
   <string name="filter_on">Filtro de áudio ligado</string>
   <string name="filter_off">Filtro de áudio desligado</string>
 
+  <string name="fund_on">Filtro fundamental ligado</string>
+  <string name="fund_off">Filtro fundamental desligado</string>
+
   <string name="zoom_on">Zoom de espectro ligado</string>
   <string name="zoom_off">Zoom de espectro desligado</string>
 
@@ -55,6 +58,8 @@
   <string name="sample_rate">Taxa de amostragem: %d</string>
 
   <string name="filter">filtro</string>
+  <string name="fund">fund</string>
+  <string name="note">notas</string>
   <string name="zoom">zoom</string>
   <string name="lock">bloquear</string>
   <string name="display">tela</string>
@@ -85,6 +90,18 @@
 
   <string name="pref_multiple">Múltiplas notas</string>
   <string name="pref_multiple_summ">Mostrar múltiplas notas na tela</string>
+
+  <string name="pref_fund">Filtro fundamental</string>
+  <string name="pref_fund_summ">Use um filtro fundamental</string>
+
+  <string name="pref_filters">Nota filtros</string>
+  <string name="pref_filters_summ">Use o filtro de notas</string>
+
+  <string name="pref_note_filter">Nota filtro</string>
+  <string name="pref_note_filter_summ">Configurações de filtro de notas</string>
+
+  <string name="pref_octave_filter">Filtro de octava</string>
+  <string name="pref_octave_filter_summ">Configurações do filtro octave</string>
 
   <string name="pref_strobe">Estroboscópio</string>
   <string name="pref_strobe_screen">Configurações do Estroboscópio</string>
