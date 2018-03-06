@@ -69,7 +69,7 @@ public class Spectrum extends Graticule
             canvas.drawText("D", 4, height - 2, paint);
         }
 
-        // Draw N if note filter
+        // Draw NF if note filter
         if (audio.filters)
         {
             // Color yellow
@@ -77,7 +77,7 @@ public class Spectrum extends Graticule
             paint.setTextAlign(Paint.Align.LEFT);
             paint.setColor(Color.YELLOW);
 
-            canvas.drawText("N", 4, height - 4, paint);
+            canvas.drawText("NF", 4, height - 4, paint);
         }
 
         // Translate canvas

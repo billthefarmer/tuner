@@ -527,13 +527,15 @@ public class MainActivity extends Activity
             if (audio.screen)
             {
                 Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                window.addFlags(WindowManager
+                                .LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
 
             else
             {
                 Window window = getWindow();
-                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                window.clearFlags(WindowManager
+                                  .LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         }
 
@@ -541,7 +543,7 @@ public class MainActivity extends Activity
         if (strobe != null)
         {
             strobe.colour =
-                Integer.valueOf(preferences.getString(PREF_COLOUR, "0"));
+                Integer.parseInt(preferences.getString(PREF_COLOUR, "0"));
 
             if (strobe.colour == 3)
             {
@@ -566,15 +568,15 @@ public class MainActivity extends Activity
     }
 
     // Show alert
-    void showAlert(int appName, int errorBuffer)
+    void showAlert(int title, int message)
     {
         // Create an alert dialog builder
         AlertDialog.Builder builder =
             new AlertDialog.Builder(this);
 
         // Set the title, message and button
-        builder.setTitle(appName);
-        builder.setMessage(errorBuffer);
+        builder.setTitle(title);
+        builder.setMessage(message);
         builder.setNeutralButton(android.R.string.ok,
                                  new DialogInterface.OnClickListener()
         {
@@ -768,9 +770,10 @@ public class MainActivity extends Activity
             {
                 // Check sample rate
                 size =
-                    AudioRecord.getMinBufferSize(rate,
-                                                 AudioFormat.CHANNEL_IN_MONO,
-                                                 AudioFormat.ENCODING_PCM_16BIT);
+                    AudioRecord
+                    .getMinBufferSize(rate,
+                                      AudioFormat.CHANNEL_IN_MONO,
+                                      AudioFormat.ENCODING_PCM_16BIT);
                 // Loop if invalid sample rate
                 if (size == AudioRecord.ERROR_BAD_VALUE)
                 {
@@ -1329,39 +1332,42 @@ public class MainActivity extends Activity
                         continue;
 
                     text +=
-                        String.format(Locale.getDefault(),
-                                      "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                      notes[(maxima.n[i] - transpose +
-                                             OCTAVE) % OCTAVE],
-                                      sharps[(maxima.n[i] - transpose +
-                                              OCTAVE) % OCTAVE],
-                                      (maxima.n[i] - transpose) / OCTAVE, cents,
-                                      maxima.r[i], maxima.f[i],
-                                      maxima.r[i] - maxima.f[i]);
+                        String
+                        .format(Locale.getDefault(),
+                                "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+                                notes[(maxima.n[i] - transpose +
+                                       OCTAVE) % OCTAVE],
+                                sharps[(maxima.n[i] - transpose +
+                                        OCTAVE) % OCTAVE],
+                                (maxima.n[i] - transpose) / OCTAVE, cents,
+                                maxima.r[i], maxima.f[i],
+                                maxima.r[i] - maxima.f[i]);
                 }
 
                 if (count == 0)
                     text =
-                        String.format(Locale.getDefault(),
-                                      "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                      notes[(note - transpose +
-                                             OCTAVE) % OCTAVE],
-                                      sharps[(note - transpose +
-                                              OCTAVE) % OCTAVE],
-                                      (note - transpose) / OCTAVE, cents,
-                                      nearest, frequency, difference);
+                        String
+                        .format(Locale.getDefault(),
+                                "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+                                notes[(note - transpose +
+                                       OCTAVE) % OCTAVE],
+                                sharps[(note - transpose +
+                                        OCTAVE) % OCTAVE],
+                                (note - transpose) / OCTAVE, cents,
+                                nearest, frequency, difference);
             }
 
             else
                 text =
-                    String.format(Locale.getDefault(),
-                                  "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                  notes[(note - transpose +
-                                         OCTAVE) % OCTAVE],
-                                  sharps[(note - transpose +
-                                          OCTAVE) % OCTAVE],
-                                  (note - transpose) / OCTAVE, cents,
-                                  nearest, frequency, difference);
+                    String
+                    .format(Locale.getDefault(),
+                            "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+                            notes[(note - transpose +
+                                   OCTAVE) % OCTAVE],
+                            sharps[(note - transpose +
+                                    OCTAVE) % OCTAVE],
+                            (note - transpose) / OCTAVE, cents,
+                            nearest, frequency, difference);
 
             ClipboardManager clipboard =
                 (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
