@@ -68,7 +68,7 @@
   <string name="pref_input_category">Entrada</string>
 
   <string name="pref_input">Fuente de entrada</string>
-  <string name="pref_input_summ">%s"</string>
+  <string name="pref_input_summ">%s</string>
 
   <string name="pref_filter">Filtro de audio</string>
   <string name="pref_filter_summ">Filtro de la entrada de audio</string>
@@ -91,7 +91,7 @@
   <string name="pref_fund_summ">Utilizar filtro fundamental</string>
 
   <string name="pref_filters">Filtros</string>
-  <string name="pref_filters_summ">Usa filtros</string>
+  <string name="pref_filters_summ">Usa filtros de nota</string>
 
   <string name="pref_note_filter">Filtro de nota</string>
   <string name="pref_note_filter_summ">Configuración de filtro de nota</string>

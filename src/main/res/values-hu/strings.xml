@@ -28,6 +28,9 @@
   <string name="filter_on">Hangfrekvenciás szűrő be</string>
   <string name="filter_off">Hangfrekvenciás szűrő ki</string>
 
+  <string name="fund_on">Alapvető szűrő be</string>
+  <string name="fund_off">Alapvető szűrő ki</string>
+
   <string name="zoom_on">Spektrumra közelítés be</string>
   <string name="zoom_off">Spektrumra közelítés ki</string>
 
@@ -53,6 +56,8 @@
   <string name="sample_rate">Mintavételi frekvencia: %d</string>
 
   <string name="filter">szűrő</string>
+  <string name="fund">alapvető</string>
+  <string name="note">hangjegy</string>
   <string name="zoom">közelítés</string>
   <string name="lock">zárás</string>
   <string name="display">kijelző</string>
@@ -65,7 +70,7 @@
   <string name="pref_input_category">Bemenet</string>
 
   <string name="pref_input">Bemeneti jel</string>
-  <string name="pref_input_summ">%s"</string>
+  <string name="pref_input_summ">%s</string>
 
   <string name="pref_filter">Hangfrekvenciás szűrő</string>
   <string name="pref_filter_summ">Bemeneti jel szűrése</string>
@@ -84,8 +89,11 @@
   <string name="pref_multiple">Több hang</string>
   <string name="pref_multiple_summ">Több hang mutatása a kijelzőn</string>
 
-  <string name="pref_filters">Szűrők</string>
-  <string name="pref_filters_summ">Szűrők használata</string>
+  <string name="pref_fund">Alapvető</string>
+  <string name="pref_fund_summ">Használjon alapvető szűrőt</string>
+
+  <string name="pref_filters">Megjegyzés szűrők</string>
+  <string name="pref_filters_summ">Használj jegyzetszűrőket</string>
 
   <string name="pref_note_filter">Hangjegy szűrő</string>
   <string name="pref_note_filter_summ">Hangjegy szűrő beállításait</string>
