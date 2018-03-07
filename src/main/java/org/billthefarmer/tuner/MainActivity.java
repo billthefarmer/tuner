@@ -617,7 +617,7 @@ public class MainActivity extends Activity
          true, true, true, true, true, true};
 
         protected boolean octaveFilter[] =
-        {true, true, true, true,
+        {true, true, true, true, true,
          true, true, true, true};
 
         protected double reference;

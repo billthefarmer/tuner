@@ -104,6 +104,7 @@
     <item>5</item>
     <item>6</item>
     <item>7</item>
+    <item>8</item>
   </string-array>
   <string-array name="pref_octave_entry_values">
     <item>0</item>
@@ -114,6 +115,7 @@
     <item>5</item>
     <item>6</item>
     <item>7</item>
+    <item>8</item>
   </string-array>
 
   <integer-array name="sample_rates">
