@@ -27,6 +27,9 @@
   <string name="filter_on">オーディオフィルター オン</string>
   <string name="filter_off">オーディオフィルター オフ</string>
 
+  <string name="fund_on">基本フィルタは</string>
+  <string name="fund_off">基本フィルタオフ</string>
+
   <string name="zoom_on">スペクトルズーム オン</string>
   <string name="zoom_off">スペクトルズーム オフ</string>
 
@@ -52,11 +55,13 @@
   <string name="sample_rate">サンプルレート: %d</string>
 
   <string name="filter">フィルター</string>
+  <string name="fund">基本的な</string>
+  <string name="note">音符</string>
   <string name="zoom">ズーム</string>
   <string name="lock">ロック</string>
   <string name="display">画面</string>
   <string name="strobe">ストロボ</string>
-  <string name="down">ダウンサンプル</string>
+  <string name="down">ダウン</string>
   <string name="mult">複数</string>
 
   <string name="def_custom">[-1073807360,-1090518785]</string>
@@ -82,6 +87,18 @@
 
   <string name="pref_multiple">複数音符</string>
   <string name="pref_multiple_summ">ディスプレイに複数音符を表示</string>
+
+  <string name="pref_fund">基本フィルタ</string>
+  <string name="pref_fund_summ">基本フィルタを使用する</string>
+
+  <string name="pref_filters">音符フィルタ</string>
+  <string name="pref_filters_summ">音符フィルタを使用する</string>
+
+  <string name="pref_note_filter">音符フィルタ</string>
+  <string name="pref_note_filter_summ">音符フィルタの設定</string>
+
+  <string name="pref_octave_filter">オクターブフィルター</string>
+  <string name="pref_octave_filter_summ">オクターブフィルターの設定</string>
 
   <string name="pref_strobe">ストロボ</string>
   <string name="pref_strobe_screen">ストロボ設定</string>

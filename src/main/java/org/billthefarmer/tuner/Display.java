@@ -281,7 +281,6 @@ public class Display extends TunerView
             paint.setTextAlign(Paint.Align.RIGHT);
 
             // Draw cents
-
             s = String.format(Locale.getDefault(),
                               "%+5.2f\u00A2", audio.cents);
             // dx = paint.measureText(s);
