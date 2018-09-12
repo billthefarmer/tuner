@@ -8,7 +8,7 @@
   <string name="copyright">Copyright \u00A9 2014 <a
   href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="translation">Portuguese translation by <a
+  <string name="translation">Tradução para o português por <a
   href="https://github.com/afmachado">Caio Roberto</a>
   </string>
   <string name="licence">Licence <a
@@ -22,9 +22,7 @@
   <string name="error_init">
     Gravador de áudio não inicializado! Talvez a fonte de entrada
     selecionada não esteja disponível ou não foi possível encontrar
-    uma taxa de amostragem adequada.  Audio recorder not initialised!
-    Maybe the selected input source is not available, or a working
-    input sample rate could not be found.
+    uma taxa de amostragem adequada.
   </string>
 
   <string name="filter_on">Filtro de áudio ligado</string>

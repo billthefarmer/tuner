@@ -1074,8 +1074,7 @@ public class MainActivity extends Activity
                 for (int i = 1; i < limit; i++)
                 {
                     // Cents relative to reference
-                    double cf =
-                        -12.0 * log2(reference / xf[i]);
+                    double cf = -12.0 * log2(reference / xf[i]);
 
                     // Note number
                     int n = (int)(Math.round(cf) + C5_OFFSET);
@@ -1124,7 +1123,7 @@ public class MainActivity extends Activity
 
                         // Reference note
                         maxima.r[count] = reference *
-                                          Math.pow(2.0, Math.round(cf) / 12.0);
+                            Math.pow(2.0, Math.round(cf) / 12.0);
 
                         // Set limit to octave above
                         if (!downsample && (limit > i * 2))
@@ -1147,12 +1146,9 @@ public class MainActivity extends Activity
                         frequency = maxima.f[0];
 
                     // Cents relative to reference
-
-                    double cf =
-                        -12.0 * log2(reference / frequency);
+                    double cf = -12.0 * log2(reference / frequency);
 
                     // Don't count silly values
-
                     if (Double.isNaN(cf))
                     {
                         cf = 0.0;
