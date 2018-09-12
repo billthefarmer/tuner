@@ -23,15 +23,14 @@
 
 package org.billthefarmer.tuner;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import android.preference.DialogPreference;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 // Colour picker preference
 public class ColourPickerPreference extends DialogPreference
 {
@@ -53,11 +52,11 @@ public class ColourPickerPreference extends DialogPreference
         super.onBindDialogView(view);
 
         // Get the views
-        strobe = (StrobeView)view.findViewById(R.id.strobe);
+        strobe = view.findViewById(R.id.strobe);
         foregroundPicker =
-            (ColourPicker)view.findViewById(R.id.foreground_picker);
+                view.findViewById(R.id.foreground_picker);
         backgroundPicker =
-            (ColourPicker)view.findViewById(R.id.background_picker);
+                view.findViewById(R.id.background_picker);
 
         // Set the picker colours
         try
@@ -76,22 +75,16 @@ public class ColourPickerPreference extends DialogPreference
         strobe.background = backgroundPicker.getColour();
 
         // Set the listeners
-        foregroundPicker.setListener(new ColourPicker.ColourChangeListener()
+        foregroundPicker.setListener(c ->
         {
-            public void onColourChanged(int c)
-            {
-                strobe.foreground = c;
-                strobe.createShaders();
-            }
+            strobe.foreground = c;
+            strobe.createShaders();
         });
 
-        backgroundPicker.setListener(new ColourPicker.ColourChangeListener()
+        backgroundPicker.setListener(c ->
         {
-            public void onColourChanged(int c)
-            {
-                strobe.background = c;
-                strobe.createShaders();
-            }
+            strobe.background = c;
+            strobe.createShaders();
         });
     }
 

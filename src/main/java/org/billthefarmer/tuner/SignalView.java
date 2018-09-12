@@ -35,21 +35,17 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
-
 // Signal view
 public class SignalView extends View
     implements ValueAnimator.AnimatorUpdateListener
 {
     protected MainActivity.Audio audio;
 
-    private int width;
     private int height;
     private int margin;
 
     private double signal;
 
-    private ValueAnimator animator;
-    private BitmapShader shader;
     private Paint paint;
     private RectF rect;
 
@@ -77,10 +73,9 @@ public class SignalView extends View
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         // Get dimensions
-        width = w;
         height = h;
 
-        margin = width / 4;
+        margin = w / 4;
 
         // Colours for gradient
         int colours[] =
@@ -92,7 +87,7 @@ public class SignalView extends View
                                colours, null, Shader.TileMode.CLAMP);
 
         // Bitmap to draw coloured bars in
-        Bitmap bitmap = Bitmap.createBitmap(width, height,
+        Bitmap bitmap = Bitmap.createBitmap(w, height,
                                             Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -104,17 +99,17 @@ public class SignalView extends View
             canvas.drawLine(0, i, bitmap.getWidth(), i, paint);
 
         // Create shader from coloured bars
-        shader = new BitmapShader(bitmap,
-                                  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        BitmapShader shader = new BitmapShader(bitmap,
+                Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
         paint.setShader(shader);
 
         // Rect to draw the coloured bars
         rect = new RectF(margin, margin,
-                         margin + width / 2, margin + height * 3 / 4);
+                margin + w / 2, margin + height * 3 / 4);
 
         // Create animator
-        animator = ValueAnimator.ofInt(0, 10000);
+        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
         animator.setDuration(10000);

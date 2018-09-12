@@ -33,12 +33,11 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.graphics.PorterDuff;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-
 // Strobe
 public class Strobe extends TunerView
     implements ValueAnimator.AnimatorUpdateListener
@@ -46,9 +45,6 @@ public class Strobe extends TunerView
     protected int colour;
     protected int foreground;
     protected int background;
-
-    private int fore[];
-    private int back[];
 
     private static final int CUSTOM = 3;
 
@@ -63,8 +59,6 @@ public class Strobe extends TunerView
     private Bitmap bitmap;
     private Bitmap rounded;
     private Paint xferPaint;
-
-    private ValueAnimator animator;
 
     private BitmapShader smallShader;
     private BitmapShader mediumShader;
@@ -119,7 +113,7 @@ public class Strobe extends TunerView
         matrix = new Matrix();
 
         // Create animator
-        animator = ValueAnimator.ofInt(0, 10000);
+        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
         animator.setDuration(10000);
@@ -153,8 +147,8 @@ public class Strobe extends TunerView
         {
             Resources resources = getResources();
 
-            fore = resources.getIntArray(R.array.foreground_colours);
-            back = resources.getIntArray(R.array.background_colours);
+            int[] fore = resources.getIntArray(R.array.foreground_colours);
+            int[] back = resources.getIntArray(R.array.background_colours);
 
             if (colour < CUSTOM)
             {

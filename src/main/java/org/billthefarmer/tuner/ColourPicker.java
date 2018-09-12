@@ -31,7 +31,6 @@ import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
 // Colour picker
 public class ColourPicker extends PreferenceView
 {

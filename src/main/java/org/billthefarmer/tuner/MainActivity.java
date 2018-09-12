@@ -28,10 +28,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -47,10 +45,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.Locale;
 import java.util.Set;
-
-import org.json.JSONArray;
 
 // Main Activity
 public class MainActivity extends Activity
@@ -91,7 +89,6 @@ public class MainActivity extends Activity
         "\u266F", "", "\u266D", "", "\u266D", ""
     };
 
-    private SignalView signal;
     private Spectrum spectrum;
     private Display display;
     private Strobe strobe;
@@ -119,19 +116,19 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
 
         // Find the views, not all may be present
-        spectrum = (Spectrum)findViewById(R.id.spectrum);
-        display = (Display)findViewById(R.id.display);
-        strobe = (Strobe)findViewById(R.id.strobe);
-        status = (Status)findViewById(R.id.status);
-        meter = (Meter)findViewById(R.id.meter);
-        scope = (Scope)findViewById(R.id.scope);
+        spectrum = findViewById(R.id.spectrum);
+        display = findViewById(R.id.display);
+        strobe = findViewById(R.id.strobe);
+        status = findViewById(R.id.status);
+        meter = findViewById(R.id.meter);
+        scope = findViewById(R.id.scope);
 
         // Add custom view to action bar
         ActionBar actionBar = getActionBar();
         actionBar.setCustomView(R.layout.signal_view);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        signal = (SignalView)actionBar.getCustomView();
+        SignalView signal = (SignalView) actionBar.getCustomView();
 
         // Create audio
         audio = new Audio();
@@ -578,16 +575,11 @@ public class MainActivity extends Activity
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setNeutralButton(android.R.string.ok,
-                                 new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog,
-                                int which)
-            {
-                // Dismiss dialog
-                dialog.dismiss();
-            }
-        });
+                (dialog, which) ->
+                {
+                    // Dismiss dialog
+                    dialog.dismiss();
+                });
         // Create the dialog
         AlertDialog dialog = builder.create();
 
@@ -784,15 +776,8 @@ public class MainActivity extends Activity
                 // Check valid input selected, or other error
                 if (size == AudioRecord.ERROR)
                 {
-                    runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            showAlert(R.string.app_name,
-                                      R.string.error_buffer);
-                        }
-                    });
+                    runOnUiThread(() -> showAlert(R.string.app_name,
+                            R.string.error_buffer));
 
                     thread = null;
                     return;
@@ -814,15 +799,8 @@ public class MainActivity extends Activity
                 // Exception
                 catch (Exception e)
                 {
-                    runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            showAlert(R.string.app_name,
-                                      R.string.error_init);
-                        }
-                    });
+                    runOnUiThread(() -> showAlert(R.string.app_name,
+                            R.string.error_init));
 
                     thread = null;
                     return;
@@ -845,15 +823,8 @@ public class MainActivity extends Activity
             // Check valid sample rate
             if (size == AudioRecord.ERROR_BAD_VALUE)
             {
-                runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        showAlert(R.string.app_name,
-                                  R.string.error_buffer);
-                    }
-                });
+                runOnUiThread(() -> showAlert(R.string.app_name,
+                        R.string.error_buffer));
 
                 thread = null;
                 return;
@@ -862,15 +833,8 @@ public class MainActivity extends Activity
             // Check AudioRecord initialised
             if (state != AudioRecord.STATE_INITIALIZED)
             {
-                runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        showAlert(R.string.app_name,
-                                  R.string.error_init);
-                    }
-                });
+                runOnUiThread(() -> showAlert(R.string.app_name,
+                        R.string.error_init));
 
                 audioRecord.release();
                 thread = null;
