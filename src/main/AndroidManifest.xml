@@ -6,7 +6,7 @@
     tools:ignore="GoogleAppIndexingWarning"
     android:versionCode="121"
     android:versionName="1.21"
-    android:installLocation="auto" >
+    android:installLocation="auto">
 
   <uses-sdk
       tools:ignore="OldTargetApi"
