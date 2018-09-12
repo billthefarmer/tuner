@@ -68,14 +68,8 @@ public class NumberPickerPreference extends DialogPreference
         picker.setMinValue(minValue);
         picker.setValue(value);
 
-        picker.setFormatter(new NumberPicker.Formatter()
-        {
-            @Override
-            public String format(int value)
-            {
-                return String.format(Locale.getDefault(), "%dHz", value);
-            }
-        });
+        picker.setFormatter(value -> String.format(Locale.getDefault(),
+                "%dHz", value));
 
         picker.setWrapSelectorWheel(false);
         picker.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);

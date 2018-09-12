@@ -1,9 +1,5 @@
-*.*~
-.*
-*.orig
-*.apk
-bin
-build
-gen
-libs
+*.iml
+build/
 local.properties
+.idea/
+.gradle/

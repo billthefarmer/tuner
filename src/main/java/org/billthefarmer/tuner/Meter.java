@@ -25,10 +25,8 @@ package org.billthefarmer.tuner;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.LinearGradient;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -46,8 +44,6 @@ public class Meter extends TunerView
     private Matrix matrix;
     private Rect bar;
     private Path thumb;
-
-    private ValueAnimator animator;
 
     private double cents;
     private float medium;
@@ -111,7 +107,7 @@ public class Meter extends TunerView
         gradient.setLocalMatrix(matrix);
 
         // Create animator
-        animator = ValueAnimator.ofInt(0, 10000);
+        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
         animator.setDuration(10000);

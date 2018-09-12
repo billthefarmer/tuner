@@ -28,7 +28,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.util.AttributeSet;
-
 // Scope
 public class Scope extends Graticule
 {
@@ -77,7 +76,7 @@ public class Scope extends Graticule
 
         // Initialise sync
         int maxdx = 0;
-        int dx = 0;
+        int dx;
         int n = 0;
 
         // Look for zero crossing
@@ -94,7 +93,7 @@ public class Scope extends Graticule
                 break;
         }
 
-        // Translate camvas
+        // Translate canvas
         canvas.translate(0, height / 2);
 
         // Check max value

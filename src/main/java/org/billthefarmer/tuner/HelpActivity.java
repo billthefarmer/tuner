@@ -32,7 +32,6 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 // HelpActivity
 public class HelpActivity extends Activity
 {
@@ -55,7 +54,7 @@ public class HelpActivity extends Activity
 
         setContentView(R.layout.help);
 
-        TextView view = (TextView)findViewById(R.id.help);
+        TextView view = findViewById(R.id.help);
         String text = RawTextReader.read(this, R.raw.help);
         if (view != null)
         {

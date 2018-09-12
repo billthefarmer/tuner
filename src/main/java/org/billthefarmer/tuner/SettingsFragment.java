@@ -34,7 +34,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-
 // SettingsFragment
 public class SettingsFragment extends PreferenceFragment
     implements SharedPreferences.OnSharedPreferenceChangeListener
@@ -54,7 +53,6 @@ public class SettingsFragment extends PreferenceFragment
     private static final String KEY_PREF_ABOUT = "pref_about";
 
     private String summary;
-    private Dialog dialog;
 
     // On create
     @Override
@@ -153,7 +151,7 @@ public class SettingsFragment extends PreferenceFragment
 
         if (preference instanceof PreferenceScreen)
         {
-            dialog = ((PreferenceScreen)preference).getDialog();
+            Dialog dialog = ((PreferenceScreen) preference).getDialog();
             ActionBar actionBar = dialog.getActionBar();
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
