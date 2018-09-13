@@ -37,7 +37,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
-
 // Strobe view
 public class StrobeView extends PreferenceView
     implements ValueAnimator.AnimatorUpdateListener

@@ -33,9 +33,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
-
 // Tuner View
-
 public abstract class TunerView extends View
 {
     protected MainActivity.Audio audio;
@@ -99,7 +97,7 @@ public abstract class TunerView extends View
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawRoundRect(outlineRect, 10, 10, paint);
 
-        // Set the cliprect
+        // Set the clipRect
         canvas.clipRect(clipRect);
 
         // Translate to the clip rect

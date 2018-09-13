@@ -24,15 +24,12 @@
 package org.billthefarmer.tuner;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import java.util.Locale;
-
 // Display
 public class Display extends TunerView
 {

@@ -25,10 +25,9 @@ package org.billthefarmer.tuner;
 
 import android.content.Context;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
-
 // RawTextReader
 public class RawTextReader
 {
@@ -51,7 +50,7 @@ public class RawTextReader
         try
         {
             while ((line = buff.readLine()) != null)
-                text.append(line + "\n" );
+                text.append(line).append("\n");
         }
 
         catch (Exception e)
