@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-		google()
+	google()
     }
 
     dependencies {
@@ -14,6 +14,10 @@ allprojects {
         jcenter()
         google()
     }
+
+    // tasks.withType(JavaCompile) {
+    //     options.deprecation = true
+    // }
 }
 
 apply plugin: 'com.android.application'
@@ -26,13 +30,14 @@ android {
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
 
-	compileOptions {
+    compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
-	disable 'IconDensities', 'ClickableViewAccessibility'
+	disable 'IconDensities', 'ClickableViewAccessibility',
+            'CustomViewStyleable'
 	// abortOnError false
     }
 }
