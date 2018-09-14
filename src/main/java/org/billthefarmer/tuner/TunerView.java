@@ -51,6 +51,7 @@ public abstract class TunerView extends View
     private RectF outlineRect;
 
     // Constructor
+    @SuppressWarnings("deprecation")
     protected TunerView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -88,6 +89,7 @@ public abstract class TunerView extends View
 
     // On Draw
     @Override
+    @SuppressWarnings("deprecation")
     protected void onDraw(Canvas canvas)
     {
         // Set up the paint and draw the outline

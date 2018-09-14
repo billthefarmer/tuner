@@ -59,6 +59,7 @@ public class Meter extends TunerView
 
     // On size changed
     @Override
+    @SuppressWarnings("deprecation")
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -128,6 +129,7 @@ public class Meter extends TunerView
 
     // On draw
     @Override
+    @SuppressWarnings("deprecation")
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);

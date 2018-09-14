@@ -36,6 +36,7 @@ public class SettingsActivity extends Activity
 
     // On create
     @Override
+    @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

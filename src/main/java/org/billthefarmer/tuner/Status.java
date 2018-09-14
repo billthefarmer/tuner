@@ -47,6 +47,7 @@ public class Status extends View
     private Resources resources;
 
     // Constructor
+    @SuppressWarnings("deprecation")
     public Status(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -76,6 +77,7 @@ public class Status extends View
 
     // On draw
     @Override
+    @SuppressWarnings("deprecation")
     protected void onDraw(Canvas canvas)
     {
         String s;
