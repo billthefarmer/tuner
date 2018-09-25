@@ -32,6 +32,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 // HelpActivity
 public class HelpActivity extends Activity
 {
