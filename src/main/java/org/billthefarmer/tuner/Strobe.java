@@ -38,10 +38,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+
 // Strobe
 public class Strobe extends TunerView
-    implements ValueAnimator.AnimatorUpdateListener
-{
+        implements ValueAnimator.AnimatorUpdateListener {
     protected int colour;
     protected int foreground;
     protected int background;
@@ -75,15 +75,13 @@ public class Strobe extends TunerView
     private double cents;
 
     // Constructor
-    public Strobe(Context context, AttributeSet attrs)
-    {
+    public Strobe(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     // On size changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh)
-    {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Recalculate dimensions
@@ -129,8 +127,7 @@ public class Strobe extends TunerView
     // Animation update
 
     @Override
-    public void onAnimationUpdate(ValueAnimator animator)
-    {
+    public void onAnimationUpdate(ValueAnimator animator) {
         // Do inertia calculation
 
         if (audio != null)
@@ -140,18 +137,15 @@ public class Strobe extends TunerView
     }
 
     // Create shaders
-    protected void createShaders()
-    {
+    protected void createShaders() {
         // Get the colours
-        if (audio != null)
-        {
+        if (audio != null) {
             Resources resources = getResources();
 
             int[] fore = resources.getIntArray(R.array.foreground_colours);
             int[] back = resources.getIntArray(R.array.background_colours);
 
-            if (colour < CUSTOM)
-            {
+            if (colour < CUSTOM) {
                 foreground = fore[colour];
                 background = back[colour];
             }
@@ -159,32 +153,32 @@ public class Strobe extends TunerView
 
         // Create the bitmap shaders
         smallShader =
-            new BitmapShader(createShaderBitmap(size,
-                                                size, foreground, background),
-                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+                new BitmapShader(createShaderBitmap(size,
+                        size, foreground, background),
+                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
         mediumShader =
-            new BitmapShader(createShaderBitmap(size * 2,
-                                                size, foreground, background),
-                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+                new BitmapShader(createShaderBitmap(size * 2,
+                        size, foreground, background),
+                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
         largeShader =
-            new BitmapShader(createShaderBitmap(size * 4,
-                                                size, foreground, background),
-                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+                new BitmapShader(createShaderBitmap(size * 4,
+                        size, foreground, background),
+                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
         largerShader =
-            new BitmapShader(createShaderBitmap(size * 8,
-                                                size, foreground, background),
-                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+                new BitmapShader(createShaderBitmap(size * 8,
+                        size, foreground, background),
+                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
 
         // Create the gradients
         smallGradient = new LinearGradient(0, 0, size, 0,
-                                           background, foreground,
-                                           Shader.TileMode.MIRROR);
+                background, foreground,
+                Shader.TileMode.MIRROR);
         mediumGradient = new LinearGradient(0, 0, size * 2, 0,
-                                            background, foreground,
-                                            Shader.TileMode.MIRROR);
+                background, foreground,
+                Shader.TileMode.MIRROR);
         largeGradient = new LinearGradient(0, 0, size * 4, 0,
-                                           background, foreground,
-                                           Shader.TileMode.MIRROR);
+                background, foreground,
+                Shader.TileMode.MIRROR);
 
         // Calculate intermediate colours for the small gradient
         int red = (Color.red(foreground) + Color.red(background)) / 2;
@@ -192,18 +186,17 @@ public class Strobe extends TunerView
         int blue = (Color.blue(foreground) + Color.blue(background)) / 2;
 
         smallBlurGradient =
-            new LinearGradient(0, 0, size, 0,
-                               background,
-                               Color.argb(191, red, green, blue),
-                               Shader.TileMode.MIRROR);
+                new LinearGradient(0, 0, size, 0,
+                        background,
+                        Color.argb(191, red, green, blue),
+                        Shader.TileMode.MIRROR);
     }
 
     // Create shader bitmap
-    private Bitmap createShaderBitmap(int width, int height, int f, int b)
-    {
+    private Bitmap createShaderBitmap(int width, int height, int f, int b) {
         // Create bitmap twice as wide as the block
         Bitmap bitmap =
-            Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
+                Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
 
@@ -217,8 +210,7 @@ public class Strobe extends TunerView
 
     // On draw
     @Override
-    protected void onDraw(Canvas canvas)
-    {
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         // Don't draw if turned off
@@ -226,7 +218,7 @@ public class Strobe extends TunerView
             return;
 
         // Calculate offset
-        offset = offset + ((float)cents * scale);
+        offset = offset + ((float) cents * scale);
 
         if (offset > size * 16)
             offset = 0;
@@ -245,8 +237,7 @@ public class Strobe extends TunerView
     }
 
     // Draw strobe
-    private void drawStrobe(Canvas canvas)
-    {
+    private void drawStrobe(Canvas canvas) {
         // Reset the paint
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
@@ -256,57 +247,39 @@ public class Strobe extends TunerView
         matrix.setTranslate(offset, 0);
 
         // Draw the strobe chequers
-        if (Math.abs(cents) < SLOW)
-        {
+        if (Math.abs(cents) < SLOW) {
             smallShader.setLocalMatrix(matrix);
             paint.setShader(smallShader);
             canvas.drawRect(0, 0, width, size, paint);
-        }
-
-        else if (Math.abs(cents) < MEDIUM)
-        {
+        } else if (Math.abs(cents) < MEDIUM) {
             smallGradient.setLocalMatrix(matrix);
             paint.setShader(smallGradient);
             canvas.drawRect(0, 0, width, size, paint);
-        }
-
-        else if (Math.abs(cents) < FAST)
-        {
+        } else if (Math.abs(cents) < FAST) {
             smallBlurGradient.setLocalMatrix(matrix);
             paint.setShader(smallBlurGradient);
             canvas.drawRect(0, 0, width, size, paint);
-        }
-
-        else
-        {
+        } else {
             paint.setShader(null);
             paint.setColor(background);
             canvas.drawRect(0, 0, width, size, paint);
         }
 
-        if (Math.abs(cents) < MEDIUM)
-        {
+        if (Math.abs(cents) < MEDIUM) {
             mediumShader.setLocalMatrix(matrix);
             paint.setShader(mediumShader);
             canvas.drawRect(0, size, width, size * 2, paint);
-        }
-
-        else
-        {
+        } else {
             mediumGradient.setLocalMatrix(matrix);
             paint.setShader(mediumGradient);
             canvas.drawRect(0, size, width, size * 2, paint);
         }
 
-        if (Math.abs(cents) < FAST)
-        {
+        if (Math.abs(cents) < FAST) {
             largeShader.setLocalMatrix(matrix);
             paint.setShader(largeShader);
             canvas.drawRect(0, size * 2, width, size * 3, paint);
-        }
-
-        else
-        {
+        } else {
             largeGradient.setLocalMatrix(matrix);
             paint.setShader(largeGradient);
             canvas.drawRect(0, size * 2, width, size * 3, paint);

@@ -28,15 +28,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.util.AttributeSet;
+
 // Scope
-public class Scope extends Graticule
-{
+public class Scope extends Graticule {
     private Path path;
     private int max;
 
     // Constructor
-    public Scope(Context context, AttributeSet attrs)
-    {
+    public Scope(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         path = new Path();
@@ -44,16 +43,14 @@ public class Scope extends Graticule
 
     // Draw trace
     @Override
-    protected void drawTrace(Canvas canvas)
-    {
+    protected void drawTrace(Canvas canvas) {
 
         // Check for data
         if (audio == null || audio.data == null)
             return;
 
         // Draw F if filter
-        if (audio.filter)
-        {
+        if (audio.filter) {
             // Color yellow
             paint.setStrokeWidth(2);
             paint.setAntiAlias(true);
@@ -64,8 +61,7 @@ public class Scope extends Graticule
         }
 
         // Draw FF if fundamental filter
-        if (audio.fund)
-        {
+        if (audio.fund) {
             // Color yellow
             paint.setStrokeWidth(2);
             paint.setAntiAlias(true);
@@ -80,11 +76,9 @@ public class Scope extends Graticule
         int n = 0;
 
         // Look for zero crossing
-        for (int i = 1; i < audio.data.length; i++)
-        {
+        for (int i = 1; i < audio.data.length; i++) {
             dx = audio.data[i] - audio.data[i - 1];
-            if (maxdx < dx)
-            {
+            if (maxdx < dx) {
                 maxdx = dx;
                 n = i;
             }
@@ -107,15 +101,14 @@ public class Scope extends Graticule
         max = 0;
 
         // Calculate x scale
-        float xscale = (float)Math.ceil((double)width / audio.data.length);
+        float xscale = (float) Math.ceil((double) width / audio.data.length);
 
         // Rewind the path
         path.rewind();
         path.moveTo(0, 0);
 
         // Create the trace
-        for (int i = 0; i < Math.min(width, audio.data.length - n); i++)
-        {
+        for (int i = 0; i < Math.min(width, audio.data.length - n); i++) {
             // Get max value
             if (max < Math.abs(audio.data[n + i]))
                 max = Math.abs(audio.data[n + i]);

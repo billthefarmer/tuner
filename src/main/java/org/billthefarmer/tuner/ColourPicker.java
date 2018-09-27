@@ -31,16 +31,16 @@ import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
 // Colour picker
-public class ColourPicker extends PreferenceView
-{
+public class ColourPicker extends PreferenceView {
     private Paint circlePaint;
     private Paint centrePaint;
     private final static int[] colours =
-    {
-        Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN,
-        Color.GREEN, Color.YELLOW, Color.RED
-    };
+            {
+                    Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN,
+                    Color.GREEN, Color.YELLOW, Color.RED
+            };
 
     private boolean trackingCentre;
     private int circleRadius;
@@ -53,14 +53,8 @@ public class ColourPicker extends PreferenceView
     // Colour change listener
     private ColourChangeListener listener;
 
-    protected interface ColourChangeListener
-    {
-        void onColourChanged(int colour);
-    }
-
     // Constructor
-    public ColourPicker(Context context, AttributeSet attrs)
-    {
+    public ColourPicker(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         Shader shader = new SweepGradient(0, 0, colours, null);
@@ -75,8 +69,7 @@ public class ColourPicker extends PreferenceView
 
     // On measure
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-    {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         // Get the max width from the superclass
@@ -86,8 +79,7 @@ public class ColourPicker extends PreferenceView
 
     // On size changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh)
-    {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         // Calculate the dimensions based on the given values
         circleRadius = h / 2;
         strokeWidth = w / 5;
@@ -99,8 +91,7 @@ public class ColourPicker extends PreferenceView
 
     // On draw
     @Override
-    protected void onDraw(Canvas canvas)
-    {
+    protected void onDraw(Canvas canvas) {
         float r = circleRadius - strokeWidth * 0.5f;
 
         canvas.translate(offset, circleRadius);
@@ -110,67 +101,63 @@ public class ColourPicker extends PreferenceView
     }
 
     // Set listener
-    protected void setListener(ColourChangeListener l)
-    {
+    protected void setListener(ColourChangeListener l) {
         listener = l;
     }
 
-    // Set colour
-    protected void setColour(int c)
-    {
-        centrePaint.setColor(c);
+    // Get colour
+    protected int getColour() {
+        return centrePaint.getColor();
     }
 
-    // Get colour
-    protected int getColour()
-    {
-        return centrePaint.getColor();
+    // Set colour
+    protected void setColour(int c) {
+        centrePaint.setColor(c);
     }
 
     // On touch event
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX() - offset;
         float y = event.getY() - circleRadius;
 
         boolean inCentre = Math.sqrt(x * x + y * y) <= centreRadius;
 
-        switch (event.getAction())
-        {
-        case MotionEvent.ACTION_DOWN:
-            trackingCentre = inCentre;
-            if (inCentre)
-            {
-                if (listener != null)
-                    listener.onColourChanged(centrePaint.getColor());
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                trackingCentre = inCentre;
+                if (inCentre) {
+                    if (listener != null)
+                        listener.onColourChanged(centrePaint.getColor());
 
+                    break;
+                }
+
+            case MotionEvent.ACTION_MOVE:
+                if (!trackingCentre) {
+                    float angle = (float) Math.toDegrees(Math.atan2(y, -x));
+
+                    // Need to turn angle +-180 to 0-360
+
+                    hsv[0] = angle + 180;
+
+                    centrePaint.setColor(Color.HSVToColor(hsv));
+                    invalidate();
+                }
                 break;
-            }
 
-        case MotionEvent.ACTION_MOVE:
-            if (!trackingCentre)
-            {
-                float angle = (float)Math.toDegrees(Math.atan2(y, -x));
-
-                // Need to turn angle +-180 to 0-360
-
-                hsv[0] = angle + 180;
-
-                centrePaint.setColor(Color.HSVToColor(hsv));
-                invalidate();
-            }
-            break;
-
-        case MotionEvent.ACTION_UP:
-            if (trackingCentre)
-            {
-                trackingCentre = false;
-                invalidate();
-            }
-            break;
+            case MotionEvent.ACTION_UP:
+                if (trackingCentre) {
+                    trackingCentre = false;
+                    invalidate();
+                }
+                break;
         }
 
         return true;
+    }
+
+    protected interface ColourChangeListener {
+        void onColourChanged(int colour);
     }
 }
