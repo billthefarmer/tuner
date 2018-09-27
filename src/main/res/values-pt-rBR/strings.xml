@@ -5,14 +5,11 @@
   <string name="help">Ajuda</string>
   <string name="settings">Configurações</string>
   <string name="built">Construído %s</string>
-  <string name="copyright">Copyright \u00A9 2014 <a
-  href="https://github.com/billthefarmer">Bill Farmer</a>
+  <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="translation">Tradução para o português por <a
-  href="https://github.com/afmachado">Caio Roberto</a>
+  <string name="translation">Tradução para o português por <a href="https://github.com/afmachado">Caio Roberto</a>
   </string>
-  <string name="licence">Licence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="licence">Licence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="error_buffer">

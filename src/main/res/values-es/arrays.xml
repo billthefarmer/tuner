@@ -1,153 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
-  <string-array name="pref_input_entries">
-    <item>Fuente de audio predeterminada</item>
-    <item>Fuente de audio del micrófono</item>
-    <item>Fuente de audio de llamada de voz uplink + downlink</item>
-    <item>Fuente de llamada de voz downlink (Rx)</item>
-    <item>Fuente de llamada de voz uplink (Tx)</item>
-    <item>
+    <string-array name="pref_input_entries">
+        <item>Fuente de audio predeterminada</item>
+        <item>Fuente de audio del micrófono</item>
+        <item>Fuente de audio de llamada de voz uplink + downlink</item>
+        <item>Fuente de llamada de voz downlink (Rx)</item>
+        <item>Fuente de llamada de voz uplink (Tx)</item>
+        <item>
       Fuente de audio del micrófono con la misma orientación que la
       cámara si está disponible, de lo contrario, el micrófono del
       dispositivo principal
     </item>
-  </string-array>
-  <string-array name="pref_input_entry_values">
-    <item>0</item>
-    <item>1</item>
-    <item>4</item>
-    <item>3</item>
-    <item>2</item>
-    <item>5</item>
-  </string-array>
+    </string-array>
+    <string-array name="pref_input_entry_values">
+        <item>0</item>
+        <item>1</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>5</item>
+    </string-array>
 
-  <string-array name="pref_colour_entries">
-    <item>Azul/Cian (default)</item>
-    <item>Verde oliva/Azul mar</item>
-    <item>Magenta/Amarillo</item>
-    <item>Personalizado</item>
-  </string-array>
-  <string-array name="pref_colour_entry_values">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-  </string-array>
+    <string-array name="pref_colour_entries">
+        <item>Azul/Cian (default)</item>
+        <item>Verde oliva/Azul mar</item>
+        <item>Magenta/Amarillo</item>
+        <item>Personalizado</item>
+    </string-array>
+    <string-array name="pref_colour_entry_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
-  <string-array name="pref_transpose_entries">
-    <item>+6[Clave:F\u266F]</item>
-    <item>+5[Clave:F]</item>
-    <item>+4[Clave:E]</item>
-    <item>+3[Clave:E\u266D]</item>
-    <item>+2[Clave:D]</item>
-    <item>+1[Clave:C\u266F]</item>
-    <item>+0[Clave:C]</item>
-    <item>-1[Clave:B]</item>
-    <item>-2[Clave:B\u266D]</item>
-    <item>-3[Clave:A]</item>
-    <item>-4[Clave:A\u266D]</item>
-    <item>-5[Clave:G]</item>
-    <item>-6[Clave:F\u266F]</item>
-  </string-array>
-  <string-array name="pref_transpose_entry_values">
-    <item>6</item>
-    <item>5</item>
-    <item>4</item>
-    <item>3</item>
-    <item>2</item>
-    <item>1</item>
-    <item>0</item>
-    <item>-1</item>
-    <item>-2</item>
-    <item>-3</item>
-    <item>-4</item>
-    <item>-5</item>
-    <item>-6</item>
-  </string-array>
+    <string-array name="pref_transpose_entries">
+        <item>+6[Clave:F\u266F]</item>
+        <item>+5[Clave:F]</item>
+        <item>+4[Clave:E]</item>
+        <item>+3[Clave:E\u266D]</item>
+        <item>+2[Clave:D]</item>
+        <item>+1[Clave:C\u266F]</item>
+        <item>+0[Clave:C]</item>
+        <item>-1[Clave:B]</item>
+        <item>-2[Clave:B\u266D]</item>
+        <item>-3[Clave:A]</item>
+        <item>-4[Clave:A\u266D]</item>
+        <item>-5[Clave:G]</item>
+        <item>-6[Clave:F\u266F]</item>
+    </string-array>
+    <string-array name="pref_transpose_entry_values">
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+        <item>-2</item>
+        <item>-3</item>
+        <item>-4</item>
+        <item>-5</item>
+        <item>-6</item>
+    </string-array>
 
-  <string-array name="pref_note_entries">
-    <item>C</item>
-    <item>C\u266F</item>
-    <item>D</item>
-    <item>E\u266D</item>
-    <item>E</item>
-    <item>F</item>
-    <item>F\u266F</item>
-    <item>G</item>
-    <item>A\u266D</item>
-    <item>A</item>
-    <item>B\u266D</item>
-    <item>B</item>
-  </string-array>
-  <string-array name="pref_note_entry_values">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>5</item>
-    <item>6</item>
-    <item>7</item>
-    <item>8</item>
-    <item>9</item>
-    <item>10</item>
-    <item>11</item>
-  </string-array>
+    <string-array name="pref_note_entries">
+        <item>C</item>
+        <item>C\u266F</item>
+        <item>D</item>
+        <item>E\u266D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>F\u266F</item>
+        <item>G</item>
+        <item>A\u266D</item>
+        <item>A</item>
+        <item>B\u266D</item>
+        <item>B</item>
+    </string-array>
+    <string-array name="pref_note_entry_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
 
-  <string-array name="pref_octave_entries">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>5</item>
-    <item>6</item>
-    <item>7</item>
-    <item>8</item>
-  </string-array>
-  <string-array name="pref_octave_entry_values">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>5</item>
-    <item>6</item>
-    <item>7</item>
-    <item>8</item>
-  </string-array>
+    <string-array name="pref_octave_entries">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="pref_octave_entry_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 
-  <integer-array name="sample_rates">
-      <item>11025</item>
-      <item>22050</item>
-      <item>8000</item>
-      <item>16000</item>
-      <item>44100</item>
-      <item>32000</item>
-  </integer-array>
+    <integer-array name="sample_rates">
+        <item>11025</item>
+        <item>22050</item>
+        <item>8000</item>
+        <item>16000</item>
+        <item>44100</item>
+        <item>32000</item>
+    </integer-array>
 
-  <integer-array name="divisors">
-      <item>1</item>
-      <item>2</item>
-      <item>1</item>
-      <item>2</item>
-      <item>4</item>
-      <item>4</item>
-  </integer-array>
+    <integer-array name="divisors">
+        <item>1</item>
+        <item>2</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+    </integer-array>
 
-  <integer-array name="foreground_colours">
-      <item>0xbf0000ff</item>
-      <item>0xbf6f6f00</item>
-      <item>0xbfff00ff</item>
-      <item>0xbf0000ff</item>
-  </integer-array>
-  <integer-array name="background_colours">
-      <item>0xbf00ffff</item>
-      <item>0xbfbfffbf</item>
-      <item>0xbfffff00</item>
-      <item>0xbf0000ff</item>
-  </integer-array>
+    <integer-array name="foreground_colours">
+        <item>0xbf0000ff</item>
+        <item>0xbf6f6f00</item>
+        <item>0xbfff00ff</item>
+        <item>0xbf0000ff</item>
+    </integer-array>
+    <integer-array name="background_colours">
+        <item>0xbf00ffff</item>
+        <item>0xbfbfffbf</item>
+        <item>0xbfffff00</item>
+        <item>0xbf0000ff</item>
+    </integer-array>
 
 </resources>

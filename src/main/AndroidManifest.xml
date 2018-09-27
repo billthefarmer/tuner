@@ -1,41 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="org.billthefarmer.tuner"
-    tools:ignore="GoogleAppIndexingWarning"
-    android:versionCode="122"
-    android:versionName="1.22"
-    android:installLocation="auto">
+    android:installLocation="auto"
+    tools:ignore="GoogleAppIndexingWarning">
 
-  <uses-sdk
-      tools:ignore="OldTargetApi"
-      android:minSdkVersion="11"
-      android:targetSdkVersion="22" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-  <uses-permission
-      android:name="android.permission.RECORD_AUDIO" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
+        <activity
+            android:name="org.billthefarmer.tuner.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="org.billthefarmer.tuner.HelpActivity">
 
-  <application
-      tools:ignore="AllowBackup"
-      android:allowBackup="true"
-      android:icon="@drawable/ic_launcher"
-      android:label="@string/app_name"
-      android:theme="@style/AppTheme">
-    <activity
-        android:name="org.billthefarmer.tuner.MainActivity"
-        android:label="@string/app_name" >
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-    <activity
-        android:name="org.billthefarmer.tuner.HelpActivity" >
-    </activity>
-    <activity
-        android:name="org.billthefarmer.tuner.SettingsActivity" >
-    </activity>
-  </application>
+        </activity>
+        <activity android:name="org.billthefarmer.tuner.SettingsActivity">
+
+        </activity>
+    </application>
 
 </manifest>
