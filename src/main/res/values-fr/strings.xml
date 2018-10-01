@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Tuner</string>
+  <string name="help">Aide</string>
+  <string name="settings">Paramètres</string>
+  <string name="built">Construit le %s</string>
+  <string name="copyright">Copyright \\00A9 2014 <a href="https://github.com/billthefarmer" >Bill Farmer</a></string>
+  <string name="translation">Traduction espagnole de <a href="https://github.com/susobaco" >Suso Comesaña</a>\n
+  Traduction hongroise de <a href="https://github.com/lna91" >András   Lengyel-Nagy</a>\n
+  Traduction japonaise de <a href="https://github.com/naofum" >naofum</a>\n
+  Traduction portugaise de <a href="https://github.com/afmachado" >Caio Roberto</a></string>
+  <string name="licence">License <a href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
+
+  <string name="error_buffer">Erreur d\'enregistrement audio ! Impossible de trouver un taux d\'échantillonnage d\'entrée correct.</string>
+  <string name="error_init">Enregistrement audio non initialisé ! La source sélectionnée n\'est peut-être pas disponible ou un taux d\'échantillonnage d\'entrée correct n\'a pas été trouvé.</string>
+
+  <string name="filter_on">Filtre audio activé</string>
+  <string name="filter_off">Feltre audio désactivé</string>
+
+  <string name="fund_on">Filtre de la fondamentale activé</string>
+  <string name="fund_off">Filtre de la fondamentale désactivé</string>
+
+  <string name="zoom_on">Zoom sur le spectre activé</string>
+  <string name="zoom_off">Zoom sur le spectre désactivé</string>
+
+  <string name="lock_on">Verrouillage de l\'écran activé</string>
+  <string name="lock_off">Verrouillage de l\'écran désactivé</string>
+
+  <string name="screen_on">Garder l\'écran allumé</string>
+  <string name="screen_off">Ne pas garder l\'écran allumé</string>
+
+  <string name="strobe_on">Stroboscope activé</string>
+  <string name="strobe_off">Stroboscope désactivé</string>
+
+  <string name="downsample_on">Sous-échantillonnage activé</string>
+  <string name="downsample_off">Sous-échantillonnage désactivé</string>
+
+  <string name="multiple_on">Notes multiples activé</string>
+  <string name="multiple_off">Notes multiples désactivé</string>
+
+  <string name="dark_theme">Thème sombre</string>
+  <string name="light_theme">Thème clair</string>
+
+  <string name="copied_clip">Données copiées dans le presse-papier</string>
+  <string name="sample_rate">Taux d\'échantillonnage : %d</string>
+
+  <string name="filter">filtre</string>
+  <string name="fund">fond</string>
+  <string name="note">note</string>
+  <string name="zoom">zoom</string>
+  <string name="lock">verr</string>
+  <string name="display">écran</string>
+  <string name="strobe">stroboscope</string>
+  <string name="down">sous</string>
+  <string name="mult">mult</string>
+
+  <string name="def_custom">[-1073807360,-1090518785]</string>
+
+  <string name="pref_input_category">Entrée</string>
+
+  <string name="pref_input">Source d\'entrée</string>
+  <string name="pref_input_summ">%s</string>
+
+  <string name="pref_filter">Filtre audio</string>
+  <string name="pref_filter_summ">Filtrer l\'entrée audio</string>
+
+  <string name="pref_downsample">Sous-échantillonnage</string>
+  <string name="pref_downsample_summ">Sous-échantillonner l\'entrée avant l\'analyse</string>
+
+  <string name="pref_display">Affichage</string>
+
+  <string name="pref_screen">Écran</string>
+  <string name="pref_screen_summ">Garder l\'écran allumé</string>
+
+  <string name="pref_zoom">Zoom sur le spectre</string>
+  <string name="pref_zoom_summ">Zoomer sur la note actuelle sur le spectre</string>
+
+  <string name="pref_multiple">Notes multiples</string>
+  <string name="pref_multiple_summ">Montrer plusieurs notes sur l\'affichage</string>
+
+  <string name="pref_fund">Filtre de la fondamentale</string>
+  <string name="pref_fund_summ">Utiliser le filtre de la fondamentale</string>
+
+  <string name="pref_filters">Filtres de notes</string>
+  <string name="pref_filters_summ">Utiliser des filtres de notes</string>
+
+  <string name="pref_note_filter">Filtre de note</string>
+  <string name="pref_note_filter_summ">Paramètres du filtre de notes</string>
+
+  <string name="pref_octave_filter">Filtre d\'octave</string>
+  <string name="pref_octave_filter_summ">Paramètres du filtre d\'octave</string>
+
+  <string name="pref_strobe">Stroboscope</string>
+  <string name="pref_strobe_screen">Paramètres du stroboscope</string>
+  <string name="pref_strobe_summ">Afficher le stroboscope</string>
+
+  <string name="pref_colour">Couleurs du stroboscope</string>
+  <string name="pref_colour_summ">Modifier les couleurs du stroboscope</string>
+
+  <string name="pref_custom">Personnalisées</string>
+  <string name="pref_custom_summ">Couleurs personnalisées</string>
+
+  <string name="pref_reference">Référence</string>
+  <string name="pref_reference_summ">%d Hz</string>
+
+  <string name="pref_transpose">Transposer</string>
+  <string name="pref_transpose_summ">%s</string>
+
+  <string name="pref_theme">Thème</string>
+
+  <string name="pref_dark">Thème foncé</string>
+  <string name="pref_dark_summ">Utiliser le thème foncé</string>
+
+  <string name="pref_about">À propos</string>
+  <string name="pref_about_summ">Tuner version %s</string>
+
+</resources>
