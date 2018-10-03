@@ -31,20 +31,18 @@ import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
 // SettingsActivity
-public class SettingsActivity extends Activity
-{
+public class SettingsActivity extends Activity {
     private static final String PREF_DARK = "pref_dark";
 
     // On create
     @Override
     @SuppressWarnings("deprecation")
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Get preferences
         SharedPreferences preferences =
-            PreferenceManager.getDefaultSharedPreferences(this);
+                PreferenceManager.getDefaultSharedPreferences(this);
 
         boolean dark = preferences.getBoolean(PREF_DARK, false);
 
@@ -53,8 +51,8 @@ public class SettingsActivity extends Activity
 
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()
-        .replace(android.R.id.content, new SettingsFragment())
-        .commit();
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
 
         // Enable back navigation on action bar
         ActionBar actionBar = getActionBar();
@@ -64,18 +62,16 @@ public class SettingsActivity extends Activity
 
     // On options item selected
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Switch on item id
-        switch (item.getItemId())
-        {
-        case android.R.id.home:
-            // app icon in action bar clicked; go home
-            finish();
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                finish();
+                return true;
 
-        default:
-            return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

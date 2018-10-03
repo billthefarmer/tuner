@@ -31,24 +31,22 @@ import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
 // Colour picker preference
-public class ColourPickerPreference extends DialogPreference
-{
+public class ColourPickerPreference extends DialogPreference {
     private JSONArray colours;
     private StrobeView strobe;
     private ColourPicker foregroundPicker;
     private ColourPicker backgroundPicker;
 
     // Constructor
-    public ColourPickerPreference(Context context, AttributeSet attrs)
-    {
+    public ColourPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     // On bind dialog view
     @Override
-    protected void onBindDialogView(View view)
-    {
+    protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
         // Get the views
@@ -59,14 +57,10 @@ public class ColourPickerPreference extends DialogPreference
                 view.findViewById(R.id.background_picker);
 
         // Set the picker colours
-        try
-        {
+        try {
             foregroundPicker.setColour(colours.getInt(0));
             backgroundPicker.setColour(colours.getInt(1));
-        }
-
-        catch (JSONException e)
-        {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -90,40 +84,26 @@ public class ColourPickerPreference extends DialogPreference
 
     // On get default value
     @Override
-    protected Object onGetDefaultValue(TypedArray a, int index)
-    {
+    protected Object onGetDefaultValue(TypedArray a, int index) {
         return a.getString(index);
     }
 
     // On set initial value
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue,
-                                     Object defaultValue)
-    {
-        if (restorePersistedValue)
-        {
+                                     Object defaultValue) {
+        if (restorePersistedValue) {
             // Restore existing state
-            try
-            {
+            try {
                 colours = new JSONArray(getPersistedString(null));
-            }
-
-            catch (JSONException e)
-            {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-
-        else
-        {
+        } else {
             // Set default state from the XML attribute
-            try
-            {
-                colours = new JSONArray((String)defaultValue);
-            }
-
-            catch (JSONException e)
-            {
+            try {
+                colours = new JSONArray((String) defaultValue);
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -133,12 +113,10 @@ public class ColourPickerPreference extends DialogPreference
 
     // On dialog closed
     @Override
-    protected void onDialogClosed(boolean positiveResult)
-    {
+    protected void onDialogClosed(boolean positiveResult) {
         // When the user selects "OK", persist the new value
 
-        if (positiveResult)
-        {
+        if (positiveResult) {
             // Change the dummy strobe colours
 
             strobe.foreground = foregroundPicker.getColour();

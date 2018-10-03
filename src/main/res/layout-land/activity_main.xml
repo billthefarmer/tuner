@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
@@ -9,37 +8,37 @@
     android:orientation="vertical"
     tools:ignore="InconsistentLayout">
 
-  <org.billthefarmer.tuner.Display
-      android:id="@+id/display"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1.02"
-      android:layout_marginTop="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginBottom="8dp"
-      app:lock="?attr/lock"
-      app:TextColour="?android:attr/textColorPrimary"
-      app:BackgroundColour="?android:attr/colorBackground" />
+    <org.billthefarmer.tuner.Display
+        android:id="@+id/display"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1.02"
+        app:BackgroundColour="?android:attr/colorBackground"
+        app:TextColour="?android:attr/textColorPrimary"
+        app:lock="?attr/lock" />
 
-  <org.billthefarmer.tuner.Meter
-      android:id="@+id/meter"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="0.52"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginBottom="8dp"
-      app:screen="?attr/screen"
-      app:TextColour="?android:attr/textColorPrimary"
-      app:BackgroundColour="?android:attr/colorBackground" />
+    <org.billthefarmer.tuner.Meter
+        android:id="@+id/meter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0.52"
+        app:BackgroundColour="?android:attr/colorBackground"
+        app:TextColour="?android:attr/textColorPrimary"
+        app:screen="?attr/screen" />
 
-  <org.billthefarmer.tuner.Status
-      android:id="@+id/status"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="0.10"
-      app:TextColour="?android:attr/textColorPrimary"
-      app:BackgroundColour="?android:attr/colorBackground" />
+    <org.billthefarmer.tuner.Status
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.10"
+        app:BackgroundColour="?android:attr/colorBackground"
+        app:TextColour="?android:attr/textColorPrimary" />
 
 </LinearLayout>

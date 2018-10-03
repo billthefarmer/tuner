@@ -16,10 +16,10 @@ screen for detailed documentation.
 Using
 -----
 
-Hold the phone/tablet near the instrument, play a note and observe the
-display. In portrait the app shows a scope with the input signal, a
+Hold the phone/tablet near the instrument, play a note, and observe the
+display. In portrait, the app shows a scope with the input signal, a
 spectrum showing the processed signal, the main display with the note
-value, cents error, frequency error etc, a strobe display and a meter
-display showing the cents error. In landscape the app shows just the
+value, cents error, frequency error etc, a strobe display, and a meter
+display showing the cents error. In landscape, the app shows just the
 main display and the meter. There is a signal indicator in the action
 bar which is useful in landscape mode.

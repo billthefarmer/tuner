@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-	google()
+        google()
     }
 
     dependencies {
@@ -24,9 +24,15 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
+        applicationId "org.billthefarmer.tuner"
+        minSdkVersion 11
+        targetSdkVersion 28
+        versionName "1.22"
+        versionCode 122
+
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
 
@@ -36,8 +42,8 @@ android {
     }
 
     lintOptions {
-	disable 'IconDensities', 'ClickableViewAccessibility',
-            'CustomViewStyleable'
-	// abortOnError false
+        disable 'IconDensities', 'ClickableViewAccessibility',
+                'CustomViewStyleable'
+        // abortOnError false
     }
 }

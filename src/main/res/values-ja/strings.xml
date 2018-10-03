@@ -5,14 +5,11 @@
   <string name="help">ヘルプ</string>
   <string name="settings">設定</string>
   <string name="built">内蔵 %s</string>
-  <string name="copyright">Copyright \u00A9 2014 <a
-  href="https://github.com/billthefarmer">Bill Farmer</a>
+  <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="translation">日本語翻訳 by <a
-  href="https://github.com/naofum">naofum</a>
+  <string name="translation">日本語翻訳 by <a href="https://github.com/naofum">naofum</a>
   </string>
-  <string name="licence">ライセンス <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="licence">ライセンス <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="error_buffer">

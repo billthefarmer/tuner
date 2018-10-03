@@ -5,11 +5,9 @@
   <string name="help">Ayuda</string>
   <string name="settings">Ajustes</string>
   <string name="built">Construido %s</string>
-  <string name="copyright">Copyright \u00A9 2014 <a
-  href="https://github.com/billthefarmer">Bill Farmer</a>
+  <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="translation">Traducción al español por <a
-  href="https://github.com/susobaco">Suso Comesaña</a>
+  <string name="translation">Traducción al español por <a href="https://github.com/susobaco">Suso Comesaña</a>
   </string>
   <string name="licence">Licence: GNU GPLv3</string>
 

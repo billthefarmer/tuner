@@ -34,8 +34,7 @@ import android.widget.NumberPicker;
 import java.util.Locale;
 
 // NumberPickerPreference
-public class NumberPickerPreference extends DialogPreference
-{
+public class NumberPickerPreference extends DialogPreference {
     private final int maxValue;
     private final int minValue;
 
@@ -44,24 +43,22 @@ public class NumberPickerPreference extends DialogPreference
     private NumberPicker picker;
 
     // Constructor
-    public NumberPickerPreference(Context context, AttributeSet attrs)
-    {
+    public NumberPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a =
-            context.obtainStyledAttributes(attrs,
-                                           R.styleable.NumberPickerPreference);
+                context.obtainStyledAttributes(attrs,
+                        R.styleable.NumberPickerPreference);
         maxValue =
-            a.getInt(R.styleable.NumberPickerPreference_maxValue, 0);
+                a.getInt(R.styleable.NumberPickerPreference_maxValue, 0);
         minValue =
-            a.getInt(R.styleable.NumberPickerPreference_minValue, 0);
+                a.getInt(R.styleable.NumberPickerPreference_minValue, 0);
         a.recycle();
     }
 
     // On create dialog view
     @Override
-    protected View onCreateDialogView()
-    {
+    protected View onCreateDialogView() {
         picker = new NumberPicker(getContext());
 
         picker.setMaxValue(maxValue);
@@ -80,24 +77,18 @@ public class NumberPickerPreference extends DialogPreference
     // On get default value
 
     @Override
-    protected Object onGetDefaultValue(TypedArray a, int index)
-    {
+    protected Object onGetDefaultValue(TypedArray a, int index) {
         return a.getInteger(index, value);
     }
 
     // On set initial value
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue,
-                                     Object defaultValue)
-    {
-        if (restorePersistedValue)
-        {
+                                     Object defaultValue) {
+        if (restorePersistedValue) {
             // Restore existing state
             value = getPersistedInt(0);
-        }
-
-        else
-        {
+        } else {
             // Set default state from the XML attribute
             value = (Integer) defaultValue;
             persistInt(value);
@@ -106,19 +97,16 @@ public class NumberPickerPreference extends DialogPreference
 
     // On dialog closed
     @Override
-    protected void onDialogClosed(boolean positiveResult)
-    {
+    protected void onDialogClosed(boolean positiveResult) {
         // When the user selects "OK", persist the new value
-        if (positiveResult)
-        {
+        if (positiveResult) {
             value = picker.getValue();
             persistInt(value);
         }
     }
 
     // Get value
-    protected int getValue()
-    {
+    protected int getValue() {
         return value;
     }
 }

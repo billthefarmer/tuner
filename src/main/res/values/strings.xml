@@ -5,18 +5,14 @@
   <string name="help">Help</string>
   <string name="settings">Settings</string>
   <string name="built">Built %s</string>
-  <string name="copyright">Copyright \u00A9 2014 <a
-  href="https://github.com/billthefarmer">Bill Farmer</a>
+  <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="translation">Spanish translation by <a
-  href="https://github.com/susobaco">Suso Comesaña</a>\nHungarian
+  <string name="translation">Spanish translation by <a href="https://github.com/susobaco">Suso Comesaña</a>\nHungarian
   translation by <a href="https://github.com/lna91">András
-  Lengyel-Nagy</a>\nJapanese translation by <a
-  href="https://github.com/naofum">naofum</a>\nPortuguese translation
+  Lengyel-Nagy</a>\nJapanese translation by <a href="https://github.com/naofum">naofum</a>\nPortuguese translation
   by <a href="https://github.com/afmachado">Caio Roberto</a>
   </string>
-  <string name="licence">Licence <a
-  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="licence">Licence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="error_buffer">
@@ -121,7 +117,7 @@
 
   <string name="pref_theme">Theme</string>
 
-  <string name="pref_dark">Dark theme</string>
+  <string name="pref_dark">Dark Theme</string>
   <string name="pref_dark_summ">Use dark theme</string>
 
   <string name="pref_about">About</string>

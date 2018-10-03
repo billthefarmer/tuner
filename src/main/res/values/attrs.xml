@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <declare-styleable name="NumberPickerPreference">
+    <declare-styleable name="NumberPickerPreference">
 
-    <attr name="maxValue" format="integer" />
-    <attr name="minValue" format="integer" />
+        <attr name="maxValue" format="integer" />
+        <attr name="minValue" format="integer" />
 
-  </declare-styleable>
+    </declare-styleable>
 
-  <declare-styleable name="Tuner">
+    <declare-styleable name="Tuner">
 
-    <attr name="TextColour" format="reference" />
-    <attr name="BackgroundColour" format="reference" />
+        <attr name="TextColour" format="reference" />
+        <attr name="BackgroundColour" format="reference" />
 
-    <attr name="screen" format="reference" />
-    <attr name="lock" format="reference" />
+        <attr name="screen" format="reference" />
+        <attr name="lock" format="reference" />
 
-    <attr name="pref_input" format="reference" />
-    <attr name="pref_filter" format="reference" />
-    <attr name="pref_downsample" format="reference" />
-    <attr name="pref_screen" format="reference" />
-    <attr name="pref_zoom" format="reference" />
-    <attr name="pref_multiple" format="reference" />
-    <attr name="pref_strobe" format="reference" />
-    <attr name="pref_reference" format="reference" />
-    <attr name="pref_transpose" format="reference" />
-    <attr name="pref_dark" format="reference" />
-    <attr name="pref_about" format="reference" />
+        <attr name="pref_input" format="reference" />
+        <attr name="pref_filter" format="reference" />
+        <attr name="pref_downsample" format="reference" />
+        <attr name="pref_screen" format="reference" />
+        <attr name="pref_zoom" format="reference" />
+        <attr name="pref_multiple" format="reference" />
+        <attr name="pref_strobe" format="reference" />
+        <attr name="pref_reference" format="reference" />
+        <attr name="pref_transpose" format="reference" />
+        <attr name="pref_dark" format="reference" />
+        <attr name="pref_about" format="reference" />
 
-  </declare-styleable>
+    </declare-styleable>
 
 </resources>
