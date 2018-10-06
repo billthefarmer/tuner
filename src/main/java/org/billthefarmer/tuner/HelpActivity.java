@@ -34,18 +34,20 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 // HelpActivity
-public class HelpActivity extends Activity {
+public class HelpActivity extends Activity
+{
     private static final String PREF_DARK = "pref_dark";
 
     // On create
     @Override
     @SuppressWarnings("deprecation")
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         // Get preferences
         SharedPreferences preferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
+            PreferenceManager.getDefaultSharedPreferences(this);
 
         boolean dark = preferences.getBoolean(PREF_DARK, false);
 
@@ -56,7 +58,8 @@ public class HelpActivity extends Activity {
 
         TextView view = findViewById(R.id.help);
         String text = RawTextReader.read(this, R.raw.help);
-        if (view != null) {
+        if (view != null)
+        {
             view.setMovementMethod(LinkMovementMethod.getInstance());
             view.setText(Html.fromHtml(text));
         }
@@ -69,17 +72,19 @@ public class HelpActivity extends Activity {
 
     // On options item selected
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Get id
         int id = item.getItemId();
-        switch (id) {
-            // Home
-            case android.R.id.home:
-                finish();
-                break;
+        switch (id)
+        {
+        // Home
+        case android.R.id.home:
+            finish();
+            break;
 
-            default:
-                return false;
+        default:
+            return false;
         }
 
         return true;

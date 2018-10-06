@@ -38,7 +38,8 @@ import java.util.Locale;
 
 // Meter
 public class Meter extends TunerView
-        implements ValueAnimator.AnimatorUpdateListener {
+    implements ValueAnimator.AnimatorUpdateListener
+{
     private LinearGradient gradient;
     private Matrix matrix;
     private Rect bar;
@@ -48,7 +49,8 @@ public class Meter extends TunerView
     private float medium;
 
     // Constructor
-    public Meter(Context context, AttributeSet attrs) {
+    public Meter(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
 
         // Create a matrix for scaling
@@ -58,7 +60,8 @@ public class Meter extends TunerView
     // On size changed
     @Override
     @SuppressWarnings("deprecation")
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Recalculate dimensions
@@ -76,7 +79,7 @@ public class Meter extends TunerView
 
         // Create a rect for the horizontal bar
         bar = new Rect(width / 36 - width / 2, -height / 128,
-                width / 2 - width / 36, height / 128);
+                       width / 2 - width / 36, height / 128);
 
         // Create a path for the thumb
         thumb = new Path();
@@ -90,10 +93,10 @@ public class Meter extends TunerView
 
         // Create a gradient for the thumb
         gradient = new
-                LinearGradient(0, 0, 0, 4,
-                resources.getColor(android.R.color.background_light),
-                resources.getColor(android.R.color.primary_text_light),
-                Shader.TileMode.MIRROR);
+        LinearGradient(0, 0, 0, 4,
+                       resources.getColor(android.R.color.background_light),
+                       resources.getColor(android.R.color.primary_text_light),
+                       Shader.TileMode.MIRROR);
 
         // Create a matrix to scale the thumb
         matrix.setScale(height / 16, height / 16);
@@ -115,7 +118,8 @@ public class Meter extends TunerView
     }
 
     @Override
-    public void onAnimationUpdate(ValueAnimator animator) {
+    public void onAnimationUpdate(ValueAnimator animator)
+    {
         // Do the inertia calculation
         if (audio != null)
             cents = ((cents * 19.0) + audio.cents) / 20.0;
@@ -126,13 +130,14 @@ public class Meter extends TunerView
     // On draw
     @Override
     @SuppressWarnings("deprecation")
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
 
         // Draw display icon
         if (audio != null && audio.screen && screen != null)
             canvas.drawBitmap(screen.getBitmap(), 0,
-                    height - screen.getIntrinsicHeight(), null);
+                              height - screen.getIntrinsicHeight(), null);
 
         // Reset the paint to black
         paint.setStrokeWidth(1);
@@ -147,7 +152,8 @@ public class Meter extends TunerView
         float xscale = width / 11;
 
         // Draw the scale legend
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 5; i++)
+        {
             String s = String.format(Locale.getDefault(), "%d", i * 10);
             float x = i * xscale;
 
@@ -162,7 +168,8 @@ public class Meter extends TunerView
         canvas.translate(0, medium / 1.5f);
 
         // Draw the scale
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 5; i++)
+        {
             float x = i * xscale;
 
             canvas.drawLine(x, 0, x, -medium / 2, paint);
@@ -170,7 +177,8 @@ public class Meter extends TunerView
         }
 
         // Draw the fine scale
-        for (int i = 0; i <= 25; i++) {
+        for (int i = 0; i <= 25; i++)
+        {
             float x = i * xscale / 5;
 
             canvas.drawLine(x, 0, x, -medium / 4, paint);

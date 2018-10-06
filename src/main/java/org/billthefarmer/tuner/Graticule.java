@@ -34,7 +34,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 
 // Graticule
-public abstract class Graticule extends TunerView {
+public abstract class Graticule extends TunerView
+{
     private static final int SIZE = 10;
 
     private Canvas source;
@@ -44,13 +45,15 @@ public abstract class Graticule extends TunerView {
 
     // Constructor
 
-    protected Graticule(Context context, AttributeSet attrs) {
+    protected Graticule(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
     }
 
     // On size changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Calculate indented width and height
@@ -76,7 +79,8 @@ public abstract class Graticule extends TunerView {
 
     // On draw
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
 
         // Reset the canvas transform
@@ -98,7 +102,8 @@ public abstract class Graticule extends TunerView {
 
     // Draw graticule
 
-    private void drawGraticule(Canvas canvas) {
+    private void drawGraticule(Canvas canvas)
+    {
         // Draw black rectangle
         canvas.drawColor(Color.BLACK);
 

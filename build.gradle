@@ -30,8 +30,8 @@ android {
         applicationId "org.billthefarmer.tuner"
         minSdkVersion 11
         targetSdkVersion 28
-        versionName "1.22"
-        versionCode 122
+        versionName "1.23"
+        versionCode 123
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }

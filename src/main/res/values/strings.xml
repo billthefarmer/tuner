@@ -7,12 +7,16 @@
   <string name="built">Built %s</string>
   <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
-  <string name="translation">Spanish translation by <a href="https://github.com/susobaco">Suso Comesaña</a>\nHungarian
+  <string name="translation">Spanish translation by <a
+  href="https://github.com/susobaco">Suso Comesaña</a>\nHungarian
   translation by <a href="https://github.com/lna91">András
-  Lengyel-Nagy</a>\nJapanese translation by <a href="https://github.com/naofum">naofum</a>\nPortuguese translation
-  by <a href="https://github.com/afmachado">Caio Roberto</a>
+  Lengyel-Nagy</a>\nJapanese translation by <a
+  href="https://github.com/naofum">naofum</a>\nPortuguese translation
+  by <a href="https://github.com/afmachado">Caio Roberto</a>\nFrench
+  translation by <a href="https://github.com/roptat">roptat</a>
   </string>
-  <string name="licence">Licence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  <string name="licence">Licence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="error_buffer">
@@ -74,7 +78,9 @@
   <string name="pref_filter_summ">Filter input audio</string>
 
   <string name="pref_downsample">Downsample</string>
-  <string name="pref_downsample_summ">Downsample input before analysis</string>
+  <string name="pref_downsample_summ">
+    Downsample input before analysis
+  </string>
 
   <string name="pref_display">Display</string>
 
@@ -82,7 +88,9 @@
   <string name="pref_screen_summ">Keep screen on</string>
 
   <string name="pref_zoom">Zoom spectrum</string>
-  <string name="pref_zoom_summ">Zoom in to current note on spectrum display</string>
+  <string name="pref_zoom_summ">
+    Zoom in to current note on spectrum display
+  </string>
 
   <string name="pref_multiple">Multiple notes</string>
   <string name="pref_multiple_summ">Show multiple notes on display</string>

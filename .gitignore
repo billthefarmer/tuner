@@ -4,6 +4,7 @@ local.properties
 .idea/
 .gradle/
 *.apk
+*.orig
 *~
 .classpath
 .data/

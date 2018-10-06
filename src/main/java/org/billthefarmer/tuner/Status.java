@@ -34,7 +34,8 @@ import android.view.View;
 import java.util.Locale;
 
 // Status
-public class Status extends View {
+public class Status extends View
+{
     protected MainActivity.Audio audio;
 
     private int width;
@@ -47,17 +48,18 @@ public class Status extends View {
 
     // Constructor
     @SuppressWarnings("deprecation")
-    public Status(Context context, AttributeSet attrs) {
+    public Status(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
 
         resources = getResources();
 
         final TypedArray typedArray =
-                context.obtainStyledAttributes(attrs, R.styleable.Tuner, 0, 0);
+            context.obtainStyledAttributes(attrs, R.styleable.Tuner, 0, 0);
 
         textColour =
-                typedArray.getColor(R.styleable.Tuner_TextColour,
-                        resources.getColor(android.R.color.black));
+            typedArray.getColor(R.styleable.Tuner_TextColour,
+                                resources.getColor(android.R.color.black));
         typedArray.recycle();
 
         paint = new Paint();
@@ -65,7 +67,8 @@ public class Status extends View {
 
     // On size changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
         width = w;
         height = h;
 
@@ -75,7 +78,8 @@ public class Status extends View {
     // On draw
     @Override
     @SuppressWarnings("deprecation")
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         String s;
 
         // Draw separator line
@@ -100,25 +104,28 @@ public class Status extends View {
 
         // Draw sample rate text
         s = String.format(Locale.getDefault(),
-                resources.getString(R.string.sample_rate),
-                audio.sample);
+                          resources.getString(R.string.sample_rate),
+                          audio.sample);
         canvas.drawText(s, margin, 0, paint);
         float x = margin + paint.measureText(s + "  ");
 
         // Transpose
-        if (audio.transpose != 0) {
+        if (audio.transpose != 0)
+        {
             String entries[] =
-                    resources.getStringArray(R.array.pref_transpose_entries);
+                resources.getStringArray(R.array.pref_transpose_entries);
             String values[] =
-                    resources.getStringArray(R.array.pref_transpose_entry_values);
+                resources.getStringArray(R.array.pref_transpose_entry_values);
 
             s = resources.getString(R.string.pref_transpose);
             canvas.drawText(s + ":", x, 0, paint);
             x += paint.measureText(s + ": ");
 
             int index = 0;
-            for (String v : values) {
-                if (Integer.parseInt(v) == audio.transpose) {
+            for (String v : values)
+            {
+                if (Integer.parseInt(v) == audio.transpose)
+                {
                     s = entries[index];
                     break;
                 }
@@ -130,49 +137,56 @@ public class Status extends View {
         }
 
         // Audio filter
-        if (audio.filter) {
+        if (audio.filter)
+        {
             s = resources.getString(R.string.filter);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
 
         // Fundamental filter
-        if (audio.fund) {
+        if (audio.fund)
+        {
             s = resources.getString(R.string.fund);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
 
         // Note filter
-        if (audio.filters) {
+        if (audio.filters)
+        {
             s = resources.getString(R.string.note);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
 
         // Downsample
-        if (audio.downsample) {
+        if (audio.downsample)
+        {
             s = resources.getString(R.string.down);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
 
         // Zoom
-        if (audio.zoom) {
+        if (audio.zoom)
+        {
             s = resources.getString(R.string.zoom);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
 
         // Lock
-        if (audio.lock) {
+        if (audio.lock)
+        {
             s = resources.getString(R.string.lock);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
 
         // Multiple
-        if (audio.multiple) {
+        if (audio.multiple)
+        {
             s = resources.getString(R.string.mult);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
@@ -180,14 +194,16 @@ public class Status extends View {
 
         // Screen
 
-        if (audio.screen) {
+        if (audio.screen)
+        {
             s = resources.getString(R.string.display);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");
         }
 
         // Strobe
-        if (audio.strobe) {
+        if (audio.strobe)
+        {
             s = resources.getString(R.string.strobe);
             canvas.drawText(s, x, 0, paint);
             x += paint.measureText(s + " ");

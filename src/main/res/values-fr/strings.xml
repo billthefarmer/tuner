@@ -5,12 +5,9 @@
   <string name="help">Aide</string>
   <string name="settings">Paramètres</string>
   <string name="built">Construit le %s</string>
-  <string name="copyright">Copyright \\00A9 2014 <a href="https://github.com/billthefarmer" >Bill Farmer</a></string>
-  <string name="translation">Traduction espagnole de <a href="https://github.com/susobaco" >Suso Comesaña</a>\n
-  Traduction hongroise de <a href="https://github.com/lna91" >András   Lengyel-Nagy</a>\n
-  Traduction japonaise de <a href="https://github.com/naofum" >naofum</a>\n
-  Traduction portugaise de <a href="https://github.com/afmachado" >Caio Roberto</a></string>
-  <string name="licence">License <a href="https://www.gnu.org/licenses/gpl.txt" >GNU GPLv3</a></string>
+  <string name="copyright">Copyright \\00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a></string>
+  <string name="translation">Traduction espagnole de <a href="https://github.com/susobaco">Suso Comesaña</a>\nTraduction hongroise de <a href="https://github.com/lna91">András Lengyel-Nagy</a>\nTraduction japonaise de <a href="https://github.com/naofum">naofum</a>\nTraduction portugaise de <a href="https://github.com/afmachado">Caio Roberto</a>\nTraduction francais de <a href="https://github.com/roptat">roptat</a></string>
+  <string name="licence">License <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
 
   <string name="error_buffer">Erreur d\'enregistrement audio ! Impossible de trouver un taux d\'échantillonnage d\'entrée correct.</string>
   <string name="error_init">Enregistrement audio non initialisé ! La source sélectionnée n\'est peut-être pas disponible ou un taux d\'échantillonnage d\'entrée correct n\'a pas été trouvé.</string>

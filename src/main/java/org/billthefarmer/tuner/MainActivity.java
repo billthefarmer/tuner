@@ -52,7 +52,8 @@ import java.util.Set;
 
 // Main Activity
 public class MainActivity extends Activity
-        implements View.OnClickListener, View.OnLongClickListener {
+    implements View.OnClickListener, View.OnLongClickListener
+{
     private static final String PREF_INPUT = "pref_input";
     private static final String PREF_REFERENCE = "pref_reference";
     private static final String PREF_TRANSPOSE = "pref_transpose";
@@ -77,16 +78,16 @@ public class MainActivity extends Activity
 
     // Note values for display
     private static final String notes[] =
-            {
-                    "C", "C", "D", "E", "E", "F",
-                    "F", "G", "A", "A", "B", "B"
-            };
+    {
+        "C", "C", "D", "E", "E", "F",
+        "F", "G", "A", "A", "B", "B"
+    };
 
     private static final String sharps[] =
-            {
-                    "", "\u266F", "", "\u266D", "", "",
-                    "\u266F", "", "\u266D", "", "\u266D", ""
-            };
+    {
+        "", "\u266F", "", "\u266D", "", "",
+        "\u266F", "", "\u266D", "", "\u266D", ""
+    };
 
     private Spectrum spectrum;
     private Display display;
@@ -102,7 +103,8 @@ public class MainActivity extends Activity
 
     // On Create
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         // Get preferences
@@ -159,7 +161,8 @@ public class MainActivity extends Activity
 
     // On create options menu
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it
         // is present.
         MenuInflater inflater = getMenuInflater();
@@ -169,33 +172,39 @@ public class MainActivity extends Activity
     }
 
     // Set click listeners
-    void setClickListeners() {
+    void setClickListeners()
+    {
         // Scope
-        if (scope != null) {
+        if (scope != null)
+        {
             scope.setOnClickListener(this);
             scope.setOnLongClickListener(this);
         }
 
         // Spectrum
-        if (spectrum != null) {
+        if (spectrum != null)
+        {
             spectrum.setOnClickListener(this);
             spectrum.setOnLongClickListener(this);
         }
 
         // Display
-        if (display != null) {
+        if (display != null)
+        {
             display.setOnClickListener(this);
             display.setOnLongClickListener(this);
         }
 
         // Strobe
-        if (strobe != null) {
+        if (strobe != null)
+        {
             strobe.setOnClickListener(this);
             strobe.setOnLongClickListener(this);
         }
 
         // Meter
-        if (meter != null) {
+        if (meter != null)
+        {
             meter.setOnClickListener(this);
             meter.setOnLongClickListener(this);
         }
@@ -203,156 +212,163 @@ public class MainActivity extends Activity
 
     // On click
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         // Get id
         int id = v.getId();
-        switch (id) {
-            // Scope
-            case R.id.scope:
-                audio.filter = !audio.filter;
+        switch (id)
+        {
+        // Scope
+        case R.id.scope:
+            audio.filter = !audio.filter;
 
-                if (audio.filter)
-                    showToast(R.string.filter_on);
-                else
-                    showToast(R.string.filter_off);
-                break;
+            if (audio.filter)
+                showToast(R.string.filter_on);
+            else
+                showToast(R.string.filter_off);
+            break;
 
-            // Spectrum
-            case R.id.spectrum:
-                audio.zoom = !audio.zoom;
+        // Spectrum
+        case R.id.spectrum:
+            audio.zoom = !audio.zoom;
 
-                if (audio.zoom)
-                    showToast(R.string.zoom_on);
-                else
-                    showToast(R.string.zoom_off);
-                break;
+            if (audio.zoom)
+                showToast(R.string.zoom_on);
+            else
+                showToast(R.string.zoom_off);
+            break;
 
-            // Display
-            case R.id.display:
-                audio.lock = !audio.lock;
-                if (display != null)
-                    display.invalidate();
+        // Display
+        case R.id.display:
+            audio.lock = !audio.lock;
+            if (display != null)
+                display.invalidate();
 
-                if (audio.lock)
-                    showToast(R.string.lock_on);
-                else
-                    showToast(R.string.lock_off);
-                break;
+            if (audio.lock)
+                showToast(R.string.lock_on);
+            else
+                showToast(R.string.lock_off);
+            break;
 
-            // Strobe
-            case R.id.strobe:
-                audio.strobe = !audio.strobe;
+        // Strobe
+        case R.id.strobe:
+            audio.strobe = !audio.strobe;
 
-                if (audio.strobe)
-                    showToast(R.string.strobe_on);
+            if (audio.strobe)
+                showToast(R.string.strobe_on);
 
-                else
-                    showToast(R.string.strobe_off);
-                break;
+            else
+                showToast(R.string.strobe_off);
+            break;
 
-            // Meter
-            case R.id.meter:
-                audio.copyToClipboard();
-                showToast(R.string.copied_clip);
-                break;
+        // Meter
+        case R.id.meter:
+            audio.copyToClipboard();
+            showToast(R.string.copied_clip);
+            break;
         }
     }
 
     // On long click
     @Override
-    public boolean onLongClick(View v) {
+    public boolean onLongClick(View v)
+    {
         // Get id
         int id = v.getId();
-        switch (id) {
-            // Scope
-            case R.id.scope:
-                audio.fund = !audio.fund;
+        switch (id)
+        {
+        // Scope
+        case R.id.scope:
+            audio.fund = !audio.fund;
 
-                if (audio.fund)
-                    showToast(R.string.fund_on);
-                else
-                    showToast(R.string.fund_off);
-                break;
+            if (audio.fund)
+                showToast(R.string.fund_on);
+            else
+                showToast(R.string.fund_off);
+            break;
 
-            // Spectrum
-            case R.id.spectrum:
-                audio.downsample = !audio.downsample;
+        // Spectrum
+        case R.id.spectrum:
+            audio.downsample = !audio.downsample;
 
-                if (audio.downsample)
-                    showToast(R.string.downsample_on);
-                else
-                    showToast(R.string.downsample_off);
-                break;
+            if (audio.downsample)
+                showToast(R.string.downsample_on);
+            else
+                showToast(R.string.downsample_off);
+            break;
 
-            // Display
-            case R.id.display:
-                audio.multiple = !audio.multiple;
+        // Display
+        case R.id.display:
+            audio.multiple = !audio.multiple;
 
-                if (audio.multiple)
-                    showToast(R.string.multiple_on);
+            if (audio.multiple)
+                showToast(R.string.multiple_on);
 
-                else
-                    showToast(R.string.multiple_off);
-                break;
+            else
+                showToast(R.string.multiple_off);
+            break;
 
-            // Strobe
-            case R.id.strobe:
-                dark = !dark;
+        // Strobe
+        case R.id.strobe:
+            dark = !dark;
 
-                if (Build.VERSION.SDK_INT != VERSION_M)
-                    recreate();
+            if (Build.VERSION.SDK_INT != VERSION_M)
+                recreate();
 
-                else if (dark)
-                    showToast(R.string.dark_theme);
+            else if (dark)
+                showToast(R.string.dark_theme);
 
-                else
-                    showToast(R.string.light_theme);
-                break;
+            else
+                showToast(R.string.light_theme);
+            break;
 
-            // Meter
-            case R.id.meter:
-                audio.screen = !audio.screen;
+        // Meter
+        case R.id.meter:
+            audio.screen = !audio.screen;
 
-                if (audio.screen)
-                    showToast(R.string.screen_on);
+            if (audio.screen)
+                showToast(R.string.screen_on);
 
-                else
-                    showToast(R.string.screen_off);
+            else
+                showToast(R.string.screen_off);
 
-                Window window = getWindow();
+            Window window = getWindow();
 
-                if (audio.screen)
-                    window.addFlags(WindowManager
-                            .LayoutParams.FLAG_KEEP_SCREEN_ON);
-                else
-                    window.clearFlags(WindowManager
-                            .LayoutParams.FLAG_KEEP_SCREEN_ON);
-                break;
+            if (audio.screen)
+                window.addFlags(WindowManager
+                                .LayoutParams.FLAG_KEEP_SCREEN_ON);
+            else
+                window.clearFlags(WindowManager
+                                  .LayoutParams.FLAG_KEEP_SCREEN_ON);
+            break;
         }
         return true;
     }
 
     // On options item
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Get id
         int id = item.getItemId();
-        switch (id) {
-            // Help
-            case R.id.help:
-                return onHelpClick(item);
+        switch (id)
+        {
+        // Help
+        case R.id.help:
+            return onHelpClick(item);
 
-            // Settings
-            case R.id.settings:
-                return onSettingsClick(item);
+        // Settings
+        case R.id.settings:
+            return onSettingsClick(item);
 
-            default:
-                return false;
+        default:
+            return false;
         }
     }
 
     // On help click
-    private boolean onHelpClick(MenuItem item) {
+    private boolean onHelpClick(MenuItem item)
+    {
         Intent intent = new Intent(this, HelpActivity.class);
         startActivity(intent);
 
@@ -360,7 +376,8 @@ public class MainActivity extends Activity
     }
 
     // On settings click
-    private boolean onSettingsClick(MenuItem item) {
+    private boolean onSettingsClick(MenuItem item)
+    {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
 
@@ -368,7 +385,8 @@ public class MainActivity extends Activity
     }
 
     // Show toast.
-    void showToast(int key) {
+    void showToast(int key)
+    {
         Resources resources = getResources();
         String text = resources.getString(key);
 
@@ -388,7 +406,8 @@ public class MainActivity extends Activity
 
     // On Resume
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
 
         boolean theme = dark;
@@ -409,7 +428,8 @@ public class MainActivity extends Activity
 
     // onPause
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
 
         // Save preferences
@@ -420,15 +440,17 @@ public class MainActivity extends Activity
     }
 
     // Save preferences
-    void savePreferences() {
+    void savePreferences()
+    {
         SharedPreferences preferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
+            PreferenceManager.getDefaultSharedPreferences(this);
 
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putBoolean(PREF_DARK, dark);
 
-        if (audio != null) {
+        if (audio != null)
+        {
             editor.putBoolean(PREF_FUND, audio.fund);
             editor.putBoolean(PREF_FILTER, audio.filter);
             editor.putBoolean(PREF_FILTERS, audio.filters);
@@ -443,20 +465,22 @@ public class MainActivity extends Activity
     }
 
     // Get preferences
-    void getPreferences() {
+    void getPreferences()
+    {
         // Get preferences
         SharedPreferences preferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
+            PreferenceManager.getDefaultSharedPreferences(this);
 
         // Set preferences
         dark = preferences.getBoolean(PREF_DARK, false);
 
-        if (audio != null) {
+        if (audio != null)
+        {
             audio.input =
-                    Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
+                Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
             audio.reference = preferences.getInt(PREF_REFERENCE, 440);
             audio.transpose =
-                    Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
+                Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
 
             audio.fund = preferences.getBoolean(PREF_FUND, false);
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
@@ -469,11 +493,13 @@ public class MainActivity extends Activity
 
             // Note filter
             Set<String> notes = preferences.getStringSet(PREF_NOTE, null);
-            if (notes != null) {
+            if (notes != null)
+            {
                 for (int index = 0; index < audio.noteFilter.length; index++)
                     audio.noteFilter[index] = false;
 
-                for (String note : notes) {
+                for (String note : notes)
+                {
                     int index = Integer.parseInt(note);
                     audio.noteFilter[index] = true;
                 }
@@ -481,43 +507,53 @@ public class MainActivity extends Activity
 
             // Octave filter
             Set<String> octaves = preferences.getStringSet(PREF_OCTAVE, null);
-            if (octaves != null) {
+            if (octaves != null)
+            {
                 for (int index = 0; index < audio.octaveFilter.length; index++)
                     audio.octaveFilter[index] = false;
 
-                for (String octave : octaves) {
+                for (String octave : octaves)
+                {
                     int index = Integer.parseInt(octave);
                     audio.octaveFilter[index] = true;
                 }
             }
 
             // Check screen
-            if (audio.screen) {
+            if (audio.screen)
+            {
                 Window window = getWindow();
                 window.addFlags(WindowManager
-                        .LayoutParams.FLAG_KEEP_SCREEN_ON);
-            } else {
+                                .LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+            else
+            {
                 Window window = getWindow();
                 window.clearFlags(WindowManager
-                        .LayoutParams.FLAG_KEEP_SCREEN_ON);
+                                  .LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         }
 
         // Check for strobe before setting colours
-        if (strobe != null) {
+        if (strobe != null)
+        {
             strobe.colour =
-                    Integer.parseInt(preferences.getString(PREF_COLOUR, "0"));
+                Integer.parseInt(preferences.getString(PREF_COLOUR, "0"));
 
-            if (strobe.colour == 3) {
+            if (strobe.colour == 3)
+            {
                 JSONArray custom;
 
-                try {
+                try
+                {
                     custom =
-                            new JSONArray(preferences.getString(PREF_CUSTOM,
-                                    null));
+                        new JSONArray(preferences.getString(PREF_CUSTOM,
+                                                            null));
                     strobe.foreground = custom.getInt(0);
                     strobe.background = custom.getInt(1);
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                 }
             }
 
@@ -528,20 +564,21 @@ public class MainActivity extends Activity
     }
 
     // Show alert
-    void showAlert(int title, int message) {
+    void showAlert(int title, int message)
+    {
         // Create an alert dialog builder
         AlertDialog.Builder builder =
-                new AlertDialog.Builder(this);
+            new AlertDialog.Builder(this);
 
         // Set the title, message and button
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setNeutralButton(android.R.string.ok,
-                (dialog, which) ->
-                {
-                    // Dismiss dialog
-                    dialog.dismiss();
-                });
+                                 (dialog, which) ->
+        {
+            // Dismiss dialog
+            dialog.dismiss();
+        });
         // Create the dialog
         AlertDialog dialog = builder.create();
 
@@ -550,12 +587,14 @@ public class MainActivity extends Activity
     }
 
     // Log2
-    protected double log2(double d) {
+    protected double log2(double d)
+    {
         return Math.log(d) / Math.log(2.0);
     }
 
     // Audio
-    protected class Audio implements Runnable {
+    protected class Audio implements Runnable
+    {
         // Preferences
         protected int input;
         protected int transpose;
@@ -571,12 +610,16 @@ public class MainActivity extends Activity
         protected boolean downsample;
 
         protected boolean noteFilter[] =
-                {true, true, true, true, true, true,
-                        true, true, true, true, true, true};
+        {
+            true, true, true, true, true, true,
+            true, true, true, true, true, true
+        };
 
         protected boolean octaveFilter[] =
-                {true, true, true, true, true,
-                        true, true, true, true};
+        {
+            true, true, true, true, true,
+            true, true, true, true
+        };
 
         protected double reference;
 
@@ -640,7 +683,8 @@ public class MainActivity extends Activity
         private double x5[];
 
         // Constructor
-        protected Audio() {
+        protected Audio()
+        {
             buffer = new double[SAMPLES];
 
             xv = new double[2];
@@ -662,7 +706,8 @@ public class MainActivity extends Activity
         }
 
         // Start audio
-        protected void start() {
+        protected void start()
+        {
             // Start the thread
             thread = new Thread(this, "Audio");
             thread.start();
@@ -670,12 +715,14 @@ public class MainActivity extends Activity
 
         // Run
         @Override
-        public void run() {
+        public void run()
+        {
             processAudio();
         }
 
         // Stop
-        protected void stop() {
+        protected void stop()
+        {
             // Stop and release the audio recorder
             cleanUpAudioRecord();
 
@@ -688,23 +735,30 @@ public class MainActivity extends Activity
         }
 
         // Stop and release the audio recorder
-        private void cleanUpAudioRecord() {
+        private void cleanUpAudioRecord()
+        {
             if (audioRecord != null &&
-                    audioRecord.getState() == AudioRecord.STATE_INITIALIZED) {
-                try {
+                    audioRecord.getState() == AudioRecord.STATE_INITIALIZED)
+            {
+                try
+                {
                     if (audioRecord.getRecordingState() ==
-                            AudioRecord.RECORDSTATE_RECORDING) {
+                            AudioRecord.RECORDSTATE_RECORDING)
+                    {
                         audioRecord.stop();
                     }
 
                     audioRecord.release();
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                 }
             }
         }
 
         // Process Audio
-        protected void processAudio() {
+        protected void processAudio()
+        {
             // Sample rates to try
             Resources resources = getResources();
 
@@ -714,23 +768,26 @@ public class MainActivity extends Activity
             int size = 0;
             int state = 0;
             int index = 0;
-            for (int rate : rates) {
+            for (int rate : rates)
+            {
                 // Check sample rate
                 size =
-                        AudioRecord
-                                .getMinBufferSize(rate,
-                                        AudioFormat.CHANNEL_IN_MONO,
-                                        AudioFormat.ENCODING_PCM_16BIT);
+                    AudioRecord
+                    .getMinBufferSize(rate,
+                                      AudioFormat.CHANNEL_IN_MONO,
+                                      AudioFormat.ENCODING_PCM_16BIT);
                 // Loop if invalid sample rate
-                if (size == AudioRecord.ERROR_BAD_VALUE) {
+                if (size == AudioRecord.ERROR_BAD_VALUE)
+                {
                     index++;
                     continue;
                 }
 
                 // Check valid input selected, or other error
-                if (size == AudioRecord.ERROR) {
+                if (size == AudioRecord.ERROR)
+                {
                     runOnUiThread(() -> showAlert(R.string.app_name,
-                            R.string.error_buffer));
+                                                  R.string.error_buffer));
 
                     thread = null;
                     return;
@@ -740,18 +797,20 @@ public class MainActivity extends Activity
                 divisor = divisors[index];
 
                 // Create the AudioRecord object
-                try {
+                try
+                {
                     audioRecord =
-                            new AudioRecord(input, rate,
-                                    AudioFormat.CHANNEL_IN_MONO,
-                                    AudioFormat.ENCODING_PCM_16BIT,
-                                    Math.max(size, SIZE * divisor));
+                        new AudioRecord(input, rate,
+                                        AudioFormat.CHANNEL_IN_MONO,
+                                        AudioFormat.ENCODING_PCM_16BIT,
+                                        Math.max(size, SIZE * divisor));
                 }
 
                 // Exception
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     runOnUiThread(() -> showAlert(R.string.app_name,
-                            R.string.error_init));
+                                                  R.string.error_init));
 
                     thread = null;
                     return;
@@ -759,7 +818,8 @@ public class MainActivity extends Activity
 
                 // Check state
                 state = audioRecord.getState();
-                if (state != AudioRecord.STATE_INITIALIZED) {
+                if (state != AudioRecord.STATE_INITIALIZED)
+                {
                     audioRecord.release();
                     index++;
                     continue;
@@ -771,18 +831,20 @@ public class MainActivity extends Activity
             }
 
             // Check valid sample rate
-            if (size == AudioRecord.ERROR_BAD_VALUE) {
+            if (size == AudioRecord.ERROR_BAD_VALUE)
+            {
                 runOnUiThread(() -> showAlert(R.string.app_name,
-                        R.string.error_buffer));
+                                              R.string.error_buffer));
 
                 thread = null;
                 return;
             }
 
             // Check AudioRecord initialised
-            if (state != AudioRecord.STATE_INITIALIZED) {
+            if (state != AudioRecord.STATE_INITIALIZED)
+            {
                 runOnUiThread(() -> showAlert(R.string.app_name,
-                        R.string.error_init));
+                                              R.string.error_init));
 
                 audioRecord.release();
                 thread = null;
@@ -792,7 +854,7 @@ public class MainActivity extends Activity
             // Calculate fps and expect
             fps = ((double) sample / divisor) / SAMPLES;
             final double expect = 2.0 * Math.PI *
-                    STEP / SAMPLES;
+                                  STEP / SAMPLES;
 
             // Create buffer for input data
             data = new short[STEP * divisor];
@@ -804,7 +866,8 @@ public class MainActivity extends Activity
             double dmax = 0.0;
 
             // Continue until the thread is stopped
-            while (thread != null) {
+            while (thread != null)
+            {
                 // Read a buffer of data
                 // NOTE: audioRecord.read(short[], int, int) can block
                 // indefinitely, until audioRecord.stop() is called
@@ -812,7 +875,8 @@ public class MainActivity extends Activity
                 size = audioRecord.read(data, 0, STEP * divisor);
 
                 // Stop the thread if no data or error state
-                if (size <= 0) {
+                if (size <= 0)
+                {
                     thread = null;
                     break;
                 }
@@ -828,7 +892,8 @@ public class MainActivity extends Activity
                 double rm = 0;
 
                 // Butterworth filter, 3dB/octave
-                for (int i = 0; i < STEP; i++) {
+                for (int i = 0; i < STEP; i++)
+                {
                     xv[0] = xv[1];
                     xv[1] = data[i * divisor] / G;
 
@@ -837,7 +902,7 @@ public class MainActivity extends Activity
 
                     // Choose filtered/unfiltered data
                     buffer[(SAMPLES - STEP) + i] =
-                            audio.filter ? yv[1] : data[i * divisor];
+                        audio.filter ? yv[1] : data[i * divisor];
 
                     // Find root mean signal
                     double v = data[i * divisor] / 32768.0;
@@ -858,15 +923,16 @@ public class MainActivity extends Activity
                 dmax = 0.0;
 
                 // Copy data to FFT input arrays for tuner
-                for (int i = 0; i < SAMPLES; i++) {
+                for (int i = 0; i < SAMPLES; i++)
+                {
                     // Find the magnitude
                     if (dmax < Math.abs(buffer[i]))
                         dmax = Math.abs(buffer[i]);
 
                     // Calculate the window
                     double window =
-                            0.5 - 0.5 * Math.cos(2.0 * Math.PI *
-                                    i / SAMPLES);
+                        0.5 - 0.5 * Math.cos(2.0 * Math.PI *
+                                             i / SAMPLES);
 
                     // Normalise and window the input data
                     x.r[i] = buffer[i] / norm * window;
@@ -876,7 +942,8 @@ public class MainActivity extends Activity
                 fftr(x);
 
                 // Process FFT output for tuner
-                for (int i = 1; i < RANGE; i++) {
+                for (int i = 1; i < RANGE; i++)
+                {
                     double real = x.r[i];
                     double imag = x.i[i];
 
@@ -913,9 +980,11 @@ public class MainActivity extends Activity
                 }
 
                 // Downsample
-                if (downsample) {
+                if (downsample)
+                {
                     // x2 = xa << 2
-                    for (int i = 0; i < RANGE / 2; i++) {
+                    for (int i = 0; i < RANGE / 2; i++)
+                    {
                         x2[i] = 0.0;
 
                         for (int j = 0; j < 2; j++)
@@ -923,7 +992,8 @@ public class MainActivity extends Activity
                     }
 
                     // x3 = xa << 3
-                    for (int i = 0; i < RANGE / 3; i++) {
+                    for (int i = 0; i < RANGE / 3; i++)
+                    {
                         x3[i] = 0.0;
 
                         for (int j = 0; j < 3; j++)
@@ -931,7 +1001,8 @@ public class MainActivity extends Activity
                     }
 
                     // x4 = xa << 4
-                    for (int i = 0; i < RANGE / 4; i++) {
+                    for (int i = 0; i < RANGE / 4; i++)
+                    {
                         x4[i] = 0.0;
 
                         for (int j = 0; j < 4; j++)
@@ -939,7 +1010,8 @@ public class MainActivity extends Activity
                     }
 
                     // x5 = xa << 5
-                    for (int i = 0; i < RANGE / 5; i++) {
+                    for (int i = 0; i < RANGE / 5; i++)
+                    {
                         x5[i] = 0.0;
 
                         for (int j = 0; j < 5; j++)
@@ -947,7 +1019,8 @@ public class MainActivity extends Activity
                     }
 
                     // Add downsamples
-                    for (int i = 1; i < RANGE; i++) {
+                    for (int i = 1; i < RANGE; i++)
+                    {
                         if (i < RANGE / 2)
                             xa[i] += x2[i];
 
@@ -972,7 +1045,8 @@ public class MainActivity extends Activity
                 int limit = RANGE - 1;
 
                 // Find maximum value, and list of maxima
-                for (int i = 1; i < limit; i++) {
+                for (int i = 1; i < limit; i++)
+                {
                     // Cents relative to reference
                     double cf = -12.0 * log2(reference / xf[i]);
 
@@ -988,7 +1062,8 @@ public class MainActivity extends Activity
                             ((n % OCTAVE) != (maxima.n[0] % OCTAVE)))
                         continue;
 
-                    if (filters) {
+                    if (filters)
+                    {
                         // Get note and octave
                         int note = n % OCTAVE;
                         int octave = n / OCTAVE;
@@ -1004,7 +1079,8 @@ public class MainActivity extends Activity
                     }
 
                     // Find maximum value
-                    if (xa[i] > max) {
+                    if (xa[i] > max)
+                    {
                         max = xa[i];
                         frequency = xf[i];
                     }
@@ -1012,7 +1088,8 @@ public class MainActivity extends Activity
                     // If display not locked, find maxima and add to list
                     if (!lock && count < MAXIMA &&
                             xa[i] > MIN && xa[i] > (max / 4.0) &&
-                            dx[i] > 0.0 && dx[i + 1] < 0.0) {
+                            dx[i] > 0.0 && dx[i + 1] < 0.0)
+                    {
                         maxima.f[count] = xf[i];
 
                         // Note number
@@ -1020,7 +1097,7 @@ public class MainActivity extends Activity
 
                         // Reference note
                         maxima.r[count] = reference *
-                                Math.pow(2.0, Math.round(cf) / 12.0);
+                                          Math.pow(2.0, Math.round(cf) / 12.0);
 
                         // Set limit to octave above
                         if (!downsample && (limit > i * 2))
@@ -1034,7 +1111,8 @@ public class MainActivity extends Activity
                 boolean found = false;
 
                 // Do the note and cents calculations
-                if (max > MIN) {
+                if (max > MIN)
+                {
                     found = true;
 
                     // Frequency
@@ -1045,25 +1123,27 @@ public class MainActivity extends Activity
                     double cf = -12.0 * log2(reference / frequency);
 
                     // Don't count silly values
-                    if (Double.isNaN(cf)) {
+                    if (Double.isNaN(cf))
+                    {
                         cf = 0.0;
                         found = false;
                     }
 
                     // Reference note
                     nearest = audio.reference *
-                            Math.pow(2.0, Math.round(cf) / 12.0);
+                              Math.pow(2.0, Math.round(cf) / 12.0);
 
                     // Lower and upper freq
                     lower = reference *
                             Math.pow(2.0, (Math.round(cf) - 0.55) / 12.0);
                     higher = reference *
-                            Math.pow(2.0, (Math.round(cf) + 0.55) / 12.0);
+                             Math.pow(2.0, (Math.round(cf) + 0.55) / 12.0);
 
                     // Note number
                     note = (int) Math.round(cf) + C5_OFFSET;
 
-                    if (note < 0) {
+                    if (note < 0)
+                    {
                         note = 0;
                         found = false;
                     }
@@ -1071,8 +1151,10 @@ public class MainActivity extends Activity
                     // Find nearest maximum to reference note
                     double df = 1000.0;
 
-                    for (int i = 0; i < count; i++) {
-                        if (Math.abs(maxima.f[i] - nearest) < df) {
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (Math.abs(maxima.f[i] - nearest) < df)
+                        {
                             df = Math.abs(maxima.f[i] - nearest);
                             frequency = maxima.f[i];
                         }
@@ -1082,13 +1164,15 @@ public class MainActivity extends Activity
                     cents = -12.0 * log2(nearest / frequency) * 100.0;
 
                     // Ignore silly values
-                    if (Double.isNaN(cents)) {
+                    if (Double.isNaN(cents))
+                    {
                         cents = 0.0;
                         found = false;
                     }
 
                     // Ignore if not within 50 cents of reference note
-                    if (Math.abs(cents) > 50.0) {
+                    if (Math.abs(cents) > 50.0)
+                    {
                         cents = 0.0;
                         found = false;
                     }
@@ -1098,9 +1182,11 @@ public class MainActivity extends Activity
                 }
 
                 // Found
-                if (found) {
+                if (found)
+                {
                     // If display not locked
-                    if (!lock) {
+                    if (!lock)
+                    {
                         // Update spectrum
                         if (spectrum != null)
                             spectrum.postInvalidate();
@@ -1112,10 +1198,14 @@ public class MainActivity extends Activity
 
                     // Reset count;
                     timer = 0;
-                } else {
+                }
+                else
+                {
                     // If display not locked
-                    if (!lock) {
-                        if (timer > TIMER_COUNT) {
+                    if (!lock)
+                    {
+                        if (timer > TIMER_COUNT)
+                        {
                             difference = 0.0;
                             frequency = 0.0;
                             nearest = 0.0;
@@ -1143,12 +1233,15 @@ public class MainActivity extends Activity
         }
 
         // Real to complex FFT, ignores imaginary values in input array
-        private void fftr(Complex a) {
+        private void fftr(Complex a)
+        {
             final int n = a.r.length;
             final double norm = Math.sqrt(1.0 / n);
 
-            for (int i = 0, j = 0; i < n; i++) {
-                if (j >= i) {
+            for (int i = 0, j = 0; i < n; i++)
+            {
+                if (j >= i)
+                {
                     double tr = a.r[j] * norm;
 
                     a.r[j] = a.r[i] * norm;
@@ -1159,7 +1252,8 @@ public class MainActivity extends Activity
                 }
 
                 int m = n / 2;
-                while (m >= 1 && j >= m) {
+                while (m >= 1 && j >= m)
+                {
                     j -= m;
                     m /= 2;
                 }
@@ -1167,14 +1261,17 @@ public class MainActivity extends Activity
             }
 
             for (int mmax = 1, istep = 2 * mmax; mmax < n;
-                 mmax = istep, istep = 2 * mmax) {
+                    mmax = istep, istep = 2 * mmax)
+            {
                 double delta = (Math.PI / mmax);
-                for (int m = 0; m < mmax; m++) {
+                for (int m = 0; m < mmax; m++)
+                {
                     double w = m * delta;
                     double wr = Math.cos(w);
                     double wi = Math.sin(w);
 
-                    for (int i = m; i < n; i += istep) {
+                    for (int i = m; i < n; i += istep)
+                    {
                         int j = i + mmax;
                         double tr = wr * a.r[j] - wi * a.i[j];
                         double ti = wr * a.i[j] + wi * a.r[j];
@@ -1188,56 +1285,60 @@ public class MainActivity extends Activity
         }
 
         // Copy to clipboard
-        protected void copyToClipboard() {
+        protected void copyToClipboard()
+        {
             String text = "";
 
-            if (multiple) {
-                for (int i = 0; i < count; i++) {
+            if (multiple)
+            {
+                for (int i = 0; i < count; i++)
+                {
                     // Calculate cents
                     double cents = -12.0 * log2(maxima.r[i] /
-                            maxima.f[i]) * 100.0;
+                                                maxima.f[i]) * 100.0;
                     // Ignore silly values
                     if (Double.isNaN(cents))
                         continue;
 
                     text +=
-                            String
-                                    .format(Locale.getDefault(),
-                                            "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                            notes[(maxima.n[i] - transpose +
-                                                    OCTAVE) % OCTAVE],
-                                            sharps[(maxima.n[i] - transpose +
-                                                    OCTAVE) % OCTAVE],
-                                            (maxima.n[i] - transpose) / OCTAVE, cents,
-                                            maxima.r[i], maxima.f[i],
-                                            maxima.r[i] - maxima.f[i]);
+                        String
+                        .format(Locale.getDefault(),
+                                "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+                                notes[(maxima.n[i] - transpose +
+                                       OCTAVE) % OCTAVE],
+                                sharps[(maxima.n[i] - transpose +
+                                        OCTAVE) % OCTAVE],
+                                (maxima.n[i] - transpose) / OCTAVE, cents,
+                                maxima.r[i], maxima.f[i],
+                                maxima.r[i] - maxima.f[i]);
                 }
 
                 if (count == 0)
                     text =
-                            String
-                                    .format(Locale.getDefault(),
-                                            "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                            notes[(note - transpose +
-                                                    OCTAVE) % OCTAVE],
-                                            sharps[(note - transpose +
-                                                    OCTAVE) % OCTAVE],
-                                            (note - transpose) / OCTAVE, cents,
-                                            nearest, frequency, difference);
-            } else
-                text =
                         String
-                                .format(Locale.getDefault(),
-                                        "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                        notes[(note - transpose +
-                                                OCTAVE) % OCTAVE],
-                                        sharps[(note - transpose +
-                                                OCTAVE) % OCTAVE],
-                                        (note - transpose) / OCTAVE, cents,
-                                        nearest, frequency, difference);
+                        .format(Locale.getDefault(),
+                                "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+                                notes[(note - transpose +
+                                       OCTAVE) % OCTAVE],
+                                sharps[(note - transpose +
+                                        OCTAVE) % OCTAVE],
+                                (note - transpose) / OCTAVE, cents,
+                                nearest, frequency, difference);
+            }
+            else
+                text =
+                    String
+                    .format(Locale.getDefault(),
+                            "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+                            notes[(note - transpose +
+                                   OCTAVE) % OCTAVE],
+                            sharps[(note - transpose +
+                                    OCTAVE) % OCTAVE],
+                            (note - transpose) / OCTAVE, cents,
+                            nearest, frequency, difference);
 
             ClipboardManager clipboard =
-                    (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
             clipboard.setPrimaryClip(ClipData.newPlainText("Tuner clip", text));
         }
@@ -1247,23 +1348,27 @@ public class MainActivity extends Activity
     // because initialising arrays of objects in Java is, IMHO, barmy
 
     // Complex
-    private class Complex {
+    private class Complex
+    {
         double r[];
         double i[];
 
-        private Complex(int l) {
+        private Complex(int l)
+        {
             r = new double[l];
             i = new double[l];
         }
     }
 
     // Maximum
-    protected class Maxima {
+    protected class Maxima
+    {
         double f[];
         double r[];
         int n[];
 
-        protected Maxima(int l) {
+        protected Maxima(int l)
+        {
             f = new double[l];
             r = new double[l];
             n = new int[l];

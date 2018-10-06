@@ -38,7 +38,8 @@ import android.view.View;
 
 // Signal view
 public class SignalView extends View
-        implements ValueAnimator.AnimatorUpdateListener {
+    implements ValueAnimator.AnimatorUpdateListener
+{
     protected MainActivity.Audio audio;
 
     private int height;
@@ -52,13 +53,15 @@ public class SignalView extends View
     private static final float SCALE = (float) Math.log(0.01);
 
     // Constructor
-    public SignalView(Context context, AttributeSet attrs) {
+    public SignalView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
     }
 
     // On measure
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
         // Get offered height
         int h = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -68,7 +71,8 @@ public class SignalView extends View
 
     // On size changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
         // Get dimensions
         height = h;
 
@@ -76,16 +80,16 @@ public class SignalView extends View
 
         // Colours for gradient
         int colours[] =
-                {Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK};
+        {Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK};
 
         // Coloured gradient
         LinearGradient gradient =
-                new LinearGradient(0, 0, 0, height,
-                        colours, null, Shader.TileMode.CLAMP);
+            new LinearGradient(0, 0, 0, height,
+                               colours, null, Shader.TileMode.CLAMP);
 
         // Bitmap to draw coloured bars in
         Bitmap bitmap = Bitmap.createBitmap(w, height,
-                Bitmap.Config.ARGB_8888);
+                                            Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setShader(gradient);
@@ -97,13 +101,13 @@ public class SignalView extends View
 
         // Create shader from coloured bars
         BitmapShader shader = new BitmapShader(bitmap,
-                Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+                                               Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
         paint.setShader(shader);
 
         // Rect to draw the coloured bars
         rect = new RectF(margin, margin,
-                margin + w / 2, margin + height * 3 / 4);
+                         margin + w / 2, margin + height * 3 / 4);
 
         // Create animator
         ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
@@ -120,9 +124,11 @@ public class SignalView extends View
 
     // Animation update
     @Override
-    public void onAnimationUpdate(ValueAnimator animator) {
+    public void onAnimationUpdate(ValueAnimator animator)
+    {
         // Do VU meter style calculation
-        if (audio != null) {
+        if (audio != null)
+        {
             if (signal < audio.signal)
                 signal = ((signal * 4) + audio.signal) / 5;
 
@@ -134,7 +140,8 @@ public class SignalView extends View
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         // Draw the coloured column
         paint.setStyle(Paint.Style.FILL);
         int max = height * 3 / 4;

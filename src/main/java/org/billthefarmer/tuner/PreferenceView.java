@@ -28,11 +28,13 @@ import android.util.AttributeSet;
 import android.view.View;
 
 // PreferenceView
-public abstract class PreferenceView extends View {
+public abstract class PreferenceView extends View
+{
     protected static int maxWidth;
 
     // Constructor
-    public PreferenceView(Context context, AttributeSet attrs) {
+    public PreferenceView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
 
         maxWidth = 0;
@@ -40,7 +42,8 @@ public abstract class PreferenceView extends View {
 
     // On measure
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
         // Get the largest width offered so a valid calculation can be
         // made
         int w = MeasureSpec.getSize(widthMeasureSpec);

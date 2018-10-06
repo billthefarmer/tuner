@@ -35,7 +35,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 // Tuner View
-public abstract class TunerView extends View {
+public abstract class TunerView extends View
+{
     protected MainActivity.Audio audio;
     protected Resources resources;
 
@@ -52,21 +53,22 @@ public abstract class TunerView extends View {
 
     // Constructor
     @SuppressWarnings("deprecation")
-    protected TunerView(Context context, AttributeSet attrs) {
+    protected TunerView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
 
         resources = getResources();
 
         final TypedArray typedArray =
-                context.obtainStyledAttributes(attrs, R.styleable.Tuner, 0, 0);
+            context.obtainStyledAttributes(attrs, R.styleable.Tuner, 0, 0);
 
         textColour =
-                typedArray.getColor(R.styleable.Tuner_TextColour,
-                        resources.getColor(android.R.color.black));
+            typedArray.getColor(R.styleable.Tuner_TextColour,
+                                resources.getColor(android.R.color.black));
         lock = (BitmapDrawable)
-                typedArray.getDrawable(R.styleable.Tuner_lock);
+               typedArray.getDrawable(R.styleable.Tuner_lock);
         screen = (BitmapDrawable)
-                typedArray.getDrawable(R.styleable.Tuner_screen);
+                 typedArray.getDrawable(R.styleable.Tuner_screen);
         typedArray.recycle();
 
         paint = new Paint();
@@ -74,7 +76,8 @@ public abstract class TunerView extends View {
 
     // On Size Changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
         // Save the new width and height
         width = w;
         height = h;
@@ -88,7 +91,8 @@ public abstract class TunerView extends View {
     // On Draw
     @Override
     @SuppressWarnings("deprecation")
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         // Set up the paint and draw the outline
         paint.setStrokeWidth(3);
         paint.setAntiAlias(true);

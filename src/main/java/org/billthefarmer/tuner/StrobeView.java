@@ -40,7 +40,8 @@ import android.view.animation.LinearInterpolator;
 
 // Strobe view
 public class StrobeView extends PreferenceView
-        implements ValueAnimator.AnimatorUpdateListener {
+    implements ValueAnimator.AnimatorUpdateListener
+{
     protected int foreground;
     protected int background;
 
@@ -65,7 +66,8 @@ public class StrobeView extends PreferenceView
     //	  private static final int DELAY = 40;
 
     // Constructor
-    public StrobeView(Context context, AttributeSet attrs) {
+    public StrobeView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
 
         foreground = Color.BLUE;
@@ -74,7 +76,8 @@ public class StrobeView extends PreferenceView
 
     // On measure
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         // Get the max width from the superclass
@@ -83,7 +86,8 @@ public class StrobeView extends PreferenceView
 
     // On size changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
 
         width = w;
 
@@ -127,46 +131,50 @@ public class StrobeView extends PreferenceView
 
     // Animation update
     @Override
-    public void onAnimationUpdate(ValueAnimator animation) {
+    public void onAnimationUpdate(ValueAnimator animation)
+    {
         offset = (Float) animator.getAnimatedValue();
 
         invalidate();
     }
 
     // Setter method for animator
-    void setOffset(float v) {
+    void setOffset(float v)
+    {
         offset = v;
 
         invalidate();
     }
 
     // Create shaders
-    protected void createShaders() {
+    protected void createShaders()
+    {
 
         // Create the bitmap shaders
         smallShader =
-                new BitmapShader(createShaderBitmap(size,
-                        size, foreground, background),
-                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+            new BitmapShader(createShaderBitmap(size,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
         mediumShader =
-                new BitmapShader(createShaderBitmap(size * 2,
-                        size, foreground, background),
-                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+            new BitmapShader(createShaderBitmap(size * 2,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
         largeShader =
-                new BitmapShader(createShaderBitmap(size * 4,
-                        size, foreground, background),
-                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+            new BitmapShader(createShaderBitmap(size * 4,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
         largerShader =
-                new BitmapShader(createShaderBitmap(size * 8,
-                        size, foreground, background),
-                        Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+            new BitmapShader(createShaderBitmap(size * 8,
+                                                size, foreground, background),
+                             Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
     }
 
     // Create shader bitmap
-    private Bitmap createShaderBitmap(int width, int height, int f, int b) {
+    private Bitmap createShaderBitmap(int width, int height, int f, int b)
+    {
         // Create bitmap twice as wide as the block
         Bitmap bitmap =
-                Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
+            Bitmap.createBitmap(width * 2, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
 
@@ -180,7 +188,8 @@ public class StrobeView extends PreferenceView
 
     // On draw
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         // Reset the paint
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
