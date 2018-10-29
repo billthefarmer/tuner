@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 
@@ -29,7 +29,7 @@ android {
     defaultConfig {
         applicationId "org.billthefarmer.tuner"
         minSdkVersion 11
-        targetSdkVersion 28
+        targetSdkVersion 22
         versionName "1.23"
         versionCode 123
 
@@ -43,7 +43,7 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ClickableViewAccessibility',
-                'CustomViewStyleable'
+            'CustomViewStyleable', 'ExpiringTargetSdkVersion'
         // abortOnError false
     }
 }
