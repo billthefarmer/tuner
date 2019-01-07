@@ -43,7 +43,7 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ClickableViewAccessibility',
-            'CustomViewStyleable', 'ExpiringTargetSdkVersion'
+            'CustomViewStyleable', 'ExpiredTargetSdkVersion'
         // abortOnError false
     }
 }
