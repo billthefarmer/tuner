@@ -62,6 +62,9 @@
   <string name="pref_filter">Filtre audio</string>
   <string name="pref_filter_summ">Filtrer l\'entrée audio</string>
 
+  <string name="pref_solfa">Solfège</string>
+  <string name="pref_solfa_summ">Utiliser solfège (DoReMi)</string>
+
   <string name="pref_downsample">Sous-échantillonnage</string>
   <string name="pref_downsample_summ">Sous-échantillonner l\'entrée avant l\'analyse</string>
 

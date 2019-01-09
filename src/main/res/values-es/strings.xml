@@ -71,6 +71,9 @@
   <string name="pref_filter">Filtro de audio</string>
   <string name="pref_filter_summ">Filtro de la entrada de audio</string>
 
+  <string name="pref_solfa">Solfeo</string>
+  <string name="pref_solfa_summ">Utilizar solfeo (DoReMi)</string>
+
   <string name="pref_downsample">Grabación de muestra</string>
   <string name="pref_downsample_summ">Grabar una muestra antes del análisis</string>
 

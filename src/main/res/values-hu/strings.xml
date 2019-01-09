@@ -72,6 +72,9 @@
   <string name="pref_filter">Hangfrekvenciás szűrő</string>
   <string name="pref_filter_summ">Bemeneti jel szűrése</string>
 
+  <string name="pref_solfa">Szolfézs</string>
+  <string name="pref_solfa_summ">Használja a szolfézs (DoReMi)</string>
+
   <string name="pref_downsample">Alulmintavételezés</string>
   <string name="pref_downsample_summ">Bemeneti jel alulmintavételezése kiértékelés előtt</string>
 
