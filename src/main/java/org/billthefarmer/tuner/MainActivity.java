@@ -59,6 +59,7 @@ public class MainActivity extends Activity
     private static final String PREF_TRANSPOSE = "pref_transpose";
 
     private static final String PREF_FUND = "pref_fund";
+    private static final String PREF_SOLFA = "pref_solfa";
     private static final String PREF_FILTER = "pref_filter";
     private static final String PREF_FILTERS = "pref_filters";
     private static final String PREF_DOWNSAMPLE = "pref_downsample";
@@ -452,6 +453,7 @@ public class MainActivity extends Activity
         if (audio != null)
         {
             editor.putBoolean(PREF_FUND, audio.fund);
+            editor.putBoolean(PREF_SOLFA, audio.solfa);
             editor.putBoolean(PREF_FILTER, audio.filter);
             editor.putBoolean(PREF_FILTERS, audio.filters);
             editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
@@ -483,6 +485,7 @@ public class MainActivity extends Activity
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
 
             audio.fund = preferences.getBoolean(PREF_FUND, false);
+            audio.solfa = preferences.getBoolean(PREF_SOLFA, false);
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
             audio.filters = preferences.getBoolean(PREF_FILTERS, false);
             audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
@@ -602,6 +605,7 @@ public class MainActivity extends Activity
         protected boolean lock;
         protected boolean zoom;
         protected boolean fund;
+        protected boolean solfa;
         protected boolean filter;
         protected boolean screen;
         protected boolean strobe;

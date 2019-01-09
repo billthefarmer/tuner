@@ -16,17 +16,18 @@
         <attr name="screen" format="reference" />
         <attr name="lock" format="reference" />
 
-        <attr name="pref_input" format="reference" />
-        <attr name="pref_filter" format="reference" />
-        <attr name="pref_downsample" format="reference" />
-        <attr name="pref_screen" format="reference" />
-        <attr name="pref_zoom" format="reference" />
-        <attr name="pref_multiple" format="reference" />
-        <attr name="pref_strobe" format="reference" />
-        <attr name="pref_reference" format="reference" />
-        <attr name="pref_transpose" format="reference" />
-        <attr name="pref_dark" format="reference" />
         <attr name="pref_about" format="reference" />
+        <attr name="pref_dark" format="reference" />
+        <attr name="pref_downsample" format="reference" />
+        <attr name="pref_filter" format="reference" />
+        <attr name="pref_input" format="reference" />
+        <attr name="pref_multiple" format="reference" />
+        <attr name="pref_reference" format="reference" />
+        <attr name="pref_screen" format="reference" />
+        <attr name="pref_solfa" format="reference" />
+        <attr name="pref_strobe" format="reference" />
+        <attr name="pref_transpose" format="reference" />
+        <attr name="pref_zoom" format="reference" />
 
     </declare-styleable>
 

@@ -77,6 +77,9 @@
   <string name="pref_filter">Audio filter</string>
   <string name="pref_filter_summ">Filter input audio</string>
 
+  <string name="pref_solfa">Solfa</string>
+  <string name="pref_solfa_summ">Use solfa (DoReMi)</string>
+
   <string name="pref_downsample">Downsample</string>
   <string name="pref_downsample_summ">
     Downsample input before analysis

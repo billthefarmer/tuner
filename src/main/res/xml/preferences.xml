@@ -44,6 +44,12 @@
             android:title="@string/pref_zoom" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:icon="?attr/pref_solfa"
+            android:key="pref_solfa"
+            android:summary="@string/pref_solfa_summ"
+            android:title="@string/pref_solfa" />
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:icon="?attr/pref_multiple"
             android:key="pref_multiple"
             android:summary="@string/pref_multiple_summ"
