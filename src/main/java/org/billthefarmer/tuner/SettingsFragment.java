@@ -108,7 +108,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         NumberPickerPreference picker =
             (NumberPickerPreference) findPreference(KEY_PREF_REFERENCE);
-        summary = (String) picker.getSummary();
+        summary = picker.getSummary().toString();
 
         // Set number picker summary
         v = picker.getValue();
@@ -117,7 +117,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Get about summary
         Preference about = findPreference(KEY_PREF_ABOUT);
-        String sum = (String) about.getSummary();
+        String sum = about.getSummary().toString();
 
         // Set version in text view
         s = String.format(sum, BuildConfig.VERSION_NAME);
