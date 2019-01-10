@@ -96,6 +96,7 @@ public class MainActivity extends Activity
     private Status status;
     private Meter meter;
     private Scope scope;
+    private Staff staff;
 
     private Audio audio;
     private Toast toast;
@@ -123,6 +124,7 @@ public class MainActivity extends Activity
         status = findViewById(R.id.status);
         meter = findViewById(R.id.meter);
         scope = findViewById(R.id.scope);
+        staff = findViewById(R.id.staff);
 
         // Add custom view to action bar
         ActionBar actionBar = getActionBar();
@@ -155,6 +157,9 @@ public class MainActivity extends Activity
 
         if (scope != null)
             scope.audio = audio;
+
+        if (staff != null)
+            staff.audio = audio;
 
         // Set up the click listeners
         setClickListeners();
@@ -1198,6 +1203,10 @@ public class MainActivity extends Activity
                         // Update display
                         if (display != null)
                             display.postInvalidate();
+
+                        // Update staff
+                        if (staff != null)
+                            staff.postInvalidate();
                     }
 
                     // Reset count;
@@ -1222,6 +1231,10 @@ public class MainActivity extends Activity
                             // Update display
                             if (display != null)
                                 display.postInvalidate();
+
+                            // Update staff
+                            if (staff != null)
+                                staff.postInvalidate();
                         }
 
                         // Update spectrum
