@@ -190,13 +190,16 @@ public class Staff extends TunerView
     {
         super.onDraw(canvas);
 
-        // Don't draw if no audio
-        if (audio == null)
+        // Don't draw if turned off
+        if (audio == null || audio.strobe)
             return;
 
         // Set up paint
         paint.setStrokeWidth(2);
         paint.setColor(textColour);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setTextSize(lineHeight * 4);
+        paint.setTextAlign(Paint.Align.LEFT);
 
         // Draw staff
         canvas.translate(0, height / 2f);
@@ -208,7 +211,6 @@ public class Staff extends TunerView
                             width - margin, i * -lineHeight, paint);
         }
 
-        paint.setStyle(Paint.Style.FILL);
         canvas.drawPath(tclef, paint);
         canvas.drawPath(bclef, paint);
 
@@ -218,12 +220,9 @@ public class Staff extends TunerView
         int index = note % OCTAVE;
         float dx = (octave * lineHeight * 3.5f) +
             (offset[index] * (lineHeight / 2));
-        Log.d(TAG, "Base " + base);
-        Log.d(TAG, "Note " + note);
-        Log.d(TAG, "Octave " + octave);
-        Log.d(TAG, "Index " + index);
-        Log.d(TAG, "Dx " + dx);
-        canvas.translate(-(base * 2) + (dx * 2), base - dx);
+
+        canvas.translate(-(base * 3) + (dx * 3), base - dx);
         canvas.drawPath(hnote, paint);
+        canvas.drawText(sharps[index], (width / 2) + lineHeight, 0, paint);
     }
 }

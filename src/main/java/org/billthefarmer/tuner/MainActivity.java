@@ -208,6 +208,13 @@ public class MainActivity extends Activity
             strobe.setOnLongClickListener(this);
         }
 
+        // Staff
+        if (staff != null)
+        {
+            staff.setOnClickListener(this);
+            staff.setOnLongClickListener(this);
+        }
+
         // Meter
         if (meter != null)
         {
@@ -256,15 +263,24 @@ public class MainActivity extends Activity
                 showToast(R.string.lock_off);
             break;
 
-        // Strobe
+        // Strobe / Staff
         case R.id.strobe:
+        case R.id.staff:
             audio.strobe = !audio.strobe;
 
             if (audio.strobe)
+            {
+                strobe.setVisibility(View.VISIBLE);
+                staff.setVisibility(View.GONE);
                 showToast(R.string.strobe_on);
+            }
 
             else
+            {
+                strobe.setVisibility(View.GONE);
+                staff.setVisibility(View.VISIBLE);
                 showToast(R.string.strobe_off);
+            }
             break;
 
         // Meter
@@ -314,8 +330,9 @@ public class MainActivity extends Activity
                 showToast(R.string.multiple_off);
             break;
 
-        // Strobe
+        // Strobe / Staff
         case R.id.strobe:
+        case R.id.staff:
             dark = !dark;
 
             if (Build.VERSION.SDK_INT != VERSION_M)
@@ -534,12 +551,19 @@ public class MainActivity extends Activity
                 window.addFlags(WindowManager
                                 .LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
+
             else
             {
                 Window window = getWindow();
                 window.clearFlags(WindowManager
                                   .LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
+
+            // Strobe
+            if (strobe != null)
+                strobe.setVisibility(audio.strobe? View.VISIBLE: View.GONE);
+            if (staff != null)
+                staff.setVisibility(audio.strobe? View.GONE: View.VISIBLE);
         }
 
         // Check for strobe before setting colours

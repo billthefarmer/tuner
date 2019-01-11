@@ -33,6 +33,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.util.Log;
 
 // Tuner View
 public abstract class TunerView extends View
