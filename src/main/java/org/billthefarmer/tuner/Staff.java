@@ -25,24 +25,26 @@ package org.billthefarmer.tuner;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 
 // Staff
 public class Staff extends TunerView
 {
+    private static final String TAG = "Staff";
+
+    private static final String sharps[] =
+    {
+        "", "\u266F", "", "\u266D", "", "",
+        "\u266F", "", "\u266D", "", "\u266D", ""
+    };
+
     private static final float tc[][]=
     {
         {-6, 16},  {-8, 13},  {-14, 19},  {-10, 35},  {2, 35},  {8, 37},  
@@ -61,7 +63,8 @@ public class Staff extends TunerView
 
     private static final float bc[][] =
     {
-        {-2.3f,3}, {6,7}, {10.5f,12}, {10.5f,16},
+        {-2.3f,3},
+        {6,7}, {10.5f,12}, {10.5f,16},
         {10.5f,20.5f}, {8.5f,23.5f}, {6.2f,23.3f},
         {5.2f,23.5f}, {2,23.5f}, {0.5f,19.5f},
         {2,20}, {4,19.5f}, {4,18},
@@ -78,8 +81,27 @@ public class Staff extends TunerView
         {16.9f,13.5f}, {14.9f,13.5f}, {14.9f,15}
     };
 
+    private static final float hd[][] =
+    {
+        {8.0f, 0.0f},
+        {8.0f, 8.0f},  {-8.0f, 8.0f},  {-8.0f, 0.0f},
+        {-8.0f, -8.0f}, {8.0f, -8.0f},  {8.0f, 0.0f}
+    };
+
+    private static final int offset[] =
+    {
+        0, 0, 1, 2, 2, 3,
+        3, 4, 5, 5, 6, 6
+    };
+
+    private static final int A5_OFFSET = 60;
+    private static final int OCTAVE = 12;
+
     private Path tclef;
     private Path bclef;
+    private Path hnote;
+
+    private Matrix matrix;
 
     private float lineHeight; 
     private int margin; 
@@ -99,8 +121,67 @@ public class Staff extends TunerView
         height = clipRect.bottom - clipRect.top;
         width = clipRect.right - clipRect.left;
 
-        lineHeight = height / 12f;
-        margin = width / 12;
+        lineHeight = height / 14f;
+        margin = width / 14;
+
+        tclef = new Path();
+        tclef.moveTo(tc[0][0], tc[0][1]);
+        tclef.lineTo(tc[1][0], tc[1][1]);
+        for (int i = 2; i < tc.length; i += 3)
+            tclef.cubicTo(tc[i][0], tc[i][1],
+                          tc[i + 1][0], tc[i + 1][1],
+                          tc[i + 2][0], tc[i + 2][1]);
+
+        bclef = new Path();
+        bclef.moveTo(bc[0][0], bc[0][1]);
+        for (int i = 1; i < 28; i += 3)
+            bclef.cubicTo(bc[i][0], bc[i][1],
+                          bc[i + 1][0], bc[i + 1][1],
+                          bc[i + 2][0], bc[i + 2][1]);
+
+        bclef.moveTo(bc[28][0], bc[28][1]);
+        for (int i = 29; i < 35; i += 3)
+            bclef.cubicTo(bc[i][0], bc[i][1],
+                          bc[i + 1][0], bc[i + 1][1],
+                          bc[i + 2][0], bc[i + 2][1]);
+
+        bclef.moveTo(bc[35][0], bc[35][1]);
+        for (int i = 36; i < bc.length; i += 3)
+            bclef.cubicTo(bc[i][0], bc[i][1],
+                          bc[i + 1][0], bc[i + 1][1],
+                          bc[i + 2][0], bc[i + 2][1]);
+
+        hnote = new Path();
+        hnote.moveTo(hd[0][0], hd[0][1]);
+        for (int i = 1; i < hd.length; i += 3)
+            hnote.cubicTo(hd[i][0], hd[i][1],
+                          hd[i + 1][0], hd[i + 1][1],
+                          hd[i + 2][0], hd[i + 2][1]);
+
+        RectF bounds = new RectF();
+        tclef.computeBounds(bounds, false);
+
+        float scale = (height / 2) / (bounds.top - bounds.bottom);
+        matrix = new Matrix();
+        matrix.setScale(-scale, scale);
+        matrix.postTranslate(margin + (lineHeight * 2), - lineHeight);
+        tclef.transform(matrix);
+
+        bclef.computeBounds(bounds, false);
+        scale = (lineHeight * 4) / (bounds.top - bounds.bottom);
+
+        matrix.reset();
+        matrix.setScale(-scale, scale);
+        matrix.postTranslate(margin + lineHeight, lineHeight * 5.4f);
+        bclef.transform(matrix);
+
+        hnote.computeBounds(bounds, false);
+        scale = (lineHeight * 1.5f) / (bounds.top - bounds.bottom);
+
+        matrix.reset();
+        matrix.setScale(-scale, scale);
+        matrix.postTranslate(width / 2, 0);
+        hnote.transform(matrix);
     }
 
     // On draw
@@ -109,7 +190,7 @@ public class Staff extends TunerView
     {
         super.onDraw(canvas);
 
-        // Don't draw if turned off
+        // Don't draw if no audio
         if (audio == null)
             return;
 
@@ -126,5 +207,23 @@ public class Staff extends TunerView
             canvas.drawLine(margin, i * -lineHeight,
                             width - margin, i * -lineHeight, paint);
         }
+
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawPath(tclef, paint);
+        canvas.drawPath(bclef, paint);
+
+        float base = lineHeight * 14;
+        int note = audio.note;
+        int octave = note / OCTAVE;
+        int index = note % OCTAVE;
+        float dx = (octave * lineHeight * 3.5f) +
+            (offset[index] * (lineHeight / 2));
+        Log.d(TAG, "Base " + base);
+        Log.d(TAG, "Note " + note);
+        Log.d(TAG, "Octave " + octave);
+        Log.d(TAG, "Index " + index);
+        Log.d(TAG, "Dx " + dx);
+        canvas.translate(-(base * 2) + (dx * 2), base - dx);
+        canvas.drawPath(hnote, paint);
     }
 }
