@@ -276,16 +276,12 @@ public class MainActivity extends Activity
             if (audio.strobe)
             {
                 animateStrobe();
-                // strobe.setVisibility(View.VISIBLE);
-                // staff.setVisibility(View.GONE);
                 showToast(R.string.strobe_on);
             }
 
             else
             {
                 animateStaff();
-                // strobe.setVisibility(View.GONE);
-                // staff.setVisibility(View.VISIBLE);
                 showToast(R.string.strobe_off);
             }
             break;
