@@ -92,6 +92,9 @@ public class MainActivity extends Activity
         "\u266F", "", "\u266D", "", "\u266D", ""
     };
 
+    private static final String CLIP_FORMAT =
+        "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n";
+
     private Spectrum spectrum;
     private Display display;
     private Strobe strobe;
@@ -1371,8 +1374,7 @@ public class MainActivity extends Activity
 
                     text +=
                         String
-                        .format(Locale.getDefault(),
-                                "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
+                        .format(Locale.getDefault(), CLIP_FORMAT,
                                 notes[(maxima.n[i] - transpose +
                                        OCTAVE) % OCTAVE],
                                 sharps[(maxima.n[i] - transpose +
@@ -1385,24 +1387,18 @@ public class MainActivity extends Activity
                 if (count == 0)
                     text =
                         String
-                        .format(Locale.getDefault(),
-                                "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                                notes[(note - transpose +
-                                       OCTAVE) % OCTAVE],
-                                sharps[(note - transpose +
-                                        OCTAVE) % OCTAVE],
+                        .format(Locale.getDefault(), CLIP_FORMAT,
+                                notes[(note - transpose + OCTAVE) % OCTAVE],
+                                sharps[(note - transpose + OCTAVE) % OCTAVE],
                                 (note - transpose) / OCTAVE, cents,
                                 nearest, frequency, difference);
             }
             else
                 text =
                     String
-                    .format(Locale.getDefault(),
-                            "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n",
-                            notes[(note - transpose +
-                                   OCTAVE) % OCTAVE],
-                            sharps[(note - transpose +
-                                    OCTAVE) % OCTAVE],
+                    .format(Locale.getDefault(), CLIP_FORMAT,
+                            notes[(note - transpose + OCTAVE) % OCTAVE],
+                            sharps[(note - transpose + OCTAVE) % OCTAVE],
                             (note - transpose) / OCTAVE, cents,
                             nearest, frequency, difference);
 
