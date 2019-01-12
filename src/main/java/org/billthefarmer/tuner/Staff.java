@@ -39,12 +39,15 @@ public class Staff extends TunerView
 {
     private static final String TAG = "Staff";
 
+    private static final int OCTAVE = 12;
+
     private static final String sharps[] =
     {
         "", "\u266F", "", "\u266D", "", "",
         "\u266F", "", "\u266D", "", "\u266D", ""
     };
 
+    // Treble clef
     private static final float tc[][]=
     {
         {-6, 16},  {-8, 13},  {-14, 19},  {-10, 35},  {2, 35},  {8, 37},  
@@ -61,6 +64,7 @@ public class Staff extends TunerView
         {7, 26},  {2, 26},  {-5, 26},  {-9, 21},  {-6, 16}
     };
 
+    // Bass clef
     private static final float bc[][] =
     {
         {-2.3f,3},
@@ -81,21 +85,20 @@ public class Staff extends TunerView
         {16.9f,13.5f}, {14.9f,13.5f}, {14.9f,15}
     };
 
+    // Note head
     private static final float hd[][] =
     {
         {8.0f, 0.0f},
-        {8.0f, 8.0f},  {-8.0f, 8.0f},  {-8.0f, 0.0f},
-        {-8.0f, -8.0f}, {8.0f, -8.0f},  {8.0f, 0.0f}
+        {8.0f, 8.0f}, {-8.0f, 8.0f}, {-8.0f, 0.0f},
+        {-8.0f, -8.0f}, {8.0f, -8.0f}, {8.0f, 0.0f}
     };
 
+    // Scale offsets
     private static final int offset[] =
     {
         0, 0, 1, 2, 2, 3,
         3, 4, 5, 5, 6, 6
     };
-
-    private static final int A5_OFFSET = 60;
-    private static final int OCTAVE = 12;
 
     private Path tclef;
     private Path bclef;
@@ -122,8 +125,9 @@ public class Staff extends TunerView
         width = clipRect.right - clipRect.left;
 
         lineHeight = height / 14f;
-        margin = width / 14;
+        margin = width / 32;
 
+        // Treble clef
         tclef = new Path();
         tclef.moveTo(tc[0][0], tc[0][1]);
         tclef.lineTo(tc[1][0], tc[1][1]);
@@ -132,6 +136,7 @@ public class Staff extends TunerView
                           tc[i + 1][0], tc[i + 1][1],
                           tc[i + 2][0], tc[i + 2][1]);
 
+        // Bass clef
         bclef = new Path();
         bclef.moveTo(bc[0][0], bc[0][1]);
         for (int i = 1; i < 28; i += 3)
@@ -151,6 +156,7 @@ public class Staff extends TunerView
                           bc[i + 1][0], bc[i + 1][1],
                           bc[i + 2][0], bc[i + 2][1]);
 
+        // Note head
         hnote = new Path();
         hnote.moveTo(hd[0][0], hd[0][1]);
         for (int i = 1; i < hd.length; i += 3)
@@ -159,28 +165,28 @@ public class Staff extends TunerView
                           hd[i + 2][0], hd[i + 2][1]);
 
         RectF bounds = new RectF();
-        tclef.computeBounds(bounds, false);
 
+        // Scale treble clef
+        tclef.computeBounds(bounds, false);
         float scale = (height / 2) / (bounds.top - bounds.bottom);
         matrix = new Matrix();
         matrix.setScale(-scale, scale);
         matrix.postTranslate(margin + (lineHeight * 2), - lineHeight);
         tclef.transform(matrix);
 
+        // Scale bass clef
         bclef.computeBounds(bounds, false);
         scale = (lineHeight * 4) / (bounds.top - bounds.bottom);
-
         matrix.reset();
         matrix.setScale(-scale, scale);
         matrix.postTranslate(margin + lineHeight, lineHeight * 5.4f);
         bclef.transform(matrix);
 
+        // Scale note head
         hnote.computeBounds(bounds, false);
         scale = (lineHeight * 1.5f) / (bounds.top - bounds.bottom);
-
         matrix.reset();
         matrix.setScale(-scale, scale);
-        matrix.postTranslate(width / 2, 0);
         hnote.transform(matrix);
     }
 
@@ -211,18 +217,38 @@ public class Staff extends TunerView
                             width - margin, i * -lineHeight, paint);
         }
 
+        // Draw leger lines
+        canvas.drawLine((width / 2) - (lineHeight * 1.5f), 0,
+                        (width / 2) + (lineHeight * 1.5f), 0, paint);
+
+        canvas.drawLine((width / 2) + (lineHeight * 16.5f),
+                        -lineHeight * 6,
+                        (width / 2) + (lineHeight * 19.5f),
+                        -lineHeight * 6, paint);
+
+        canvas.drawLine((width / 2) - (lineHeight * 16.5f),
+                        lineHeight * 6,
+                        (width / 2) - (lineHeight * 19.5f),
+                        lineHeight * 6, paint);
+
+        // Draw treble and bass clef
         canvas.drawPath(tclef, paint);
         canvas.drawPath(bclef, paint);
 
+        // Calculate transform for note
         float base = lineHeight * 14;
-        int note = audio.note;
+        int note = audio.note - audio.transpose;
         int octave = note / OCTAVE;
-        int index = note % OCTAVE;
+        int index = (note + OCTAVE) % OCTAVE;
         float dx = (octave * lineHeight * 3.5f) +
             (offset[index] * (lineHeight / 2));
 
-        canvas.translate(-(base * 3) + (dx * 3), base - dx);
+        // Translate canvas
+        canvas.translate((width / 2) - (base * 3) + (dx * 3), base - dx);
+
+        // Draw note and accidental
         canvas.drawPath(hnote, paint);
-        canvas.drawText(sharps[index], (width / 2) + lineHeight, 0, paint);
+        canvas.drawText(sharps[index], -lineHeight * 3f,
+                        lineHeight / 2, paint);
     }
 }

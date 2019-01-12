@@ -43,6 +43,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -270,15 +272,17 @@ public class MainActivity extends Activity
 
             if (audio.strobe)
             {
-                strobe.setVisibility(View.VISIBLE);
-                staff.setVisibility(View.GONE);
+                animateStrobe();
+                // strobe.setVisibility(View.VISIBLE);
+                // staff.setVisibility(View.GONE);
                 showToast(R.string.strobe_on);
             }
 
             else
             {
-                strobe.setVisibility(View.GONE);
-                staff.setVisibility(View.VISIBLE);
+                animateStaff();
+                // strobe.setVisibility(View.GONE);
+                // staff.setVisibility(View.VISIBLE);
                 showToast(R.string.strobe_off);
             }
             break;
@@ -289,6 +293,30 @@ public class MainActivity extends Activity
             showToast(R.string.copied_clip);
             break;
         }
+    }
+
+    // animateStaff
+    public void animateStaff()
+    {
+        // Animation
+        startAnimation(strobe, R.anim.activity_close_exit, View.GONE);
+        startAnimation(staff, R.anim.activity_open_enter, View.VISIBLE);
+    }
+
+    // animateStrobe
+    private void animateStrobe()
+    {
+        // Animation
+        startAnimation(staff, R.anim.activity_close_exit, View.GONE);
+        startAnimation(strobe, R.anim.activity_open_enter, View.VISIBLE);
+    }
+
+    // startAnimation
+    private void startAnimation(View view, int anim, int visibility)
+    {
+        Animation animation = AnimationUtils.loadAnimation(this, anim);
+        view.startAnimation(animation);
+        view.setVisibility(visibility);
     }
 
     // On long click
