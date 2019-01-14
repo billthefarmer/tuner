@@ -277,24 +277,60 @@ public class MainActivity extends Activity
 
                 if (audio.strobe)
                 {
-                    animateStrobe();
+                    animateView(staff, strobe);
                     showToast(R.string.strobe_on);
                 }
 
                 else
                 {
-                    animateStaff();
+                    animateView(strobe, staff);
                     showToast(R.string.strobe_off);
                 }
+            }
+
+            else
+            {
+                audio.lock = !audio.lock;
+                if (display != null)
+                    display.invalidate();
+
+                if (audio.lock)
+                    showToast(R.string.lock_on);
+                else
+                    showToast(R.string.lock_off);
             }
             break;
 
         // Meter
         case R.id.meter:
-            audio.copyToClipboard();
-            showToast(R.string.copied_clip);
+            if (strobe == null)
+            {
+                audio.strobe = !audio.strobe;
+
+                if (display != null && staff != null &&
+                    staff.getVisibility() == View.VISIBLE)
+                    animateView(staff, display);
+
+                else if (display != null && staff != null &&
+                         staff.getVisibility() == View.GONE)
+                    animateView(display, staff);
+            }
+
+            else
+            {
+                audio.copyToClipboard();
+                showToast(R.string.copied_clip);
+            }
             break;
         }
+    }
+
+    // animateView
+    public void animateView(View gone, View visible)
+    {
+        // Animation
+        startAnimation(gone, R.anim.activity_close_exit, View.GONE);
+        startAnimation(visible, R.anim.activity_open_enter, View.VISIBLE);
     }
 
     // animateStaff
@@ -303,6 +339,14 @@ public class MainActivity extends Activity
         // Animation
         startAnimation(strobe, R.anim.activity_close_exit, View.GONE);
         startAnimation(staff, R.anim.activity_open_enter, View.VISIBLE);
+    }
+
+    // animateDisplay
+    private void animateDisplay()
+    {
+        // Animation
+        startAnimation(staff, R.anim.activity_close_exit, View.GONE);
+        startAnimation(display, R.anim.activity_open_enter, View.VISIBLE);
     }
 
     // animateStrobe

@@ -21,6 +21,19 @@
         app:TextColour="?android:attr/textColorPrimary"
         app:lock="?attr/lock" />
 
+    <org.billthefarmer.tuner.Staff
+        android:id="@+id/staff"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1.02"
+        app:BackgroundColour="?android:attr/colorBackground"
+        app:TextColour="?android:attr/textColorPrimary" />
+
     <org.billthefarmer.tuner.Meter
         android:id="@+id/meter"
         android:layout_width="match_parent"
