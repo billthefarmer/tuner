@@ -303,16 +303,14 @@ public class MainActivity extends Activity
 
         // Meter
         case R.id.meter:
-            if (strobe == null)
+            if (strobe == null && display != null && staff != null)
             {
                 audio.strobe = !audio.strobe;
 
-                if (display != null && staff != null &&
-                    staff.getVisibility() == View.VISIBLE)
+                if (audio.strobe)
                     animateView(staff, display);
 
-                else if (display != null && staff != null &&
-                         staff.getVisibility() == View.GONE)
+                else
                     animateView(display, staff);
             }
 
@@ -331,30 +329,6 @@ public class MainActivity extends Activity
         // Animation
         startAnimation(gone, R.anim.activity_close_exit, View.GONE);
         startAnimation(visible, R.anim.activity_open_enter, View.VISIBLE);
-    }
-
-    // animateStaff
-    public void animateStaff()
-    {
-        // Animation
-        startAnimation(strobe, R.anim.activity_close_exit, View.GONE);
-        startAnimation(staff, R.anim.activity_open_enter, View.VISIBLE);
-    }
-
-    // animateDisplay
-    private void animateDisplay()
-    {
-        // Animation
-        startAnimation(staff, R.anim.activity_close_exit, View.GONE);
-        startAnimation(display, R.anim.activity_open_enter, View.VISIBLE);
-    }
-
-    // animateStrobe
-    private void animateStrobe()
-    {
-        // Animation
-        startAnimation(staff, R.anim.activity_close_exit, View.GONE);
-        startAnimation(strobe, R.anim.activity_open_enter, View.VISIBLE);
     }
 
     // startAnimation
@@ -636,8 +610,12 @@ public class MainActivity extends Activity
             // Strobe
             if (strobe != null)
                 strobe.setVisibility(audio.strobe? View.VISIBLE: View.GONE);
-            if (staff != null)
+            if (staff != null && strobe != null)
                 staff.setVisibility(audio.strobe? View.GONE: View.VISIBLE);
+            if (staff != null && strobe == null)
+                staff.setVisibility(audio.strobe? View.GONE: View.VISIBLE);
+            if (display != null && strobe == null)
+                display.setVisibility(audio.strobe? View.VISIBLE: View.GONE);
         }
 
         // Check for strobe before setting colours
