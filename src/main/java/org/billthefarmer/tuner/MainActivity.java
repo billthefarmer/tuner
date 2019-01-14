@@ -271,18 +271,21 @@ public class MainActivity extends Activity
         // Strobe / Staff
         case R.id.strobe:
         case R.id.staff:
-            audio.strobe = !audio.strobe;
-
-            if (audio.strobe)
+            if (strobe != null && staff != null)
             {
-                animateStrobe();
-                showToast(R.string.strobe_on);
-            }
+                audio.strobe = !audio.strobe;
 
-            else
-            {
-                animateStaff();
-                showToast(R.string.strobe_off);
+                if (audio.strobe)
+                {
+                    animateStrobe();
+                    showToast(R.string.strobe_on);
+                }
+
+                else
+                {
+                    animateStaff();
+                    showToast(R.string.strobe_off);
+                }
             }
             break;
 
