@@ -277,13 +277,13 @@ public class MainActivity extends Activity
 
                 if (audio.strobe)
                 {
-                    animateView(staff, strobe);
+                    animateViews(staff, strobe);
                     showToast(R.string.strobe_on);
                 }
 
                 else
                 {
-                    animateView(strobe, staff);
+                    animateViews(strobe, staff);
                     showToast(R.string.strobe_off);
                 }
             }
@@ -308,10 +308,10 @@ public class MainActivity extends Activity
                 audio.strobe = !audio.strobe;
 
                 if (audio.strobe)
-                    animateView(staff, display);
+                    animateViews(staff, display);
 
                 else
-                    animateView(display, staff);
+                    animateViews(display, staff);
             }
 
             else
@@ -323,11 +323,11 @@ public class MainActivity extends Activity
         }
     }
 
-    // animateView
-    public void animateView(View gone, View visible)
+    // animateViews
+    public void animateViews(View hidden, View visible)
     {
         // Animation
-        startAnimation(gone, R.anim.activity_close_exit, View.GONE);
+        startAnimation(hidden, R.anim.activity_close_exit, View.GONE);
         startAnimation(visible, R.anim.activity_open_enter, View.VISIBLE);
     }
 
@@ -572,7 +572,7 @@ public class MainActivity extends Activity
                     audio.noteFilter[index] = false;
 
                 for (String note : notes)
-                {
+                {
                     int index = Integer.parseInt(note);
                     audio.noteFilter[index] = true;
                 }

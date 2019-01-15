@@ -56,7 +56,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_weight="0.52"
+        android:layout_weight="0.48"
         app:BackgroundColour="?android:attr/colorBackground"
         app:TextColour="?android:attr/textColorPrimary" />
 
