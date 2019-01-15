@@ -277,13 +277,13 @@ public class MainActivity extends Activity
 
                 if (audio.strobe)
                 {
-                    animateStrobe();
+                    animateViews(staff, strobe);
                     showToast(R.string.strobe_on);
                 }
 
                 else
                 {
-                    animateStaff();
+                    animateViews(strobe, staff);
                     showToast(R.string.strobe_off);
                 }
             }
@@ -297,20 +297,12 @@ public class MainActivity extends Activity
         }
     }
 
-    // animateStaff
-    public void animateStaff()
+    // animateViews
+    public void animateViews(View hidden, View visible)
     {
         // Animation
-        startAnimation(strobe, R.anim.activity_close_exit, View.GONE);
-        startAnimation(staff, R.anim.activity_open_enter, View.VISIBLE);
-    }
-
-    // animateStrobe
-    private void animateStrobe()
-    {
-        // Animation
-        startAnimation(staff, R.anim.activity_close_exit, View.GONE);
-        startAnimation(strobe, R.anim.activity_open_enter, View.VISIBLE);
+        startAnimation(hidden, R.anim.activity_close_exit, View.GONE);
+        startAnimation(visible, R.anim.activity_open_enter, View.VISIBLE);
     }
 
     // startAnimation
