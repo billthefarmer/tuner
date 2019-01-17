@@ -23,3 +23,10 @@ value, cents error, frequency error etc, a strobe display, and a meter
 display showing the cents error. In landscape, the app shows just the
 main display and the meter. There is a signal indicator in the action
 bar which is useful in landscape mode.
+
+Building
+--------
+
+To build the project, use:
+
+    ./gradlew build
