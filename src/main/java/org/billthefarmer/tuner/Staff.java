@@ -259,6 +259,7 @@ public class Staff extends TunerView
             (offset[index] * (lineWidth / 2));
         float dy = (octave * lineHeight * 3.5f) +
             (offset[index] * (lineHeight / 2));
+
         // Translate canvas
         canvas.translate((width / 2) - xBase + dx, yBase - dy);
 
