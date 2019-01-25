@@ -649,7 +649,15 @@ public class MainActivity extends Activity
                 if (staff != null)
                     staff.setVisibility(audio.strobe? View.GONE: View.VISIBLE);
             }
-        }
+
+            else
+            {
+                if (staff != null)
+                    staff.setVisibility(show? View.VISIBLE: View.GONE);
+                if (display != null)
+                    display.setVisibility(show? View.GONE: View.VISIBLE);
+            }
+         }
 
         // Check for strobe before setting colours
         if (strobe != null)

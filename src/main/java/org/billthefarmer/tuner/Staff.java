@@ -107,6 +107,7 @@ public class Staff extends TunerView
     private Matrix matrix;
 
     private float lineHeight;
+    private float lineWidth;
     private int margin;
 
     // Constructor
@@ -125,6 +126,7 @@ public class Staff extends TunerView
         width = clipRect.right - clipRect.left;
 
         lineHeight = height / 14f;
+        lineWidth = width / 16f;
         margin = width / 32;
 
         // Treble clef
@@ -218,17 +220,17 @@ public class Staff extends TunerView
         }
 
         // Draw leger lines
-        canvas.drawLine((width / 2) - (lineHeight * 1.5f), 0,
-                        (width / 2) + (lineHeight * 1.5f), 0, paint);
+        canvas.drawLine((width / 2) - (lineWidth * 0.5f), 0,
+                        (width / 2) + (lineWidth * 0.5f), 0, paint);
 
-        canvas.drawLine((width / 2) + (lineHeight * 16.5f),
+        canvas.drawLine((width / 2) + (lineWidth * 5.5f),
                         -lineHeight * 6,
-                        (width / 2) + (lineHeight * 19.5f),
+                        (width / 2) + (lineWidth * 6.5f),
                         -lineHeight * 6, paint);
 
-        canvas.drawLine((width / 2) - (lineHeight * 16.5f),
+        canvas.drawLine((width / 2) - (lineWidth * 5.5f),
                         lineHeight * 6,
-                        (width / 2) - (lineHeight * 19.5f),
+                        (width / 2) - (lineWidth * 6.5f),
                         lineHeight * 6, paint);
 
         // Draw treble and bass clef
@@ -236,19 +238,21 @@ public class Staff extends TunerView
         canvas.drawPath(bclef, paint);
 
         // Calculate transform for note
-        float base = lineHeight * 14;
+        float xBase = lineWidth * 14;
+        float yBase = lineHeight * 14;
         int note = audio.note - audio.transpose;
         int octave = note / OCTAVE;
         int index = (note + OCTAVE) % OCTAVE;
-        float dx = (octave * lineHeight * 3.5f) +
+        float dx = (octave * lineWidth * 3.5f) +
+            (offset[index] * (lineWidth / 2));
+        float dy = (octave * lineHeight * 3.5f) +
             (offset[index] * (lineHeight / 2));
-
         // Translate canvas
-        canvas.translate((width / 2) - (base * 3) + (dx * 3), base - dx);
+        canvas.translate((width / 2) - xBase + dx, yBase - dy);
 
         // Draw note and accidental
         canvas.drawPath(hnote, paint);
-        canvas.drawText(sharps[index], -lineHeight * 3f,
+        canvas.drawText(sharps[index], -lineWidth,
                         lineHeight / 2, paint);
     }
 }
