@@ -30,6 +30,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -77,6 +78,8 @@ public class MainActivity extends Activity
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
 
+    private static final String SHOW = "show";
+
     private static final int VERSION_M = 23;
 
     // Note values for display
@@ -107,6 +110,7 @@ public class MainActivity extends Activity
     private Toast toast;
 
     private boolean dark;
+    private boolean show;
 
     // On Create
     @Override
@@ -232,6 +236,9 @@ public class MainActivity extends Activity
     @Override
     public void onClick(View v)
     {
+        // Get config
+        Configuration config = getResources().getConfiguration();
+
         // Get id
         int id = v.getId();
         switch (id)
@@ -271,20 +278,23 @@ public class MainActivity extends Activity
         // Strobe / Staff
         case R.id.strobe:
         case R.id.staff:
-            if (strobe != null && staff != null)
+            if (config.orientation == Configuration.ORIENTATION_PORTRAIT)
             {
-                audio.strobe = !audio.strobe;
-
-                if (audio.strobe)
+                if (strobe != null && staff != null)
                 {
-                    animateViews(staff, strobe);
-                    showToast(R.string.strobe_on);
-                }
+                    audio.strobe = !audio.strobe;
 
-                else
-                {
-                    animateViews(strobe, staff);
-                    showToast(R.string.strobe_off);
+                    if (audio.strobe)
+                    {
+                        animateViews(staff, strobe);
+                        showToast(R.string.strobe_on);
+                    }
+
+                    else
+                    {
+                        animateViews(strobe, staff);
+                        showToast(R.string.strobe_off);
+                    }
                 }
             }
 
@@ -303,15 +313,18 @@ public class MainActivity extends Activity
 
         // Meter
         case R.id.meter:
-            if (strobe == null && display != null && staff != null)
+            if (config.orientation == Configuration.ORIENTATION_LANDSCAPE)
             {
-                audio.strobe = !audio.strobe;
+                if (display != null && staff != null)
+                {
+                    show = !show;
 
-                if (audio.strobe)
-                    animateViews(staff, display);
+                    if (show)
+                        animateViews(display, staff);
 
-                else
-                    animateViews(display, staff);
+                    else
+                        animateViews(staff, display);
+                }
             }
 
             else
@@ -497,6 +510,15 @@ public class MainActivity extends Activity
         audio.start();
     }
 
+    // onRestoreInstanceState
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        show = savedInstanceState.getBoolean(SHOW);
+    }
+
     // onPause
     @Override
     protected void onPause()
@@ -508,6 +530,15 @@ public class MainActivity extends Activity
 
         // Stop audio thread
         audio.stop();
+    }
+
+    // onSaveInstanceState
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean(SHOW, show);
     }
 
     // Save preferences
@@ -607,15 +638,17 @@ public class MainActivity extends Activity
                                   .LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
 
+            // Get config
+            Configuration config = getResources().getConfiguration();
+
             // Strobe
-            if (strobe != null)
-                strobe.setVisibility(audio.strobe? View.VISIBLE: View.GONE);
-            if (staff != null && strobe != null)
-                staff.setVisibility(audio.strobe? View.GONE: View.VISIBLE);
-            if (staff != null && strobe == null)
-                staff.setVisibility(audio.strobe? View.GONE: View.VISIBLE);
-            if (display != null && strobe == null)
-                display.setVisibility(audio.strobe? View.VISIBLE: View.GONE);
+            if (config.orientation == Configuration.ORIENTATION_PORTRAIT)
+            {
+                if (strobe != null)
+                    strobe.setVisibility(audio.strobe? View.VISIBLE: View.GONE);
+                if (staff != null)
+                    staff.setVisibility(audio.strobe? View.GONE: View.VISIBLE);
+            }
         }
 
         // Check for strobe before setting colours
