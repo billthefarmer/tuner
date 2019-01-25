@@ -198,8 +198,8 @@ public class Staff extends TunerView
     {
         super.onDraw(canvas);
 
-        // Don't draw if turned off
-        if (audio == null || audio.strobe)
+        // Don't draw if no audio
+        if (audio == null)
             return;
 
         // Set up paint
