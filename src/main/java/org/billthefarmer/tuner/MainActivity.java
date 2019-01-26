@@ -37,6 +37,7 @@ import android.media.AudioRecord;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,6 +59,8 @@ import java.util.Set;
 public class MainActivity extends Activity
     implements View.OnClickListener, View.OnLongClickListener
 {
+    private static final String TAG = "Tuner";
+
     private static final String PREF_INPUT = "pref_input";
     private static final String PREF_REFERENCE = "pref_reference";
     private static final String PREF_TRANSPOSE = "pref_transpose";
@@ -80,7 +83,7 @@ public class MainActivity extends Activity
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
 
-    private static final String SHOW = "show";
+    private static final String SHOW_STAFF = "show_staff";
 
     private static final int VERSION_M = 23;
 
@@ -689,7 +692,7 @@ public class MainActivity extends Activity
     {
         super.onRestoreInstanceState(savedInstanceState);
 
-        show = savedInstanceState.getBoolean(SHOW);
+        show = savedInstanceState.getBoolean(SHOW_STAFF);
     }
 
     // onPause
@@ -711,7 +714,7 @@ public class MainActivity extends Activity
     {
         super.onSaveInstanceState(outState);
 
-        outState.putBoolean(SHOW, show);
+        outState.putBoolean(SHOW_STAFF, show);
     }
 
     // Save preferences
@@ -957,6 +960,8 @@ public class MainActivity extends Activity
         private static final int SIZE = 4096;
 
         private static final int OCTAVE = 12;
+        private static final int EQUAL = 8;
+        private static final int A_OFFSET = 9;
         private static final int C5_OFFSET = 57;
         private static final long TIMER_COUNT = 24;
         private static final double MIN = 0.5;
@@ -1431,16 +1436,6 @@ public class MainActivity extends Activity
                         found = false;
                     }
 
-                    // Reference note
-                    nearest = audio.reference *
-                              Math.pow(2.0, Math.round(cf) / 12.0);
-
-                    // Lower and upper freq
-                    lower = reference *
-                            Math.pow(2.0, (Math.round(cf) - 0.55) / 12.0);
-                    higher = reference *
-                             Math.pow(2.0, (Math.round(cf) + 0.55) / 12.0);
-
                     // Note number
                     note = (int) Math.round(cf) + C5_OFFSET;
 
@@ -1449,6 +1444,30 @@ public class MainActivity extends Activity
                         note = 0;
                         found = false;
                     }
+
+                    // Octave note number
+                    int n = (note - transpose + OCTAVE) % OCTAVE;
+
+                    // Temperament ratio
+                    double tempRatio = temperaments[temperament][n] /
+                        temperaments[temperament][A_OFFSET];
+                    // Equal ratio
+                    double equRatio = temperaments[EQUAL][n] /
+                        temperaments[EQUAL][A_OFFSET];
+                    // Temperament adjustment
+                    double tempAdj = tempRatio / equRatio;
+
+                    // Reference note
+                    nearest = audio.reference *
+                              Math.pow(2.0, Math.round(cf) / 12.0) * tempAdj;
+
+                    // Lower and upper freq
+                    lower = reference *
+                            Math.pow(2.0, (Math.round(cf) - 0.55) /
+                                     12.0) * tempAdj;
+                    higher = reference *
+                             Math.pow(2.0, (Math.round(cf) + 0.55) /
+                                      12.0) * tempAdj;
 
                     // Find nearest maximum to reference note
                     double df = 1000.0;
