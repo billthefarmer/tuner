@@ -117,6 +117,9 @@
   <string name="pref_transpose">Transpor</string>
   <string name="pref_transpose_summ">%s</string>
 
+  <string name="pref_temperament">Temperamento</string>
+  <string name="pref_temperament_summ">%s</string>
+
   <string name="pref_theme">Tema</string>
   <string name="pref_dark">Tema escuro</string>
   <string name="pref_dark_summ">Use o tema escuro</string>

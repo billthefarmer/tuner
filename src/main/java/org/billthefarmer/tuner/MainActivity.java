@@ -60,6 +60,7 @@ public class MainActivity extends Activity
     private static final String PREF_INPUT = "pref_input";
     private static final String PREF_REFERENCE = "pref_reference";
     private static final String PREF_TRANSPOSE = "pref_transpose";
+    private static final String PREF_TEMPERAMENT = "pref_temperament";
 
     private static final String PREF_FUND = "pref_fund";
     private static final String PREF_SOLFA = "pref_solfa";
@@ -746,6 +747,8 @@ public class MainActivity extends Activity
             audio.reference = preferences.getInt(PREF_REFERENCE, 440);
             audio.transpose =
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
+            audio.temperament =
+                Integer.parseInt(preferences.getString(PREF_TEMPERAMENT, "0"));
 
             audio.fund = preferences.getBoolean(PREF_FUND, false);
             audio.solfa = preferences.getBoolean(PREF_SOLFA, false);
@@ -885,6 +888,7 @@ public class MainActivity extends Activity
         // Preferences
         protected int input;
         protected int transpose;
+        protected int temperament;
 
         protected boolean lock;
         protected boolean zoom;
