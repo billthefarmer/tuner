@@ -1402,9 +1402,22 @@ public class MainActivity extends Activity
                         // Note number
                         maxima.n[count] = n;
 
+                        // Octave note number
+                        n = (n - transpose + OCTAVE) % OCTAVE;
+
+                        // Temperament ratio
+                        double tempRatio = temperaments[temperament][n] /
+                            temperaments[temperament][A_OFFSET];
+                        // Equal ratio
+                        double equRatio = temperaments[EQUAL][n] /
+                            temperaments[EQUAL][A_OFFSET];
+                        // Temperament adjustment
+                        double tempAdj = tempRatio / equRatio;
+
                         // Reference note
                         maxima.r[count] = reference *
-                                          Math.pow(2.0, Math.round(cf) / 12.0);
+                                          Math.pow(2.0, Math.round(cf) /
+                                                   12.0) * tempAdj;
 
                         // Set limit to octave above
                         if (!downsample && (limit > i * 2))
@@ -1458,7 +1471,7 @@ public class MainActivity extends Activity
                     double tempAdj = tempRatio / equRatio;
 
                     // Reference note
-                    nearest = audio.reference *
+                    nearest = reference *
                               Math.pow(2.0, Math.round(cf) / 12.0) * tempAdj;
 
                     // Lower and upper freq
