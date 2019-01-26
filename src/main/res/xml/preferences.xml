@@ -143,6 +143,15 @@
             android:key="pref_transpose"
             android:summary="@string/pref_transpose_summ"
             android:title="@string/pref_transpose" />
+         <ListPreference
+            android:defaultValue="@integer/default_temperament"
+            android:dialogIcon="?attr/pref_temperament"
+            android:entries="@array/pref_temperament_entries"
+            android:entryValues="@array/pref_temperament_entry_values"
+            android:icon="?attr/pref_temperament"
+            android:key="pref_temperament"
+            android:summary="@string/pref_temperament_summ"
+            android:title="@string/pref_temperament" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_theme_category"

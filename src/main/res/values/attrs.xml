@@ -27,6 +27,7 @@
         <attr name="pref_solfa" format="reference" />
         <attr name="pref_strobe" format="reference" />
         <attr name="pref_transpose" format="reference" />
+        <attr name="pref_temperament" format="reference" />
         <attr name="pref_zoom" format="reference" />
 
     </declare-styleable>

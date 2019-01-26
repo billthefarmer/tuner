@@ -8,4 +8,5 @@
     <integer name="min_reference">420</integer>
 
     <integer name="default_transpose">0</integer>
+    <integer name="default_temperament">8</integer>
 </resources>
