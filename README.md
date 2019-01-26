@@ -13,8 +13,7 @@ screen for detailed documentation.
 &nbsp;
 ![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Tuner-settings.png)
 
-Using
------
+## Using
 
 Hold the phone/tablet near the instrument, play a note, and observe the
 display. In portrait, the app shows a scope with the input signal, a
@@ -23,3 +22,13 @@ value, cents error, frequency error etc, a strobe display, and a meter
 display showing the cents error. In landscape, the app shows just the
 main display and the meter. There is a signal indicator in the action
 bar which is useful in landscape mode.
+
+## Building
+
+You can either import the app into Android Studio or use standalone Gradle.
+Don't use installed gradle unless it's the same version as here (see
+`./gradle/wrapper/gradle-wrapper.properties`).
+
+```shell
+$ ./gradlew [assembleDebug|assemble|build]
+```
