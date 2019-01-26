@@ -46,6 +46,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -662,8 +663,17 @@ public class MainActivity extends Activity
         // Get preferences
         getPreferences();
 
+        // Change theme
         if (dark != theme && Build.VERSION.SDK_INT != VERSION_M)
             recreate();
+
+        // Set temperament text
+        Resources resources = getResources();
+        String entries[] =
+            resources.getStringArray(R.array.pref_temperament_entries);
+        TextView textView = findViewById(R.id.temperament);
+        if (textView != null)
+            textView.setText(entries[audio.temperament]);
 
         // Update status
         if (status != null)

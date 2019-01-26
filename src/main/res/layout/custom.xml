@@ -13,12 +13,13 @@
       android:id="@+id/temperament"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
-      android:layout_gravity="center" />
+      android:layout_marginRight="8dp"
+      android:gravity="center"
+      android:textAppearance="?android:attr/textAppearanceMedium" />
 
   <org.billthefarmer.tuner.SignalView
       android:id="@+id/signal"
       android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_gravity="right" />
+      android:layout_height="match_parent" />
 
   </LinearLayout>
