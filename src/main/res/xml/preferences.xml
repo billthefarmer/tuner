@@ -152,6 +152,15 @@
             android:key="pref_temperament"
             android:summary="@string/pref_temperament_summ"
             android:title="@string/pref_temperament" />
+         <ListPreference
+            android:defaultValue="@integer/default_key"
+            android:dialogIcon="?attr/pref_key"
+            android:entries="@array/pref_note_entries"
+            android:entryValues="@array/pref_note_entry_values"
+            android:icon="?attr/pref_key"
+            android:key="pref_key"
+            android:summary="@string/pref_key_summ"
+            android:title="@string/pref_key" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_theme_category"

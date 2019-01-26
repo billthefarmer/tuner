@@ -61,27 +61,25 @@ public class MainActivity extends Activity
 {
     private static final String TAG = "Tuner";
 
-    private static final String PREF_INPUT = "pref_input";
-    private static final String PREF_REFERENCE = "pref_reference";
-    private static final String PREF_TRANSPOSE = "pref_transpose";
-    private static final String PREF_TEMPERAMENT = "pref_temperament";
-
-    private static final String PREF_FUND = "pref_fund";
-    private static final String PREF_SOLFA = "pref_solfa";
-    private static final String PREF_FILTER = "pref_filter";
-    private static final String PREF_FILTERS = "pref_filters";
-    private static final String PREF_DOWNSAMPLE = "pref_downsample";
-    private static final String PREF_MULTIPLE = "pref_multiple";
-    private static final String PREF_SCREEN = "pref_screen";
-    private static final String PREF_STROBE = "pref_strobe";
-    private static final String PREF_ZOOM = "pref_zoom";
-    private static final String PREF_DARK = "pref_dark";
-
-    private static final String PREF_NOTE = "pref_note";
-    private static final String PREF_OCTAVE = "pref_octave";
-
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
+    private static final String PREF_DARK = "pref_dark";
+    private static final String PREF_DOWNSAMPLE = "pref_downsample";
+    private static final String PREF_FILTER = "pref_filter";
+    private static final String PREF_FILTERS = "pref_filters";
+    private static final String PREF_FUND = "pref_fund";
+    private static final String PREF_INPUT = "pref_input";
+    private static final String PREF_KEY = "pref_key";
+    private static final String PREF_MULTIPLE = "pref_multiple";
+    private static final String PREF_NOTE = "pref_note";
+    private static final String PREF_OCTAVE = "pref_octave";
+    private static final String PREF_REFERENCE = "pref_reference";
+    private static final String PREF_SCREEN = "pref_screen";
+    private static final String PREF_SOLFA = "pref_solfa";
+    private static final String PREF_STROBE = "pref_strobe";
+    private static final String PREF_TEMPERAMENT = "pref_temperament";
+    private static final String PREF_TRANSPOSE = "pref_transpose";
+    private static final String PREF_ZOOM = "pref_zoom";
 
     private static final String SHOW_STAFF = "show_staff";
 
@@ -674,9 +672,14 @@ public class MainActivity extends Activity
         Resources resources = getResources();
         String entries[] =
             resources.getStringArray(R.array.pref_temperament_entries);
+        String keys[] =
+            resources.getStringArray(R.array.pref_note_entries);
+
+        String text = String.format("%s  %s", entries[audio.temperament],
+                                    keys[audio.key]);
         TextView textView = findViewById(R.id.temperament);
         if (textView != null)
-            textView.setText(entries[audio.temperament]);
+            textView.setText(text);
 
         // Update status
         if (status != null)
@@ -762,6 +765,8 @@ public class MainActivity extends Activity
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
             audio.temperament =
                 Integer.parseInt(preferences.getString(PREF_TEMPERAMENT, "0"));
+            audio.key =
+                Integer.parseInt(preferences.getString(PREF_KEY, "0"));
 
             audio.fund = preferences.getBoolean(PREF_FUND, false);
             audio.solfa = preferences.getBoolean(PREF_SOLFA, false);
@@ -899,6 +904,7 @@ public class MainActivity extends Activity
     protected class Audio implements Runnable
     {
         // Preferences
+        protected int key;
         protected int input;
         protected int transpose;
         protected int temperament;
@@ -1403,7 +1409,7 @@ public class MainActivity extends Activity
                         maxima.n[count] = n;
 
                         // Octave note number
-                        n = (n - transpose + OCTAVE) % OCTAVE;
+                        n = (n + key) % OCTAVE;
 
                         // Temperament ratio
                         double tempRatio = temperaments[temperament][n] /
@@ -1459,7 +1465,7 @@ public class MainActivity extends Activity
                     }
 
                     // Octave note number
-                    int n = (note - transpose + OCTAVE) % OCTAVE;
+                    int n = (note + key) % OCTAVE;
 
                     // Temperament ratio
                     double tempRatio = temperaments[temperament][n] /

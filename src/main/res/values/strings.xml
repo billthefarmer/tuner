@@ -129,6 +129,9 @@
   <string name="pref_temperament">Temperament</string>
   <string name="pref_temperament_summ">%s</string>
 
+  <string name="pref_key">Key</string>
+  <string name="pref_key_summ">%s</string>
+
   <string name="pref_theme">Theme</string>
 
   <string name="pref_dark">Dark Theme</string>
