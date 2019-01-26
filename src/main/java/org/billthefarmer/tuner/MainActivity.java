@@ -300,10 +300,10 @@ public class MainActivity extends Activity
 
         // Add custom view to action bar
         ActionBar actionBar = getActionBar();
-        actionBar.setCustomView(R.layout.signal_view);
+        actionBar.setCustomView(R.layout.custom);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        SignalView signal = (SignalView) actionBar.getCustomView();
+        SignalView signal = findViewById(R.id.signal);
 
         // Create audio
         audio = new Audio();
