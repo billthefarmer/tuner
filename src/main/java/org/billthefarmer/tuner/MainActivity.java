@@ -764,7 +764,7 @@ public class MainActivity extends Activity
             audio.transpose =
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
             audio.temperament =
-                Integer.parseInt(preferences.getString(PREF_TEMPERAMENT, "0"));
+                Integer.parseInt(preferences.getString(PREF_TEMPERAMENT, "8"));
             audio.key =
                 Integer.parseInt(preferences.getString(PREF_KEY, "0"));
 
