@@ -1409,7 +1409,7 @@ public class MainActivity extends Activity
                         maxima.n[count] = n;
 
                         // Octave note number
-                        n = (n + key) % OCTAVE;
+                        n = (n - key + OCTAVE) % OCTAVE;
 
                         // Temperament ratio
                         double tempRatio = temperaments[temperament][n] /
@@ -1465,7 +1465,7 @@ public class MainActivity extends Activity
                     }
 
                     // Octave note number
-                    int n = (note + key) % OCTAVE;
+                    int n = (note - key + OCTAVE) % OCTAVE;
 
                     // Temperament ratio
                     double tempRatio = temperaments[temperament][n] /

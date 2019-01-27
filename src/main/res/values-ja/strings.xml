@@ -119,6 +119,9 @@
   <string name="pref_temperament">気質</string>
   <string name="pref_temperament_summ">%s</string>
 
+  <string name="pref_key">キー</string>
+  <string name="pref_key_summ">%s</string>
+
   <string name="pref_theme">テーマ</string>
 
   <string name="pref_dark">暗いテーマ</string>

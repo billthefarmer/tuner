@@ -120,6 +120,9 @@
   <string name="pref_temperament">Vérmérséklet</string>
   <string name="pref_temperament_summ">%s</string>
 
+  <string name="pref_key">Kulcs</string>
+  <string name="pref_key_summ">%s</string>
+
   <string name="pref_theme">Téma</string>
 
   <string name="pref_dark">Sötét téma</string>
