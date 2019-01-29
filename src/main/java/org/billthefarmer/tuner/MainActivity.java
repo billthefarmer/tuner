@@ -64,20 +64,20 @@ public class MainActivity extends Activity
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
     private static final String PREF_DARK = "pref_dark";
-    private static final String PREF_DOWNSAMPLE = "pref_downsample";
+    private static final String PREF_DOWN = "pref_down";
     private static final String PREF_FILTER = "pref_filter";
     private static final String PREF_FILTERS = "pref_filters";
     private static final String PREF_FUND = "pref_fund";
     private static final String PREF_INPUT = "pref_input";
     private static final String PREF_KEY = "pref_key";
-    private static final String PREF_MULTIPLE = "pref_multiple";
+    private static final String PREF_MULT = "pref_mult";
     private static final String PREF_NOTE = "pref_note";
     private static final String PREF_OCTAVE = "pref_octave";
-    private static final String PREF_REFERENCE = "pref_reference";
+    private static final String PREF_REFER = "pref_refer";
     private static final String PREF_SCREEN = "pref_screen";
     private static final String PREF_SOLFA = "pref_solfa";
     private static final String PREF_STROBE = "pref_strobe";
-    private static final String PREF_TEMPERAMENT = "pref_temperament";
+    private static final String PREF_TEMPER = "pref_temper";
     private static final String PREF_TRANSPOSE = "pref_transpose";
     private static final String PREF_ZOOM = "pref_zoom";
 
@@ -144,8 +144,9 @@ public class MainActivity extends Activity
          371.25, 396.00, 412.50, 440.00, 475.20, 495.00},
 
         // Equal
-        {1.00000, 1.05946, 1.12246, 1.18921, 1.25992, 1.33483,
-         1.41421, 1.49831, 1.58740, 1.68179, 1.78180, 1.88775},
+        {1.000000000, 1.059463094, 1.122462048, 1.189207115,
+         1.259921050, 1.334839854, 1.414213562, 1.498307077,
+         1.587401052, 1.681792831, 1.781797436, 1.887748625},
 
         // Pythagorean
         {1.000000000, 1.067871094, 1.125000000, 1.185185185,
@@ -540,9 +541,9 @@ public class MainActivity extends Activity
             audio.downsample = !audio.downsample;
 
             if (audio.downsample)
-                showToast(R.string.downsample_on);
+                showToast(R.string.down_on);
             else
-                showToast(R.string.downsample_off);
+                showToast(R.string.down_off);
             break;
 
         // Display
@@ -550,10 +551,10 @@ public class MainActivity extends Activity
             audio.multiple = !audio.multiple;
 
             if (audio.multiple)
-                showToast(R.string.multiple_on);
+                showToast(R.string.mult_on);
 
             else
-                showToast(R.string.multiple_off);
+                showToast(R.string.mult_off);
             break;
 
         // Strobe / Staff
@@ -671,11 +672,11 @@ public class MainActivity extends Activity
         // Set temperament text
         Resources resources = getResources();
         String entries[] =
-            resources.getStringArray(R.array.pref_temperament_entries);
+            resources.getStringArray(R.array.pref_temper_entries);
         String keys[] =
             resources.getStringArray(R.array.pref_note_entries);
 
-        String text = String.format("%s  %s", entries[audio.temperament],
+        String text = String.format("%s  %s", entries[audio.temper],
                                     keys[audio.key]);
         TextView textView = findViewById(R.id.temperament);
         if (textView != null)
@@ -736,8 +737,8 @@ public class MainActivity extends Activity
             editor.putBoolean(PREF_SOLFA, audio.solfa);
             editor.putBoolean(PREF_FILTER, audio.filter);
             editor.putBoolean(PREF_FILTERS, audio.filters);
-            editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
-            editor.putBoolean(PREF_MULTIPLE, audio.multiple);
+            editor.putBoolean(PREF_DOWN, audio.downsample);
+            editor.putBoolean(PREF_MULT, audio.multiple);
             editor.putBoolean(PREF_SCREEN, audio.screen);
             editor.putBoolean(PREF_STROBE, audio.strobe);
             editor.putBoolean(PREF_ZOOM, audio.zoom);
@@ -760,11 +761,11 @@ public class MainActivity extends Activity
         {
             audio.input =
                 Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
-            audio.reference = preferences.getInt(PREF_REFERENCE, 440);
+            audio.reference = preferences.getInt(PREF_REFER, 440);
             audio.transpose =
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
-            audio.temperament =
-                Integer.parseInt(preferences.getString(PREF_TEMPERAMENT, "8"));
+            audio.temper =
+                Integer.parseInt(preferences.getString(PREF_TEMPER, "8"));
             audio.key =
                 Integer.parseInt(preferences.getString(PREF_KEY, "0"));
 
@@ -772,8 +773,8 @@ public class MainActivity extends Activity
             audio.solfa = preferences.getBoolean(PREF_SOLFA, false);
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
             audio.filters = preferences.getBoolean(PREF_FILTERS, false);
-            audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
-            audio.multiple = preferences.getBoolean(PREF_MULTIPLE, false);
+            audio.downsample = preferences.getBoolean(PREF_DOWN, false);
+            audio.multiple = preferences.getBoolean(PREF_MULT, false);
             audio.screen = preferences.getBoolean(PREF_SCREEN, false);
             audio.strobe = preferences.getBoolean(PREF_STROBE, false);
             audio.zoom = preferences.getBoolean(PREF_ZOOM, true);
@@ -907,7 +908,7 @@ public class MainActivity extends Activity
         protected int key;
         protected int input;
         protected int transpose;
-        protected int temperament;
+        protected int temper;
 
         protected boolean lock;
         protected boolean zoom;
@@ -1364,30 +1365,30 @@ public class MainActivity extends Activity
                     double cf = -12.0 * log2(reference / xf[i]);
 
                     // Note number
-                    int n = (int) (Math.round(cf) + C5_OFFSET);
+                    int note = (int) (Math.round(cf) + C5_OFFSET);
 
                     // Don't use if negative
-                    if (n < 0)
+                    if (note < 0)
                         continue;
 
                     // Check fundamental
                     if (fund && (count > 0) &&
-                            ((n % OCTAVE) != (maxima.n[0] % OCTAVE)))
+                            ((note % OCTAVE) != (maxima.n[0] % OCTAVE)))
                         continue;
 
                     if (filters)
                     {
                         // Get note and octave
-                        int note = n % OCTAVE;
-                        int octave = n / OCTAVE;
+                        int n = note % OCTAVE;
+                        int o = note / OCTAVE;
 
                         // Don't use if too high
-                        if (octave >= octaveFilter.length)
+                        if (o >= octaveFilter.length)
                             continue;
 
                         // Check the filters
-                        if (!noteFilter[note] ||
-                                !octaveFilter[octave])
+                        if (!noteFilter[n] ||
+                                !octaveFilter[o])
                             continue;
                     }
 
@@ -1406,24 +1407,27 @@ public class MainActivity extends Activity
                         maxima.f[count] = xf[i];
 
                         // Note number
-                        maxima.n[count] = n;
+                        maxima.n[count] = note;
 
                         // Octave note number
-                        n = (n - key + OCTAVE) % OCTAVE;
+                        int n = (note - key + OCTAVE) % OCTAVE;
+                        // A note number
+                        int a = (A_OFFSET - key + OCTAVE) % OCTAVE;
 
                         // Temperament ratio
-                        double tempRatio = temperaments[temperament][n] /
-                            temperaments[temperament][A_OFFSET];
+                        double temperRatio = temperaments[temper][n] /
+                            temperaments[temper][a];
                         // Equal ratio
-                        double equRatio = temperaments[EQUAL][n] /
-                            temperaments[EQUAL][A_OFFSET];
+                        double equalRatio = temperaments[EQUAL][n] /
+                            temperaments[EQUAL][a];
+
                         // Temperament adjustment
-                        double tempAdj = tempRatio / equRatio;
+                        double temperAdjust = temperRatio / equalRatio;
 
                         // Reference note
                         maxima.r[count] = reference *
                                           Math.pow(2.0, Math.round(cf) /
-                                                   12.0) * tempAdj;
+                                                   12.0) * temperAdjust;
 
                         // Set limit to octave above
                         if (!downsample && (limit > i * 2))
@@ -1466,27 +1470,30 @@ public class MainActivity extends Activity
 
                     // Octave note number
                     int n = (note - key + OCTAVE) % OCTAVE;
+                    // A note number
+                    int a = (A_OFFSET - key + OCTAVE) % OCTAVE;
 
-                    // Temperament ratio
-                    double tempRatio = temperaments[temperament][n] /
-                        temperaments[temperament][A_OFFSET];
+                        // Temperament ratio
+                    double temperRatio = temperaments[temper][n] /
+                        temperaments[temper][a];
                     // Equal ratio
-                    double equRatio = temperaments[EQUAL][n] /
-                        temperaments[EQUAL][A_OFFSET];
+                    double equalRatio = temperaments[EQUAL][n] /
+                        temperaments[EQUAL][a];
+
                     // Temperament adjustment
-                    double tempAdj = tempRatio / equRatio;
+                    double temperAdjust = temperRatio / equalRatio;
 
                     // Reference note
                     nearest = reference *
-                              Math.pow(2.0, Math.round(cf) / 12.0) * tempAdj;
+                        Math.pow(2.0, Math.round(cf) / 12.0) * temperAdjust;
 
                     // Lower and upper freq
                     lower = reference *
-                            Math.pow(2.0, (Math.round(cf) - 0.55) /
-                                     12.0) * tempAdj;
+                        Math.pow(2.0, (Math.round(cf) - 0.55) /
+                                 12.0) * temperAdjust;
                     higher = reference *
-                             Math.pow(2.0, (Math.round(cf) + 0.55) /
-                                      12.0) * tempAdj;
+                        Math.pow(2.0, (Math.round(cf) + 0.55) /
+                                 12.0) * temperAdjust;
 
                     // Find nearest maximum to reference note
                     double df = 1000.0;

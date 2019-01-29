@@ -39,11 +39,11 @@
   <string name="strobe_on">ストロボ オン</string>
   <string name="strobe_off">ストロボ オフ</string>
 
-  <string name="downsample_on">ダウンサンプリング オン</string>
-  <string name="downsample_off">ダウンサンプリング オフ</string>
+  <string name="down_on">ダウンサンプリング オン</string>
+  <string name="down_off">ダウンサンプリング オフ</string>
 
-  <string name="multiple_on">複数音符 オン</string>
-  <string name="multiple_off">複数音符 オフ</string>
+  <string name="mult_on">複数音符 オン</string>
+  <string name="mult_off">複数音符 オフ</string>
 
   <string name="dark_theme">暗いテーマ</string>
   <string name="light_theme">ライトテーマ</string>
@@ -74,8 +74,8 @@
   <string name="pref_solfa">ソルフェージュ</string>
   <string name="pref_solfa_summ">ソルフェージュを使う (DoReMi)</string>
 
-  <string name="pref_downsample">ダウンサンプル</string>
-  <string name="pref_downsample_summ">解析前に入力をダウンサンプル</string>
+  <string name="pref_down">ダウンサンプル</string>
+  <string name="pref_down_summ">解析前に入力をダウンサンプル</string>
 
   <string name="pref_display">ディスプレイ</string>
 
@@ -85,8 +85,8 @@
   <string name="pref_zoom">スペクトルのズーム</string>
   <string name="pref_zoom_summ">スペクトル表示の現在の音符にズームイン</string>
 
-  <string name="pref_multiple">複数音符</string>
-  <string name="pref_multiple_summ">ディスプレイに複数音符を表示</string>
+  <string name="pref_mult">複数音符</string>
+  <string name="pref_mult_summ">ディスプレイに複数音符を表示</string>
 
   <string name="pref_fund">基本フィルタ</string>
   <string name="pref_fund_summ">基本フィルタを使用する</string>
@@ -110,14 +110,14 @@
   <string name="pref_custom">カスタム</string>
   <string name="pref_custom_summ">カスタム色</string>
 
-  <string name="pref_reference">基準</string>
-  <string name="pref_reference_summ">%dHz</string>
+  <string name="pref_refer">基準</string>
+  <string name="pref_refer_summ">%dHz</string>
 
   <string name="pref_transpose">転置</string>
   <string name="pref_transpose_summ">%s</string>
 
-  <string name="pref_temperament">気質</string>
-  <string name="pref_temperament_summ">%s</string>
+  <string name="pref_temper">気質</string>
+  <string name="pref_temper_summ">%s</string>
 
   <string name="pref_key">キー</string>
   <string name="pref_key_summ">%s</string>

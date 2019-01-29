@@ -39,11 +39,11 @@
   <string name="strobe_on">Encender el estroboscopio</string>
   <string name="strobe_off">Apagar el estroboscopio</string>
 
-  <string name="downsample_on">Activar la descarga de una muestra</string>
-  <string name="downsample_off">Desactivar la descarga de una muestra</string>
+  <string name="down_on">Activar la descarga de una muestra</string>
+  <string name="down_off">Desactivar la descarga de una muestra</string>
 
-  <string name="multiple_on">Activar múltiples notas</string>
-  <string name="multiple_off">Desactivar múltiple notas</string>
+  <string name="mult_on">Activar múltiples notas</string>
+  <string name="mult_off">Desactivar múltiple notas</string>
 
   <string name="dark_theme">Tema oscuro</string>
   <string name="light_theme">Tema de luz</string>
@@ -74,8 +74,8 @@
   <string name="pref_solfa">Solfeo</string>
   <string name="pref_solfa_summ">Utilizar solfeo (DoReMi)</string>
 
-  <string name="pref_downsample">Grabación de muestra</string>
-  <string name="pref_downsample_summ">Grabar una muestra antes del análisis</string>
+  <string name="pref_down">Grabación de muestra</string>
+  <string name="pref_down_summ">Grabar una muestra antes del análisis</string>
 
   <string name="pref_display">Monitor</string>
 
@@ -85,8 +85,8 @@
   <string name="pref_zoom">Acercar en el espectro</string>
   <string name="pref_zoom_summ">Acercar a la nota actual en la pantalla del espectro</string>
 
-  <string name="pref_multiple">Múltiple notas</string>
-  <string name="pref_multiple_summ">Muestra múltiples notas en la pantalla</string>
+  <string name="pref_mult">Múltiple notas</string>
+  <string name="pref_mult_summ">Muestra múltiples notas en la pantalla</string>
 
   <string name="pref_fund">Fundamental</string>
   <string name="pref_fund_summ">Utilizar filtro fundamental</string>
@@ -110,14 +110,14 @@
   <string name="pref_custom">Personalizar</string>
   <string name="pref_custom_summ">Colores personalizados</string>
 
-  <string name="pref_reference">Referencia</string>
-  <string name="pref_reference_summ">%dHz</string>
+  <string name="pref_refer">Referencia</string>
+  <string name="pref_refer_summ">%dHz</string>
 
   <string name="pref_transpose">Transponer</string>
   <string name="pref_transpose_summ">%s</string>
 
-  <string name="pref_temperament">Temperamento</string>
-  <string name="pref_temperament_summ">%s</string>
+  <string name="pref_temper">Temperamento</string>
+  <string name="pref_temper_summ">%s</string>
 
   <string name="pref_key">Llave</string>
   <string name="pref_key_summ">%s</string>

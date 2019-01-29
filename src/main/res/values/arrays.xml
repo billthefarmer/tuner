@@ -65,7 +65,7 @@
         <item>-6</item>
     </string-array>
 
-    <string-array name="pref_temperament_entries">
+    <string-array name="pref_temper_entries">
       <item>Kirnberger II</item>
       <item>Kirnberger III</item>
       <item>Werckmeister III</item>
@@ -99,7 +99,7 @@
       <item>Meantone b (-1/4)</item>
       <item>Lehman-Bach</item>
     </string-array>
-    <string-array name="pref_temperament_entry_values">
+    <string-array name="pref_temper_entry_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
