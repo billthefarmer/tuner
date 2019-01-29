@@ -13,6 +13,12 @@ screen for detailed documentation.
 &nbsp;
 ![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Tuner-settings.png)
 
+ * 32 temperaments including Equal, Just, Pythagorean, Meantone
+ * Filter options, including low pass, fundamental, note and octave filter
+ * Optional strobe or musical staff display
+ * Transposition option
+ * Solfège (DoRéMi) option
+
 ## Using
 
 Hold the phone/tablet near the instrument, play a note, and observe the
