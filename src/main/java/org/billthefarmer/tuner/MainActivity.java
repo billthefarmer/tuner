@@ -907,8 +907,8 @@ public class MainActivity extends Activity
         // Preferences
         protected int key;
         protected int input;
-        protected int transpose;
         protected int temper;
+        protected int transpose;
 
         protected boolean lock;
         protected boolean zoom;
