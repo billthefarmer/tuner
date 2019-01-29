@@ -65,6 +65,75 @@
         <item>-6</item>
     </string-array>
 
+    <string-array name="pref_temper_entries">
+      <item>Kirnberger II</item>
+      <item>Kirnberger III</item>
+      <item>Werckmeister III</item>
+      <item>Werckmeister IV</item>
+      <item>Werckmeister V</item>
+      <item>Werckmeister VI</item>
+      <item>Bach (Klais)</item>
+      <item>Just (Barbour)</item>
+      <item>Equal Temperament</item>
+      <item>Pythagorean</item>
+      <item>Van Zwolle</item>
+      <item>Meantone (-1/4)</item>
+      <item>Silbermann (-1/6)</item>
+      <item>Salinas (-1/3)</item>
+      <item>Zarlino (-2/7)</item>
+      <item>Rossi (-1/5)</item>
+      <item>Rossi (-2/9)</item>
+      <item>Rameau (-1/4)</item>
+      <item>Kellner</item>
+      <item>Vallotti</item>
+      <item>Young II</item>
+      <item>Bendeler III</item>
+      <item>Neidhardt I</item>
+      <item>Neidhardt II</item>
+      <item>Neidhardt III</item>
+      <item>Bruder 1829</item>
+      <item>Barnes 1977</item>
+      <item>Lambert 1774</item>
+      <item>Schlick (H. Vogel)</item>
+      <item>Meantone # (-1/4)</item>
+      <item>Meantone b (-1/4)</item>
+      <item>Lehman-Bach</item>
+    </string-array>
+    <string-array name="pref_temper_entry_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
     <string-array name="pref_note_entries">
         <item>C</item>
         <item>C\u266F</item>

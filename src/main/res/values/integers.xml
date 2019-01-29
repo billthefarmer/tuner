@@ -3,9 +3,12 @@
 
     <integer name="default_input">0</integer>
 
-    <integer name="default_reference">440</integer>
-    <integer name="max_reference">480</integer>
-    <integer name="min_reference">420</integer>
+    <integer name="default_refer">440</integer>
+    <integer name="max_refer">480</integer>
+    <integer name="min_refer">420</integer>
 
     <integer name="default_transpose">0</integer>
+    <integer name="default_temper">8</integer>
+    <integer name="default_key">0</integer>
+
 </resources>

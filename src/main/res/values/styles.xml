@@ -25,14 +25,16 @@
 
         <item name="pref_about">@drawable/ic_action_about</item>
         <item name="pref_dark">@drawable/ic_action_brightness_high</item>
-        <item name="pref_downsample">@drawable/ic_action_reply_all</item>
+        <item name="pref_down">@drawable/ic_action_reply_all</item>
         <item name="pref_filter">@drawable/ic_action_network_cell</item>
         <item name="pref_input">@drawable/ic_action_mic</item>
-        <item name="pref_multiple">@drawable/ic_action_sort_by_size</item>
-        <item name="pref_reference">@drawable/ic_action_collapse</item>
+        <item name="pref_key">@drawable/ic_action_accounts</item>
+        <item name="pref_mult">@drawable/ic_action_sort_by_size</item>
+        <item name="pref_refer">@drawable/ic_action_collapse</item>
         <item name="pref_screen">@drawable/ic_action_brightness_low</item>
         <item name="pref_solfa">@drawable/ic_action_next_item</item>
         <item name="pref_strobe">@drawable/ic_pref_strobe</item>
+        <item name="pref_temper">@drawable/ic_action_previous_item</item>
         <item name="pref_transpose">@drawable/ic_action_import_export</item>
         <item name="pref_zoom">@drawable/ic_action_expand</item>
 
@@ -57,19 +59,21 @@
             API-level can go here.
         -->
 
-        <item name="screen">@drawable/ic_action_brightness_low_dark</item>
         <item name="lock">@drawable/ic_action_secure_dark</item>
+        <item name="screen">@drawable/ic_action_brightness_low_dark</item>
 
         <item name="pref_about">@drawable/ic_action_about_dark</item>
         <item name="pref_dark">@drawable/ic_action_brightness_high_dark</item>
-        <item name="pref_downsample">@drawable/ic_action_reply_all_dark</item>
+        <item name="pref_down">@drawable/ic_action_reply_all_dark</item>
         <item name="pref_filter">@drawable/ic_action_network_cell_dark</item>
         <item name="pref_input">@drawable/ic_action_mic_dark</item>
-        <item name="pref_multiple">@drawable/ic_action_sort_by_size_dark</item>
-        <item name="pref_reference">@drawable/ic_action_collapse_dark</item>
+        <item name="pref_key">@drawable/ic_action_accounts_dark</item>
+        <item name="pref_mult">@drawable/ic_action_sort_by_size_dark</item>
+        <item name="pref_refer">@drawable/ic_action_collapse_dark</item>
         <item name="pref_screen">@drawable/ic_action_brightness_low_dark</item>
         <item name="pref_solfa">@drawable/ic_action_next_item_dark</item>
         <item name="pref_strobe">@drawable/ic_pref_strobe_dark</item>
+        <item name="pref_temper">@drawable/ic_action_previous_item_dark</item>
         <item name="pref_transpose">@drawable/ic_action_import_export_dark</item>
         <item name="pref_zoom">@drawable/ic_action_expand_dark</item>
 

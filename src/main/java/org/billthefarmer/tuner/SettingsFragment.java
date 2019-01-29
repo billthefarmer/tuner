@@ -49,7 +49,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private static final String KEY_PREF_INPUT = "pref_input";
     private static final String KEY_PREF_DARK = "pref_dark";
     private static final String KEY_PREF_COLOUR = "pref_colour";
-    private static final String KEY_PREF_REFERENCE = "pref_reference";
+    private static final String KEY_PREF_REFER = "pref_refer";
     private static final String KEY_PREF_CUSTOM = "pref_custom";
     private static final String KEY_PREF_ABOUT = "pref_about";
 
@@ -107,7 +107,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         }
 
         NumberPickerPreference picker =
-            (NumberPickerPreference) findPreference(KEY_PREF_REFERENCE);
+            (NumberPickerPreference) findPreference(KEY_PREF_REFER);
         summary = picker.getSummary().toString();
 
         // Set number picker summary
@@ -223,7 +223,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             preference.setIcon(d);
         }
 
-        if (key.equals(KEY_PREF_REFERENCE))
+        if (key.equals(KEY_PREF_REFER))
         {
             NumberPickerPreference preference =
                 (NumberPickerPreference) findPreference(key);

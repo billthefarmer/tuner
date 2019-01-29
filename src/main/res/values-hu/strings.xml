@@ -40,11 +40,11 @@
   <string name="strobe_on">Stroboszkóp be</string>
   <string name="strobe_off">Stroboszkóp ki</string>
 
-  <string name="downsample_on">Alulmintavételezés be</string>
-  <string name="downsample_off">Alulmintavételezés ki</string>
+  <string name="down_on">Alulmintavételezés be</string>
+  <string name="down_off">Alulmintavételezés ki</string>
 
-  <string name="multiple_on">Több hang be</string>
-  <string name="multiple_off">Több hang ki</string>
+  <string name="mult_on">Több hang be</string>
+  <string name="mult_off">Több hang ki</string>
 
   <string name="dark_theme">Sötét téma</string>
   <string name="light_theme">Fényes téma</string>
@@ -75,8 +75,8 @@
   <string name="pref_solfa">Szolfézs</string>
   <string name="pref_solfa_summ">Használja a szolfézs (DoReMi)</string>
 
-  <string name="pref_downsample">Alulmintavételezés</string>
-  <string name="pref_downsample_summ">Bemeneti jel alulmintavételezése kiértékelés előtt</string>
+  <string name="pref_down">Alulmintavételezés</string>
+  <string name="pref_down_summ">Bemeneti jel alulmintavételezése kiértékelés előtt</string>
 
   <string name="pref_display">Kijelző</string>
 
@@ -86,8 +86,8 @@
   <string name="pref_zoom">Spektrumra közelítés</string>
   <string name="pref_zoom_summ">Az aktuális hangra ráközelítés a spektrumban</string>
 
-  <string name="pref_multiple">Több hang</string>
-  <string name="pref_multiple_summ">Több hang mutatása a kijelzőn</string>
+  <string name="pref_mult">Több hang</string>
+  <string name="pref_mult_summ">Több hang mutatása a kijelzőn</string>
 
   <string name="pref_fund">Alapvető</string>
   <string name="pref_fund_summ">Használjon alapvető szűrőt</string>
@@ -111,11 +111,17 @@
   <string name="pref_custom">Egyéni</string>
   <string name="pref_custom_summ">Egyéni színek</string>
 
-  <string name="pref_reference">Referencia</string>
-  <string name="pref_reference_summ">%dHz</string>
+  <string name="pref_refer">Referencia</string>
+  <string name="pref_refer_summ">%dHz</string>
 
   <string name="pref_transpose">Átültetés</string>
   <string name="pref_transpose_summ">%s</string>
+
+  <string name="pref_temper">Vérmérséklet</string>
+  <string name="pref_temper_summ">%s</string>
+
+  <string name="pref_key">Kulcs</string>
+  <string name="pref_key_summ">%s</string>
 
   <string name="pref_theme">Téma</string>
 

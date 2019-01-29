@@ -45,11 +45,11 @@
   <string name="strobe_on">Strobe on</string>
   <string name="strobe_off">Strobe off</string>
 
-  <string name="downsample_on">Downsampling on</string>
-  <string name="downsample_off">Downsampling off</string>
+  <string name="down_on">Downsampling on</string>
+  <string name="down_off">Downsampling off</string>
 
-  <string name="multiple_on">Multiple notes on</string>
-  <string name="multiple_off">Multiple notes off</string>
+  <string name="mult_on">Multiple notes on</string>
+  <string name="mult_off">Multiple notes off</string>
 
   <string name="dark_theme">Dark theme</string>
   <string name="light_theme">Light theme</string>
@@ -80,8 +80,8 @@
   <string name="pref_solfa">Solfège</string>
   <string name="pref_solfa_summ">Use solfège (DoReMi)</string>
 
-  <string name="pref_downsample">Downsample</string>
-  <string name="pref_downsample_summ">
+  <string name="pref_down">Downsample</string>
+  <string name="pref_down_summ">
     Downsample input before analysis
   </string>
 
@@ -95,8 +95,8 @@
     Zoom in to current note on spectrum display
   </string>
 
-  <string name="pref_multiple">Multiple notes</string>
-  <string name="pref_multiple_summ">Show multiple notes on display</string>
+  <string name="pref_mult">Multiple notes</string>
+  <string name="pref_mult_summ">Show multiple notes on display</string>
 
   <string name="pref_fund">Fundamental filter</string>
   <string name="pref_fund_summ">Use fundamental filter</string>
@@ -120,14 +120,19 @@
   <string name="pref_custom">Custom</string>
   <string name="pref_custom_summ">Custom colours</string>
 
-  <string name="pref_reference">Reference</string>
-  <string name="pref_reference_summ">%dHz</string>
+  <string name="pref_refer">Reference</string>
+  <string name="pref_refer_summ">%dHz</string>
 
   <string name="pref_transpose">Transpose</string>
   <string name="pref_transpose_summ">%s</string>
 
-  <string name="pref_theme">Theme</string>
+  <string name="pref_temper">Temperament</string>
+  <string name="pref_temper_summ">%s</string>
 
+  <string name="pref_key">Key</string>
+  <string name="pref_key_summ">%s</string>
+
+  <string name="pref_theme">Theme</string>
   <string name="pref_dark">Dark Theme</string>
   <string name="pref_dark_summ">Use dark theme</string>
 

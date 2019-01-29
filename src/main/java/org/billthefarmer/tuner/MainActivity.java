@@ -37,6 +37,7 @@ import android.media.AudioRecord;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +47,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -57,28 +59,29 @@ import java.util.Set;
 public class MainActivity extends Activity
     implements View.OnClickListener, View.OnLongClickListener
 {
-    private static final String PREF_INPUT = "pref_input";
-    private static final String PREF_REFERENCE = "pref_reference";
-    private static final String PREF_TRANSPOSE = "pref_transpose";
-
-    private static final String PREF_FUND = "pref_fund";
-    private static final String PREF_SOLFA = "pref_solfa";
-    private static final String PREF_FILTER = "pref_filter";
-    private static final String PREF_FILTERS = "pref_filters";
-    private static final String PREF_DOWNSAMPLE = "pref_downsample";
-    private static final String PREF_MULTIPLE = "pref_multiple";
-    private static final String PREF_SCREEN = "pref_screen";
-    private static final String PREF_STROBE = "pref_strobe";
-    private static final String PREF_ZOOM = "pref_zoom";
-    private static final String PREF_DARK = "pref_dark";
-
-    private static final String PREF_NOTE = "pref_note";
-    private static final String PREF_OCTAVE = "pref_octave";
+    private static final String TAG = "Tuner";
 
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
+    private static final String PREF_DARK = "pref_dark";
+    private static final String PREF_DOWN = "pref_down";
+    private static final String PREF_FILTER = "pref_filter";
+    private static final String PREF_FILTERS = "pref_filters";
+    private static final String PREF_FUND = "pref_fund";
+    private static final String PREF_INPUT = "pref_input";
+    private static final String PREF_KEY = "pref_key";
+    private static final String PREF_MULT = "pref_mult";
+    private static final String PREF_NOTE = "pref_note";
+    private static final String PREF_OCTAVE = "pref_octave";
+    private static final String PREF_REFER = "pref_refer";
+    private static final String PREF_SCREEN = "pref_screen";
+    private static final String PREF_SOLFA = "pref_solfa";
+    private static final String PREF_STROBE = "pref_strobe";
+    private static final String PREF_TEMPER = "pref_temper";
+    private static final String PREF_TRANSPOSE = "pref_transpose";
+    private static final String PREF_ZOOM = "pref_zoom";
 
-    private static final String SHOW = "show";
+    private static final String SHOW_STAFF = "show_staff";
 
     private static final int VERSION_M = 23;
 
@@ -97,6 +100,169 @@ public class MainActivity extends Activity
 
     private static final String CLIP_FORMAT =
         "%s%s%d\t%+5.2f\u00A2\t%4.2fHz\t%4.2fHz\t%+5.2fHz\n";
+
+
+    // Temperaments
+    private static final double temperaments[][] =
+    {
+        // Kirnberger II
+        {1.000000000, 1.053497163, 1.125000000, 1.185185185,
+         1.250000000, 1.333333333, 1.406250000, 1.500000000,
+         1.580245745, 1.677050983, 1.777777778, 1.875000000},
+
+        // Kirnberger III
+        {1.000000000, 1.053497163, 1.118033989, 1.185185185,
+         1.250000000, 1.333333333, 1.406250000, 1.495348781,
+         1.580245745, 1.671850762, 1.777777778, 1.875000000},
+
+        // Werckmeister III
+        {1.000000000, 1.053497942, 1.117403309, 1.185185185,
+         1.252827249, 1.333333333, 1.404663923, 1.494926960,
+         1.580246914, 1.670436332, 1.777777778, 1.879240873},
+
+        // Werckmeister IV
+        {1.000000000, 1.048750012, 1.119929822, 1.185185185,
+         1.254242806, 1.333333333, 1.404663923, 1.493239763,
+         1.573125018, 1.672323742, 1.785826183, 1.872885231},
+
+        // Werckmeister V
+        {1.000000000, 1.057072991, 1.125000000, 1.189207115,
+         1.257078722, 1.337858004, 1.414213562, 1.500000000,
+         1.580246914, 1.681792831, 1.783810673, 1.885618083},
+
+        // Werckmeister VI
+        {1.000000000, 1.053497942, 1.114163307, 1.187481762,
+         1.255862545, 1.333333333, 1.410112936, 1.497099016,
+         1.580246914, 1.674483394, 1.781222643, 1.883793818},
+
+        // Bach (Klais)
+        {262.76, 276.87, 294.30, 311.46, 328.70, 350.37,
+         369.18, 393.70, 415.30, 440.00, 467.18, 492.26},
+
+        // Just (Barbour)
+        {264.00, 275.00, 297.00, 316.80, 330.00, 352.00,
+         371.25, 396.00, 412.50, 440.00, 475.20, 495.00},
+
+        // Equal
+        {1.000000000, 1.059463094, 1.122462048, 1.189207115,
+         1.259921050, 1.334839854, 1.414213562, 1.498307077,
+         1.587401052, 1.681792831, 1.781797436, 1.887748625},
+
+        // Pythagorean
+        {1.000000000, 1.067871094, 1.125000000, 1.185185185,
+         1.265625000, 1.333333333, 1.423828125, 1.500000000,
+         1.601806641, 1.687500000, 1.777777778, 1.898437500},
+
+        // Van Zwolle
+        {1.000000000, 1.053497942, 1.125000000, 1.185185185,
+         1.265625000, 1.333333333, 1.404663923, 1.500000000,
+         1.580246914, 1.687500000, 1.777777778, 1.898437500},
+
+        // Meantone (-1/4)
+        {1.000000000, 1.044906727, 1.118033989, 1.196279025,
+         1.250000000, 1.337480610, 1.397542486, 1.495348781,
+         1.562500000, 1.671850762, 1.788854382, 1.869185977},
+
+        // Silbermann (-1/6)
+        {1.000000000, 1.052506113, 1.120351187, 1.192569588,
+         1.255186781, 1.336096753, 1.406250000, 1.496897583,
+         1.575493856, 1.677050983, 1.785154534, 1.878886059},
+
+        // Salinas (-1/3)
+        {1.000000000, 1.037362210, 1.115721583, 1.200000000,
+         1.244834652, 1.338865900, 1.388888889, 1.493801582,
+         1.549613310, 1.666666667, 1.792561899, 1.859535972},
+
+        // Zarlino (-2/7)
+        {1.000000000, 1.041666667, 1.117042372, 1.197872314,
+         1.247783660, 1.338074130, 1.393827219, 1.494685500,
+         1.556964062, 1.669627036, 1.790442378, 1.865044144},
+
+        // Rossi (-1/5)
+        {1.000000000, 1.049459749, 1.119423732, 1.194051981,
+         1.253109491, 1.336650124, 1.402760503, 1.496277870,
+         1.570283397, 1.674968957, 1.786633554, 1.875000000},
+
+        // Rossi (-2/9)
+        {1.000000000, 1.047433739, 1.118805855, 1.195041266,
+         1.251726541, 1.337019165, 1.400438983, 1.495864870,
+         1.566819334, 1.673582375, 1.787620248, 1.872413760},
+
+        // Rameau (-1/4)
+        {1.000000000, 1.051417112, 1.118033989, 1.179066456,
+         1.250000000, 1.337480610, 1.401889482, 1.495348781,
+         1.577125668, 1.671850762, 1.775938357, 1.869185977},
+
+        // Kellner
+        {1.000000000, 1.053497942, 1.118918532, 1.185185185,
+         1.251978681, 1.333333333, 1.404663923, 1.495940194,
+         1.580246914, 1.673835206, 1.777777778, 1.877968022},
+
+        // Vallotti
+        {1.000000000, 1.055879962, 1.119929822, 1.187864958,
+         1.254242806, 1.336348077, 1.407839950, 1.496616064,
+         1.583819943, 1.676104963, 1.781797436, 1.877119933},
+
+        // Young II
+        {1.000000000, 1.053497942, 1.119929822, 1.185185185,
+         1.254242806, 1.333333333, 1.404663923, 1.496616064,
+         1.580246914, 1.676104963, 1.777777778, 1.877119933},
+
+        // Bendeler III
+        {1.000000000, 1.057072991, 1.117403309, 1.185185185,
+         1.257078722, 1.333333333, 1.409430655, 1.494926960,
+         1.585609487, 1.676104963, 1.777777778, 1.879240873},
+
+        // Neidhardt I
+        {1.000000000, 1.055879962, 1.119929822, 1.186524315,
+         1.254242806, 1.333333333, 1.407839950, 1.496616064,
+         1.583819943, 1.676104963, 1.777777778, 1.879240873},
+
+        // Neidhardt II
+        {1.000000000, 1.057072991, 1.119929822, 1.187864958,
+         1.255659964, 1.334839854, 1.411023157, 1.496616064,
+         1.583819943, 1.676104963, 1.781797436, 1.883489946},
+
+        // Neidhardt III
+        {1.000000000, 1.057072991, 1.119929822, 1.187864958,
+         1.255659964, 1.333333333, 1.411023157, 1.496616064,
+         1.583819943, 1.676104963, 1.779786472, 1.883489946},
+
+        // Bruder 1829
+        {1.000000000, 1.056476308, 1.124364975, 1.187194447,
+         1.253534828, 1.334086381, 1.409032810, 1.499576590,
+         1.583819943, 1.678946488, 1.779786472, 1.879240873},
+
+        // Barnes 1977
+        {1.000000000, 1.055879962, 1.119929822, 1.187864958,
+         1.254242806, 1.336348077, 1.407839950, 1.496616064,
+         1.583819943, 1.676104963, 1.781797436, 1.881364210},
+
+        // Lambert 1774
+        {1.000000000, 1.055539344, 1.120652732, 1.187481762,
+         1.255862545, 1.335916983, 1.407385792, 1.497099016,
+         1.583309016, 1.677728102, 1.781222643, 1.880150581},
+
+        // Schlick (H. Vogel)
+        {1.000000000, 1.050646611, 1.118918532, 1.185185185,
+         1.251978681, 1.336951843, 1.400862148, 1.495940194,
+         1.575969916, 1.673835206, 1.782602458, 1.872885231},
+
+        // Meantone # (-1/4)
+        {1.000000000, 1.044906727, 1.118033989, 1.168241235,
+         1.250000000, 1.337480610, 1.397542486, 1.495348781,
+         1.562500000, 1.671850762, 1.746928107, 1.869185977},
+
+        // Meantone b (-1/4)
+        {1.000000000, 1.069984488, 1.118033989, 1.196279025,
+         1.250000000, 1.337480610, 1.431083506, 1.495348781,
+         1.600000000, 1.671850762, 1.788854382, 1.869185977},
+
+        // Lehman-Bach
+        {1.000000000, 1.058267368, 1.119929822, 1.187864958,
+         1.254242806, 1.336348077, 1.411023157, 1.496616064,
+         1.585609487, 1.676104963, 1.779786472, 1.881364210},
+    };
 
     private Spectrum spectrum;
     private Display display;
@@ -137,10 +303,10 @@ public class MainActivity extends Activity
 
         // Add custom view to action bar
         ActionBar actionBar = getActionBar();
-        actionBar.setCustomView(R.layout.signal_view);
+        actionBar.setCustomView(R.layout.custom);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        SignalView signal = (SignalView) actionBar.getCustomView();
+        SignalView signal = findViewById(R.id.signal);
 
         // Create audio
         audio = new Audio();
@@ -375,9 +541,9 @@ public class MainActivity extends Activity
             audio.downsample = !audio.downsample;
 
             if (audio.downsample)
-                showToast(R.string.downsample_on);
+                showToast(R.string.down_on);
             else
-                showToast(R.string.downsample_off);
+                showToast(R.string.down_off);
             break;
 
         // Display
@@ -385,10 +551,10 @@ public class MainActivity extends Activity
             audio.multiple = !audio.multiple;
 
             if (audio.multiple)
-                showToast(R.string.multiple_on);
+                showToast(R.string.mult_on);
 
             else
-                showToast(R.string.multiple_off);
+                showToast(R.string.mult_off);
             break;
 
         // Strobe / Staff
@@ -499,8 +665,22 @@ public class MainActivity extends Activity
         // Get preferences
         getPreferences();
 
+        // Change theme
         if (dark != theme && Build.VERSION.SDK_INT != VERSION_M)
             recreate();
+
+        // Set temperament text
+        Resources resources = getResources();
+        String entries[] =
+            resources.getStringArray(R.array.pref_temper_entries);
+        String keys[] =
+            resources.getStringArray(R.array.pref_note_entries);
+
+        String text = String.format("%s  %s", entries[audio.temper],
+                                    keys[audio.key]);
+        TextView textView = findViewById(R.id.temperament);
+        if (textView != null)
+            textView.setText(text);
 
         // Update status
         if (status != null)
@@ -516,7 +696,7 @@ public class MainActivity extends Activity
     {
         super.onRestoreInstanceState(savedInstanceState);
 
-        show = savedInstanceState.getBoolean(SHOW);
+        show = savedInstanceState.getBoolean(SHOW_STAFF);
     }
 
     // onPause
@@ -538,7 +718,7 @@ public class MainActivity extends Activity
     {
         super.onSaveInstanceState(outState);
 
-        outState.putBoolean(SHOW, show);
+        outState.putBoolean(SHOW_STAFF, show);
     }
 
     // Save preferences
@@ -557,8 +737,8 @@ public class MainActivity extends Activity
             editor.putBoolean(PREF_SOLFA, audio.solfa);
             editor.putBoolean(PREF_FILTER, audio.filter);
             editor.putBoolean(PREF_FILTERS, audio.filters);
-            editor.putBoolean(PREF_DOWNSAMPLE, audio.downsample);
-            editor.putBoolean(PREF_MULTIPLE, audio.multiple);
+            editor.putBoolean(PREF_DOWN, audio.downsample);
+            editor.putBoolean(PREF_MULT, audio.multiple);
             editor.putBoolean(PREF_SCREEN, audio.screen);
             editor.putBoolean(PREF_STROBE, audio.strobe);
             editor.putBoolean(PREF_ZOOM, audio.zoom);
@@ -581,16 +761,20 @@ public class MainActivity extends Activity
         {
             audio.input =
                 Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
-            audio.reference = preferences.getInt(PREF_REFERENCE, 440);
+            audio.reference = preferences.getInt(PREF_REFER, 440);
             audio.transpose =
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
+            audio.temper =
+                Integer.parseInt(preferences.getString(PREF_TEMPER, "8"));
+            audio.key =
+                Integer.parseInt(preferences.getString(PREF_KEY, "0"));
 
             audio.fund = preferences.getBoolean(PREF_FUND, false);
             audio.solfa = preferences.getBoolean(PREF_SOLFA, false);
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
             audio.filters = preferences.getBoolean(PREF_FILTERS, false);
-            audio.downsample = preferences.getBoolean(PREF_DOWNSAMPLE, false);
-            audio.multiple = preferences.getBoolean(PREF_MULTIPLE, false);
+            audio.downsample = preferences.getBoolean(PREF_DOWN, false);
+            audio.multiple = preferences.getBoolean(PREF_MULT, false);
             audio.screen = preferences.getBoolean(PREF_SCREEN, false);
             audio.strobe = preferences.getBoolean(PREF_STROBE, false);
             audio.zoom = preferences.getBoolean(PREF_ZOOM, true);
@@ -721,8 +905,10 @@ public class MainActivity extends Activity
     protected class Audio implements Runnable
     {
         // Preferences
+        protected int key;
         protected int input;
         protected int transpose;
+        protected int temper;
 
         protected boolean lock;
         protected boolean zoom;
@@ -781,6 +967,8 @@ public class MainActivity extends Activity
         private static final int SIZE = 4096;
 
         private static final int OCTAVE = 12;
+        private static final int EQUAL = 8;
+        private static final int A_OFFSET = 9;
         private static final int C5_OFFSET = 57;
         private static final long TIMER_COUNT = 24;
         private static final double MIN = 0.5;
@@ -1177,30 +1365,30 @@ public class MainActivity extends Activity
                     double cf = -12.0 * log2(reference / xf[i]);
 
                     // Note number
-                    int n = (int) (Math.round(cf) + C5_OFFSET);
+                    int note = (int) (Math.round(cf) + C5_OFFSET);
 
                     // Don't use if negative
-                    if (n < 0)
+                    if (note < 0)
                         continue;
 
                     // Check fundamental
                     if (fund && (count > 0) &&
-                            ((n % OCTAVE) != (maxima.n[0] % OCTAVE)))
+                            ((note % OCTAVE) != (maxima.n[0] % OCTAVE)))
                         continue;
 
                     if (filters)
                     {
                         // Get note and octave
-                        int note = n % OCTAVE;
-                        int octave = n / OCTAVE;
+                        int n = note % OCTAVE;
+                        int o = note / OCTAVE;
 
                         // Don't use if too high
-                        if (octave >= octaveFilter.length)
+                        if (o >= octaveFilter.length)
                             continue;
 
                         // Check the filters
-                        if (!noteFilter[note] ||
-                                !octaveFilter[octave])
+                        if (!noteFilter[n] ||
+                                !octaveFilter[o])
                             continue;
                     }
 
@@ -1219,11 +1407,27 @@ public class MainActivity extends Activity
                         maxima.f[count] = xf[i];
 
                         // Note number
-                        maxima.n[count] = n;
+                        maxima.n[count] = note;
+
+                        // Octave note number
+                        int n = (note - key + OCTAVE) % OCTAVE;
+                        // A note number
+                        int a = (A_OFFSET - key + OCTAVE) % OCTAVE;
+
+                        // Temperament ratio
+                        double temperRatio = temperaments[temper][n] /
+                            temperaments[temper][a];
+                        // Equal ratio
+                        double equalRatio = temperaments[EQUAL][n] /
+                            temperaments[EQUAL][a];
+
+                        // Temperament adjustment
+                        double temperAdjust = temperRatio / equalRatio;
 
                         // Reference note
                         maxima.r[count] = reference *
-                                          Math.pow(2.0, Math.round(cf) / 12.0);
+                                          Math.pow(2.0, Math.round(cf) /
+                                                   12.0) * temperAdjust;
 
                         // Set limit to octave above
                         if (!downsample && (limit > i * 2))
@@ -1255,16 +1459,6 @@ public class MainActivity extends Activity
                         found = false;
                     }
 
-                    // Reference note
-                    nearest = audio.reference *
-                              Math.pow(2.0, Math.round(cf) / 12.0);
-
-                    // Lower and upper freq
-                    lower = reference *
-                            Math.pow(2.0, (Math.round(cf) - 0.55) / 12.0);
-                    higher = reference *
-                             Math.pow(2.0, (Math.round(cf) + 0.55) / 12.0);
-
                     // Note number
                     note = (int) Math.round(cf) + C5_OFFSET;
 
@@ -1273,6 +1467,33 @@ public class MainActivity extends Activity
                         note = 0;
                         found = false;
                     }
+
+                    // Octave note number
+                    int n = (note - key + OCTAVE) % OCTAVE;
+                    // A note number
+                    int a = (A_OFFSET - key + OCTAVE) % OCTAVE;
+
+                        // Temperament ratio
+                    double temperRatio = temperaments[temper][n] /
+                        temperaments[temper][a];
+                    // Equal ratio
+                    double equalRatio = temperaments[EQUAL][n] /
+                        temperaments[EQUAL][a];
+
+                    // Temperament adjustment
+                    double temperAdjust = temperRatio / equalRatio;
+
+                    // Reference note
+                    nearest = reference *
+                        Math.pow(2.0, Math.round(cf) / 12.0) * temperAdjust;
+
+                    // Lower and upper freq
+                    lower = reference *
+                        Math.pow(2.0, (Math.round(cf) - 0.55) /
+                                 12.0) * temperAdjust;
+                    higher = reference *
+                        Math.pow(2.0, (Math.round(cf) + 0.55) /
+                                 12.0) * temperAdjust;
 
                     // Find nearest maximum to reference note
                     double df = 1000.0;
