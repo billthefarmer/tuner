@@ -319,14 +319,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         }
 
         if (BuildConfig.DEBUG)
-        {
             Log.d(TAG, "Properties " + props);
-            Log.d(TAG, "Writer " + writer);
-            for (CharSequence s: entries)
-                Log.d(TAG, "Entry " + s);
-            for (CharSequence v: values)
-                Log.d(TAG, "Value " + v);
-        }
 
         // Set the new entries and entry values
         preference.setEntries(entries.toArray(new CharSequence[0]));

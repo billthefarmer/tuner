@@ -680,13 +680,9 @@ public class MainActivity extends Activity
             recreate();
 
         // Set temperament text
-        Resources resources = getResources();
-        String entries[] =
-            resources.getStringArray(R.array.pref_temper_entries);
         String keys[] =
-            resources.getStringArray(R.array.pref_note_entries);
-
-        String text = String.format("%s  %s", entries[audio.temper],
+            getResources().getStringArray(R.array.pref_note_entries);
+        String text = String.format("%s  %s", names[audio.temper],
                                     keys[audio.key]);
         TextView textView = findViewById(R.id.temperament);
         if (textView != null)
@@ -782,8 +778,10 @@ public class MainActivity extends Activity
         String entries[] =
             getResources().getStringArray(R.array.pref_temper_entries);
         List<String> entryList = new ArrayList<String>(Arrays.asList(entries));
+        // Get temperament values
         List<double[]> valueList =
             new ArrayList<double[]>(Arrays.asList(temperament_values));
+        // Add the names and values from the properties
         for (Enumeration<?> e = props.propertyNames(); e.hasMoreElements();)
         {
             String name = (String) e.nextElement();
@@ -791,12 +789,17 @@ public class MainActivity extends Activity
             String value = props.getProperty(name);
             String a[] = value.split(",");
             double d[] = new double[a.length];
+            Arrays.fill(d, 1.0);
             int i = 0;
             for (String v: a)
                 d[i++] = Double.valueOf(v);
             valueList.add(d);
         }
 
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Properties " + props);
+
+        names = entryList.toArray(new String[0]);
         temperaments = valueList.toArray(new double[0][0]);
 
         if (audio != null)
