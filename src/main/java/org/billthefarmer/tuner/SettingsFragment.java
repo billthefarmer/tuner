@@ -33,6 +33,16 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.util.Log;
+
+import java.io.CharArrayWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Properties;
 
 // SettingsFragment
 @SuppressWarnings("deprecation")
@@ -46,12 +56,17 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
     private static final int VERSION_M = 23;
 
-    private static final String KEY_PREF_INPUT = "pref_input";
-    private static final String KEY_PREF_DARK = "pref_dark";
-    private static final String KEY_PREF_COLOUR = "pref_colour";
-    private static final String KEY_PREF_REFER = "pref_refer";
-    private static final String KEY_PREF_CUSTOM = "pref_custom";
+    private static final String TAG = "Tuner";
+    private static final String CUSTOM_FILE = "custom.txt";
+
     private static final String KEY_PREF_ABOUT = "pref_about";
+    private static final String KEY_PREF_COLOUR = "pref_colour";
+    private static final String KEY_PREF_CUSTOM = "pref_custom";
+    private static final String KEY_PREF_DARK = "pref_dark";
+    private static final String KEY_PREF_INPUT = "pref_input";
+    private static final String KEY_PREF_PROPS = "pref_props";
+    private static final String KEY_PREF_REFER = "pref_refer";
+    private static final String KEY_PREF_TEMPER = "pref_temper";
 
     private String summary;
 
@@ -63,9 +78,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
-
-        SharedPreferences preferences =
-            PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         ListPreference preference =
             (ListPreference) findPreference(KEY_PREF_INPUT);
@@ -114,6 +126,9 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         v = picker.getValue();
         String s = String.format(summary, v);
         picker.setSummary(s);
+
+        // Load custom temperaments
+        loadCustomTemperaments();
 
         // Get about summary
         Preference about = findPreference(KEY_PREF_ABOUT);
@@ -239,5 +254,82 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             if (Build.VERSION.SDK_INT != VERSION_M)
                 getActivity().recreate();
         }
+    }
+
+    // loadCustomTemperaments
+    private void loadCustomTemperaments()
+    {
+        // Check custom temperaments file
+        File custom = new File(getActivity().getExternalFilesDir(null),
+                               CUSTOM_FILE);
+        if (custom == null)
+            return;
+
+        // Read into properties
+        Properties props = new Properties();
+        try
+        {
+            FileReader reader = new FileReader(custom);
+            props.load(reader);
+            reader.close();
+        }
+
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return;
+        }
+
+        // Store in preferences
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = preferences.edit();
+
+        CharArrayWriter writer = new CharArrayWriter();
+        try
+        {
+            props.store(writer, "Custom Temperaments");
+            writer.close();
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return;
+        }
+
+        editor.putString(KEY_PREF_PROPS, writer.toString());
+        editor.apply();
+
+        // Get the temperament entries and entry values
+        ListPreference preference =
+            (ListPreference) findPreference(KEY_PREF_TEMPER);
+        List<CharSequence> entries = new
+            ArrayList<CharSequence>(Arrays.asList(preference.getEntries()));
+        List<CharSequence> values = new
+            ArrayList<CharSequence>(Arrays.asList(preference.getEntryValues()));
+
+        // Add custom entries and entry values
+        int value = values.size();
+        for (Enumeration<?> e = props.propertyNames();
+             e.hasMoreElements();)
+        {
+            entries.add((String) e.nextElement());
+            values.add(String.valueOf(value++));
+        }
+
+        if (BuildConfig.DEBUG)
+        {
+            Log.d(TAG, "Properties " + props);
+            Log.d(TAG, "Writer " + writer);
+            for (CharSequence s: entries)
+                Log.d(TAG, "Entry " + s);
+            for (CharSequence v: values)
+                Log.d(TAG, "Value " + v);
+        }
+
+        // Set the new entries and entry values
+        preference.setEntries(entries.toArray(new CharSequence[0]));
+        preference.setEntryValues(values.toArray(new CharSequence[0]));
     }
 }

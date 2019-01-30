@@ -80,6 +80,7 @@ public class MainActivity extends Activity
     private static final String PREF_TEMPER = "pref_temper";
     private static final String PREF_TRANSPOSE = "pref_transpose";
     private static final String PREF_ZOOM = "pref_zoom";
+    private static final String PREF_PROPS = "pref_props";
 
     private static final String SHOW_STAFF = "show_staff";
 
