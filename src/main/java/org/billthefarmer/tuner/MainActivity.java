@@ -52,7 +52,13 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Set;
 
 // Main Activity
@@ -73,6 +79,7 @@ public class MainActivity extends Activity
     private static final String PREF_MULT = "pref_mult";
     private static final String PREF_NOTE = "pref_note";
     private static final String PREF_OCTAVE = "pref_octave";
+    private static final String PREF_PROPS = "pref_props";
     private static final String PREF_REFER = "pref_refer";
     private static final String PREF_SCREEN = "pref_screen";
     private static final String PREF_SOLFA = "pref_solfa";
@@ -80,7 +87,6 @@ public class MainActivity extends Activity
     private static final String PREF_TEMPER = "pref_temper";
     private static final String PREF_TRANSPOSE = "pref_transpose";
     private static final String PREF_ZOOM = "pref_zoom";
-    private static final String PREF_PROPS = "pref_props";
 
     private static final String SHOW_STAFF = "show_staff";
 
@@ -104,7 +110,7 @@ public class MainActivity extends Activity
 
 
     // Temperaments
-    private static final double temperaments[][] =
+    private static final double temperament_values[][] =
     {
         // Kirnberger II
         {1.000000000, 1.053497163, 1.125000000, 1.185185185,
@@ -264,6 +270,9 @@ public class MainActivity extends Activity
          1.254242806, 1.336348077, 1.411023157, 1.496616064,
          1.585609487, 1.676104963, 1.779786472, 1.881364210},
     };
+
+    private double temperaments[][];
+    private String names[];
 
     private Spectrum spectrum;
     private Display display;
@@ -757,6 +766,38 @@ public class MainActivity extends Activity
 
         // Set preferences
         dark = preferences.getBoolean(PREF_DARK, false);
+        Properties props = new Properties();
+        String s = preferences.getString(PREF_PROPS, "");
+        StringReader reader = new StringReader(s);
+        try
+        {
+            props.load(reader);
+        }
+
+        catch (Exception e)
+        {
+        }
+
+        // Get temperament names
+        String entries[] =
+            getResources().getStringArray(R.array.pref_temper_entries);
+        List<String> entryList = new ArrayList<String>(Arrays.asList(entries));
+        List<double[]> valueList =
+            new ArrayList<double[]>(Arrays.asList(temperament_values));
+        for (Enumeration<?> e = props.propertyNames(); e.hasMoreElements();)
+        {
+            String name = (String) e.nextElement();
+            entryList.add(name);
+            String value = props.getProperty(name);
+            String a[] = value.split(",");
+            double d[] = new double[a.length];
+            int i = 0;
+            for (String v: a)
+                d[i++] = Double.valueOf(v);
+            valueList.add(d);
+        }
+
+        temperaments = valueList.toArray(new double[0][0]);
 
         if (audio != null)
         {
