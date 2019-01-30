@@ -972,6 +972,8 @@ public class MainActivity extends Activity
         private static final int C5_OFFSET = 57;
         private static final long TIMER_COUNT = 24;
         private static final double MIN = 0.5;
+        private static final double SPAN = 0.6;
+        private static final double MARGIN = 60.0;
 
         private static final double G = 3.023332184e+01;
         private static final double K = 0.9338478249;
@@ -1489,10 +1491,10 @@ public class MainActivity extends Activity
 
                     // Lower and upper freq
                     lower = reference *
-                        Math.pow(2.0, (Math.round(cf) - 0.55) /
+                        Math.pow(2.0, (Math.round(cf) - SPAN) /
                                  12.0) * temperAdjust;
                     higher = reference *
-                        Math.pow(2.0, (Math.round(cf) + 0.55) /
+                        Math.pow(2.0, (Math.round(cf) + SPAN) /
                                  12.0) * temperAdjust;
 
                     // Find nearest maximum to reference note
@@ -1517,8 +1519,8 @@ public class MainActivity extends Activity
                         found = false;
                     }
 
-                    // Ignore if not within 50 cents of reference note
-                    if (Math.abs(cents) > 50.0)
+                    // Ignore if not within margin of reference note
+                    if (Math.abs(cents) > MARGIN)
                     {
                         cents = 0.0;
                         found = false;
