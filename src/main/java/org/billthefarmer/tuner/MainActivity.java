@@ -1170,7 +1170,6 @@ public class MainActivity extends Activity
                 {
                     runOnUiThread(() -> showAlert(R.string.app_name,
                                                   R.string.error_buffer));
-
                     thread = null;
                     return;
                 }
@@ -1193,7 +1192,6 @@ public class MainActivity extends Activity
                 {
                     runOnUiThread(() -> showAlert(R.string.app_name,
                                                   R.string.error_init));
-
                     thread = null;
                     return;
                 }
@@ -1217,7 +1215,6 @@ public class MainActivity extends Activity
             {
                 runOnUiThread(() -> showAlert(R.string.app_name,
                                               R.string.error_buffer));
-
                 thread = null;
                 return;
             }
