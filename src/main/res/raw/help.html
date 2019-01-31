@@ -1,6 +1,6 @@
 <h2>Introduction</h2>
 
-<p>An android accordion tuner with strobe and multiple notes.</p>
+<p>An android accordion tuner with strobe, staff and multiple notes.</p>
 
 <h3>Using</h3>
 
@@ -10,10 +10,10 @@
   signal, a spectrum showing the processed signal, the main display
   with the note value, cents error, frequency error etc, a strobe
   display or staff display and a meter display showing the cents
-  error. In landscape the app shows just the main display and the
-  meter. There is a signal indicator in the action bar which is useful
-  in landscape mode. Using the touch setting changes below causes a
-  short notification message to pop up for a few seconds.
+  error. In landscape the app shows just the main display or staff and
+  the meter. There is a signal indicator in the action bar which is
+  useful in landscape mode. Using the touch setting changes below
+  causes a short notification message to pop up for a few seconds.
 </p>
 
 <h4>Temperaments</h4>
@@ -22,7 +22,30 @@
   The app defaults to <b>equal</b> temperament and the key
   of <b>C</b>. 32 temperaments are available in the settings. For any
   temperament other than equal it is necessary to set the key to be
-  used for that temperament.
+  used for that temperament. Note that the display may show a cents
+  variation greater than 50 for some notes in some temperament due to
+  the interval between notes being greater than 100 cents..
+</p>
+
+<h4>Custom Temperaments</h4>
+
+<p>
+  You may load custom temperaments by placing a file
+  in <b>Tuner/Custom.txt</b>. The file should contain one or more
+  entries formatted as property entries. The format is
+  documented <a href="https://developer.android.com/reference/java/util/Properties#load(java.io.Reader)">here</a>.
+</p>
+<tt>
+# Custom Temperaments<br>
+Custom: 1.000000000, 1.067871094, 1.125000000, 1.185185185, \<br>
+        1.265625000, 1.333333333, 1.423828125, 1.500000000, \<br>
+        1.601806641, 1.687500000, 1.777777778, 1.898437500<br>
+</tt>
+<p>
+  Entries will be loaded and displayed in <b>Settings</b> in
+  alphabetical order at the end of the list. Erronious entries will
+  either be ignored or replaced with ones (1.0). Changes to the
+  contents of the custom file will be loaded in <b>Settings</b>.
 </p>
 
 <h4>Scope</h4>

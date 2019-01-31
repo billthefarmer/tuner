@@ -29,15 +29,16 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
-import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -57,7 +58,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private static final int VERSION_M = 23;
 
     private static final String TAG = "Tuner";
-    private static final String CUSTOM_FILE = "custom.txt";
+    private static final String CUSTOM_FILE = "Tuner/Custom.txt";
 
     private static final String KEY_PREF_ABOUT = "pref_about";
     private static final String KEY_PREF_COLOUR = "pref_colour";
@@ -260,7 +261,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private void loadCustomTemperaments()
     {
         // Check custom temperaments file
-        File custom = new File(getActivity().getExternalFilesDir(null),
+        File custom = new File(Environment.getExternalStorageDirectory(),
                                CUSTOM_FILE);
         if (custom == null)
             return;
@@ -285,7 +286,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = preferences.edit();
 
-        CharArrayWriter writer = new CharArrayWriter();
+        StringWriter writer = new StringWriter();
         try
         {
             props.store(writer, "Custom Temperaments");
@@ -301,6 +302,10 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         editor.putString(KEY_PREF_PROPS, writer.toString());
         editor.apply();
 
+        // Sort the entries
+        String order[] = props.stringPropertyNames().toArray(new String[0]);
+        Arrays.sort(order);
+
         // Get the temperament entries and entry values
         ListPreference preference =
             (ListPreference) findPreference(KEY_PREF_TEMPER);
@@ -311,10 +316,9 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Add custom entries and entry values
         int value = values.size();
-        for (Enumeration<?> e = props.propertyNames();
-             e.hasMoreElements();)
+        for (String entry: order)
         {
-            entries.add((String) e.nextElement());
+            entries.add(entry);
             values.add(String.valueOf(value++));
         }
 

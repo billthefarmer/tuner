@@ -679,6 +679,9 @@ public class MainActivity extends Activity
         if (dark != theme && Build.VERSION.SDK_INT != VERSION_M)
             recreate();
 
+        // Load custom temperaments
+        loadCustomTemperaments();
+
         // Set temperament text
         String keys[] =
             getResources().getStringArray(R.array.pref_note_entries);
@@ -762,45 +765,6 @@ public class MainActivity extends Activity
 
         // Set preferences
         dark = preferences.getBoolean(PREF_DARK, false);
-        Properties props = new Properties();
-        String s = preferences.getString(PREF_PROPS, "");
-        StringReader reader = new StringReader(s);
-        try
-        {
-            props.load(reader);
-        }
-
-        catch (Exception e)
-        {
-        }
-
-        // Get temperament names
-        String entries[] =
-            getResources().getStringArray(R.array.pref_temper_entries);
-        List<String> entryList = new ArrayList<String>(Arrays.asList(entries));
-        // Get temperament values
-        List<double[]> valueList =
-            new ArrayList<double[]>(Arrays.asList(temperament_values));
-        // Add the names and values from the properties
-        for (Enumeration<?> e = props.propertyNames(); e.hasMoreElements();)
-        {
-            String name = (String) e.nextElement();
-            entryList.add(name);
-            String value = props.getProperty(name);
-            String a[] = value.split(",");
-            double d[] = new double[a.length];
-            Arrays.fill(d, 1.0);
-            int i = 0;
-            for (String v: a)
-                d[i++] = Double.valueOf(v);
-            valueList.add(d);
-        }
-
-        if (BuildConfig.DEBUG)
-            Log.d(TAG, "Properties " + props);
-
-        names = entryList.toArray(new String[0]);
-        temperaments = valueList.toArray(new double[0][0]);
 
         if (audio != null)
         {
@@ -915,6 +879,64 @@ public class MainActivity extends Activity
             if (strobe.width > 0 && strobe.height > 0)
                 strobe.createShaders();
         }
+    }
+
+    // loadCustomTemperaments
+    private void loadCustomTemperaments()
+    {
+        // Get preferences
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(this);
+
+        Properties props = new Properties();
+        StringReader reader = new
+            StringReader(preferences.getString(PREF_PROPS, ""));
+        try
+        {
+            props.load(reader);
+        }
+
+        catch (Exception e)
+        {
+        }
+
+        // Sort the entries
+        String order[] = props.stringPropertyNames().toArray(new String[0]);
+        Arrays.sort(order);
+
+        // Get temperament names
+        String entries[] =
+            getResources().getStringArray(R.array.pref_temper_entries);
+        List<String> entryList = new ArrayList<String>(Arrays.asList(entries));
+        // Get temperament values
+        List<double[]> valueList =
+            new ArrayList<double[]>(Arrays.asList(temperament_values));
+        // Add the names and values from the properties
+        for (String entry: order)
+        {
+            entryList.add(entry);
+            String value = props.getProperty(entry);
+            String a[] = value.split(",");
+            double d[] = new double[a.length];
+            Arrays.fill(d, 1.0);
+            int i = 0;
+            for (String v: a)
+            {
+                try
+                {
+                    d[i++] = Double.valueOf(v);
+                }
+
+                catch (Exception e) {}
+            }
+            valueList.add(d);
+        }
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "Properties " + props);
+
+        names = entryList.toArray(new String[0]);
+        temperaments = valueList.toArray(new double[0][0]);
     }
 
     // Show alert
