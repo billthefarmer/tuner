@@ -16,6 +16,7 @@ screen for detailed documentation.
  * 32 temperaments including Equal, Just, Pythagorean, Meantone
  * Filter options, including low pass, fundamental, note and octave filter
  * Optional strobe or musical staff display
+ * Custom temperaments option
  * Transposition option
  * Solfège (DoRéMi) option
 
