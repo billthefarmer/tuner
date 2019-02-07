@@ -253,13 +253,21 @@ public class Staff extends TunerView
         float xBase = lineWidth * 14;
         float yBase = lineHeight * 14;
         int note = audio.note - audio.transpose;
+        int index = (note + OCTAVE) % OCTAVE;
         int octave = note / OCTAVE;
 
         // Wrap top two octaves
         if (octave >= 6)
             octave -= 2;
 
-        int index = (note + OCTAVE) % OCTAVE;
+        // Wrap C0
+        else if (octave == 0 && index <= 1)
+            octave += 4;
+
+        // Wrap bottom two octaves
+        else if (octave <= 1 || octave == 2 && index <= 1)
+            octave += 2;
+
         float dx = (octave * lineWidth * 3.5f) +
             (offset[index] * (lineWidth / 2));
         float dy = (octave * lineHeight * 3.5f) +
