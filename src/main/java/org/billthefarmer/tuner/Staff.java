@@ -41,11 +41,9 @@ public class Staff extends TunerView
 
     private static final int OCTAVE = 12;
 
-    private static final String sharps[] =
-    {
-        "", "\u266F", "", "\u266D", "", "",
-        "\u266F", "", "\u266D", "", "\u266D", ""
-    };
+    private static final int NATURAL = 0;
+    private static final int SHARP   = 1;
+    private static final int FLAT    = 2;
 
     // Treble clef
     private static final float tc[][]=
@@ -105,6 +103,73 @@ public class Staff extends TunerView
         {-8.0f, -8.0f}, {8.0f, -8.0f}, {8.0f, 0.0f}
     };
 
+    // Sharp symbol
+    private static final float sp[][] =
+    {
+        {35, 35}, // 0
+        {8, 22}, // 1
+        {8, 46}, // 2
+        {35, 59}, // 3
+        {35, 101}, // 4
+        {8, 88}, // 5
+        {8, 111}, // 6
+        {35, 125}, // 7
+        {35, 160}, // 8
+        {44, 160}, // 9
+        {44, 129}, // 10
+        {80, 147}, // 11
+        {80, 183}, // 12
+        {89, 183}, // 13
+        {89, 151}, // 14
+        {116, 165}, // 15
+        {116, 141}, // 16
+        {89, 127}, // 17
+        {89, 86}, // 18
+        {116, 100}, // 19
+        {116, 75}, // 20
+        {89, 62}, // 21
+        {89, 19}, // 22
+        {80, 19}, // 23
+        {80, 57}, // 23
+        {44, 39}, // 25
+        {44, -1}, // 26
+        {35, -1}, // 27
+        {35, 35}, // 28
+        {44, 64}, // 29
+        {80, 81}, // 30
+        {80, 123}, // 31
+        {44, 105}, // 32
+        {44, 64}, // 33
+    };
+
+    // Flat symbol
+    private static final float ft[][] =
+    {
+        {20, 86}, // 0
+        {28, 102.667f}, {41.6667f, 111}, {61, 111}, // 3
+        {71.6667f, 111}, {80.3333f, 107.5f}, {87, 100.5f}, // 6
+        {93.6667f, 93.5f}, {97, 83.6667f}, {97, 71}, // 9
+        {97, 53}, {89, 36.6667f}, {73, 22}, // 12
+        {57, 7.33333f}, {35.3333f, -1.33333f}, {8, -4}, // 15
+        {8, 195}, // 16
+        {20, 195}, // 17
+        {20, 86}, // 18
+        {20, 7}, // 19
+        {35.3333f, 9}, {47.8333f, 15.6667f}, {57.5f, 27}, // 22
+        {67.1667f, 38.3333f}, {72, 51.6667f}, {72, 67}, // 25
+        {72, 75.6667f}, {70.1667f, 82.3333f}, {66.5f, 87}, // 28
+        {62.8333f, 91.6667f}, {57.3333f, 94}, {50, 94}, // 31
+        {41.3333f, 94}, {34.1667f, 90.3333f}, {28.5f, 83}, // 34
+        {22.8333f, 75.6667f}, {20, 64.6667f}, {20, 50}, // 37
+        {20, 7}, // 38
+    };
+
+    private static final int sharps[] =
+    {
+        NATURAL, SHARP, NATURAL, FLAT, NATURAL, NATURAL,
+        SHARP, NATURAL, FLAT, NATURAL, FLAT, NATURAL
+    };
+
     // Scale offsets
     private static final int offset[] =
     {
@@ -115,6 +180,8 @@ public class Staff extends TunerView
     private Path tclef;
     private Path bclef;
     private Path hnote;
+    private Path sharp;
+    private Path flat;
 
     private Matrix matrix;
 
@@ -178,30 +245,79 @@ public class Staff extends TunerView
                           hd[i + 1][0], hd[i + 1][1],
                           hd[i + 2][0], hd[i + 2][1]);
 
+        // Sharp
+        sharp = new Path();
+        sharp.moveTo(sp[0][0], sp[0][1]);
+        for (int i = 1; i < 28; i++)
+            sharp.lineTo(sp[i][0], sp[i][1]);
+        sharp.moveTo(sp[28][0], sp[28][1]);
+        for (int i = 29; i < sp.length; i++)
+            sharp.lineTo(sp[i][0], sp[i][1]);
+
+        // Flat
+        flat = new Path();
+        flat.moveTo(ft[0][0], ft[0][1]);
+        for (int i = 1; i < 15; i += 3)
+            flat.cubicTo(ft[i][0], ft[i][1],
+                         ft[i + 1][0], ft[i + 1][1],
+                         ft[i + 2][0], ft[i + 2][1]);
+        for (int i = 15; i < 19; i++)
+            flat.lineTo(ft[i][0], ft[i][1]);
+        flat.moveTo(ft[19][0], ft[19][1]);
+        for (int i = 20; i < 37; i += 3)
+            flat.cubicTo(ft[i][0], ft[i][1],
+                         ft[i + 1][0], ft[i + 1][1],
+                         ft[i + 2][0], ft[i + 2][1]);
+        flat.lineTo(ft[38][0], ft[38][1]);
+
         RectF bounds = new RectF();
 
         // Scale treble clef
         tclef.computeBounds(bounds, false);
-        float scale = (height / 2) / (bounds.top - bounds.bottom);
         matrix = new Matrix();
+        matrix.setTranslate(-(bounds.left + bounds.right) / 2,
+                            -(bounds.top + bounds.bottom) / 2);
+        tclef.transform(matrix);
+        float scale = (height / 2) / (bounds.top - bounds.bottom);
         matrix.setScale(-scale, scale);
-        matrix.postTranslate(margin + (lineHeight * 2), - lineHeight);
+        matrix.postTranslate(margin + lineWidth / 2, - lineHeight * 3);
         tclef.transform(matrix);
 
         // Scale bass clef
         bclef.computeBounds(bounds, false);
+        matrix.setTranslate(-(bounds.left + bounds.right) / 2,
+                            -(bounds.top + bounds.bottom) / 2);
+        bclef.transform(matrix);
         scale = (lineHeight * 4) / (bounds.top - bounds.bottom);
-        matrix.reset();
         matrix.setScale(-scale, scale);
-        matrix.postTranslate(margin + lineHeight, lineHeight * 5.4f);
+        matrix.postTranslate(margin + lineWidth / 2, lineHeight * 3);
         bclef.transform(matrix);
 
         // Scale note head
         hnote.computeBounds(bounds, false);
         scale = (lineHeight * 1.5f) / (bounds.top - bounds.bottom);
-        matrix.reset();
         matrix.setScale(-scale, scale);
         hnote.transform(matrix);
+
+        // Scale sharp
+        sharp.computeBounds(bounds, false);
+        matrix.setTranslate(-(bounds.left + bounds.right) / 2,
+                            -(bounds.top + bounds.bottom) / 2);
+        sharp.transform(matrix);
+        scale = (lineHeight * 3) / (bounds.top - bounds.bottom);
+        matrix.setScale(-scale, scale);
+        matrix.postTranslate(-lineWidth / 2, 0);
+        sharp.transform(matrix);
+
+        // Scale flat
+        flat.computeBounds(bounds, false);
+        matrix.setTranslate(-(bounds.left + bounds.right) / 2,
+                            -(bounds.top + bounds.bottom) / 2);
+        flat.transform(matrix);
+        scale = (lineHeight * 3) / (bounds.top - bounds.bottom);
+        matrix.setScale(-scale, scale);
+        matrix.postTranslate(-lineWidth / 2, -lineHeight / 2);
+        flat.transform(matrix);
     }
 
     // On draw
@@ -278,7 +394,22 @@ public class Staff extends TunerView
 
         // Draw note and accidental
         canvas.drawPath(hnote, paint);
-        canvas.drawText(sharps[index], -lineWidth,
-                        lineHeight / 2, paint);
+        switch (sharps[index])
+        {
+            // Natural
+        case NATURAL:
+            // Do nothing
+            break;
+
+            // Sharp
+        case SHARP:
+            canvas.drawPath(sharp, paint);
+            break;
+
+            // Flat
+        case FLAT:
+            canvas.drawPath(flat, paint);
+            break;
+        }
     }
 }
