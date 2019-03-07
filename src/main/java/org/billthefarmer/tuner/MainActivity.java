@@ -23,6 +23,7 @@
 
 package org.billthefarmer.tuner;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,6 +31,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.AudioFormat;
@@ -90,6 +92,7 @@ public class MainActivity extends Activity
     private static final String SHOW_STAFF = "show_staff";
 
     private static final int VERSION_M = 23;
+    private static final int REQUEST_AUDIO = 1;
 
     // Note values for display
     private static final String notes[] =
@@ -694,8 +697,46 @@ public class MainActivity extends Activity
         if (status != null)
             status.invalidate();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED)
+            {
+                requestPermissions(new String[]
+                    {Manifest.permission.RECORD_AUDIO}, 1);
+
+                // TODO: Consider calling
+                //    Activity#requestPermissions
+                // here to request the missing permissions, and then overriding
+                // public void onRequestPermissionsResult(int requestCode,
+                //                                        String[] permissions,
+                //                                        int[] grantResults)
+                // to handle the case where the user grants the permission.
+                // See the documentation for
+                // Activity#requestPermissions for more details.
+
+                return;
+            }
+        }
+
         // Start the audio thread
         audio.start();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults)
+    {
+        switch (requestCode)
+        {
+            // Check permissions
+        case REQUEST_AUDIO:
+            if (grantResults.length > 0 &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                // Granted, start audio thread
+                audio.start();
+        }
     }
 
     // onRestoreInstanceState
