@@ -449,6 +449,7 @@ public class ContextCompat {
      * @return Drawable An object that can be used to draw this resource.
      */
     @Nullable
+    @SuppressWarnings("deprecation")
     public static Drawable getDrawable(@NonNull Context context, @DrawableRes int id) {
         if (Build.VERSION.SDK_INT >= 21) {
             return context.getDrawable(id);
@@ -486,6 +487,7 @@ public class ContextCompat {
      *         does not exist.
      */
     @Nullable
+    @SuppressWarnings("deprecation")
     public static ColorStateList getColorStateList(@NonNull Context context,
             @ColorRes int id) {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -509,6 +511,7 @@ public class ContextCompat {
      *         does not exist.
      */
     @ColorInt
+    @SuppressWarnings("deprecation")
     public static int getColor(@NonNull Context context, @ColorRes int id) {
         if (Build.VERSION.SDK_INT >= 23) {
             return context.getColor(id);

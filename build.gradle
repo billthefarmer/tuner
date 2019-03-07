@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
@@ -15,9 +15,9 @@ allprojects {
         google()
     }
 
-    // tasks.withType(JavaCompile) {
-    //     options.deprecation = true
-    // }
+    tasks.withType(JavaCompile) {
+        options.deprecation = true
+    }
 }
 
 apply plugin: 'com.android.application'
