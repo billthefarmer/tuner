@@ -91,7 +91,7 @@ public class MainActivity extends Activity
 
     private static final String SHOW_STAFF = "show_staff";
 
-    private static final int REQUEST_AUDIO = 1;
+    private static final int REQUEST_PERMS = 1;
 
     // Note values for display
     private static final String notes[] =
@@ -703,7 +703,7 @@ public class MainActivity extends Activity
             {
                 requestPermissions(new String[]
                     {Manifest.permission.RECORD_AUDIO,
-                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_AUDIO);
+                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMS);
 
                 return;
             }
@@ -718,7 +718,7 @@ public class MainActivity extends Activity
                                            String[] permissions,
                                            int[] grantResults)
     {
-        if (requestCode == REQUEST_AUDIO && grantResults.length > 0)
+        if (requestCode == REQUEST_PERMS)
             for (int i = 0; i < grantResults.length; i++)
                 if (permissions[i].equals(Manifest.permission.RECORD_AUDIO) &&
                     grantResults[i] == PackageManager.PERMISSION_GRANTED)

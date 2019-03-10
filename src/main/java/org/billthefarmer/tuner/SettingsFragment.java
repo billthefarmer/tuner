@@ -261,10 +261,10 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         // Check custom temperaments file
         File custom = new File(getActivity().getExternalFilesDir(null),
                                CUSTOM_FILE);
-        if (custom == null)
+        if (!custom.canRead())
             custom = new File(Environment.getExternalStorageDirectory(),
                               CUSTOM_PATH);
-        if (custom == null)
+        if (!custom.canRead())
             return;
 
         // Read into properties
