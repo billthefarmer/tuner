@@ -15,9 +15,9 @@ allprojects {
         google()
     }
 
-    tasks.withType(JavaCompile) {
-        options.deprecation = true
-    }
+    // tasks.withType(JavaCompile) {
+    //     options.deprecation = true
+    // }
 }
 
 apply plugin: 'com.android.application'
