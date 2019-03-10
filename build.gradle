@@ -29,7 +29,7 @@ android {
     defaultConfig {
         applicationId "org.billthefarmer.tuner"
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionName "1.30"
         versionCode 130
 
@@ -43,8 +43,7 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ClickableViewAccessibility',
-            'CustomViewStyleable', 'ExpiredTargetSdkVersion',
-            'TypographyFractions'
+            'CustomViewStyleable', 'TypographyFractions'
         // abortOnError false
     }
 }

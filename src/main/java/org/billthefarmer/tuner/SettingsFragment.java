@@ -54,10 +54,9 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private static final int MAGENTA = 2;
     private static final int CUSTOM = 3;
 
-    private static final int VERSION_M = 23;
-
     private static final String TAG = "Tuner";
-    private static final String CUSTOM_FILE = "Tuner/Custom.txt";
+    private static final String CUSTOM_FILE = "Custom.txt";
+    private static final String CUSTOM_PATH = "Tuner/Custom.txt";
 
     private static final String KEY_PREF_ABOUT = "pref_about";
     private static final String KEY_PREF_COLOUR = "pref_colour";
@@ -251,7 +250,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         if (key.equals(KEY_PREF_DARK))
         {
-            if (Build.VERSION.SDK_INT != VERSION_M)
+            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                 getActivity().recreate();
         }
     }
@@ -260,8 +259,11 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private void loadCustomTemperaments()
     {
         // Check custom temperaments file
-        File custom = new File(Environment.getExternalStorageDirectory(),
+        File custom = new File(getActivity().getExternalFilesDir(null),
                                CUSTOM_FILE);
+        if (custom == null)
+            custom = new File(Environment.getExternalStorageDirectory(),
+                              CUSTOM_PATH);
         if (custom == null)
             return;
 

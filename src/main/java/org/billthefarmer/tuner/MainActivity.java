@@ -91,7 +91,6 @@ public class MainActivity extends Activity
 
     private static final String SHOW_STAFF = "show_staff";
 
-    private static final int VERSION_M = 23;
     private static final int REQUEST_AUDIO = 1;
 
     // Note values for display
@@ -574,7 +573,7 @@ public class MainActivity extends Activity
         case R.id.staff:
             dark = !dark;
 
-            if (Build.VERSION.SDK_INT != VERSION_M)
+            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                 recreate();
 
             else if (dark)
@@ -678,7 +677,7 @@ public class MainActivity extends Activity
         getPreferences();
 
         // Change theme
-        if (dark != theme && Build.VERSION.SDK_INT != VERSION_M)
+        if (dark != theme && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
 
         // Load custom temperaments
@@ -703,17 +702,8 @@ public class MainActivity extends Activity
                 != PackageManager.PERMISSION_GRANTED)
             {
                 requestPermissions(new String[]
-                    {Manifest.permission.RECORD_AUDIO}, 1);
-
-                // TODO: Consider calling
-                //    Activity#requestPermissions
-                // here to request the missing permissions, and then overriding
-                // public void onRequestPermissionsResult(int requestCode,
-                //                                        String[] permissions,
-                //                                        int[] grantResults)
-                // to handle the case where the user grants the permission.
-                // See the documentation for
-                // Activity#requestPermissions for more details.
+                    {Manifest.permission.RECORD_AUDIO,
+                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_AUDIO);
 
                 return;
             }
@@ -728,15 +718,12 @@ public class MainActivity extends Activity
                                            String[] permissions,
                                            int[] grantResults)
     {
-        switch (requestCode)
-        {
-            // Check permissions
-        case REQUEST_AUDIO:
-            if (grantResults.length > 0 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                // Granted, start audio thread
-                audio.start();
-        }
+        if (requestCode == REQUEST_AUDIO && grantResults.length > 0)
+            for (int i = 0; i < grantResults.length; i++)
+                if (permissions[i].equals(Manifest.permission.RECORD_AUDIO) &&
+                    grantResults[i] == PackageManager.PERMISSION_GRANTED)
+                    // Granted, start audio thread
+                    audio.start();
     }
 
     // onRestoreInstanceState
@@ -936,9 +923,7 @@ public class MainActivity extends Activity
             props.load(reader);
         }
 
-        catch (Exception e)
-        {
-        }
+        catch (Exception e) {}
 
         // Sort the entries
         String order[] = props.stringPropertyNames().toArray(new String[0]);
