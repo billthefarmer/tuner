@@ -12,7 +12,7 @@
         android:id="@+id/strobe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dip" />
+        android:layout_margin="8dp" />
 
     <LinearLayout
         android:id="@+id/pickers"
@@ -27,7 +27,7 @@
             android:id="@+id/foreground_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dip" />
+            android:layout_margin="8dp" />
 
         <!-- Background -->
 
@@ -35,7 +35,7 @@
             android:id="@+id/background_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dip" />
+            android:layout_margin="8dp" />
 
     </LinearLayout>
 
