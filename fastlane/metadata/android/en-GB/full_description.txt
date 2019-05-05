@@ -13,4 +13,4 @@ in the action bar which is useful in landscape mode.
  * Optional strobe or musical staff display
  * Custom temperaments option
  * Transposition option
- * SolfËge (DoRÈMi) option
+ * Solf√®ge (DoR√©Mi) option
