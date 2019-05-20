@@ -91,7 +91,7 @@ public class MainActivity extends Activity
 
     private static final String SHOW_STAFF = "show_staff";
 
-    private static final int REQUEST_PERMS = 1;
+    private static final int REQUEST_PERMISSIONS = 1;
 
     // Note values for display
     private static final String notes[] =
@@ -703,7 +703,8 @@ public class MainActivity extends Activity
             {
                 requestPermissions(new String[]
                     {Manifest.permission.RECORD_AUDIO,
-                     Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMS);
+                     Manifest.permission.READ_EXTERNAL_STORAGE},
+                                   REQUEST_PERMISSIONS);
 
                 return;
             }
@@ -718,12 +719,18 @@ public class MainActivity extends Activity
                                            String[] permissions,
                                            int[] grantResults)
     {
-        if (requestCode == REQUEST_PERMS)
+        if (requestCode == REQUEST_PERMISSIONS)
             for (int i = 0; i < grantResults.length; i++)
                 if (permissions[i].equals(Manifest.permission.RECORD_AUDIO) &&
                     grantResults[i] == PackageManager.PERMISSION_GRANTED)
-                    // Granted, start audio thread
-                    audio.start();
+                {
+                    // Granted, recreate or start audio thread
+                    if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+                        recreate();
+
+                    else
+                        audio.start();
+                }
     }
 
     // onRestoreInstanceState
