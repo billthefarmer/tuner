@@ -2,8 +2,8 @@
 
 An android accordion tuner with strobe and multiple notes. The
 Windows, Mac and the Android version of this project are also on
-[Google code](https://code.google.com/p/ctuner
-"https://code.google.com/p/ctuner"). The app is available on
+[here](https://github.com/billthefarmer/ctuner
+"https://github.com/billthefarmer/ctuner"). The app is available on
 [F-Droid](https://f-droid.org/packages/org.billthefarmer.tuner)
 and [here](https://github.com/billthefarmer/tuner/releases). See the
 [Wiki](https://github.com/billthefarmer/tuner/wiki) or the app help
