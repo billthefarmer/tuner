@@ -648,8 +648,7 @@ public class MainActivity extends Activity
     // Show toast.
     void showToast(int key)
     {
-        Resources resources = getResources();
-        String text = resources.getString(key);
+        String text = getString(key);
 
         // Cancel the last one
         if (toast != null)
