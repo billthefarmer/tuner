@@ -46,7 +46,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_weight="0.44" />
+        android:layout_weight="0.48" />
 
     <org.billthefarmer.tuner.Staff
         android:id="@+id/staff"
