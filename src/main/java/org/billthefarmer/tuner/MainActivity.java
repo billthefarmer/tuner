@@ -1787,6 +1787,11 @@ public class MainActivity extends Activity
 
             clipboard.setPrimaryClip(ClipData.newPlainText("Tuner clip", text));
         }
+
+		public void onDestroy() {
+			super.onDestroy();
+			thread.stop();
+		}
     }
 
     // These two objects replace arrays of structs in the C version
