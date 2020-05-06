@@ -903,9 +903,8 @@ public class MainActivity extends Activity
                     strobe.foreground = custom.getInt(0);
                     strobe.background = custom.getInt(1);
                 }
-                catch (Exception e)
-                {
-                }
+
+                catch (Exception e) {}
             }
 
             // Ensure the view dimensions have been set
@@ -1143,30 +1142,32 @@ public class MainActivity extends Activity
             Thread t = thread;
             thread = null;
 
-            // Wait for the thread to exit
-            while (t != null && t.isAlive())
-                Thread.yield();
+            try
+            {
+                // Wait for the thread to exit
+                if (t != null && t.isAlive())
+                    t.join();
+            }
+
+            catch (Exception e) {}
         }
 
         // Stop and release the audio recorder
         private void cleanUpAudioRecord()
         {
             if (audioRecord != null &&
-                    audioRecord.getState() == AudioRecord.STATE_INITIALIZED)
+                audioRecord.getState() == AudioRecord.STATE_INITIALIZED)
             {
                 try
                 {
                     if (audioRecord.getRecordingState() ==
-                            AudioRecord.RECORDSTATE_RECORDING)
-                    {
+                        AudioRecord.RECORDSTATE_RECORDING)
                         audioRecord.stop();
-                    }
 
                     audioRecord.release();
                 }
-                catch (Exception e)
-                {
-                }
+
+                catch (Exception e) {}
             }
         }
 
@@ -1185,8 +1186,7 @@ public class MainActivity extends Activity
             for (int rate : rates)
             {
                 // Check sample rate
-                size =
-                    AudioRecord
+                size = AudioRecord
                     .getMinBufferSize(rate,
                                       AudioFormat.CHANNEL_IN_MONO,
                                       AudioFormat.ENCODING_PCM_16BIT);
@@ -1470,7 +1470,7 @@ public class MainActivity extends Activity
 
                     // Check fundamental
                     if (fund && (count > 0) &&
-                            ((note % OCTAVE) != (maxima.n[0] % OCTAVE)))
+                        ((note % OCTAVE) != (maxima.n[0] % OCTAVE)))
                         continue;
 
                     if (filters)
@@ -1485,7 +1485,7 @@ public class MainActivity extends Activity
 
                         // Check the filters
                         if (!noteFilter[n] ||
-                                !octaveFilter[o])
+                            !octaveFilter[o])
                             continue;
                     }
 

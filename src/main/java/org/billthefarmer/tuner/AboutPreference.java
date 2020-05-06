@@ -32,7 +32,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+// AboutPreference class
 public class AboutPreference extends DialogPreference
 {
     // Constructor
@@ -55,9 +58,11 @@ public class AboutPreference extends DialogPreference
         {
             SpannableStringBuilder builder =
                 new SpannableStringBuilder(version.getText());
-            int st = builder.toString().indexOf("%s");
-            int en = builder.length();
-            builder.replace(st, en, BuildConfig.VERSION_NAME);
+            Pattern pattern = Pattern.compile("%s");
+            Matcher matcher = pattern.matcher(builder);
+            if (matcher.find())
+                builder.replace(matcher.start(), matcher.end(),
+                                BuildConfig.VERSION_NAME);
             version.setText(builder);
             version.setMovementMethod(LinkMovementMethod.getInstance());
         }

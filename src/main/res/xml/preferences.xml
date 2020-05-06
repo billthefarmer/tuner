@@ -181,8 +181,8 @@
       android:key="pref_about_category"
       android:title="@string/pref_about">
     <org.billthefarmer.tuner.AboutPreference
-        android:dialogIcon="?attr/pref_about"
         android:dialogLayout="@layout/about_dialog"
+        android:dialogTitle="@string/app_name"
         android:icon="?attr/pref_about"
         android:key="pref_about"
         android:negativeButtonText=""

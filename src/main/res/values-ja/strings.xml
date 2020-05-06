@@ -128,6 +128,6 @@
   <string name="pref_dark_summ">暗いテーマを使う</string>
 
   <string name="pref_about">アプリについて</string>
-  <string name="pref_about_summ">Tuner <a href="https://github.com/billthefarmer/tuner/releases/latest">version %s</a></string>
+  <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Version %s</a></string>
 
 </resources>

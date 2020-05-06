@@ -129,6 +129,6 @@
   <string name="pref_dark_summ">Használjon sötét témát</string>
 
   <string name="pref_about">Információk</string>
-  <string name="pref_about_summ">Tuner <a href="https://github.com/billthefarmer/tuner/releases/latest">változat %s</a></string>
+  <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Változat %s</a></string>
 
 </resources>
