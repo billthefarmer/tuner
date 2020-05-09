@@ -25,6 +25,7 @@ package org.billthefarmer.tuner;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -32,6 +33,10 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 // HelpActivity
 public class HelpActivity extends Activity
@@ -57,11 +62,11 @@ public class HelpActivity extends Activity
         setContentView(R.layout.help);
 
         TextView view = findViewById(R.id.help);
-        String text = RawTextReader.read(this, R.raw.help);
+        CharSequence text = read(this, R.raw.help);
         if (view != null)
         {
             view.setMovementMethod(LinkMovementMethod.getInstance());
-            view.setText(Html.fromHtml(text));
+            view.setText(Html.fromHtml(text.toString()));
         }
 
         // Enable back navigation on action bar
@@ -88,5 +93,24 @@ public class HelpActivity extends Activity
         }
 
         return true;
+    }
+
+    // read
+    public static CharSequence read(Context context, int resId)
+    {
+        StringBuilder text = new StringBuilder();
+
+        try (InputStream stream = context.getResources().openRawResource(resId);
+             InputStreamReader reader = new InputStreamReader(stream);
+             BufferedReader buffer = new BufferedReader(reader))
+        {
+            String line;
+            while ((line = buffer.readLine()) != null)
+                text.append(line).append(System.getProperty("line.separator"));
+        }
+
+        catch (Exception e) {}
+
+        return text;
     }
 }
