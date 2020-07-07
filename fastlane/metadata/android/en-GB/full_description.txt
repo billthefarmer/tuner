@@ -1,5 +1,5 @@
-Accordion tuner with scope, spectrum and strobe or staff. Can show up
-to eight different notes or reeds concurrently.
+Accordion tuner with scope, spectrum and strobe or staff.
+Can show up to eight different notes or reeds concurrently.
 
 In portrait the app shows a scope with the input signal, a spectrum
 showing the processed signal, the main display with the note value,
