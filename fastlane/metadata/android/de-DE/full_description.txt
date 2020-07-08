@@ -1,0 +1,16 @@
+Akkordionstimmgerät mit Bereich, Spektrum und Stroboskop oder Notenlinien.
+Es kann bis zu acht verschiedene Noten bzw. Blätter gleichzeitig anzeigen.
+
+In der Portraitansicht zeigt die App den Bereich mit Eingangssignal, dem Spektrum mit dem
+verarbeiteten Signal, die Haupansicht mit dem Notenwert,
+der Abweichung von der Note, dem Frequenz, usw. und ein Stroboskop oder die Notenlinien
+und eine metrische Anzeige mit der Abweichung. Im Querformat zeigt die App nur die
+Hauptansicht oder die Notenlinien und das Maß. Es gibt eine Signalanzeige
+in der Aktionsleiste, nützlich im Querformat.
+
+ * 32 Stimmungen einschließlich: Gleichstufig, Natürlich, Pythagoräisch, Mitteltönig
+ * Filteroptionen einschließlich Low-Pass-, fundamentalem, Noten- und Oktavfilter
+ * Optionale Stoboskob- oder Notenlinienanzeige
+ * Mögliche eigene Stimmungen
+ * Transpoaition
+ * Solfège (DoRéMi) als Option

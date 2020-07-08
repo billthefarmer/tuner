@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Stimmgerät</string>
+  <string name="help">Hilfe</string>
+  <string name="settings">Einstellungen</string>
+  <string name="built">Gebaut %s</string>
+  <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
+  </string>
+  <string name="translation">Deutsche Übersetzung von <a href="https://github.com/niccokunzmann">Nicco Kunzmann</a></string>
+  <string name="licence">Licence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="error_buffer">Fehler in der Audioaufnahme! Kann keine funktionierende Eingabeabtastrate finden.</string>
+
+  <string name="filter_on">Audiofilter an</string>
+  <string name="filter_off">Audiofilter aus</string>
+
+  <string name="fund_on">Fundamentalfilter an</string>
+  <string name="fund_off">Fundamentalfilter aus</string>
+
+  <string name="zoom_on">Spektralzoom an</string>
+  <string name="zoom_off">Spektralzoom aus</string>
+
+  <string name="lock_on">Displaysperre an</string>
+  <string name="lock_off">Displaysperre aus</string>
+
+  <string name="screen_on">Bildschirm eingeschaltet lassen</string>
+  <string name="screen_off">Bildschirm nicht eingeschaltet lassen</string>
+
+  <string name="strobe_on">Stroboskop an</string>
+  <string name="strobe_off">Stroboskop aus</string>
+
+  <string name="down_on">Runterrechnen an</string>
+
+  <string name="mult_off">Gleichzeitige Töne aus</string>
+
+  <string name="dark_theme">Dunkle Ansicht</string>
+  <string name="light_theme">Helle Ansicht</string>
+
+  <string name="copied_clip">Daten in die Zwischenablage kopiert</string>
+  <string name="sample_rate">Abtastrate: %d</string>
+
+  <string name="filter">Filter</string>
+  <string name="note">Note</string>
+  <string name="zoom">Zoom</string>
+  <string name="lock">Schloss</string>
+  <string name="display">Bildschirm</string>
+  <string name="strobe">Stroboskop</string>
+  <string name="down">runter</string>
+  <string name="mult">viele</string>
+
+  <string name="def_custom">[-1073807360,-1090518785]</string>
+
+  <string name="pref_input_category">Aufnahme</string>
+
+  <string name="pref_input_summ">%s</string>
+
+  <string name="pref_filter">Audiofilter</string>
+  <string name="pref_filter_summ">Filtere Eingabesignal</string>
+
+  <string name="pref_solfa">Solfège</string>
+  <string name="pref_solfa_summ">Solfège (DoReMi) benutzen</string>
+
+  <string name="pref_down">Runterrechnen</string>
+  <string name="pref_down_summ">Eingabe vor der Analyse runterrechnen</string>
+
+  <string name="pref_display">Display</string>
+
+  <string name="pref_screen">Bildschirm</string>
+  <string name="pref_screen_summ">Bildschirm eingeschaltet lassen</string>
+
+  <string name="pref_zoom">Spektrum Zoomen</string>
+  <string name="pref_zoom_summ">Auf erkannte Note im Spektrom zoomen</string>
+
+  <string name="pref_mult_summ">Ziege verschiendene Noten an</string>
+
+  <string name="pref_fund">Fundamentalfilter</string>
+  <string name="pref_fund_summ">Fundamentalfilter benutzen</string>
+
+  <string name="pref_filters_summ">Notenfilter benutzen</string>
+
+  <string name="pref_note_filter">Notenfilter</string>
+  <string name="pref_note_filter_summ">Notenfiltereinstellungen</string>
+
+  <string name="pref_octave_filter_summ">Oktavfiltereinstellungen</string>
+
+  <string name="pref_strobe">Stroboskop</string>
+  <string name="pref_strobe_screen">Stroboskopeinstellungen</string>
+  <string name="pref_strobe_summ">Stroboskop anzeigen</string>
+
+  <string name="pref_colour">Stroboskopfarben</string>
+  <string name="pref_colour_summ">Stroboskopfarben ändern</string>
+
+  <string name="pref_custom">Eigenes</string>
+  <string name="pref_custom_summ">Eigene Farben</string>
+
+  <string name="pref_refer">Referenz</string>
+  <string name="pref_refer_summ">%dHz</string>
+
+  <string name="pref_transpose">Verschiebung</string>
+  <string name="pref_transpose_summ">%s</string>
+
+  <string name="pref_temper">Stimmung</string>
+  <string name="pref_temper_summ">%s</string>
+
+  <string name="pref_key">Taste</string>
+  <string name="pref_key_summ">%s</string>
+
+  <string name="pref_dark">Dunkle Ansicht</string>
+  <string name="pref_dark_summ">Dunkle Ansicht benutzen</string>
+
+  <string name="pref_about">Über die App</string>
+  <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Version   %s</a></string>
+  <string name="error_init">Audioaufnahme nicht bereit! Vielleicht ist die ausgewähle Eingabequelle nicht da oder es wurde keine funktionierende Abtastrate gefunden.</string>
+  <string name="down_off">Runterrechnen aus</string>
+  <string name="mult_on">Gleichzeitige Töne an</string>
+  <string name="fund">Fond</string>
+  <string name="pref_input">Aufnahmequelle</string>
+  <string name="pref_mult">Mehrere Noten gleichzeitig</string>
+  <string name="pref_filters">Notenfilter</string>
+  <string name="pref_octave_filter">Oktavfilter</string>
+  <string name="pref_theme">Farbschema</string>
+
+</resources>
