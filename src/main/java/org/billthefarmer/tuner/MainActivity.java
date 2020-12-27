@@ -298,8 +298,8 @@ public class MainActivity extends Activity
         // Get preferences
         getPreferences();
 
-        if (dark)
-            setTheme(R.style.AppDarkTheme);
+        if (!dark)
+            setTheme(R.style.AppTheme);
 
         setContentView(R.layout.activity_main);
 
@@ -829,7 +829,7 @@ public class MainActivity extends Activity
                     audio.noteFilter[index] = false;
 
                 for (String note : notes)
-                {
+                {
                     int index = Integer.parseInt(note);
                     audio.noteFilter[index] = true;
                 }

@@ -56,8 +56,8 @@ public class HelpActivity extends Activity
 
         boolean dark = preferences.getBoolean(PREF_DARK, false);
 
-        if (dark)
-            setTheme(R.style.AppDarkTheme);
+        if (!dark)
+            setTheme(R.style.AppTheme);
 
         setContentView(R.layout.help);
 
