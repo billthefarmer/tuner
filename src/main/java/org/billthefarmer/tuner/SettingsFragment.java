@@ -66,6 +66,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private static final String KEY_PREF_PROPS = "pref_props";
     private static final String KEY_PREF_REFER = "pref_refer";
     private static final String KEY_PREF_TEMPER = "pref_temper";
+    private static final String KEY_PREF_KEY = "pref_key";
 
     private String summary;
 
@@ -128,6 +129,20 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Load custom temperaments
         loadCustomTemperaments();
+
+        // Disable key preference on equal temperament
+        preference = (ListPreference) findPreference(KEY_PREF_TEMPER);
+        v = Integer.valueOf(preference.getValue());
+        preference = (ListPreference) findPreference(KEY_PREF_KEY);
+        if (v == getActivity().getResources()
+            .getInteger(R.integer.default_temper))
+        {
+            preference.setEnabled(false);
+            preference.setValueIndex(0);
+        }
+
+        else
+            preference.setEnabled(true);
 
         // Get about summary
         Preference about = findPreference(KEY_PREF_ABOUT);
@@ -246,6 +261,23 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             int v = preference.getValue();
             String s = String.format(summary, v);
             preference.setSummary(s);
+        }
+
+        if (key.equals(KEY_PREF_TEMPER))
+        {
+            ListPreference preference =
+                (ListPreference) findPreference(key);
+            int v = Integer.valueOf(preference.getValue());
+            preference = (ListPreference) findPreference(KEY_PREF_KEY);
+            if (v == getActivity().getResources()
+                .getInteger(R.integer.default_temper))
+            {
+                preference.setEnabled(false);
+                preference.setValueIndex(0);
+            }
+
+            else
+                preference.setEnabled(true);
         }
 
         if (key.equals(KEY_PREF_DARK))
