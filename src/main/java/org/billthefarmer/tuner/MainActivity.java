@@ -685,8 +685,12 @@ public class MainActivity extends Activity
         // Set temperament text
         String keys[] =
             getResources().getStringArray(R.array.pref_note_entries);
-        String text = String.format("%s  %s", names[audio.temper],
+        String text = names[audio.temper];
+        // Don't show key on equal temperament
+        if (audio.temper != getResources().getInteger(R.integer.default_temper))
+            text = String.format("%s  %s", names[audio.temper],
                                     keys[audio.key]);
+
         TextView textView = findViewById(R.id.temperament);
         if (textView != null)
             textView.setText(text);
