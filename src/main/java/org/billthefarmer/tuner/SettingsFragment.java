@@ -30,6 +30,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -59,12 +60,14 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private static final String CUSTOM_PATH = "Tuner/Custom.txt";
 
     private static final String KEY_PREF_ABOUT = "pref_about";
+    private static final String KEY_PREF_BACH = "pref_bach";
     private static final String KEY_PREF_COLOUR = "pref_colour";
     private static final String KEY_PREF_CUSTOM = "pref_custom";
     private static final String KEY_PREF_DARK = "pref_dark";
     private static final String KEY_PREF_INPUT = "pref_input";
     private static final String KEY_PREF_PROPS = "pref_props";
     private static final String KEY_PREF_REFER = "pref_refer";
+    private static final String KEY_PREF_SOLFA = "pref_solfa";
     private static final String KEY_PREF_TEMPER = "pref_temper";
     private static final String KEY_PREF_KEY = "pref_key";
 
@@ -129,6 +132,15 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Load custom temperaments
         loadCustomTemperaments();
+
+        // Reset bach preference on solfa
+        CheckBoxPreference check =
+            (CheckBoxPreference) findPreference(KEY_PREF_SOLFA);
+        if (check.isChecked())
+        {
+            check = (CheckBoxPreference) findPreference(KEY_PREF_BACH);
+            check.setChecked(false);
+        }
 
         // Disable key preference on equal temperament
         preference = (ListPreference) findPreference(KEY_PREF_TEMPER);
@@ -263,6 +275,19 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             preference.setSummary(s);
         }
 
+        // Reset bach preference on solfa
+        if (key.equals(KEY_PREF_SOLFA))
+        {
+            CheckBoxPreference check =
+                (CheckBoxPreference) findPreference(key);
+            if (check.isChecked())
+            {
+                check = (CheckBoxPreference) findPreference(KEY_PREF_BACH);
+                check.setChecked(false);
+            }
+        }
+
+        // Disable key preference on equal temperament
         if (key.equals(KEY_PREF_TEMPER))
         {
             ListPreference preference =

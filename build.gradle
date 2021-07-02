@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
     }
 }
 
@@ -44,6 +44,6 @@ android {
         disable 'IconDensities', 'ClickableViewAccessibility',
             'CustomViewStyleable', 'TypographyFractions', 'OldTargetApi',
             'NonConstantResourceId', 'ExpiredTargetSdkVersion'
-        // abortOnError false
+        abortOnError false
     }
 }

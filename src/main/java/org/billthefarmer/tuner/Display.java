@@ -50,6 +50,11 @@ public class Display extends TunerView
         "C", "C", "D", "E", "E", "F",
         "F", "G", "A", "A", "B", "B"
     };
+    private static final String bachs[] =
+    {
+        "C", "C", "D", "E", "E", "F",
+        "F", "G", "A", "A", "B", "H"
+    };
 
     private static final String solfa[] =
     {
@@ -61,6 +66,12 @@ public class Display extends TunerView
     {
         "", "\u266F", "", "\u266D", "", "",
         "\u266F", "", "\u266D", "", "\u266D", ""
+    };
+
+    private static final String flats[] =
+    {
+        "", "\u266F", "", "\u266D", "", "",
+        "\u266F", "", "\u266D", "", "", ""
     };
 
     // Constructor
@@ -260,6 +271,9 @@ public class Display extends TunerView
             s = String.format("%s", audio.solfa?
                               solfa[(audio.note - audio.transpose +
                                      OCTAVE) % OCTAVE]:
+                              audio.bach?
+                              bachs[(audio.note - audio.transpose +
+                                     OCTAVE) % OCTAVE]:
                               notes[(audio.note - audio.transpose +
                                      OCTAVE) % OCTAVE]);
             canvas.drawText(s, margin, 0, paint);
@@ -269,7 +283,9 @@ public class Display extends TunerView
 
             // Draw sharps/flats
             paint.setTextSize(larger / 2);
-            s = String.format("%s",
+            s = String.format("%s", audio.bach?
+                              flats[(audio.note - audio.transpose +
+                                      OCTAVE) % OCTAVE]:
                               sharps[(audio.note - audio.transpose +
                                       OCTAVE) % OCTAVE]);
             canvas.translate(0, paint.ascent());

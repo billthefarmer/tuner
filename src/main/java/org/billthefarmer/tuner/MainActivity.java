@@ -68,6 +68,7 @@ public class MainActivity extends Activity
 {
     private static final String TAG = "Tuner";
 
+    private static final String PREF_BACH = "pref_bach";
     private static final String PREF_COLOUR = "pref_colour";
     private static final String PREF_CUSTOM = "pref_custom";
     private static final String PREF_DARK = "pref_dark";
@@ -779,13 +780,14 @@ public class MainActivity extends Activity
 
         if (audio != null)
         {
-            editor.putBoolean(PREF_FUND, audio.fund);
-            editor.putBoolean(PREF_SOLFA, audio.solfa);
+            editor.putBoolean(PREF_BACH, audio.bach);
+            editor.putBoolean(PREF_DOWN, audio.downsample);
             editor.putBoolean(PREF_FILTER, audio.filter);
             editor.putBoolean(PREF_FILTERS, audio.filters);
-            editor.putBoolean(PREF_DOWN, audio.downsample);
+            editor.putBoolean(PREF_FUND, audio.fund);
             editor.putBoolean(PREF_MULT, audio.multiple);
             editor.putBoolean(PREF_SCREEN, audio.screen);
+            editor.putBoolean(PREF_SOLFA, audio.solfa);
             editor.putBoolean(PREF_STROBE, audio.strobe);
             editor.putBoolean(PREF_ZOOM, audio.zoom);
         }
@@ -815,13 +817,14 @@ public class MainActivity extends Activity
             audio.key =
                 Integer.parseInt(preferences.getString(PREF_KEY, "0"));
 
-            audio.fund = preferences.getBoolean(PREF_FUND, false);
-            audio.solfa = preferences.getBoolean(PREF_SOLFA, false);
+            audio.bach = preferences.getBoolean(PREF_BACH, false);
+            audio.downsample = preferences.getBoolean(PREF_DOWN, false);
             audio.filter = preferences.getBoolean(PREF_FILTER, false);
             audio.filters = preferences.getBoolean(PREF_FILTERS, false);
-            audio.downsample = preferences.getBoolean(PREF_DOWN, false);
+            audio.fund = preferences.getBoolean(PREF_FUND, false);
             audio.multiple = preferences.getBoolean(PREF_MULT, false);
             audio.screen = preferences.getBoolean(PREF_SCREEN, false);
+            audio.solfa = preferences.getBoolean(PREF_SOLFA, false);
             audio.strobe = preferences.getBoolean(PREF_STROBE, false);
             audio.zoom = preferences.getBoolean(PREF_ZOOM, true);
 
@@ -1014,6 +1017,7 @@ public class MainActivity extends Activity
         protected boolean lock;
         protected boolean zoom;
         protected boolean fund;
+        protected boolean bach;
         protected boolean solfa;
         protected boolean filter;
         protected boolean screen;

@@ -17,6 +17,7 @@
         <attr name="lock" format="reference" />
 
         <attr name="pref_about" format="reference" />
+        <attr name="pref_bach" format="reference" />
         <attr name="pref_dark" format="reference" />
         <attr name="pref_down" format="reference" />
         <attr name="pref_filter" format="reference" />

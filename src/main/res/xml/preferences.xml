@@ -45,10 +45,18 @@
         android:title="@string/pref_zoom" />
     <CheckBoxPreference
         android:defaultValue="false"
+        android:disableDependentsState="true"
         android:icon="?attr/pref_solfa"
         android:key="pref_solfa"
         android:summary="@string/pref_solfa_summ"
         android:title="@string/pref_solfa" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:dependency="pref_solfa"
+        android:icon="?attr/pref_bach"
+        android:key="pref_bach"
+        android:summary="@string/pref_bach_summ"
+        android:title="@string/pref_bach" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:icon="?attr/pref_mult"

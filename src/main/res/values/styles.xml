@@ -24,6 +24,7 @@
         <item name="screen">@drawable/ic_action_brightness_low</item>
 
         <item name="pref_about">@drawable/ic_action_about</item>
+        <item name="pref_bach">@drawable/ic_action_previous_item</item>
         <item name="pref_dark">@drawable/ic_action_brightness_high</item>
         <item name="pref_down">@drawable/ic_action_reply_all</item>
         <item name="pref_filter">@drawable/ic_action_network_cell</item>
@@ -63,6 +64,7 @@
         <item name="screen">@drawable/ic_action_brightness_low_dark</item>
 
         <item name="pref_about">@drawable/ic_action_about_dark</item>
+        <item name="pref_bach">@drawable/ic_action_previous_item_dark</item>
         <item name="pref_dark">@drawable/ic_action_brightness_high_dark</item>
         <item name="pref_down">@drawable/ic_action_reply_all_dark</item>
         <item name="pref_filter">@drawable/ic_action_network_cell_dark</item>
