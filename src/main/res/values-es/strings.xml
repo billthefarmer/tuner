@@ -74,6 +74,9 @@
   <string name="pref_solfa">Solfeo</string>
   <string name="pref_solfa_summ">Utilizar solfeo (DoReMi)</string>
 
+  <string name="pref_bach">Bach</string>
+  <string name="pref_bach_summ">Utilizar Bach (ABHC)</string>
+
   <string name="pref_down">Grabación de muestra</string>
   <string name="pref_down_summ">Grabar una muestra antes del análisis</string>
 

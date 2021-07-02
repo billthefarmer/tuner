@@ -74,6 +74,9 @@
   <string name="pref_solfa">ソルフェージュ</string>
   <string name="pref_solfa_summ">ソルフェージュを使う (DoReMi)</string>
 
+  <string name="pref_bach">バッハ</string>
+  <string name="pref_bach_summ">バッハを使用する（ABHC）</string>
+
   <string name="pref_down">ダウンサンプル</string>
   <string name="pref_down_summ">解析前に入力をダウンサンプル</string>
 

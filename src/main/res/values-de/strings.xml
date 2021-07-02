@@ -63,6 +63,9 @@
   <string name="pref_solfa">Solfège</string>
   <string name="pref_solfa_summ">Solfège (DoReMi) benutzen</string>
 
+  <string name="pref_bach">Bach</string>
+  <string name="pref_bach_summ">Bach (ABHC) benutzen</string>
+
   <string name="pref_down">Runterrechnen</string>
   <string name="pref_down_summ">Eingabe vor der Analyse runterrechnen</string>
 

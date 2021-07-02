@@ -75,6 +75,9 @@
   <string name="pref_solfa">Szolfézs</string>
   <string name="pref_solfa_summ">Használja a szolfézs (DoReMi)</string>
 
+  <string name="pref_bach">Bach</string>
+  <string name="pref_bach_summ">Használja a Bach (ABHC)</string>
+
   <string name="pref_down">Alulmintavételezés</string>
   <string name="pref_down_summ">Bemeneti jel alulmintavételezése kiértékelés előtt</string>
 

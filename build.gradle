@@ -44,6 +44,6 @@ android {
         disable 'IconDensities', 'ClickableViewAccessibility',
             'CustomViewStyleable', 'TypographyFractions', 'OldTargetApi',
             'NonConstantResourceId', 'ExpiredTargetSdkVersion'
-        abortOnError false
+        // abortOnError false
     }
 }
