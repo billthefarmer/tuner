@@ -21,6 +21,7 @@ screen for detailed documentation.
  * Custom temperaments option
  * Transposition option
  * Solfège (DoRéMi) option
+ * Bach (ABHC) option
 
 ## Using
 
