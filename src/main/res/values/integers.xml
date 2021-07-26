@@ -4,8 +4,8 @@
     <integer name="default_input">0</integer>
 
     <integer name="default_refer">440</integer>
-    <integer name="max_refer">480</integer>
-    <integer name="min_refer">420</integer>
+    <integer name="max_refer">500</integer>
+    <integer name="min_refer">400</integer>
 
     <integer name="default_transpose">0</integer>
     <integer name="default_temper">8</integer>
