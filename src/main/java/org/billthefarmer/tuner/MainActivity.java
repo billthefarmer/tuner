@@ -1080,9 +1080,11 @@ public class MainActivity extends Activity
         private static final double SPAN = 0.6;
         private static final double MARGIN = 60.0;
 
+        // Butterworth filter parameters
         private static final double G = 3.023332184e+01;
         private static final double K = 0.9338478249;
 
+        // Butterworth filter buffers
         private double xv[];
         private double yv[];
 
@@ -1310,7 +1312,7 @@ public class MainActivity extends Activity
                 // Max signal
                 double rm = 0;
 
-                // Butterworth filter, 3dB/octave
+                // Butterworth filter, 120Hz, 3dB/octave
                 for (int i = 0; i < STEP; i++)
                 {
                     xv[0] = xv[1];
@@ -1407,7 +1409,7 @@ public class MainActivity extends Activity
                         x2[i] = 0.0;
 
                         for (int j = 0; j < 2; j++)
-                            x2[i] += xa[(i * 2) + j] / 2.0;
+                            x2[i] += xa[(i * 2) + j];
                     }
 
                     // x3 = xa << 3
@@ -1416,7 +1418,7 @@ public class MainActivity extends Activity
                         x3[i] = 0.0;
 
                         for (int j = 0; j < 3; j++)
-                            x3[i] += xa[(i * 3) + j] / 3.0;
+                            x3[i] += xa[(i * 3) + j];
                     }
 
                     // x4 = xa << 4
@@ -1425,7 +1427,7 @@ public class MainActivity extends Activity
                         x4[i] = 0.0;
 
                         for (int j = 0; j < 4; j++)
-                            x2[i] += xa[(i * 4) + j] / 4.0;
+                            x4[i] += xa[(i * 4) + j];
                     }
 
                     // x5 = xa << 5
@@ -1434,23 +1436,16 @@ public class MainActivity extends Activity
                         x5[i] = 0.0;
 
                         for (int j = 0; j < 5; j++)
-                            x5[i] += xa[(i * 5) + j] / 5.0;
+                            x5[i] += xa[(i * 5) + j];
                     }
 
                     // Add downsamples
                     for (int i = 1; i < RANGE; i++)
                     {
-                        if (i < RANGE / 2)
-                            xa[i] += x2[i];
-
-                        if (i < RANGE / 3)
-                            xa[i] += x3[i];
-
-                        if (i < RANGE / 4)
-                            xa[i] += x4[i];
-
-                        if (i < RANGE / 5)
-                            xa[i] += x5[i];
+                        xa[i] += (i < RANGE / 2)? x2[i]: 0.0;
+                        xa[i] += (i < RANGE / 3)? x3[i]: 0.0;
+                        xa[i] += (i < RANGE / 4)? x4[i]: 0.0;
+                        xa[i] += (i < RANGE / 5)? x5[i]: 0.0;
 
                         // Recalculate differences
                         dx[i] = xa[i] - xa[i - 1];
