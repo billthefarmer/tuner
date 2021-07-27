@@ -1442,10 +1442,10 @@ public class MainActivity extends Activity
                     // Add downsamples
                     for (int i = 1; i < RANGE; i++)
                     {
-                        xa[i] += (i < RANGE / 2)? x2[i]: 0.0;
-                        xa[i] += (i < RANGE / 3)? x3[i]: 0.0;
-                        xa[i] += (i < RANGE / 4)? x4[i]: 0.0;
-                        xa[i] += (i < RANGE / 5)? x5[i]: 0.0;
+                        xa[i] *= (i < RANGE / 2)? x2[i]: 0.0;
+                        xa[i] *= (i < RANGE / 3)? x3[i]: 0.0;
+                        xa[i] *= (i < RANGE / 4)? x4[i]: 0.0;
+                        xa[i] *= (i < RANGE / 5)? x5[i]: 0.0;
 
                         // Recalculate differences
                         dx[i] = xa[i] - xa[i - 1];
