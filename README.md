@@ -132,8 +132,8 @@ input before processing.
 #### Downsample
 
 The **downsample** item controls a downsampling feature on the audio
-input during processing to help with bass reeds. Use with caution, it
-may generate spurious results
+input during processing to help with bass reeds. This should be more
+reliable now I have found the long standing deliberate mistake.
 
 ### Display
 
