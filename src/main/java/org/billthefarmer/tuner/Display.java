@@ -59,7 +59,7 @@ public class Display extends TunerView
     private static final String solfa[] =
     {
         "Do", "Do", "Re", "Mi", "Mi", "Fa",
-        "Fa", "So", "La", "La", "Ti", "Ti"
+        "Fa", "Sol", "La", "La", "Si", "Si"
     };
 
     private static final String sharps[] =
