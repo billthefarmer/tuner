@@ -326,11 +326,9 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Read into properties
         Properties props = new Properties();
-        try
+        try (FileReader reader = new FileReader(custom))
         {
-            FileReader reader = new FileReader(custom);
             props.load(reader);
-            reader.close();
         }
 
         catch(Exception e)
@@ -344,11 +342,11 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = preferences.edit();
 
-        StringWriter writer = new StringWriter();
-        try
+        try (StringWriter writer = new StringWriter())
         {
             props.store(writer, "Custom Temperaments");
-            writer.close();
+            editor.putString(KEY_PREF_PROPS, writer.toString());
+            editor.apply();
         }
 
         catch (Exception e)
@@ -356,9 +354,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             e.printStackTrace();
             return;
         }
-
-        editor.putString(KEY_PREF_PROPS, writer.toString());
-        editor.apply();
 
         // Sort the entries
         String order[] = props.stringPropertyNames().toArray(new String[0]);

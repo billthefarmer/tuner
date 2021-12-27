@@ -100,9 +100,9 @@ public class HelpActivity extends Activity
     {
         StringBuilder text = new StringBuilder();
 
-        try (InputStream stream = context.getResources().openRawResource(resId);
-             InputStreamReader reader = new InputStreamReader(stream);
-             BufferedReader buffer = new BufferedReader(reader))
+        try (BufferedReader buffer = new BufferedReader
+             (new InputStreamReader
+              (context.getResources().openRawResource(resId))))
         {
             String line;
             while ((line = buffer.readLine()) != null)

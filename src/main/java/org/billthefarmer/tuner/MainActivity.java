@@ -928,9 +928,8 @@ public class MainActivity extends Activity
             PreferenceManager.getDefaultSharedPreferences(this);
 
         Properties props = new Properties();
-        StringReader reader = new
-            StringReader(preferences.getString(PREF_PROPS, ""));
-        try
+        try (StringReader reader = new StringReader
+             (preferences.getString(PREF_PROPS, "")))
         {
             props.load(reader);
         }
