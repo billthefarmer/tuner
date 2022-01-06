@@ -126,8 +126,8 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         summary = picker.getSummary().toString();
 
         // Set number picker summary
-        v = picker.getValue();
-        String s = String.format(summary, v);
+        float f = picker.getValue();
+        String s = String.format(summary, f);
         picker.setSummary(s);
 
         // Load custom temperaments
@@ -270,7 +270,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
                 (NumberPickerPreference) findPreference(key);
 
             // Get the value and set the summary
-            int v = preference.getValue();
+            float v = preference.getValue();
             String s = String.format(summary, v);
             preference.setSummary(s);
         }

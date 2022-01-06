@@ -807,9 +807,18 @@ public class MainActivity extends Activity
 
         if (audio != null)
         {
+            try
+            {
+                audio.reference = preferences.getFloat(PREF_REFER, 440);
+            }
+
+            catch (Exception e)
+            {
+                audio.reference = preferences.getInt(PREF_REFER, 440);
+            }
+
             audio.input =
                 Integer.parseInt(preferences.getString(PREF_INPUT, "0"));
-            audio.reference = preferences.getInt(PREF_REFER, 440);
             audio.transpose =
                 Integer.parseInt(preferences.getString(PREF_TRANSPOSE, "0"));
             audio.temper =

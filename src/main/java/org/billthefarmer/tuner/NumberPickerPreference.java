@@ -27,9 +27,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import java.util.Locale;
 
@@ -39,9 +43,11 @@ public class NumberPickerPreference extends DialogPreference
     private final int maxValue;
     private final int minValue;
 
-    private int value;
+    private float value;
 
-    private NumberPicker picker;
+    private NumberPicker integer;
+    private NumberPicker fraction;
+    private LinearLayout layout;
 
     // Constructor
     public NumberPickerPreference(Context context, AttributeSet attrs)
@@ -62,19 +68,38 @@ public class NumberPickerPreference extends DialogPreference
     @Override
     protected View onCreateDialogView()
     {
-        picker = new NumberPicker(getContext());
+        integer = new NumberPicker(getContext());
+        fraction = new NumberPicker(getContext());
+        layout = new LinearLayout(getContext());
 
-        picker.setMaxValue(maxValue);
-        picker.setMinValue(minValue);
-        picker.setValue(value);
+        integer.setMaxValue(maxValue);
+        integer.setMinValue(minValue);
+        integer.setValue(Float.valueOf(value).intValue());
 
-        picker.setFormatter(value -> String.format(Locale.getDefault(),
-                            "%dHz", value));
+        integer.setWrapSelectorWheel(false);
+        integer.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
-        picker.setWrapSelectorWheel(false);
-        picker.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        fraction.setMaxValue(9);
+        fraction.setMinValue(0);
+        fraction.setValue(Float.valueOf(value * 10).intValue() % 10);
 
-        return picker;
+        fraction.setWrapSelectorWheel(false);
+        fraction.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
+        TextView dot = new TextView(getContext());
+        //noinspection SetTextI18n
+        dot.setText(".");
+
+        TextView hz = new TextView(getContext());
+        //noinspection SetTextI18n
+        hz.setText("Hz");
+
+        layout.setGravity(Gravity.CENTER);
+        layout.addView(integer);
+        layout.addView(dot);
+        layout.addView(fraction);
+        layout.addView(hz);
+        return layout;
     }
 
     // On get default value
@@ -82,7 +107,7 @@ public class NumberPickerPreference extends DialogPreference
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index)
     {
-        return a.getInteger(index, value);
+        return a.getInteger(index, (int) value);
     }
 
     // On set initial value
@@ -93,13 +118,22 @@ public class NumberPickerPreference extends DialogPreference
         if (restorePersistedValue)
         {
             // Restore existing state
-            value = getPersistedInt(0);
+            try
+            {
+                value = getPersistedFloat(0);
+            }
+
+            catch (Exception e)
+            {
+                value = getPersistedInt(0);
+            }
         }
+
         else
         {
             // Set default state from the XML attribute
-            value = (Integer) defaultValue;
-            persistInt(value);
+            value = ((Integer) defaultValue).floatValue();
+            persistFloat(value);
         }
     }
 
@@ -110,13 +144,13 @@ public class NumberPickerPreference extends DialogPreference
         // When the user selects "OK", persist the new value
         if (positiveResult)
         {
-            value = picker.getValue();
-            persistInt(value);
+            value = integer.getValue() + fraction.getValue() / 10.0f;
+            persistFloat(value);
         }
     }
 
     // Get value
-    protected int getValue()
+    protected float getValue()
     {
         return value;
     }
