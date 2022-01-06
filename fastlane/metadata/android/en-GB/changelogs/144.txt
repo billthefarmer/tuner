@@ -1,0 +1,1 @@
+* Add fraction digit to reference setting
