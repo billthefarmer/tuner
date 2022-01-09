@@ -144,8 +144,16 @@ public class NumberPickerPreference extends DialogPreference
         // When the user selects "OK", persist the new value
         if (positiveResult)
         {
-            value = integer.getValue() + fraction.getValue() / 10.0f;
-            persistFloat(value);
+            try
+            {
+                value = integer.getValue() + fraction.getValue() / 10.0f;
+                persistFloat(value);
+            }
+
+            catch (Exception e)
+            {
+                persistInt(integer.getValue());
+            }
         }
     }
 
