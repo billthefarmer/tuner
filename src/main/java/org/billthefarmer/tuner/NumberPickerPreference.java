@@ -45,8 +45,8 @@ public class NumberPickerPreference extends DialogPreference
 
     private float value;
 
-    private NumberPicker integer;
-    private NumberPicker fraction;
+    private NumberPicker units;
+    private NumberPicker tenths;
     private LinearLayout layout;
 
     // Constructor
@@ -68,23 +68,23 @@ public class NumberPickerPreference extends DialogPreference
     @Override
     protected View onCreateDialogView()
     {
-        integer = new NumberPicker(getContext());
-        fraction = new NumberPicker(getContext());
+        units = new NumberPicker(getContext());
+        tenths = new NumberPicker(getContext());
         layout = new LinearLayout(getContext());
 
-        integer.setMaxValue(maxValue);
-        integer.setMinValue(minValue);
-        integer.setValue(Float.valueOf(value).intValue());
+        units.setMaxValue(maxValue);
+        units.setMinValue(minValue);
+        units.setValue(Float.valueOf(value).intValue());
 
-        integer.setWrapSelectorWheel(false);
-        integer.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        units.setWrapSelectorWheel(false);
+        units.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
-        fraction.setMaxValue(9);
-        fraction.setMinValue(0);
-        fraction.setValue(Float.valueOf(value * 10).intValue() % 10);
+        tenths.setMaxValue(9);
+        tenths.setMinValue(0);
+        tenths.setValue(Float.valueOf(value * 10).intValue() % 10);
 
-        fraction.setWrapSelectorWheel(false);
-        fraction.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        tenths.setWrapSelectorWheel(false);
+        tenths.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
         TextView dot = new TextView(getContext());
         //noinspection SetTextI18n
@@ -95,9 +95,9 @@ public class NumberPickerPreference extends DialogPreference
         hz.setText("Hz");
 
         layout.setGravity(Gravity.CENTER);
-        layout.addView(integer);
+        layout.addView(units);
         layout.addView(dot);
-        layout.addView(fraction);
+        layout.addView(tenths);
         layout.addView(hz);
         return layout;
     }
@@ -146,13 +146,13 @@ public class NumberPickerPreference extends DialogPreference
         {
             try
             {
-                value = integer.getValue() + fraction.getValue() / 10.0f;
+                value = units.getValue() + tenths.getValue() / 10.0f;
                 persistFloat(value);
             }
 
             catch (Exception e)
             {
-                persistInt(integer.getValue());
+                persistInt(units.getValue());
             }
         }
     }
