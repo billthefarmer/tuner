@@ -64,7 +64,7 @@
   <string name="fund">fil. zas.</string>
   <string name="note">wynik</string>
   <string name="zoom">zoom</string>
-  <string name="lock">lock</string>
+  <string name="lock">blokada</string>
   <string name="display">ekran</string>
   <string name="strobe">strob.</string>
   <string name="down">zm. próbk.</string>
@@ -126,7 +126,7 @@
   <string name="pref_custom">Własny</string>
   <string name="pref_custom_summ">Własne kolory</string>
 
-  <string name="pref_refer">Reference</string>
+  <string name="pref_refer">Odniesienie</string>
   <string name="pref_refer_summ">%2.2fHz</string>
 
   <string name="pref_transpose">Transponuj do</string>
