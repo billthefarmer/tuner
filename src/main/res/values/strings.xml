@@ -2,10 +2,10 @@
 <resources>
 
   <string name="app_name">Tuner</string>
-  <string name="help">Help</string>
-  <string name="settings">Settings</string>
-  <string name="built">Built %s</string>
-  <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
+  <string name="help">Pomoc</string>
+  <string name="settings">Ustawienia</string>
+  <string name="built">Skompilowano %s</string>
+  <string name="copyright">Prawa autorskie \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
   </string>
   <string name="translation">Spanish translation by <a
   href="https://github.com/susobaco">Suso Comesaña</a>\nHungarian
@@ -16,133 +16,135 @@
   translation by <a href="https://github.com/roptat">roptat</a>\nGerman
   translation by <a href="https://github.com/niccokunzmann">Nicco Kunzmann</a>
   </string>
-  <string name="licence">Licence <a
+  <string name="licence">Licencja <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
   <string name="error_buffer">
-    Error from audio recording! Cannot find a working input sample rate.
+    Błąd podczas nagrywania dźwięku! Nie można znaleźć działającej 
+    wejściowej częstotliwości próbkowania.
   </string>
   <string name="error_init">
-    Audio recorder not initialised! Maybe the selected input source is
-    not available, or a working input sample rate could not be found.
+    Rejestrator dźwięku nie został zainicjowany! Być może wybrane
+    źródło wejściowe nie jest dostępne lub nie można znaleźć 
+    działającej częstotliwości próbkowania na wejściu.
   </string>
 
-  <string name="filter_on">Audio filter on</string>
-  <string name="filter_off">Audio filter off</string>
+  <string name="filter_on">Filtr audio włączony</string>
+  <string name="filter_off">Filtr audio wyłączony</string>
 
-  <string name="fund_on">Fundamental filter on</string>
-  <string name="fund_off">Fundamental filter off</string>
+  <string name="fund_on">Filtr zasadniczy włączony</string>
+  <string name="fund_off">Filtr zasadniczy wyłączony</string>
 
-  <string name="zoom_on">Spectrum zoom on</string>
-  <string name="zoom_off">Spectrum zoom off</string>
+  <string name="zoom_on">Powiększenie widma włączone</string>
+  <string name="zoom_off">Powiększenie widma wyłączone</string>
 
-  <string name="lock_on">Display lock on</string>
-  <string name="lock_off">Display lock off</string>
+  <string name="lock_on">Blokada ekranu włączona</string>
+  <string name="lock_off">Blokada ekranu wyłączona</string>
 
-  <string name="screen_on">Keep screen on</string>
-  <string name="screen_off">Don\'t keep screen on</string>
+  <string name="screen_on">Zachowaj włączony ekran</string>
+  <string name="screen_off">Pozwól na wyłączenie ekranu</string>
 
-  <string name="strobe_on">Strobe on</string>
-  <string name="strobe_off">Strobe off</string>
+  <string name="strobe_on">Stroboskop włączony</string>
+  <string name="strobe_off">Stroboskop wyłączony</string>
 
-  <string name="down_on">Downsampling on</string>
-  <string name="down_off">Downsampling off</string>
+  <string name="down_on">Zmniejszanie próbkowania włączone</string>
+  <string name="down_off">Zmniejszanie próbkowania wyłączone</string>
 
-  <string name="mult_on">Multiple notes on</string>
-  <string name="mult_off">Multiple notes off</string>
+  <string name="mult_on">Wiele wyników włączone</string>
+  <string name="mult_off">Wiele wyników wyłączone</string>
 
-  <string name="dark_theme">Dark theme</string>
-  <string name="light_theme">Light theme</string>
+  <string name="dark_theme">Ciemny motyw</string>
+  <string name="light_theme">Jasny motyw</string>
 
-  <string name="copied_clip">Data copied to clipboard</string>
-  <string name="sample_rate">Sample rate: %d</string>
+  <string name="copied_clip">Dane skopiowane do schowka</string>
+  <string name="sample_rate">Częstotliwość próbkowania: %d</string>
 
-  <string name="filter">filter</string>
-  <string name="fund">fund</string>
-  <string name="note">note</string>
+  <string name="filter">fil. aud.</string>
+  <string name="fund">fil. zas.</string>
+  <string name="note">wynik</string>
   <string name="zoom">zoom</string>
-  <string name="lock">lock</string>
-  <string name="display">screen</string>
-  <string name="strobe">strobe</string>
-  <string name="down">down</string>
-  <string name="mult">mult</string>
+  <string name="lock">blokada</string>
+  <string name="display">ekran</string>
+  <string name="strobe">strob.</string>
+  <string name="down">zm. próbk.</string>
+  <string name="mult">wiele wyn.</string>
 
   <string name="def_custom">[-1073807360,-1090518785]</string>
 
-  <string name="pref_input_category">Input</string>
+  <string name="pref_input_category">Wejście</string>
 
-  <string name="pref_input">Input source</string>
+  <string name="pref_input">Źródło sygnału wejściowego</string>
   <string name="pref_input_summ">%s</string>
 
-  <string name="pref_filter">Audio filter</string>
-  <string name="pref_filter_summ">Filter input audio</string>
+  <string name="pref_filter">Filtr dźwięku</string>
+  <string name="pref_filter_summ">Filtruje dźwięk na wejściu</string>
 
-  <string name="pref_solfa">Solfège</string>
-  <string name="pref_solfa_summ">Use solfège (DoReMi)</string>
+  <string name="pref_solfa">Solfeż</string>
+  <string name="pref_solfa_summ">Używaj solfeżu (DoReMi)</string>
 
   <string name="pref_bach">Bach</string>
-  <string name="pref_bach_summ">Use Bach (ABHC)</string>
+  <string name="pref_bach_summ">Używaj Bacha (ABHC)</string>
 
-  <string name="pref_down">Downsample</string>
+  <string name="pref_down">Zmniejsz próbkowanie</string>
   <string name="pref_down_summ">
-    Downsample input before analysis
+    Obniża próbkowanie danych wejściowych przed analizą
   </string>
 
-  <string name="pref_display">Display</string>
+  <string name="pref_display">Ekran</string>
 
-  <string name="pref_screen">Screen</string>
-  <string name="pref_screen_summ">Keep screen on</string>
+  <string name="pref_screen">Ekran</string>
+  <string name="pref_screen_summ">Pozostaw ekran włączony</string>
 
-  <string name="pref_zoom">Zoom spectrum</string>
+  <string name="pref_zoom">Powiększ widmo</string>
   <string name="pref_zoom_summ">
-    Zoom in to current note on spectrum display
+    Powiększanie bieżącego zapisu na wykresie widma
   </string>
 
-  <string name="pref_mult">Multiple notes</string>
-  <string name="pref_mult_summ">Show multiple notes on display</string>
+  <string name="pref_mult">Wiele wyników</string>
+  <string name="pref_mult_summ">Wyświetla wiele wyników na ekranie</string>
 
-  <string name="pref_fund">Fundamental filter</string>
-  <string name="pref_fund_summ">Use fundamental filter</string>
+    <string name="pref_fund">Filtr zasadniczy</string>
+  <string name="pref_fund_summ">Używa filtru zasadniczego</string>
 
-  <string name="pref_filters">Note filters</string>
-  <string name="pref_filters_summ">Use note filters</string>
+  <string name="pref_filters">Filtr nut</string>
+  <string name="pref_filters_summ">Używa filtrowania nut </string>
 
-  <string name="pref_note_filter">Note filter</string>
-  <string name="pref_note_filter_summ">Note filter settings</string>
+  <string name="pref_note_filter">Filtr nut</string>
+  <string name="pref_note_filter_summ">Ustawienia filtra nut</string>
 
-  <string name="pref_octave_filter">Octave filter</string>
-  <string name="pref_octave_filter_summ">Octave filter settings</string>
+  <string name="pref_octave_filter">Filtr oktaw</string>
+  <string name="pref_octave_filter_summ">Ustawienia filtra oktaw</string>
 
-  <string name="pref_strobe">Strobe</string>
-  <string name="pref_strobe_screen">Strobe settings</string>
-  <string name="pref_strobe_summ">Show the strobe display</string>
+  <string name="pref_strobe">Stroboskop</string>
+  <string name="pref_strobe_screen">Ustawienia stroboskopu</string>
+  <string name="pref_strobe_summ">Pokaż wyświetlacz stroboskopowy</string>
 
-  <string name="pref_colour">Strobe colours</string>
-  <string name="pref_colour_summ">Change the strobe colours</string>
+  <string name="pref_colour">Kolory stroboskopu</string>
+  <string name="pref_colour_summ">Zmiana kolorów stroboskopu</string>
 
-  <string name="pref_custom">Custom</string>
-  <string name="pref_custom_summ">Custom colours</string>
+  <string name="pref_custom">Własny</string>
+  <string name="pref_custom_summ">Własne kolory</string>
 
-  <string name="pref_refer">Reference</string>
+  <string name="pref_refer">Odniesienie</string>
   <string name="pref_refer_summ">%2.2fHz</string>
 
-  <string name="pref_transpose">Transpose</string>
+  <string name="pref_transpose">Transponuj do</string>
   <string name="pref_transpose_summ">%s</string>
 
-  <string name="pref_temper">Temperament</string>
+  <string name="pref_temper">Strój</string>
   <string name="pref_temper_summ">%s</string>
 
-  <string name="pref_key">Key</string>
+  <string name="pref_key">Klucz</string>
   <string name="pref_key_summ">%s</string>
 
-  <string name="pref_theme">Theme</string>
-  <string name="pref_dark">Dark Theme</string>
-  <string name="pref_dark_summ">Use dark theme</string>
+  <string name="pref_theme">Motyw</string>
+  <string name="pref_dark">Ciemny motyw</string>
+  <string name="pref_dark_summ">Używa ciemnego motywu</string>
 
-  <string name="pref_about">About</string>
+  <string name="pref_about">O aplikacji</string>
   <string name="pref_about_summ"><a
-  href="https://github.com/billthefarmer/tuner/releases/latest">Version
+  href="https://github.com/billthefarmer/tuner/releases/latest">Wersja
   %s</a></string>
 
 </resources>
