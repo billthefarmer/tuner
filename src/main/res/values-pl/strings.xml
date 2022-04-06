@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Tuner</string>
+  <string name="help">Pomoc</string>
+  <string name="settings">Ustawienia</string>
+  <string name="built">Skompilowano %s</string>
+  <string name="copyright">Prawa autorskie \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
+  </string>
+  <string name="translation">Spanish translation by <a
+  href="https://github.com/susobaco">Suso Comesaña</a>\nHungarian
+  translation by <a href="https://github.com/lna91">András
+  Lengyel-Nagy</a>\nJapanese translation by <a
+  href="https://github.com/naofum">naofum</a>\nPortuguese translation
+  by <a href="https://github.com/afmachado">Caio Roberto</a>\nFrench
+  translation by <a href="https://github.com/roptat">roptat</a>\nGerman
+  translation by <a href="https://github.com/niccokunzmann">Nicco Kunzmann</a>
+  </string>
+  <string name="licence">Licencja <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="error_buffer">
+    Błąd podczas nagrywania dźwięku! Nie można znaleźć działającej 
+    wejściowej częstotliwości próbkowania.
+  </string>
+  <string name="error_init">
+    Rejestrator dźwięku nie został zainicjowany! Być może wybrane
+    źródło wejściowe nie jest dostępne lub nie można znaleźć 
+    działającej częstotliwości próbkowania na wejściu.
+  </string>
+
+  <string name="filter_on">Filtr audio włączony</string>
+  <string name="filter_off">Filtr audio wyłączony</string>
+
+  <string name="fund_on">Filtr zasadniczy włączony</string>
+  <string name="fund_off">Filtr zasadniczy wyłączony</string>
+
+  <string name="zoom_on">Powiększenie widma włączone</string>
+  <string name="zoom_off">Powiększenie widma wyłączone</string>
+
+  <string name="lock_on">Blokada ekranu włączona</string>
+  <string name="lock_off">Blokada ekranu wyłączona</string>
+
+  <string name="screen_on">Zachowaj włączony ekran</string>
+  <string name="screen_off">Pozwól na wyłączenie ekranu</string>
+
+  <string name="strobe_on">Stroboskop włączony</string>
+  <string name="strobe_off">Stroboskop wyłączony</string>
+
+  <string name="down_on">Zmniejszanie próbkowania włączone</string>
+  <string name="down_off">Zmniejszanie próbkowania wyłączone</string>
+
+  <string name="mult_on">Wiele wyników włączone</string>
+  <string name="mult_off">Wiele wyników wyłączone</string>
+
+  <string name="dark_theme">Ciemny motyw</string>
+  <string name="light_theme">Jasny motyw</string>
+
+  <string name="copied_clip">Dane skopiowane do schowka</string>
+  <string name="sample_rate">Częstotliwość próbkowania: %d</string>
+
+  <string name="filter">fil. aud.</string>
+  <string name="fund">fil. zas.</string>
+  <string name="note">wynik</string>
+  <string name="zoom">zoom</string>
+  <string name="lock">blokada</string>
+  <string name="display">ekran</string>
+  <string name="strobe">strob.</string>
+  <string name="down">zm. próbk.</string>
+  <string name="mult">wiele wyn.</string>
+
+  <string name="def_custom">[-1073807360,-1090518785]</string>
+
+  <string name="pref_input_category">Wejście</string>
+
+  <string name="pref_input">Źródło sygnału wejściowego</string>
+  <string name="pref_input_summ">%s</string>
+
+  <string name="pref_filter">Filtr dźwięku</string>
+  <string name="pref_filter_summ">Filtruje dźwięk na wejściu</string>
+
+  <string name="pref_solfa">Solfeż</string>
+  <string name="pref_solfa_summ">Używaj solfeżu (DoReMi)</string>
+
+  <string name="pref_bach">Bach</string>
+  <string name="pref_bach_summ">Używaj Bacha (ABHC)</string>
+
+  <string name="pref_down">Zmniejsz próbkowanie</string>
+  <string name="pref_down_summ">
+    Obniża próbkowanie danych wejściowych przed analizą
+  </string>
+
+  <string name="pref_display">Ekran</string>
+
+  <string name="pref_screen">Ekran</string>
+  <string name="pref_screen_summ">Pozostaw ekran włączony</string>
+
+  <string name="pref_zoom">Powiększ widmo</string>
+  <string name="pref_zoom_summ">
+    Powiększanie bieżącego zapisu na wykresie widma
+  </string>
+
+  <string name="pref_mult">Wiele wyników</string>
+  <string name="pref_mult_summ">Wyświetla wiele wyników na ekranie</string>
+
+    <string name="pref_fund">Filtr zasadniczy</string>
+  <string name="pref_fund_summ">Używa filtru zasadniczego</string>
+
+  <string name="pref_filters">Filtr nut</string>
+  <string name="pref_filters_summ">Używa filtrowania nut </string>
+
+  <string name="pref_note_filter">Filtr nut</string>
+  <string name="pref_note_filter_summ">Ustawienia filtra nut</string>
+
+  <string name="pref_octave_filter">Filtr oktaw</string>
+  <string name="pref_octave_filter_summ">Ustawienia filtra oktaw</string>
+
+  <string name="pref_strobe">Stroboskop</string>
+  <string name="pref_strobe_screen">Ustawienia stroboskopu</string>
+  <string name="pref_strobe_summ">Pokaż wyświetlacz stroboskopowy</string>
+
+  <string name="pref_colour">Kolory stroboskopu</string>
+  <string name="pref_colour_summ">Zmiana kolorów stroboskopu</string>
+
+  <string name="pref_custom">Własny</string>
+  <string name="pref_custom_summ">Własne kolory</string>
+
+  <string name="pref_refer">Odniesienie</string>
+  <string name="pref_refer_summ">%2.2fHz</string>
+
+  <string name="pref_transpose">Transponuj do</string>
+  <string name="pref_transpose_summ">%s</string>
+
+  <string name="pref_temper">Strój</string>
+  <string name="pref_temper_summ">%s</string>
+
+  <string name="pref_key">Klucz</string>
+  <string name="pref_key_summ">%s</string>
+
+  <string name="pref_theme">Motyw</string>
+  <string name="pref_dark">Ciemny motyw</string>
+  <string name="pref_dark_summ">Używa ciemnego motywu</string>
+
+  <string name="pref_about">O aplikacji</string>
+  <string name="pref_about_summ"><a
+  href="https://github.com/billthefarmer/tuner/releases/latest">Wersja
+  %s</a></string>
+
+</resources>
