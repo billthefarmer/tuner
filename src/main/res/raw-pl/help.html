@@ -1,0 +1,254 @@
+<h2>Wprowadzenie</h2>
+
+<p>Tuner do akordeonu na Androida, z funkcją stroboskopu, pięciolinii i wieloma zapisami.</p>
+
+<h3>Używanie aplikacji</h3>
+
+<p>
+  Trzymaj telefon/tablet blisko instrumentu, zagraj nutę i obserwuj
+  wyświetlacz. W orientacji pionowej aplikacja pokazuje zakres 
+  sygnału wejściowego, widmo sygnału przetworzonego, wyświetlacz
+  główny z wartością nuty, błędem centów, błędem częstotliwości itp,
+  wyświetlacz stroboskopowy lub ekran pięciolinii oraz miernik
+  pokazujący błąd centów. W trybie poziomym aplikacja wyświetla
+  tylko główny ekran lub listę i miernik. Na pasku akcji znajduje
+  się wskaźnik sygnału, który jest przydatny w trybie poziomym. 
+  Użycie poniższych zmian ustawień dotykowych powoduje wyświetlenie
+  na kilka sekund krótkiego komunikatu z powiadomieniem.
+  
+</p>
+
+<h4>Stroje</h4>
+
+<p>
+  W aplikacji domyślnie ustawione jest strój <b>równomiernego</b>
+  temperowania i tonacja <b>C</b>. W ustawieniach dostępne są 32 stroje.
+  Dla każdego stroju innego niż równomierny należy ustawić klucz,
+  który ma być używany dla tego stroju. Należy pamiętać, że dla
+  niektórych nut przy niektórych strojacj może być wyświetlana
+  różnica centów większa niż 50, ponieważ odstępy między nutami
+  są większe niż 100 centów.
+</p>
+
+<h4>Własne stroje</h4>
+
+<p>
+  Własne stroje można załadować, umieszczając w tym celu plik
+  w <b>Tuner/Custom.txt</b>. Plik powinien zawierać jeden lub więcej
+  wpisów sformatowanych jako wpisy własności. Format ten jest
+  udokumentowany <a href="https://developer.android.com/reference/java/util/Properties#load(java.io.Reader)">
+  tutaj</a>.
+</p>
+<tt>
+# Własne stroje<br>
+Custom: 1.000000000, 1.067871094, 1.125000000, 1.185185185, \<br>
+        1.265625000, 1.333333333, 1.423828125, 1.500000000, \<br>
+        1.601806641, 1.687500000, 1.777777778, 1.898437500<br>
+<br>
+#  41edo 12 podzbiór nut<br>
+41edo: 0.995933333333333, 1.07023430212233, 1.122462048, 1.17711684266417, \<br>
+       1.26504472893667, 1.3266973308906, 1.42571583230427, 1.49526051927677, \<br>
+       1.5680347591656, 1.68521247642303, 1.76730548352053, 1.8992638916125<br>
+</tt>
+<p>
+    Wpisy zostaną wczytane i wyświetlone w <b>Ustawieniach</b> w porządku
+    alfabetycznym na końcu listy. Błędne wpisy będą ignorowane, albo
+    zastępowane takimi (1.0). Zmiany w zawartości własnego pliku
+    zostaną wczytane w <b>Ustawieniach</b>.
+</p>
+
+<h4>Zakres</h4>
+
+<p>
+  Dotknij zakresu, aby dodać wejściowy filtr dolnoprzepustowy ułatwiający
+  strojenie stroików basowych przez redukcję składowych harmonicznych.
+  Dotknij ponownie, aby go usunąć. Dotknij i przytrzymaj, aby dodać filtr
+  podstawowy w celu usunięcia harmonicznych zakłócających. Dotknij i
+  przytrzymaj ponownie, aby go usunąć. Kolory zostały dobrane zarówno
+  dla przejrzystości, jak i dla uzyskania wyglądu "retro",
+  przypominającego prawdziwy sprzęt.
+</p>
+
+<h4>Widmo</h4>
+
+<p>
+  Dotknij widma, aby powiększyć bieżącą nutę. Na ekranie może być
+  wyświetlanych do ośmiu stroików. Dotknij ponownie, aby ponownie
+  powiększyć. Dotknij i przytrzymaj, aby dodać funkcję zmniejszania
+  próbkowania, która pomaga w przypadku stroików basowych. Może
+  to powodować nieprawidłowe wyniki. Dotknij i przytrzymaj ponownie,
+  aby usunąć.
+</p>
+
+<h4>Ekran</h4>
+
+<p>
+  Dotknij ekranu, aby zablokować bieżące wyniki. Dotknij ponownie,
+  aby zdjąć blokadę. Blokada ekranu nie jest zachowana, jeśli ekran
+  zostanie obrócony. Dotknij ekranu i przytrzymaj go, aby przełączać
+  między wyświetlaniem wyniku najbliższego dźwięku wzorcowego, a
+  maksymalnie ośmioma wynikami.
+</p>
+
+<h4>Stroboskop</h4>
+
+<p>
+  Dotknij stroboskopu, aby go włączyć lub wyłączyć. Zamiast
+  niego wyświetlana jest pięciolinia. Kolory stroboskopu można
+  konfigurować w ustawieniach. Dotknij i przytrzymaj, aby zmienić
+  motyw.
+</p>
+
+<h4>Pięciolinia</h4>
+
+<p>
+  Dotknij pięciolinii, aby ją włączyć lub wyłączyć. Zamiast tego
+  wyświetlany jest stroboskop. Na pięciolinii wyświetlana jest
+  bieżąca nuta. Dotknij i przytrzymaj, aby zmienić motyw.
+  W trybie poziomym dotknij pięciolinii, aby zablokować bieżące wyniki.
+</p>
+
+  <h4>Miernik</h4>
+
+<p>
+  Miernik pokazuje błąd centa z dokładnością do plus minus 50 centów.
+  Dotknij miernika, aby skopiować wyniki do schowka. Dotknij i
+  przytrzymaj, aby zapobiec samoczynnemu wyłączeniu się ekranu.
+  Dotknij i przytrzymaj ponownie, aby umożliwić wyłączenie ekranu.
+  W układzie poziomym dotknij miernika, aby przełączać się między
+  ekranem a pięciolinią.
+</p>
+
+<h4>Pasek stanu</h4>
+
+<p>
+  Na pasku stanu wyświetlana jest częstotliwość próbkowania sygnału
+  wejściowego oraz stan różnych ustawień.
+</p>
+
+<h3>Ustawienia</h3>
+
+<p>
+  Wszystkie ustawienia są zachowywane i będą pamiętane przy następnym
+  użyciu aplikacji.
+</p>
+
+<h4>Wejście</h4>
+
+<p>
+  Można zmienić </b>źródło sygnału wejściowego</b>. Jeśli zostanie wybrane
+  źródło, które nie jest obecne w urządzeniu, zostanie wyświetlony
+  komunikat o błędzie. Wybierz źródło domyślne lub mikrofon.
+</p>
+
+<h5>Filtr dźwięku</h5>
+
+<p>
+  <b>Filtr dźwięku</b> umożliwia sterowanie filtrem dolnoprzepustowym na wejściu audio
+  przed przetwarzaniem.
+</p>
+
+<h5>Zmniejszanie próbkowania</h5>
+
+<p>
+  Element <b>zmniejszania próbkowania</b> steruje funkcją zmniejszania
+  próbkowania na wejściu audio podczas przetwarzania, co ułatwia
+  pracę ze stroikami basowymi. Teraz, po znalezieniu długotrwałego
+  błędu, powinno to być bardziej niezawodne.
+</p>
+
+<h4>Ekran</h4>
+
+<h5>Zachowaj ekran włączony</h5>
+
+<p>
+  <b>Ekran</b> się nie wyłączy
+</p>
+
+<h5>Powiększanie widma</h5>
+
+<p>
+  Element <b>powiększenia widma</b> steruje funkcją jego powiększenia.
+</p>
+
+<h5>Wyświetl wiele wyników</h5>
+
+<p>
+  Funkcja <b>wiele wyników</b> umożliwia wyświetlanie więcej niż 
+  jednego wyniku na ekranie. To ustawienie nie jest zachowywane.
+</p>
+
+<h4>Filtr nut</h4>
+
+<p>
+  Element <b>zasadniczy</b> umożliwia zastosowanie filtra zasadniczego
+</p>
+
+<p>
+  Element <b>filtry nut</b> włącza filtry nutowe i oktawowe
+</p>
+
+<h5>Filtr nut</h5>
+
+<p>Określa, które nuty mają być wyświetlane na ekranie</p>
+
+<h5>Filtr oktaw</h5>
+
+<p>Określa, które oktawy mają być wyświetlane na ekranie</p>
+
+<h4>Stroboskop</h4>
+
+<p>
+  Element <b>stroboskopu</b> steruje wyświetlaniem stroboskopu.
+</p>
+
+<h5>Kolory stroboskopu</h5>
+
+<p>
+  Jeśli stroboskop jest włączony, istnieje możliwość zmiany
+  jego <b>kolorów</b>. Dostępne są trzy ustawienia fabryczne oraz
+  ustawienie własne. W przypadku wybrania ustawienia własnego
+  oba kolory można zmieniać indywidualnie. Dotknij zewnętrznego,
+  kolorowego okręgu, aby wybrać kolor. Dotknij środkowego,
+  kolorowego okręgu dla każdego koloru, aby zobaczyć jak będzie
+  on wyglądał po lewej stronie.
+</p>
+
+<h4>Odniesienie</h4>
+
+<p>
+  Częstotliwość <b>odniesienia</b> dla "A" można zmieniać w
+  ograniczonym zakresie. Zostanie ona zapamiętana, dlatego
+  przed zamknięciem aplikacji należy ją zmienić z powrotem na
+  440 Hz.
+</p>
+
+<p>
+  <b>Transpozycja</b> umożliwia transpozycję wyświetlanych nut.
+  Zostanie ona zapamiętana, więc należy ją zmienić, jeśli nie
+  będzie już potrzebna.
+</p>
+
+<h4>Strojenie</h4>
+
+<p>
+  Opcja <b>strojenie</b> umożliwia korzystanie z różnych stroji.
+  Zostanie ono zapamiętane, więc jeśli nie będzie już potrzebne,
+  należy je zmienić z powrotem na <b>równomierne</b> temperowane.
+<p>
+  Element <b>klucza</b> umożliwia użycie różnych kluczy w
+  wybranym temperamencie. Nie ma znaczenia w przypadku stroju
+  <b>równomiernie</b> temperowanego.
+</p>
+
+<h4>Motyw</h4>
+
+<p>
+  <b>Ciemny motyw</b> pozwala używać ciemnego motywu.
+</p>
+
+<h4>O aplikacji</h4>
+
+<p>
+  Element <b>o aplikacji</b> pokazuje informacje o licencji oraz prawach autorskich.
+</p>

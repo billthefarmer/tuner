@@ -1,254 +1,244 @@
-<h2>Wprowadzenie</h2>
+<h2>Introduction</h2>
 
-<p>Tuner do akordeonu na Androida, z funkcją stroboskopu, pięciolinii i wieloma zapisami.</p>
+<p>An android accordion tuner with strobe, staff and multiple notes.</p>
 
-<h3>Używanie aplikacji</h3>
+<h3>Using</h3>
 
 <p>
-  Trzymaj telefon/tablet blisko instrumentu, zagraj nutę i obserwuj
-  wyświetlacz. W orientacji pionowej aplikacja pokazuje zakres 
-  sygnału wejściowego, widmo sygnału przetworzonego, wyświetlacz
-  główny z wartością nuty, błędem centów, błędem częstotliwości itp,
-  wyświetlacz stroboskopowy lub ekran pięciolinii oraz miernik
-  pokazujący błąd centów. W trybie poziomym aplikacja wyświetla
-  tylko główny ekran lub listę i miernik. Na pasku akcji znajduje
-  się wskaźnik sygnału, który jest przydatny w trybie poziomym. 
-  Użycie poniższych zmian ustawień dotykowych powoduje wyświetlenie
-  na kilka sekund krótkiego komunikatu z powiadomieniem.
-  
+  Hold the phone/tablet near the instrument, play a note and observe
+  the display. In portrait the app shows a scope with the input
+  signal, a spectrum showing the processed signal, the main display
+  with the note value, cents error, frequency error etc, a strobe
+  display or staff display and a meter display showing the cents
+  error. In landscape the app shows just the main display or staff and
+  the meter. There is a signal indicator in the action bar which is
+  useful in landscape mode. Using the touch setting changes below
+  causes a short notification message to pop up for a few seconds.
 </p>
 
-<h4>Stroje</h4>
+<h4>Temperaments</h4>
 
 <p>
-  W aplikacji domyślnie ustawione jest strój <b>równomiernego</b>
-  temperowania i tonacja <b>C</b>. W ustawieniach dostępne są 32 stroje.
-  Dla każdego stroju innego niż równomierny należy ustawić klucz,
-  który ma być używany dla tego stroju. Należy pamiętać, że dla
-  niektórych nut przy niektórych strojacj może być wyświetlana
-  różnica centów większa niż 50, ponieważ odstępy między nutami
-  są większe niż 100 centów.
+  The app defaults to <b>equal</b> temperament and the key
+  of <b>C</b>. 32 temperaments are available in the settings. For any
+  temperament other than equal it is necessary to set the key to be
+  used for that temperament. Note that the display may show a cents
+  variation greater than 50 for some notes in some temperament due to
+  the interval between notes being greater than 100 cents.
 </p>
 
-<h4>Własne stroje</h4>
+<h4>Custom Temperaments</h4>
 
 <p>
-  Własne stroje można załadować, umieszczając w tym celu plik
-  w <b>Tuner/Custom.txt</b>. Plik powinien zawierać jeden lub więcej
-  wpisów sformatowanych jako wpisy własności. Format ten jest
-  udokumentowany <a href="https://developer.android.com/reference/java/util/Properties#load(java.io.Reader)">
-  tutaj</a>.
+  You may load custom temperaments by placing a file
+  in <b>Tuner/Custom.txt</b>. The file should contain one or more
+  entries formatted as property entries. The format is
+  documented <a href="https://developer.android.com/reference/java/util/Properties#load(java.io.Reader)">here</a>.
 </p>
 <tt>
-# Własne stroje<br>
+# Custom Temperaments<br>
 Custom: 1.000000000, 1.067871094, 1.125000000, 1.185185185, \<br>
         1.265625000, 1.333333333, 1.423828125, 1.500000000, \<br>
         1.601806641, 1.687500000, 1.777777778, 1.898437500<br>
 <br>
-#  41edo 12 podzbiór nut<br>
+#  41edo 12 note subset<br>
 41edo: 0.995933333333333, 1.07023430212233, 1.122462048, 1.17711684266417, \<br>
        1.26504472893667, 1.3266973308906, 1.42571583230427, 1.49526051927677, \<br>
        1.5680347591656, 1.68521247642303, 1.76730548352053, 1.8992638916125<br>
 </tt>
 <p>
-    Wpisy zostaną wczytane i wyświetlone w <b>Ustawieniach</b> w porządku
-    alfabetycznym na końcu listy. Błędne wpisy będą ignorowane, albo
-    zastępowane takimi (1.0). Zmiany w zawartości własnego pliku
-    zostaną wczytane w <b>Ustawieniach</b>.
+  Entries will be loaded and displayed in <b>Settings</b> in
+  alphabetical order at the end of the list. Erroneous entries will
+  either be ignored or replaced with ones (1.0). Changes to the
+  contents of the custom file will be loaded in <b>Settings</b>.
 </p>
 
-<h4>Zakres</h4>
+<h4>Scope</h4>
 
 <p>
-  Dotknij zakresu, aby dodać wejściowy filtr dolnoprzepustowy ułatwiający
-  strojenie stroików basowych przez redukcję składowych harmonicznych.
-  Dotknij ponownie, aby go usunąć. Dotknij i przytrzymaj, aby dodać filtr
-  podstawowy w celu usunięcia harmonicznych zakłócających. Dotknij i
-  przytrzymaj ponownie, aby go usunąć. Kolory zostały dobrane zarówno
-  dla przejrzystości, jak i dla uzyskania wyglądu "retro",
-  przypominającego prawdziwy sprzęt.
+  Touch the scope to add an input low pass filter to make it easier to
+  tune bass reeds by reducing harmonics. Touch again to remove
+  it. Touch and hold to add a fundamental filter to remove spurious
+  harmonics. Touch and hold again to remove it. The colours have been
+  chosen both for clarity, and for that 'retro' look like a real piece
+  of hardware.
 </p>
 
-<h4>Widmo</h4>
+<h4>Spectrum</h4>
 
 <p>
-  Dotknij widma, aby powiększyć bieżącą nutę. Na ekranie może być
-  wyświetlanych do ośmiu stroików. Dotknij ponownie, aby ponownie
-  powiększyć. Dotknij i przytrzymaj, aby dodać funkcję zmniejszania
-  próbkowania, która pomaga w przypadku stroików basowych. Może
-  to powodować nieprawidłowe wyniki. Dotknij i przytrzymaj ponownie,
-  aby usunąć.
+  Touch the spectrum to zoom in to the current note. The display can
+  show up to eight reeds. Touch again to zoom back out. Touch and hold
+  to add a downsampling feature to help with bass reeds. This may
+  produce spurious results. Touch and hold again to remove.
 </p>
 
-<h4>Ekran</h4>
+<h4>Display</h4>
 
 <p>
-  Dotknij ekranu, aby zablokować bieżące wyniki. Dotknij ponownie,
-  aby zdjąć blokadę. Blokada ekranu nie jest zachowana, jeśli ekran
-  zostanie obrócony. Dotknij ekranu i przytrzymaj go, aby przełączać
-  między wyświetlaniem wyniku najbliższego dźwięku wzorcowego, a
-  maksymalnie ośmioma wynikami.
+  Touch the display to lock the current results. Touch again to remove
+  the lock. Display lock is not preserved if the screen is
+  rotated. Touch and hold the display to switch between displaying the
+  closest result to the reference note and up to eight results.
 </p>
 
-<h4>Stroboskop</h4>
+<h4>Strobe</h4>
 
 <p>
-  Dotknij stroboskopu, aby go włączyć lub wyłączyć. Zamiast
-  niego wyświetlana jest pięciolinia. Kolory stroboskopu można
-  konfigurować w ustawieniach. Dotknij i przytrzymaj, aby zmienić
-  motyw.
+  Touch the strobe to turn it on and off. The staff will show
+  instead. Strobe colours are configurable in the settings. Touch and
+  hold to change the theme.
 </p>
 
-<h4>Pięciolinia</h4>
+<h4>Staff</h4>
 
 <p>
-  Dotknij pięciolinii, aby ją włączyć lub wyłączyć. Zamiast tego
-  wyświetlany jest stroboskop. Na pięciolinii wyświetlana jest
-  bieżąca nuta. Dotknij i przytrzymaj, aby zmienić motyw.
-  W trybie poziomym dotknij pięciolinii, aby zablokować bieżące wyniki.
+  Touch the staff to turn it on and off. The strobe will show instead.
+  The staff shows the current note. Touch and hold to change the
+  theme. In landscape touch the staff to lock the current results.
 </p>
 
-  <h4>Miernik</h4>
+<h4>Meter</h4>
 
 <p>
-  Miernik pokazuje błąd centa z dokładnością do plus minus 50 centów.
-  Dotknij miernika, aby skopiować wyniki do schowka. Dotknij i
-  przytrzymaj, aby zapobiec samoczynnemu wyłączeniu się ekranu.
-  Dotknij i przytrzymaj ponownie, aby umożliwić wyłączenie ekranu.
-  W układzie poziomym dotknij miernika, aby przełączać się między
-  ekranem a pięciolinią.
+  The meter shows the cents error up to plus or minus 50 cents. Touch
+  the meter to copy the results to the clipboard. Touch and hold to
+  prevent the display turning itself off. Touch and hold again to
+  allow the display to turn off. In landscape touch the meter to
+  switch between the display and the staff.
 </p>
 
-<h4>Pasek stanu</h4>
+<h4>Status bar</h4>
 
 <p>
-  Na pasku stanu wyświetlana jest częstotliwość próbkowania sygnału
-  wejściowego oraz stan różnych ustawień.
+  The status bar shows the input sample rate and the status of the
+  various settings.
 </p>
 
-<h3>Ustawienia</h3>
+<h3>Settings</h3>
 
 <p>
-  Wszystkie ustawienia są zachowywane i będą pamiętane przy następnym
-  użyciu aplikacji.
+  All the settings are preserved and will be remembered the next time
+  you use the app.
 </p>
 
-<h4>Wejście</h4>
+<h4>Input</h4>
 
 <p>
-  Można zmienić </b>źródło sygnału wejściowego</b>. Jeśli zostanie wybrane
-  źródło, które nie jest obecne w urządzeniu, zostanie wyświetlony
-  komunikat o błędzie. Wybierz źródło domyślne lub mikrofon.
+  The <b>input source</b> may be changed. If a source that isn't
+  present on the device is selected an error message will
+  appear. Select the default source or the microphone.
 </p>
 
-<h5>Filtr dźwięku</h5>
+<h5>Audio filter</h5>
 
 <p>
-  <b>Filtr dźwięku</b> umożliwia sterowanie filtrem dolnoprzepustowym na wejściu audio
-  przed przetwarzaniem.
+  The <b>audio filter</b> item controls a low pass filter in the audio
+  input before processing.
 </p>
 
-<h5>Zmniejszanie próbkowania</h5>
+<h5>Downsample</h5>
 
 <p>
-  Element <b>zmniejszania próbkowania</b> steruje funkcją zmniejszania
-  próbkowania na wejściu audio podczas przetwarzania, co ułatwia
-  pracę ze stroikami basowymi. Teraz, po znalezieniu długotrwałego
-  błędu, powinno to być bardziej niezawodne.
+  The <b>downsample</b> item controls a downsampling feature on the
+  audio input during processing to help with bass reeds. This should
+  be more reliable now I have found the long standing deliberate
+  mistake.
 </p>
 
-<h4>Ekran</h4>
+<h4>Display</h4>
 
-<h5>Zachowaj ekran włączony</h5>
+<h5>Keep the screen on</h5>
 
 <p>
-  <b>Ekran</b> się nie wyłączy
+  The <b>screen</b> item stops the screen turning itself off.
 </p>
 
-<h5>Powiększanie widma</h5>
+<h5>Spectrum zoom</h5>
 
 <p>
-  Element <b>powiększenia widma</b> steruje funkcją jego powiększenia.
+  The <b>spectrum zoom</b> item controls the zoom feature of the
+  spectrum display.
 </p>
 
-<h5>Wyświetl wiele wyników</h5>
+<h5>Display multiple notes</h5>
 
 <p>
-  Funkcja <b>wiele wyników</b> umożliwia wyświetlanie więcej niż 
-  jednego wyniku na ekranie. To ustawienie nie jest zachowywane.
+  The <b>multiple notes</b> item controls the display of more than one
+  result on the display. This setting is not preserved.
 </p>
 
-<h4>Filtr nut</h4>
+<h4>Note filter</h4>
 
 <p>
-  Element <b>zasadniczy</b> umożliwia zastosowanie filtra zasadniczego
+  The <b>fundamental</b> item enables a fundamental filter
 </p>
 
 <p>
-  Element <b>filtry nut</b> włącza filtry nutowe i oktawowe
+  The <b>note filters</b> item enables the note and octave filters
 </p>
 
-<h5>Filtr nut</h5>
+<h5>Note filter</h5>
 
-<p>Określa, które nuty mają być wyświetlane na ekranie</p>
+<p>Pick which notes you would like to appear in the display</p>
 
-<h5>Filtr oktaw</h5>
+<h5>Octave filter</h5>
 
-<p>Określa, które oktawy mają być wyświetlane na ekranie</p>
+<p>Pick which octaves you would like to appear in the display</p>
 
-<h4>Stroboskop</h4>
+<h4>Strobe</h4>
 
 <p>
-  Element <b>stroboskopu</b> steruje wyświetlaniem stroboskopu.
+  The <b>strobe</b> item controls the strobe display.
 </p>
 
-<h5>Kolory stroboskopu</h5>
+<h5>Strobe colours</h5>
 
 <p>
-  Jeśli stroboskop jest włączony, istnieje możliwość zmiany
-  jego <b>kolorów</b>. Dostępne są trzy ustawienia fabryczne oraz
-  ustawienie własne. W przypadku wybrania ustawienia własnego
-  oba kolory można zmieniać indywidualnie. Dotknij zewnętrznego,
-  kolorowego okręgu, aby wybrać kolor. Dotknij środkowego,
-  kolorowego okręgu dla każdego koloru, aby zobaczyć jak będzie
-  on wyglądał po lewej stronie.
+  If the strobe is enabled, there is an option to change the
+  <b>colours</b>. There are three predefined settings and a custom
+  setting. If the custom setting is selected the two colours may be
+  changed individually. touch the outer coloured circle to select a
+  colour. Touch the centre coloured circle for each colour to see what
+  it will look like on the left.
 </p>
 
-<h4>Odniesienie</h4>
+<h4>Reference</h4>
 
 <p>
-  Częstotliwość <b>odniesienia</b> dla "A" można zmieniać w
-  ograniczonym zakresie. Zostanie ona zapamiętana, dlatego
-  przed zamknięciem aplikacji należy ją zmienić z powrotem na
-  440 Hz.
+  The <b>reference</b> frequency for 'A' may be changed over a limited
+  range. This will be remembered, so change it back to 440Hz before
+  you quit the app.
 </p>
 
 <p>
-  <b>Transpozycja</b> umożliwia transpozycję wyświetlanych nut.
-  Zostanie ona zapamiętana, więc należy ją zmienić, jeśli nie
-  będzie już potrzebna.
+  The <b>transpose</b> item enables transposition of the note
+  display. This will be remembered, so change it back if no longer
+  required.
 </p>
 
-<h4>Strojenie</h4>
+<h4>Temperament</h4>
 
 <p>
-  Opcja <b>strojenie</b> umożliwia korzystanie z różnych stroji.
-  Zostanie ono zapamiętane, więc jeśli nie będzie już potrzebne,
-  należy je zmienić z powrotem na <b>równomierne</b> temperowane.
-<p>
-  Element <b>klucza</b> umożliwia użycie różnych kluczy w
-  wybranym temperamencie. Nie ma znaczenia w przypadku stroju
-  <b>równomiernie</b> temperowanego.
+  The <b>temperament</b> item enables the use of different
+  temperaments. This will be remembered, so change it back
+  to <b>equal</b> if no longer required.
 </p>
 
-<h4>Motyw</h4>
-
 <p>
-  <b>Ciemny motyw</b> pozwala używać ciemnego motywu.
+  The <b>key</b> item enables the use of different keys with the
+  selected temperament. It makes no difference in the <b>equal</b>
+  temperament.
 </p>
 
-<h4>O aplikacji</h4>
+<h4>Theme</h4>
 
 <p>
-  Element <b>o aplikacji</b> pokazuje informacje o licencji oraz prawach autorskich.
+  The <b>dark theme</b> item allows use of the dark theme.
+</p>
+
+<h4>About</h4>
+
+<p>
+  The <b>about</b> item shows the copyright and licence.
 </p>
