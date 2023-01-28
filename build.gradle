@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:7.4.0'
     }
 }
 
@@ -24,6 +24,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    namespace "org.billthefarmer.tuner"
 
     defaultConfig {
         applicationId "org.billthefarmer.tuner"
@@ -43,7 +44,7 @@ android {
     lintOptions {
         disable 'IconDensities', 'ClickableViewAccessibility',
             'CustomViewStyleable', 'TypographyFractions', 'OldTargetApi',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion'
+            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'MissingInflatedId'
         // abortOnError false
     }
 }
