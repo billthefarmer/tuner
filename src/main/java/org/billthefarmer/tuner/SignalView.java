@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -37,8 +36,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 // Signal view
-public class SignalView extends View
-    implements ValueAnimator.AnimatorUpdateListener
+public class SignalView extends AAnimatedView
 {
     protected MainActivity.Audio audio;
 
@@ -110,33 +108,23 @@ public class SignalView extends View
                          margin + w / 2, margin + height * 3 / 4);
 
         // Create animator
-        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.setDuration(10000);
-
-        // Update the display
-        animator.addUpdateListener(this);
-
-        // Start the animator
-        animator.start();
+        startAnimator();
     }
 
-    // Animation update
     @Override
-    public void onAnimationUpdate(ValueAnimator animator)
+    public boolean updateInternalValues(boolean isAnimatorWorking)
     {
-        // Do VU meter style calculation
-        if (audio != null)
+        boolean doInvalidate = false;
+        if (audio != null && signal != audio.signal)
         {
+            // Do VU meter style calculation
             if (signal < audio.signal)
                 signal = ((signal * 4) + audio.signal) / 5;
-
             else
                 signal = ((signal * 9) + audio.signal) / 10;
+            doInvalidate = true;
         }
-
-        invalidate();
+        return doInvalidate;
     }
 
     @Override

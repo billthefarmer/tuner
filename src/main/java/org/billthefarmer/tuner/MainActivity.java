@@ -285,6 +285,7 @@ public class MainActivity extends Activity
     private Meter meter;
     private Scope scope;
     private Staff staff;
+    private SignalView signal;
 
     private Audio audio;
     private Toast toast;
@@ -320,7 +321,7 @@ public class MainActivity extends Activity
         actionBar.setCustomView(R.layout.custom);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        SignalView signal = findViewById(R.id.signal);
+        signal = findViewById(R.id.signal);
 
         // Create audio
         audio = new Audio();
@@ -1012,6 +1013,41 @@ public class MainActivity extends Activity
         // Show it
         dialog.show();
     }
+    
+    private void invalidateUserControls ()
+    {
+        // Update spectrum
+        if (spectrum != null && spectrum.isShown())
+            spectrum.postInvalidate();
+
+        // Update display
+        if (display != null && display.isShown())
+            display.postInvalidate();
+
+        // Update strobe
+        if (strobe != null && strobe.isShown())
+            strobe.forceAnimationTrigger();
+
+        // Update status
+        if (status != null && status.isShown())
+            status.postInvalidate();
+
+        // Update meter
+        if (meter != null && meter.isShown())
+            meter.forceAnimationTrigger();
+
+        // Update scope
+        if (scope != null && scope.isShown())
+            scope.postInvalidate();
+
+        // Update staff
+        if (staff != null && staff.isShown())
+            staff.postInvalidate();
+
+        // Update signal
+        if (signal != null && signal.isShown())
+            signal.forceAnimationTrigger();
+    }
 
     // Log2
     protected double log2(double d)
@@ -1648,17 +1684,7 @@ public class MainActivity extends Activity
                     // If display not locked
                     if (!lock)
                     {
-                        // Update spectrum
-                        if (spectrum != null)
-                            spectrum.postInvalidate();
-
-                        // Update display
-                        if (display != null)
-                            display.postInvalidate();
-
-                        // Update staff
-                        if (staff != null)
-                            staff.postInvalidate();
+                        invalidateUserControls();
                     }
 
                     // Reset count;
@@ -1680,18 +1706,14 @@ public class MainActivity extends Activity
                             count = 0;
                             note = 0;
 
-                            // Update display
-                            if (display != null)
-                                display.postInvalidate();
-
-                            // Update staff
-                            if (staff != null)
-                                staff.postInvalidate();
+                            invalidateUserControls();
                         }
-
-                        // Update spectrum
-                        if (spectrum != null)
-                            spectrum.postInvalidate();
+                        else
+                        {
+                            // Update spectrum
+                            if (spectrum != null)
+                                spectrum.postInvalidate();
+                        }
                     }
                 }
 

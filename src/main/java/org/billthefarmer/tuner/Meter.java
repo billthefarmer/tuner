@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
@@ -38,7 +37,6 @@ import java.util.Locale;
 
 // Meter
 public class Meter extends TunerView
-    implements ValueAnimator.AnimatorUpdateListener
 {
     private LinearGradient gradient;
     private Matrix matrix;
@@ -59,7 +57,6 @@ public class Meter extends TunerView
 
     // On size changed
     @Override
-    @SuppressWarnings("deprecation")
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -108,28 +105,49 @@ public class Meter extends TunerView
         gradient.setLocalMatrix(matrix);
 
         // Create animator
-        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.setDuration(10000);
-
-        animator.addUpdateListener(this);
-        animator.start();
+        startAnimator();
     }
 
     @Override
-    public void onAnimationUpdate(ValueAnimator animator)
+    public boolean updateInternalValues(boolean isAnimatorWorking)
     {
-        // Do the inertia calculation
-        if (audio != null)
-            cents = ((cents * 19.0) + audio.cents) / 20.0;
+        boolean doInvalidate = false;
+        if (audio == null)
+        {
+            // Do nothing
+        }
+        else  if (!isAnimatorWorking)
+        {
+            // Trigger every audio process loop.
+            // Keep 200 ms of buffer (20 * default animation rate) for a pseudo-animate
+            // effect. Use the time of the buffer data to compute the mean divisor
+            // itemsNb = buffer_time * data_length/sample, do not take care of
+            // fps not related to data time length.
+            double itemsNb = 20.0;
+            if (audio.sample > 0)
+                itemsNb = 0.2 * (audio.data.length / audio.sample);
+            itemsNb = Math.max(20.0, Math.min(5.0, itemsNb));
+            if (cents != audio.cents)
+            {
+                cents = (cents * (itemsNb - 1) + audio.cents) / itemsNb;
+                doInvalidate = true;
+            }
+        }
+        else
+        {
+            // Do the inertia calculation
+            if (cents != audio.cents)
+            {
+                cents = ((cents * 19.0) + audio.cents) / 20.0;
+                doInvalidate = true;
+            }
+        }
 
-        invalidate();
+        return doInvalidate;
     }
 
     // On draw
     @Override
-    @SuppressWarnings("deprecation")
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);

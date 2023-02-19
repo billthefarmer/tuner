@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -41,7 +40,6 @@ import android.util.AttributeSet;
 
 // Strobe
 public class Strobe extends TunerView
-    implements ValueAnimator.AnimatorUpdateListener
 {
     protected int colour;
     protected int foreground;
@@ -113,31 +111,45 @@ public class Strobe extends TunerView
         // Create matrix for translating shaders
         matrix = new Matrix();
 
-        // Create animator
-        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.setDuration(10000);
-
-        animator.addUpdateListener(this);
-
-        animator.start();
-
         // Create the shaders
         createShaders();
     }
 
-    // Animation update
-
     @Override
-    public void onAnimationUpdate(ValueAnimator animator)
+    public boolean updateInternalValues(boolean isAnimatorWorking)
     {
-        // Do inertia calculation
-
-        if (audio != null)
-            cents = (cents * 19.0 + audio.cents) / 20.0;
-
-        invalidate();
+        boolean doInvalidate = false;
+        if (audio == null)
+        {
+            // Do nothing
+        }
+        else if (!isAnimatorWorking)
+        {
+            // Trigger every audio process loop.
+            // Keep 200 ms of buffer (20 * default animation rate) for a pseudo-animate
+            // effect. Use the time of the buffer data to compute the mean divisor
+            // itemsNb = buffer_time * data_length/sample, do not take care of
+            // fps not related to data time length.
+            double itemsNb = 20.0;
+            if (audio.sample > 0)
+                itemsNb = 0.2 * (audio.data.length / audio.sample);
+            itemsNb = Math.max(20.0, Math.min(5.0, itemsNb));
+            if (cents != audio.cents)
+            {
+                cents = (cents * (itemsNb - 1) + audio.cents) / itemsNb;
+                doInvalidate = true;
+            }
+        }
+        else
+        {
+            // Do the inertia calculation
+            if (cents != audio.cents)
+            {
+                cents = ((cents * 19.0) + audio.cents) / 20.0;
+                doInvalidate = true;
+            }
+        }
+        return doInvalidate;
     }
 
     // Create shaders

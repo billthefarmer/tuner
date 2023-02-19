@@ -79,12 +79,14 @@ public class ColourPickerPreference extends DialogPreference
         {
             strobe.foreground = c;
             strobe.createShaders();
+            strobe.invalidate();
         });
 
         backgroundPicker.setListener(c ->
         {
             strobe.background = c;
             strobe.createShaders();
+            strobe.invalidate();
         });
     }
 

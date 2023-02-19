@@ -36,7 +36,7 @@ import android.view.View;
 import android.util.Log;
 
 // Tuner View
-public abstract class TunerView extends View
+public abstract class TunerView extends AAnimatedView
 {
     protected MainActivity.Audio audio;
     protected Resources resources;
@@ -73,6 +73,12 @@ public abstract class TunerView extends View
         typedArray.recycle();
 
         paint = new Paint();
+    }
+
+    @Override
+    protected boolean updateInternalValues(boolean isAnimatorWorking)
+    {
+        return false;
     }
 
     // On Size Changed
