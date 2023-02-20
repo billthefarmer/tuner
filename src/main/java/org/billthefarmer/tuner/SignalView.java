@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -36,9 +35,11 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 // Signal view
 public class SignalView extends View
-    implements ValueAnimator.AnimatorUpdateListener
 {
     protected MainActivity.Audio audio;
 
@@ -101,7 +102,8 @@ public class SignalView extends View
 
         // Create shader from coloured bars
         BitmapShader shader = new BitmapShader(bitmap,
-                                               Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+                                               Shader.TileMode.CLAMP,
+                                               Shader.TileMode.CLAMP);
 
         paint.setShader(shader);
 
@@ -109,22 +111,20 @@ public class SignalView extends View
         rect = new RectF(margin, margin,
                          margin + w / 2, margin + height * 3 / 4);
 
-        // Create animator
-        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.setDuration(10000);
-
-        // Update the display
-        animator.addUpdateListener(this);
-
-        // Start the animator
-        animator.start();
+        // Schedule update
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                post(() -> update());
+            }
+        }, 10, 10);
     }
 
-    // Animation update
-    @Override
-    public void onAnimationUpdate(ValueAnimator animator)
+    // update
+    private void update()
     {
         // Do VU meter style calculation
         if (audio != null)

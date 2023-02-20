@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
@@ -35,10 +34,11 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // Meter
 public class Meter extends TunerView
-    implements ValueAnimator.AnimatorUpdateListener
 {
     private LinearGradient gradient;
     private Matrix matrix;
@@ -107,18 +107,20 @@ public class Meter extends TunerView
         // Scale the gradient
         gradient.setLocalMatrix(matrix);
 
-        // Create animator
-        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.setDuration(10000);
-
-        animator.addUpdateListener(this);
-        animator.start();
+        // Schedule update
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                post(() -> update());
+            }
+        }, 10, 10);
     }
 
-    @Override
-    public void onAnimationUpdate(ValueAnimator animator)
+    // update
+    private void update()
     {
         // Do the inertia calculation
         if (audio != null)

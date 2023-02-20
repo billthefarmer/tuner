@@ -23,7 +23,6 @@
 
 package org.billthefarmer.tuner;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -39,9 +38,11 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 // Strobe
 public class Strobe extends TunerView
-    implements ValueAnimator.AnimatorUpdateListener
 {
     protected int colour;
     protected int foreground;
@@ -113,24 +114,23 @@ public class Strobe extends TunerView
         // Create matrix for translating shaders
         matrix = new Matrix();
 
-        // Create animator
-        ValueAnimator animator = ValueAnimator.ofInt(0, 10000);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.setDuration(10000);
-
-        animator.addUpdateListener(this);
-
-        animator.start();
+        // Schedule update
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                post(() -> update());
+            }
+        }, 10, 10);
 
         // Create the shaders
         createShaders();
     }
 
-    // Animation update
-
-    @Override
-    public void onAnimationUpdate(ValueAnimator animator)
+    // update
+    private void update()
     {
         // Do inertia calculation
 
