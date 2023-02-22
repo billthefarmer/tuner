@@ -1,0 +1,1 @@
+ * Replace animation with timer
