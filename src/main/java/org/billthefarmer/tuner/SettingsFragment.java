@@ -59,18 +59,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private static final String CUSTOM_FILE = "Custom.txt";
     private static final String CUSTOM_PATH = "Tuner/Custom.txt";
 
-    private static final String KEY_PREF_ABOUT = "pref_about";
-    private static final String KEY_PREF_BACH = "pref_bach";
-    private static final String KEY_PREF_COLOUR = "pref_colour";
-    private static final String KEY_PREF_CUSTOM = "pref_custom";
-    private static final String KEY_PREF_DARK = "pref_dark";
-    private static final String KEY_PREF_INPUT = "pref_input";
-    private static final String KEY_PREF_PROPS = "pref_props";
-    private static final String KEY_PREF_REFER = "pref_refer";
-    private static final String KEY_PREF_SOLFA = "pref_solfa";
-    private static final String KEY_PREF_TEMPER = "pref_temper";
-    private static final String KEY_PREF_KEY = "pref_key";
-
     private String summary;
 
     // On create
@@ -83,12 +71,12 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         addPreferencesFromResource(R.xml.preferences);
 
         ListPreference preference =
-            (ListPreference) findPreference(KEY_PREF_INPUT);
+            (ListPreference) findPreference(Tuner.PREF_INPUT);
         preference.setSummary(preference.getEntry());
 
-        preference = (ListPreference) findPreference(KEY_PREF_COLOUR);
+        preference = (ListPreference) findPreference(Tuner.PREF_COLOUR);
         ColourPickerPreference custom =
-            (ColourPickerPreference) findPreference(KEY_PREF_CUSTOM);
+            (ColourPickerPreference) findPreference(Tuner.PREF_CUSTOM);
         preference.setSummary(preference.getEntry());
 
         // Disable colour pickers
@@ -122,7 +110,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         }
 
         NumberPickerPreference picker =
-            (NumberPickerPreference) findPreference(KEY_PREF_REFER);
+            (NumberPickerPreference) findPreference(Tuner.PREF_REFER);
         summary = picker.getSummary().toString();
 
         // Set number picker summary
@@ -135,17 +123,17 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Reset bach preference on solfa
         CheckBoxPreference check =
-            (CheckBoxPreference) findPreference(KEY_PREF_SOLFA);
+            (CheckBoxPreference) findPreference(Tuner.PREF_SOLFA);
         if (check.isChecked())
         {
-            check = (CheckBoxPreference) findPreference(KEY_PREF_BACH);
+            check = (CheckBoxPreference) findPreference(Tuner.PREF_BACH);
             check.setChecked(false);
         }
 
         // Disable key preference on equal temperament
-        preference = (ListPreference) findPreference(KEY_PREF_TEMPER);
+        preference = (ListPreference) findPreference(Tuner.PREF_TEMPER);
         v = Integer.valueOf(preference.getValue());
-        preference = (ListPreference) findPreference(KEY_PREF_KEY);
+        preference = (ListPreference) findPreference(Tuner.PREF_KEY);
         if (v == getActivity().getResources()
             .getInteger(R.integer.default_temper))
         {
@@ -157,7 +145,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             preference.setEnabled(true);
 
         // Get about summary
-        Preference about = findPreference(KEY_PREF_ABOUT);
+        Preference about = findPreference(Tuner.PREF_ABOUT);
         String sum = about.getSummary().toString();
 
         // Set version in text view
@@ -206,7 +194,8 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences preferences,
                                           String key)
     {
-        if (key.equals(KEY_PREF_INPUT) || key.equals(KEY_PREF_COLOUR))
+        if (key.equals(Tuner.PREF_INPUT) ||
+            key.equals(Tuner.PREF_COLOUR))
         {
             Preference preference = findPreference(key);
 
@@ -214,11 +203,11 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             preference.setSummary(((ListPreference) preference).getEntry());
         }
 
-        if (key.equals(KEY_PREF_COLOUR))
+        if (key.equals(Tuner.PREF_COLOUR))
         {
             ListPreference preference = (ListPreference) findPreference(key);
             ColourPickerPreference custom =
-                (ColourPickerPreference) findPreference(KEY_PREF_CUSTOM);
+                (ColourPickerPreference) findPreference(Tuner.PREF_CUSTOM);
 
             custom.setEnabled(false);
 
@@ -251,7 +240,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             }
         }
 
-        if (key.equals(KEY_PREF_CUSTOM))
+        if (key.equals(Tuner.PREF_CUSTOM))
         {
             ColourPickerPreference custom =
                 (ColourPickerPreference) findPreference(key);
@@ -259,12 +248,12 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             // Change the list preference icons
             Drawable d = custom.getIcon();
             ListPreference preference =
-                (ListPreference) findPreference(KEY_PREF_COLOUR);
+                (ListPreference) findPreference(Tuner.PREF_COLOUR);
             preference.setDialogIcon(d);
             preference.setIcon(d);
         }
 
-        if (key.equals(KEY_PREF_REFER))
+        if (key.equals(Tuner.PREF_REFER))
         {
             NumberPickerPreference preference =
                 (NumberPickerPreference) findPreference(key);
@@ -276,24 +265,24 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         }
 
         // Reset bach preference on solfa
-        if (key.equals(KEY_PREF_SOLFA))
+        if (key.equals(Tuner.PREF_SOLFA))
         {
             CheckBoxPreference check =
                 (CheckBoxPreference) findPreference(key);
             if (check.isChecked())
             {
-                check = (CheckBoxPreference) findPreference(KEY_PREF_BACH);
+                check = (CheckBoxPreference) findPreference(Tuner.PREF_BACH);
                 check.setChecked(false);
             }
         }
 
         // Disable key preference on equal temperament
-        if (key.equals(KEY_PREF_TEMPER))
+        if (key.equals(Tuner.PREF_TEMPER))
         {
             ListPreference preference =
                 (ListPreference) findPreference(key);
             int v = Integer.valueOf(preference.getValue());
-            preference = (ListPreference) findPreference(KEY_PREF_KEY);
+            preference = (ListPreference) findPreference(Tuner.PREF_KEY);
             if (v == getActivity().getResources()
                 .getInteger(R.integer.default_temper))
             {
@@ -305,7 +294,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
                 preference.setEnabled(true);
         }
 
-        if (key.equals(KEY_PREF_DARK))
+        if (key.equals(Tuner.PREF_THEME))
         {
             if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                 getActivity().recreate();
@@ -345,7 +334,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         try (StringWriter writer = new StringWriter())
         {
             props.store(writer, "Custom Temperaments");
-            editor.putString(KEY_PREF_PROPS, writer.toString());
+            editor.putString(Tuner.PREF_PROPS, writer.toString());
             editor.apply();
         }
 
@@ -361,7 +350,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Get the temperament entries and entry values
         ListPreference preference =
-            (ListPreference) findPreference(KEY_PREF_TEMPER);
+            (ListPreference) findPreference(Tuner.PREF_TEMPER);
         List<CharSequence> entries = new
             ArrayList<CharSequence>(Arrays.asList(preference.getEntries()));
         List<CharSequence> values = new

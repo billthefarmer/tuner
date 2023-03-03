@@ -45,9 +45,6 @@
   <string name="mult_on">Activar múltiples notas</string>
   <string name="mult_off">Desactivar múltiple notas</string>
 
-  <string name="dark_theme">Tema oscuro</string>
-  <string name="light_theme">Tema de luz</string>
-
   <string name="copied_clip">Datos copiados en el portapapeles</string>
   <string name="sample_rate">Frecuencia de muestreo: %d</string>
 
@@ -126,9 +123,7 @@
   <string name="pref_key_summ">%s</string>
 
   <string name="pref_theme">Tema</string>
-
-  <string name="pref_dark">Tema oscuro</string>
-  <string name="pref_dark_summ">Usa el tema oscuro</string>
+  <string name="pref_theme_summ">%s</string>
 
   <string name="pref_about">Sobre</string>
   <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Versión %s</a></string>

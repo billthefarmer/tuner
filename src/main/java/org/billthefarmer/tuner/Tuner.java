@@ -63,32 +63,33 @@ import java.util.Properties;
 import java.util.Set;
 
 // Main Activity
-public class MainActivity extends Activity
+public class Tuner extends Activity
     implements View.OnClickListener, View.OnLongClickListener
 {
     private static final String TAG = "Tuner";
 
-    private static final String PREF_BACH = "pref_bach";
-    private static final String PREF_COLOUR = "pref_colour";
-    private static final String PREF_CUSTOM = "pref_custom";
-    private static final String PREF_DARK = "pref_dark";
-    private static final String PREF_DOWN = "pref_down";
-    private static final String PREF_FILTER = "pref_filter";
-    private static final String PREF_FILTERS = "pref_filters";
-    private static final String PREF_FUND = "pref_fund";
-    private static final String PREF_INPUT = "pref_input";
-    private static final String PREF_KEY = "pref_key";
-    private static final String PREF_MULT = "pref_mult";
-    private static final String PREF_NOTE = "pref_note";
-    private static final String PREF_OCTAVE = "pref_octave";
-    private static final String PREF_PROPS = "pref_props";
-    private static final String PREF_REFER = "pref_refer";
-    private static final String PREF_SCREEN = "pref_screen";
-    private static final String PREF_SOLFA = "pref_solfa";
-    private static final String PREF_STROBE = "pref_strobe";
-    private static final String PREF_TEMPER = "pref_temper";
-    private static final String PREF_TRANSPOSE = "pref_transpose";
-    private static final String PREF_ZOOM = "pref_zoom";
+    public static final String PREF_ABOUT = "pref_about";
+    public static final String PREF_BACH = "pref_bach";
+    public static final String PREF_COLOUR = "pref_colour";
+    public static final String PREF_CUSTOM = "pref_custom";
+    public static final String PREF_DOWN = "pref_down";
+    public static final String PREF_FILTER = "pref_filter";
+    public static final String PREF_FILTERS = "pref_filters";
+    public static final String PREF_FUND = "pref_fund";
+    public static final String PREF_INPUT = "pref_input";
+    public static final String PREF_KEY = "pref_key";
+    public static final String PREF_MULT = "pref_mult";
+    public static final String PREF_NOTE = "pref_note";
+    public static final String PREF_OCTAVE = "pref_octave";
+    public static final String PREF_PROPS = "pref_props";
+    public static final String PREF_REFER = "pref_refer";
+    public static final String PREF_SCREEN = "pref_screen";
+    public static final String PREF_SOLFA = "pref_solfa";
+    public static final String PREF_STROBE = "pref_strobe";
+    public static final String PREF_TEMPER = "pref_temper";
+    public static final String PREF_THEME = "pref_theme";
+    public static final String PREF_TRANSPOSE = "pref_transpose";
+    public static final String PREF_ZOOM = "pref_zoom";
 
     private static final String SHOW_STAFF = "show_staff";
 
@@ -275,6 +276,11 @@ public class MainActivity extends Activity
          1.585609487, 1.676104963, 1.779786472, 1.881364210},
     };
 
+    public final static int LIGHT = 0;
+    public final static int DARK  = 1;
+    public final static int WHITE = 2;
+    public final static int BLACK = 3;
+
     private double temperaments[][];
     private String names[];
 
@@ -289,8 +295,9 @@ public class MainActivity extends Activity
     private Audio audio;
     private Toast toast;
 
-    private boolean dark;
     private boolean show;
+
+    private int theme;
 
     // On Create
     @Override
@@ -301,8 +308,24 @@ public class MainActivity extends Activity
         // Get preferences
         getPreferences();
 
-        if (!dark)
+        switch (theme)
+        {
+        case LIGHT:
             setTheme(R.style.AppTheme);
+            break;
+
+        case DARK:
+            setTheme(R.style.AppDarkTheme);
+            break;
+
+        case WHITE:
+            setTheme(R.style.AppWhiteTheme);
+            break;
+
+        case BLACK:
+            setTheme(R.style.AppBlackTheme);
+            break;
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -574,16 +597,11 @@ public class MainActivity extends Activity
         // Strobe / Staff
         case R.id.strobe:
         case R.id.staff:
-            dark = !dark;
+            if (++theme > BLACK)
+                theme = LIGHT;
 
             if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                 recreate();
-
-            else if (dark)
-                showToast(R.string.dark_theme);
-
-            else
-                showToast(R.string.light_theme);
             break;
 
         // Meter
@@ -633,7 +651,7 @@ public class MainActivity extends Activity
     // On help click
     private boolean onHelpClick(MenuItem item)
     {
-        Intent intent = new Intent(this, HelpActivity.class);
+        Intent intent = new Intent(this, Help.class);
         startActivity(intent);
 
         return true;
@@ -642,7 +660,7 @@ public class MainActivity extends Activity
     // On settings click
     private boolean onSettingsClick(MenuItem item)
     {
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
 
         return true;
@@ -677,13 +695,13 @@ public class MainActivity extends Activity
     {
         super.onResume();
 
-        boolean theme = dark;
+        int current = theme;
 
         // Get preferences
         getPreferences();
 
         // Change theme
-        if (dark != theme && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+        if (current != theme && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
             recreate();
 
         // Load custom temperaments
@@ -782,7 +800,7 @@ public class MainActivity extends Activity
 
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putBoolean(PREF_DARK, dark);
+        editor.putString(PREF_THEME, String.valueOf(theme));
 
         if (audio != null)
         {
@@ -809,7 +827,7 @@ public class MainActivity extends Activity
             PreferenceManager.getDefaultSharedPreferences(this);
 
         // Set preferences
-        dark = preferences.getBoolean(PREF_DARK, false);
+        theme = Integer.parseInt(preferences.getString(PREF_THEME, "1"));
 
         if (audio != null)
         {

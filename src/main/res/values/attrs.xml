@@ -18,7 +18,6 @@
 
         <attr name="pref_about" format="reference" />
         <attr name="pref_bach" format="reference" />
-        <attr name="pref_dark" format="reference" />
         <attr name="pref_down" format="reference" />
         <attr name="pref_filter" format="reference" />
         <attr name="pref_input" format="reference" />
@@ -29,6 +28,7 @@
         <attr name="pref_solfa" format="reference" />
         <attr name="pref_strobe" format="reference" />
         <attr name="pref_temper" format="reference" />
+        <attr name="pref_theme" format="reference" />
         <attr name="pref_transpose" format="reference" />
         <attr name="pref_zoom" format="reference" />
 

@@ -38,7 +38,7 @@ import android.util.Log;
 // Tuner View
 public abstract class TunerView extends View
 {
-    protected MainActivity.Audio audio;
+    protected Tuner.Audio audio;
     protected Resources resources;
 
     protected int width;

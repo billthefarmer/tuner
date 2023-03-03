@@ -15,17 +15,17 @@
       android:theme="@style/AppDarkTheme"
       tools:ignore="AllowBackup">
     <activity
-        android:name="org.billthefarmer.tuner.MainActivity"
+        android:name="org.billthefarmer.tuner.Tuner"
         android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="org.billthefarmer.tuner.HelpActivity">
+    <activity android:name="org.billthefarmer.tuner.Help">
 
     </activity>
-    <activity android:name="org.billthefarmer.tuner.SettingsActivity">
+    <activity android:name="org.billthefarmer.tuner.Settings">
 
     </activity>
   </application>

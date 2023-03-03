@@ -30,11 +30,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
-// SettingsActivity
-public class SettingsActivity extends Activity
+// Settings
+public class Settings extends Activity
 {
-    private static final String PREF_DARK = "pref_dark";
-
     // On create
     @Override
     @SuppressWarnings("deprecation")
@@ -46,10 +44,26 @@ public class SettingsActivity extends Activity
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
 
-        boolean dark = preferences.getBoolean(PREF_DARK, false);
-
-        if (!dark)
+        int theme = Integer.parseInt(preferences.getString(Tuner.PREF_THEME,
+                                                           "0"));
+        switch (theme)
+        {
+        case Tuner.LIGHT:
             setTheme(R.style.AppTheme);
+            break;
+
+        case Tuner.DARK:
+            setTheme(R.style.AppDarkTheme);
+            break;
+
+        case Tuner.WHITE:
+            setTheme(R.style.AppWhiteTheme);
+            break;
+
+        case Tuner.BLACK:
+            setTheme(R.style.AppBlackTheme);
+            break;
+        }
 
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()

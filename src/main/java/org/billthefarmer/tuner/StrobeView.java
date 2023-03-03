@@ -167,6 +167,7 @@ public class StrobeView extends PreferenceView
             new BitmapShader(createShaderBitmap(size * 8,
                                                 size, foreground, background),
                              Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+        invalidate();
     }
 
     // Create shader bitmap

@@ -41,7 +41,7 @@ import java.util.TimerTask;
 // Signal view
 public class SignalView extends View
 {
-    protected MainActivity.Audio audio;
+    protected Tuner.Audio audio;
 
     private int height;
     private int margin;
@@ -81,15 +81,15 @@ public class SignalView extends View
 
         // Colours for gradient
         int colours[] =
-        {Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK};
+        {Color.RED, Color.YELLOW, Color.GREEN};
 
         // Coloured gradient
         LinearGradient gradient =
-            new LinearGradient(0, 0, 0, height,
+            new LinearGradient(0, 0, 0, height * 3 / 4,
                                colours, null, Shader.TileMode.CLAMP);
 
         // Bitmap to draw coloured bars in
-        Bitmap bitmap = Bitmap.createBitmap(w, height,
+        Bitmap bitmap = Bitmap.createBitmap(w / 2, height * 3 / 4,
                                             Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -97,7 +97,7 @@ public class SignalView extends View
         paint.setStrokeWidth(2);
 
         // Draw coloured bars
-        for (int i = 0; i <= bitmap.getHeight(); i += 3)
+        for (int i = 0; i < bitmap.getHeight(); i += 3)
             canvas.drawLine(0, i, bitmap.getWidth(), i, paint);
 
         // Create shader from coloured bars

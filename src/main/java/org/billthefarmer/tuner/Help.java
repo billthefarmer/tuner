@@ -38,8 +38,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-// HelpActivity
-public class HelpActivity extends Activity
+// Help
+public class Help extends Activity
 {
     private static final String PREF_DARK = "pref_dark";
 
@@ -54,10 +54,26 @@ public class HelpActivity extends Activity
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
 
-        boolean dark = preferences.getBoolean(PREF_DARK, false);
-
-        if (!dark)
+        int theme = Integer.parseInt(preferences.getString(Tuner.PREF_THEME,
+                                                           "0"));
+        switch (theme)
+        {
+        case Tuner.LIGHT:
             setTheme(R.style.AppTheme);
+            break;
+
+        case Tuner.DARK:
+            setTheme(R.style.AppDarkTheme);
+            break;
+
+        case Tuner.WHITE:
+            setTheme(R.style.AppWhiteTheme);
+            break;
+
+        case Tuner.BLACK:
+            setTheme(R.style.AppBlackTheme);
+            break;
+        }
 
         setContentView(R.layout.help);
 

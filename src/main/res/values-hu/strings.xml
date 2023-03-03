@@ -46,9 +46,6 @@
   <string name="mult_on">Több hang be</string>
   <string name="mult_off">Több hang ki</string>
 
-  <string name="dark_theme">Sötét téma</string>
-  <string name="light_theme">Fényes téma</string>
-
   <string name="copied_clip">Adatok a vágólapra másolva</string>
   <string name="sample_rate">Mintavételi frekvencia: %d</string>
 
@@ -127,9 +124,7 @@
   <string name="pref_key_summ">%s</string>
 
   <string name="pref_theme">Téma</string>
-
-  <string name="pref_dark">Sötét téma</string>
-  <string name="pref_dark_summ">Használjon sötét témát</string>
+  <string name="pref_theme_summ">%s</string>
 
   <string name="pref_about">Információk</string>
   <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Változat %s</a></string>

@@ -45,9 +45,6 @@
   <string name="mult_on">複数音符 オン</string>
   <string name="mult_off">複数音符 オフ</string>
 
-  <string name="dark_theme">暗いテーマ</string>
-  <string name="light_theme">ライトテーマ</string>
-
   <string name="copied_clip">データをクリップボードにコピーしました</string>
   <string name="sample_rate">サンプルレート: %d</string>
 
@@ -126,9 +123,7 @@
   <string name="pref_key_summ">%s</string>
 
   <string name="pref_theme">テーマ</string>
-
-  <string name="pref_dark">暗いテーマ</string>
-  <string name="pref_dark_summ">暗いテーマを使う</string>
+  <string name="pref_theme_summ">%s</string>
 
   <string name="pref_about">アプリについて</string>
   <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Version %s</a></string>

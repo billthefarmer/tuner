@@ -36,9 +36,6 @@
 
   <string name="mult_off">Gleichzeitige Töne aus</string>
 
-  <string name="dark_theme">Dunkle Ansicht</string>
-  <string name="light_theme">Helle Ansicht</string>
-
   <string name="copied_clip">Daten in die Zwischenablage kopiert</string>
   <string name="sample_rate">Abtastrate: %d</string>
 
@@ -111,8 +108,8 @@
   <string name="pref_key">Taste</string>
   <string name="pref_key_summ">%s</string>
 
-  <string name="pref_dark">Dunkle Ansicht</string>
-  <string name="pref_dark_summ">Dunkle Ansicht benutzen</string>
+  <string name="pref_theme">Farbschema</string>
+  <string name="pref_theme_summ">%s</string>
 
   <string name="pref_about">Über die App</string>
   <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Version   %s</a></string>
@@ -124,6 +121,5 @@
   <string name="pref_mult">Mehrere Noten gleichzeitig</string>
   <string name="pref_filters">Notenfilter</string>
   <string name="pref_octave_filter">Oktavfilter</string>
-  <string name="pref_theme">Farbschema</string>
 
 </resources>

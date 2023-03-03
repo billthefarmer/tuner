@@ -36,7 +36,7 @@ import java.util.Locale;
 // Status
 public class Status extends View
 {
-    protected MainActivity.Audio audio;
+    protected Tuner.Audio audio;
 
     private int width;
     private int height;

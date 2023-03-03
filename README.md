@@ -210,7 +210,7 @@ temperament. It makes no difference in the **equal** temperament.
 
 ### Theme
 
-The **dark theme** item allows use of the dark theme.
+The **theme** item enables a choice of themes.
 
 ### About
 
