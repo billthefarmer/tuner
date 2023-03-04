@@ -327,7 +327,7 @@ public class Tuner extends Activity
             break;
         }
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
 
         // Find the views, not all may be present
         spectrum = findViewById(R.id.spectrum);
@@ -384,7 +384,7 @@ public class Tuner extends Activity
         // Inflate the menu; this adds items to the action bar if it
         // is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main, menu);
+        inflater.inflate(R.menu.main, menu);
 
         return true;
     }

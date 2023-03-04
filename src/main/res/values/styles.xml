@@ -39,6 +39,9 @@
     <item name="lock">@drawable/ic_action_secure</item>
     <item name="screen">@drawable/ic_action_brightness_low</item>
 
+    <item name="help">@drawable/ic_action_help</item>
+    <item name="settings">@drawable/ic_action_settings</item>
+
     <item name="pref_about">@drawable/ic_action_about</item>
     <item name="pref_bach">@drawable/ic_action_previous_item</item>
     <item name="pref_down">@drawable/ic_action_reply_all</item>
@@ -67,6 +70,9 @@
     <item name="lock">@drawable/ic_action_secure_dark</item>
     <item name="screen">@drawable/ic_action_brightness_low_dark</item>
 
+    <item name="help">@drawable/ic_action_help</item>
+    <item name="settings">@drawable/ic_action_settings</item>
+
     <item name="pref_about">@drawable/ic_action_about_dark</item>
     <item name="pref_bach">@drawable/ic_action_previous_item_dark</item>
     <item name="pref_down">@drawable/ic_action_reply_all_dark</item>
@@ -94,6 +100,9 @@
 
     <item name="lock">@drawable/ic_action_secure_dark</item>
     <item name="screen">@drawable/ic_action_brightness_low_dark</item>
+
+    <item name="help">@drawable/ic_action_help</item>
+    <item name="settings">@drawable/ic_action_settings</item>
 
     <item name="pref_about">@drawable/ic_action_about_dark</item>
     <item name="pref_bach">@drawable/ic_action_previous_item_dark</item>
@@ -128,6 +137,9 @@
 
     <item name="lock">@drawable/ic_action_secure</item>
     <item name="screen">@drawable/ic_action_brightness_low</item>
+
+    <item name="help">@drawable/ic_action_help_light</item>
+    <item name="settings">@drawable/ic_action_settings_light</item>
 
     <item name="pref_about">@drawable/ic_action_about</item>
     <item name="pref_bach">@drawable/ic_action_previous_item</item>
