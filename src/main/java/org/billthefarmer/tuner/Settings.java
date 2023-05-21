@@ -26,6 +26,7 @@ package org.billthefarmer.tuner;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
@@ -46,6 +47,10 @@ public class Settings extends Activity
 
         int theme = Integer.parseInt(preferences.getString(Tuner.PREF_THEME,
                                                            "0"));
+
+        Configuration config = getResources().getConfiguration();
+        int night = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
         switch (theme)
         {
         case Tuner.LIGHT:
@@ -54,6 +59,19 @@ public class Settings extends Activity
 
         case Tuner.DARK:
             setTheme(R.style.AppDarkTheme);
+            break;
+
+        case Tuner.SYSTEM:
+            switch (night)
+            {
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.AppTheme);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.AppDarkTheme);
+                break;
+            }
             break;
 
         case Tuner.WHITE:

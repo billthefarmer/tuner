@@ -188,6 +188,7 @@
   <string-array name="pref_theme_entries">
     <item>Light</item>
     <item>Dark</item>
+    <item>System</item>
     <item>White</item>
     <item>Black</item>
   </string-array>
@@ -196,6 +197,7 @@
     <item>1</item>
     <item>2</item>
     <item>3</item>
+    <item>4</item>
   </string-array>
 
   <integer-array name="sample_rates">

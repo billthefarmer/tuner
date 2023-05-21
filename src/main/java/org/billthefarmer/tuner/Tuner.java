@@ -276,10 +276,11 @@ public class Tuner extends Activity
          1.585609487, 1.676104963, 1.779786472, 1.881364210},
     };
 
-    public final static int LIGHT = 0;
-    public final static int DARK  = 1;
-    public final static int WHITE = 2;
-    public final static int BLACK = 3;
+    public final static int LIGHT  = 0;
+    public final static int DARK   = 1;
+    public final static int SYSTEM = 2;
+    public final static int WHITE  = 3;
+    public final static int BLACK  = 4;
 
     private double temperaments[][];
     private String names[];
@@ -308,6 +309,9 @@ public class Tuner extends Activity
         // Get preferences
         getPreferences();
 
+        Configuration config = getResources().getConfiguration();
+        int night = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
         switch (theme)
         {
         case LIGHT:
@@ -316,6 +320,19 @@ public class Tuner extends Activity
 
         case DARK:
             setTheme(R.style.AppDarkTheme);
+            break;
+
+        case SYSTEM:
+            switch (night)
+            {
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.AppTheme);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.AppDarkTheme);
+                break;
+            }
             break;
 
         case WHITE:
