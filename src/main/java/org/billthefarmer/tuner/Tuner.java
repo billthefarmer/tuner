@@ -372,7 +372,19 @@ public class Tuner extends Activity
         toolbar = findToolbar(root);
 
         // Set up navigation
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_36dp);
+        switch (theme)
+        {
+        case LIGHT:
+        case DARK:
+        case BLACK:
+        case SYSTEM:
+            toolbar.setNavigationIcon(R.drawable.ic_menu_white_36dp);
+            break;
+
+        case WHITE:
+            toolbar.setNavigationIcon(R.drawable.ic_menu_black_36dp);
+            break;
+        }
         toolbar.setNavigationOnClickListener((v) ->
         {
             PopupMenu popup = new PopupMenu(this, v);
