@@ -28,7 +28,7 @@ android {
 
     defaultConfig {
         applicationId "org.billthefarmer.tuner"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 28
         versionName "1.51"
         versionCode 151

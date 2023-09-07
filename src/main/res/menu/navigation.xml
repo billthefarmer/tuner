@@ -3,14 +3,10 @@
 
   <item
       android:id="@+id/help"
-      android:icon="?attr/help"
-      android:showAsAction="ifRoom"
       android:title="@string/help" />
 
   <item
       android:id="@+id/settings"
-      android:icon="?attr/settings"
-      android:showAsAction="ifRoom"
       android:title="@string/settings" />
 
 </menu>

@@ -76,7 +76,6 @@ public class SignalView extends View
     {
         // Get dimensions
         height = h;
-
         margin = w / 4;
 
         // Colours for gradient
@@ -147,10 +146,11 @@ public class SignalView extends View
         int max = height * 3 / 4;
         float v = (float) (Math.log(signal) / SCALE);
 
-        rect.top = margin + max * v;
-        if (rect.top < 0)
-            rect.top = 0;
+        rect.top = margin + (max * v);
+        if (rect.top < margin)
+            rect.top = margin;
 
+        canvas.clipRect(margin, margin + max, margin * 3, margin);
         canvas.drawRoundRect(rect, 3, 3, paint);
     }
 }

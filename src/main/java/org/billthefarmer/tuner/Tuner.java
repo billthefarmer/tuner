@@ -45,12 +45,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import org.json.JSONArray;
 
@@ -64,7 +67,8 @@ import java.util.Set;
 
 // Main Activity
 public class Tuner extends Activity
-    implements View.OnClickListener, View.OnLongClickListener
+    implements View.OnClickListener, View.OnLongClickListener,
+    PopupMenu.OnMenuItemClickListener
 {
     private static final String TAG = "Tuner";
 
@@ -285,6 +289,7 @@ public class Tuner extends Activity
     private double temperaments[][];
     private String names[];
 
+    private Toolbar toolbar;
     private Spectrum spectrum;
     private Display display;
     private Strobe strobe;
@@ -362,6 +367,20 @@ public class Tuner extends Activity
 
         SignalView signal = findViewById(R.id.signal);
 
+        // Find toolbar
+        ViewGroup root = (ViewGroup) getWindow().getDecorView();
+        toolbar = findToolbar(root);
+
+        // Set up navigation
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_36dp);
+        toolbar.setNavigationOnClickListener((v) ->
+        {
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.inflate(R.menu.navigation);
+            popup.setOnMenuItemClickListener(this);
+            popup.show();
+        });
+
         // Create audio
         audio = new Audio();
 
@@ -392,18 +411,6 @@ public class Tuner extends Activity
 
         // Set up the click listeners
         setClickListeners();
-    }
-
-    // On create options menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it
-        // is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-
-        return true;
     }
 
     // Set click listeners
@@ -554,6 +561,48 @@ public class Tuner extends Activity
             }
             break;
         }
+    }
+
+    // onMenuItemClick
+    @Override
+    public boolean onMenuItemClick(MenuItem item)
+    {
+        // Get id
+        int id = item.getItemId();
+        switch (id)
+        {
+        // Help
+        case R.id.help:
+            return onHelpClick(item);
+
+        // Settings
+        case R.id.settings:
+            return onSettingsClick(item);
+
+        default:
+            return false;
+        }
+    }
+
+    // findToolbar
+    private Toolbar findToolbar(ViewGroup group)
+    {
+        View result = null;
+        final int count = group.getChildCount();
+        for (int i = 0; i < count; i++)
+        {
+            View view = group.getChildAt(i);
+            if (view instanceof Toolbar)
+                return (Toolbar) view;
+
+            if (view instanceof ViewGroup)
+                result = findToolbar((ViewGroup) view);
+
+            if (result != null)
+                break;
+        }
+
+        return (Toolbar) result;
     }
 
     // animateViews
