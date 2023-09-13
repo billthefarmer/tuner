@@ -44,6 +44,7 @@ public class SignalView extends View
     protected Tuner.Audio audio;
 
     private int height;
+    private int width;
     private int margin;
 
     private double signal;
@@ -76,6 +77,7 @@ public class SignalView extends View
     {
         // Get dimensions
         height = h;
+        width = w;
         margin = w / 4;
 
         // Colours for gradient
@@ -84,11 +86,11 @@ public class SignalView extends View
 
         // Coloured gradient
         LinearGradient gradient =
-            new LinearGradient(0, 0, 0, height * 3 / 4,
+            new LinearGradient(0, 0, 0, h * 3 / 4,
                                colours, null, Shader.TileMode.CLAMP);
 
         // Bitmap to draw coloured bars in
-        Bitmap bitmap = Bitmap.createBitmap(w / 2, height * 3 / 4,
+        Bitmap bitmap = Bitmap.createBitmap(w / 2, h * 3 / 4,
                                             Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -96,7 +98,7 @@ public class SignalView extends View
         paint.setStrokeWidth(2);
 
         // Draw coloured bars
-        for (int i = 0; i < bitmap.getHeight(); i += 3)
+        for (int i = 0; i < bitmap.getHeight(); i += 4)
             canvas.drawLine(0, i, bitmap.getWidth(), i, paint);
 
         // Create shader from coloured bars
@@ -138,7 +140,9 @@ public class SignalView extends View
         invalidate();
     }
 
+    // onDraw
     @Override
+    @SuppressWarnings("deprecation")
     protected void onDraw(Canvas canvas)
     {
         // Draw the coloured column
@@ -150,7 +154,7 @@ public class SignalView extends View
         if (rect.top < margin)
             rect.top = margin;
 
-        canvas.clipRect(margin, margin + max, margin * 3, margin);
+        canvas.clipRect(rect);
         canvas.drawRoundRect(rect, 3, 3, paint);
     }
 }
