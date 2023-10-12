@@ -377,11 +377,11 @@ public class Tuner extends Activity
         case DARK:
         case BLACK:
         case SYSTEM:
-            toolbar.setNavigationIcon(R.drawable.ic_menu_white_36dp);
+            toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
             break;
 
         case WHITE:
-            toolbar.setNavigationIcon(R.drawable.ic_menu_black_36dp);
+            toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
             break;
         }
         toolbar.setNavigationOnClickListener((v) ->

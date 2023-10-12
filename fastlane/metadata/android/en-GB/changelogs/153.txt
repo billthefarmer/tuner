@@ -1,0 +1,2 @@
+ * Add Czech language
+ * Update navigation menu
