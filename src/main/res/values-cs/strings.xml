@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Ladička</string>
+  <string name="help">Nápověda</string>
+  <string name="settings">Nastavení</string>
+  <string name="built">Sestavení %s</string>
+  <string name="copyright">Copyright \u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>
+  </string>
+  <string name="translation">Španělský překlad: <a
+  href="https://github.com/susobaco">Suso Comesaña</a>\nMaďarský
+  překlad: <a href="https://github.com/lna91">András
+  Lengyel-Nagy</a>\nJaponský překlad: <a
+  href="https://github.com/naofum">naofum</a>\nPortugalský překlad:
+  <a href="https://github.com/afmachado">Caio Roberto</a>\nFrancouzský
+  překlad: <a href="https://github.com/roptat">roptat</a>\nNěmecký
+  překlad: <a href="https://github.com/niccokunzmann">Nicco
+  Kunzmann</a>\nPolský překlad: <a
+  href="https://github.com/rehork">rehork</a>
+  </string>
+  <string name="licence">Licence <a
+  href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
+  </string>
+
+  <string name="error_buffer">
+    Chyba při nahrávání zvuku! Nepodařilo se najít funkční vstupní vzorkovací frekvenci.
+  </string>
+  <string name="error_init">
+    Záznamník zvuku nebyl inicializován! Vybraný zdroj zvuku možná nemusí
+    být dostupný nebo nebyla nalezena funkční vstupní vzorkovací frekvenci.
+  </string>
+
+  <string name="filter_on">Filtr zvuku zapnut</string>
+  <string name="filter_off">Filtr zvuku vypnut</string>
+
+  <string name="fund_on">Filtr fundamentálů zapnut</string>
+  <string name="fund_off">Filtr fundamentálů vypnut</string>
+
+  <string name="zoom_on">Přiblížení spektra zapnuto</string>
+  <string name="zoom_off">Přiblížení spektra vypnuto</string>
+
+  <string name="lock_on">Zámek displeje zapnut</string>
+  <string name="lock_off">Zámek displeje vypnut</string>
+
+  <string name="screen_on">Ponechat obrazovku zapnutou</string>
+  <string name="screen_off">Nenechávat obrazovku zapnutou</string>
+
+  <string name="strobe_on">Stroboskop zapnut</string>
+  <string name="strobe_off">Stroboskop vypnut</string>
+
+  <string name="down_on">Downsampling zapnut</string>
+  <string name="down_off">Downsampling vypnut</string>
+
+  <string name="mult_on">Více not zapnuto</string>
+  <string name="mult_off">Více not vypnuto</string>
+
+  <string name="copied_clip">Data zkopírována do schránky</string>
+  <string name="sample_rate">Vzorkovací frekvence: %d</string>
+
+  <string name="filter">filtr</string>
+  <string name="fund">fund</string>
+  <string name="note">nota</string>
+  <string name="zoom">přiblížení</string>
+  <string name="lock">zámek</string>
+  <string name="display">obrazovka</string>
+  <string name="strobe">stroboskop</string>
+  <string name="down">down</string>
+  <string name="mult">více</string>
+
+  <string name="def_custom">[-1073807360,-1090518785]</string>
+
+  <string name="pref_input_category">Vstup</string>
+
+  <string name="pref_input">Vstupní zdroj</string>
+  <string name="pref_input_summ">%s</string>
+
+  <string name="pref_filter">Filtr zvuku</string>
+  <string name="pref_filter_summ">Filtrovat vstupní zvuk</string>
+
+  <string name="pref_solfa">Solfège</string>
+  <string name="pref_solfa_summ">Použít solfège (DoReMi)</string>
+
+  <string name="pref_bach">Bach</string>
+  <string name="pref_bach_summ">Použít Bach (ABHC)</string>
+
+  <string name="pref_down">Downsample</string>
+  <string name="pref_down_summ">
+    Snížit vzorkovací frekvenci vstupu před analýzou
+  </string>
+
+  <string name="pref_display">Zobrazení</string>
+
+  <string name="pref_screen">Obrazovka</string>
+  <string name="pref_screen_summ">Ponechat obrazovku zapnutou</string>
+
+  <string name="pref_zoom">Přiblížení spektra</string>
+  <string name="pref_zoom_summ">
+    Přiblížit na aktuální notu na zobrazení spektra
+  </string>
+
+  <string name="pref_mult">Více not</string>
+  <string name="pref_mult_summ">Zobrazit více not na obrazovce</string>
+
+  <string name="pref_fund">Filtr fundamentálů</string>
+  <string name="pref_fund_summ">Použít filtr fundamentálů</string>
+
+  <string name="pref_filters">Filtry not</string>
+  <string name="pref_filters_summ">Použít filtry not</string>
+
+  <string name="pref_note_filter">Filtr not</string>
+  <string name="pref_note_filter_summ">Nastavení filtru not</string>
+
+  <string name="pref_octave_filter">Filtr oktáv</string>
+  <string name="pref_octave_filter_summ">Nastavení filtru oktáv</string>
+
+  <string name="pref_strobe">Stroboskop</string>
+  <string name="pref_strobe_screen">Nastavení stroboskopu</string>
+  <string name="pref_strobe_summ">Zbrazit stroboskop</string>
+
+  <string name="pref_colour">Barvy stroboskopu</string>
+  <string name="pref_colour_summ">Změnit barvy stroboskopu</string>
+
+  <string name="pref_custom">Vlastní</string>
+  <string name="pref_custom_summ">Vlastní barvy</string>
+
+  <string name="pref_refer">Reference</string>
+  <string name="pref_refer_summ">%2.2fHz</string>
+
+  <string name="pref_transpose">Transpozice</string>
+  <string name="pref_transpose_summ">%s</string>
+
+  <string name="pref_temper">Temperament</string>
+  <string name="pref_temper_summ">%s</string>
+
+  <string name="pref_key">Klíč</string>
+  <string name="pref_key_summ">%s</string>
+
+  <string name="pref_theme">Motiv</string>
+  <string name="pref_theme_summ">%s</string>
+
+  <string name="pref_about">O aplikaci</string>
+  <string name="pref_about_summ"><a
+  href="https://github.com/billthefarmer/tuner/releases/latest">Verze
+  %s</a></string>
+
+</resources>
