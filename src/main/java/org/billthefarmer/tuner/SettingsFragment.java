@@ -36,6 +36,7 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.widget.Toolbar;
 
 import java.io.File;
 import java.io.FileReader;
@@ -86,23 +87,23 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         switch (v)
         {
         case BLUE:
-            preference.setIcon(R.drawable.ic_pref_blue);
-            preference.setDialogIcon(R.drawable.ic_pref_blue);
+            preference.setIcon(R.drawable.ic_strobe_blue_24dp);
+            preference.setDialogIcon(R.drawable.ic_strobe_blue_24dp);
             break;
 
         case OLIVE:
-            preference.setIcon(R.drawable.ic_pref_olive);
-            preference.setDialogIcon(R.drawable.ic_pref_olive);
+            preference.setIcon(R.drawable.ic_strobe_olive_24dp);
+            preference.setDialogIcon(R.drawable.ic_strobe_olive_24dp);
             break;
 
         case MAGENTA:
-            preference.setIcon(R.drawable.ic_pref_magenta);
-            preference.setDialogIcon(R.drawable.ic_pref_magenta);
+            preference.setIcon(R.drawable.ic_strobe_magenta_24dp);
+            preference.setDialogIcon(R.drawable.ic_strobe_magenta_24dp);
             break;
 
         case CUSTOM:
-            preference.setIcon(R.drawable.ic_pref_spectrum);
-            preference.setDialogIcon(R.drawable.ic_pref_spectrum);
+            preference.setIcon(R.drawable.ic_spectrum_24dp);
+            preference.setDialogIcon(R.drawable.ic_spectrum_24dp);
 
             // Enable colour pickers
             custom.setEnabled(true);
@@ -183,7 +184,14 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         {
             Dialog dialog = ((PreferenceScreen) preference).getDialog();
             ActionBar actionBar = dialog.getActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            Toolbar toolbar = dialog.findViewById
+                (dialog.getContext().getResources().getIdentifier
+                 ("action_bar", "id", "android"));
+            toolbar.setNavigationOnClickListener((v) ->
+            {
+                dialog.dismiss();
+            });
         }
 
         return result;
@@ -216,23 +224,23 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             switch (v)
             {
             case BLUE:
-                preference.setIcon(R.drawable.ic_pref_blue);
-                preference.setDialogIcon(R.drawable.ic_pref_blue);
+                preference.setIcon(R.drawable.ic_strobe_blue_24dp);
+                preference.setDialogIcon(R.drawable.ic_strobe_blue_24dp);
                 break;
 
             case OLIVE:
-                preference.setIcon(R.drawable.ic_pref_olive);
-                preference.setDialogIcon(R.drawable.ic_pref_olive);
+                preference.setIcon(R.drawable.ic_strobe_olive_24dp);
+                preference.setDialogIcon(R.drawable.ic_strobe_olive_24dp);
                 break;
 
             case MAGENTA:
-                preference.setIcon(R.drawable.ic_pref_magenta);
-                preference.setDialogIcon(R.drawable.ic_pref_magenta);
+                preference.setIcon(R.drawable.ic_strobe_magenta_24dp);
+                preference.setDialogIcon(R.drawable.ic_strobe_magenta_24dp);
                 break;
 
             case CUSTOM:
-                preference.setIcon(R.drawable.ic_pref_spectrum);
-                preference.setDialogIcon(R.drawable.ic_pref_spectrum);
+                preference.setIcon(R.drawable.ic_spectrum_24dp);
+                preference.setDialogIcon(R.drawable.ic_spectrum_24dp);
 
                 // Enable colour pickers
                 custom.setEnabled(true);

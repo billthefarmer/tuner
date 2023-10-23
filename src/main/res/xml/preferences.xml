@@ -113,19 +113,19 @@
       <ListPreference
           android:defaultValue="0"
           android:dependency="pref_strobe"
-          android:dialogIcon="@drawable/ic_pref_blue"
+          android:dialogIcon="@drawable/ic_strobe_blue_24dp"
           android:entries="@array/pref_colour_entries"
           android:entryValues="@array/pref_colour_entry_values"
-          android:icon="@drawable/ic_pref_blue"
+          android:icon="@drawable/ic_strobe_blue_24dp"
           android:key="pref_colour"
           android:summary="@string/pref_colour_summ"
           android:title="@string/pref_colour" />
       <org.billthefarmer.tuner.ColourPickerPreference
           android:defaultValue="@string/def_custom"
           android:dependency="pref_strobe"
-          android:dialogIcon="@drawable/ic_pref_spectrum"
+          android:dialogIcon="@drawable/ic_spectrum_24dp"
           android:dialogLayout="@layout/colour_picker_preference"
-          android:icon="@drawable/ic_pref_spectrum"
+          android:icon="@drawable/ic_spectrum_24dp"
           android:key="pref_custom"
           android:summary="@string/pref_custom_summ"
           android:title="@string/pref_custom" />

@@ -39,21 +39,21 @@
     <item name="lock">@drawable/ic_action_secure</item>
     <item name="screen">@drawable/ic_action_brightness_low</item>
 
-    <item name="pref_about">@drawable/ic_action_about</item>
-    <item name="pref_bach">@drawable/ic_action_previous_item</item>
-    <item name="pref_down">@drawable/ic_action_reply_all</item>
-    <item name="pref_filter">@drawable/ic_action_network_cell</item>
-    <item name="pref_input">@drawable/ic_action_mic</item>
-    <item name="pref_key">@drawable/ic_action_accounts</item>
-    <item name="pref_mult">@drawable/ic_action_sort_by_size</item>
-    <item name="pref_refer">@drawable/ic_action_collapse</item>
-    <item name="pref_screen">@drawable/ic_action_brightness_low</item>
-    <item name="pref_solfa">@drawable/ic_action_next_item</item>
-    <item name="pref_strobe">@drawable/ic_pref_strobe</item>
-    <item name="pref_temper">@drawable/ic_action_favorite</item>
-    <item name="pref_theme">@drawable/ic_action_brightness_high</item>
-    <item name="pref_transpose">@drawable/ic_action_import_export</item>
-    <item name="pref_zoom">@drawable/ic_action_expand</item>
+    <item name="pref_about">@drawable/ic_info_outline_black_24dp</item>
+    <item name="pref_bach">@drawable/ic_chevron_left_black_24dp</item>
+    <item name="pref_down">@drawable/ic_trending_down_black_24dp</item>
+    <item name="pref_filter">@drawable/ic_equalizer_black_24dp</item>
+    <item name="pref_input">@drawable/ic_mic_black_24dp</item>
+    <item name="pref_key">@drawable/ic_music_note_black_24dp</item>
+    <item name="pref_mult">@drawable/ic_format_align_justify_black_24dp</item>
+    <item name="pref_refer">@drawable/ic_expand_less_black_24dp</item>
+    <item name="pref_screen">@drawable/ic_brightness_low_black_24dp</item>
+    <item name="pref_solfa">@drawable/ic_chevron_right_black_24dp</item>
+    <item name="pref_strobe">@drawable/ic_strobe_black_24dp</item>
+    <item name="pref_temper">@drawable/ic_favorite_black_24dp</item>
+    <item name="pref_theme">@drawable/ic_brightness_high_black_24dp</item>
+    <item name="pref_transpose">@drawable/ic_swap_vert_black_24dp</item>
+    <item name="pref_zoom">@drawable/ic_expand_more_black_24dp</item>
 
   </style>
 
@@ -67,21 +67,21 @@
     <item name="lock">@drawable/ic_action_secure_dark</item>
     <item name="screen">@drawable/ic_action_brightness_low_dark</item>
 
-    <item name="pref_about">@drawable/ic_action_about_dark</item>
-    <item name="pref_bach">@drawable/ic_action_previous_item_dark</item>
-    <item name="pref_down">@drawable/ic_action_reply_all_dark</item>
-    <item name="pref_filter">@drawable/ic_action_network_cell_dark</item>
-    <item name="pref_input">@drawable/ic_action_mic_dark</item>
-    <item name="pref_key">@drawable/ic_action_accounts_dark</item>
-    <item name="pref_mult">@drawable/ic_action_sort_by_size_dark</item>
-    <item name="pref_refer">@drawable/ic_action_collapse_dark</item>
-    <item name="pref_screen">@drawable/ic_action_brightness_low_dark</item>
-    <item name="pref_solfa">@drawable/ic_action_next_item_dark</item>
-    <item name="pref_strobe">@drawable/ic_pref_strobe_dark</item>
-    <item name="pref_temper">@drawable/ic_action_favorite_dark</item>
-    <item name="pref_theme">@drawable/ic_action_brightness_high_dark</item>
-    <item name="pref_transpose">@drawable/ic_action_import_export_dark</item>
-    <item name="pref_zoom">@drawable/ic_action_expand_dark</item>
+    <item name="pref_about">@drawable/ic_info_outline_white_24dp</item>
+    <item name="pref_bach">@drawable/ic_chevron_left_white_24dp</item>
+    <item name="pref_down">@drawable/ic_trending_down_white_24dp</item>
+    <item name="pref_filter">@drawable/ic_equalizer_white_24dp</item>
+    <item name="pref_input">@drawable/ic_mic_white_24dp</item>
+    <item name="pref_key">@drawable/ic_music_note_white_24dp</item>
+    <item name="pref_mult">@drawable/ic_format_align_justify_white_24dp</item>
+    <item name="pref_refer">@drawable/ic_expand_less_white_24dp</item>
+    <item name="pref_screen">@drawable/ic_brightness_low_white_24dp</item>
+    <item name="pref_solfa">@drawable/ic_chevron_right_white_24dp</item>
+    <item name="pref_strobe">@drawable/ic_strobe_white_24dp</item>
+    <item name="pref_temper">@drawable/ic_favorite_white_24dp</item>
+    <item name="pref_theme">@drawable/ic_brightness_high_white_24dp</item>
+    <item name="pref_transpose">@drawable/ic_swap_vert_white_24dp</item>
+    <item name="pref_zoom">@drawable/ic_expand_more_white_24dp</item>
 
   </style>
 
@@ -95,21 +95,21 @@
     <item name="lock">@drawable/ic_action_secure_dark</item>
     <item name="screen">@drawable/ic_action_brightness_low_dark</item>
 
-    <item name="pref_about">@drawable/ic_action_about_dark</item>
-    <item name="pref_bach">@drawable/ic_action_previous_item_dark</item>
-    <item name="pref_down">@drawable/ic_action_reply_all_dark</item>
-    <item name="pref_filter">@drawable/ic_action_network_cell_dark</item>
-    <item name="pref_input">@drawable/ic_action_mic_dark</item>
-    <item name="pref_key">@drawable/ic_action_accounts_dark</item>
-    <item name="pref_mult">@drawable/ic_action_sort_by_size_dark</item>
-    <item name="pref_refer">@drawable/ic_action_collapse_dark</item>
-    <item name="pref_screen">@drawable/ic_action_brightness_low_dark</item>
-    <item name="pref_solfa">@drawable/ic_action_next_item_dark</item>
-    <item name="pref_strobe">@drawable/ic_pref_strobe_dark</item>
-    <item name="pref_temper">@drawable/ic_action_favorite_dark</item>
-    <item name="pref_theme">@drawable/ic_action_brightness_high_dark</item>
-    <item name="pref_transpose">@drawable/ic_action_import_export_dark</item>
-    <item name="pref_zoom">@drawable/ic_action_expand_dark</item>
+    <item name="pref_about">@drawable/ic_info_outline_white_24dp</item>
+    <item name="pref_bach">@drawable/ic_chevron_left_white_24dp</item>
+    <item name="pref_down">@drawable/ic_trending_down_white_24dp</item>
+    <item name="pref_filter">@drawable/ic_equalizer_white_24dp</item>
+    <item name="pref_input">@drawable/ic_mic_white_24dp</item>
+    <item name="pref_key">@drawable/ic_music_note_white_24dp</item>
+    <item name="pref_mult">@drawable/ic_format_align_justify_white_24dp</item>
+    <item name="pref_refer">@drawable/ic_expand_less_white_24dp</item>
+    <item name="pref_screen">@drawable/ic_brightness_low_white_24dp</item>
+    <item name="pref_solfa">@drawable/ic_chevron_right_white_24dp</item>
+    <item name="pref_strobe">@drawable/ic_strobe_white_24dp</item>
+    <item name="pref_temper">@drawable/ic_favorite_white_24dp</item>
+    <item name="pref_theme">@drawable/ic_brightness_high_white_24dp</item>
+    <item name="pref_transpose">@drawable/ic_swap_vert_white_24dp</item>
+    <item name="pref_zoom">@drawable/ic_expand_more_white_24dp</item>
 
     <item name="android:windowBackground">@android:color/black</item>
 
@@ -129,21 +129,21 @@
     <item name="lock">@drawable/ic_action_secure</item>
     <item name="screen">@drawable/ic_action_brightness_low</item>
 
-    <item name="pref_about">@drawable/ic_action_about</item>
-    <item name="pref_bach">@drawable/ic_action_previous_item</item>
-    <item name="pref_down">@drawable/ic_action_reply_all</item>
-    <item name="pref_filter">@drawable/ic_action_network_cell</item>
-    <item name="pref_input">@drawable/ic_action_mic</item>
-    <item name="pref_key">@drawable/ic_action_accounts</item>
-    <item name="pref_mult">@drawable/ic_action_sort_by_size</item>
-    <item name="pref_refer">@drawable/ic_action_collapse</item>
-    <item name="pref_screen">@drawable/ic_action_brightness_low</item>
-    <item name="pref_solfa">@drawable/ic_action_next_item</item>
-    <item name="pref_strobe">@drawable/ic_pref_strobe</item>
-    <item name="pref_temper">@drawable/ic_action_favorite</item>
-    <item name="pref_theme">@drawable/ic_action_brightness_high</item>
-    <item name="pref_transpose">@drawable/ic_action_import_export</item>
-    <item name="pref_zoom">@drawable/ic_action_expand</item>
+    <item name="pref_about">@drawable/ic_info_outline_black_24dp</item>
+    <item name="pref_bach">@drawable/ic_chevron_left_black_24dp</item>
+    <item name="pref_down">@drawable/ic_trending_down_black_24dp</item>
+    <item name="pref_filter">@drawable/ic_equalizer_black_24dp</item>
+    <item name="pref_input">@drawable/ic_mic_black_24dp</item>
+    <item name="pref_key">@drawable/ic_music_note_black_24dp</item>
+    <item name="pref_mult">@drawable/ic_format_align_justify_black_24dp</item>
+    <item name="pref_refer">@drawable/ic_expand_less_black_24dp</item>
+    <item name="pref_screen">@drawable/ic_brightness_low_black_24dp</item>
+    <item name="pref_solfa">@drawable/ic_chevron_right_black_24dp</item>
+    <item name="pref_strobe">@drawable/ic_strobe_black_24dp</item>
+    <item name="pref_temper">@drawable/ic_favorite_black_24dp</item>
+    <item name="pref_theme">@drawable/ic_brightness_high_black_24dp</item>
+    <item name="pref_transpose">@drawable/ic_swap_vert_black_24dp</item>
+    <item name="pref_zoom">@drawable/ic_expand_more_black_24dp</item>
 
     <item name="android:textColorPrimary">@android:color/black</item>
     <item name="android:textColorSecondary">@android:color/black</item>
