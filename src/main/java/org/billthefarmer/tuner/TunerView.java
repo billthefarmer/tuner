@@ -61,7 +61,7 @@ public abstract class TunerView extends View
         resources = getResources();
 
         final TypedArray typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.Tuner, 0, 0);
+            context.obtainStyledAttributes(attrs, R.styleable.Tuner);
 
         textColour =
             typedArray.getColor(R.styleable.Tuner_TextColour,

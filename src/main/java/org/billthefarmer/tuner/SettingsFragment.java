@@ -25,6 +25,7 @@ package org.billthefarmer.tuner;
 
 import android.app.ActionBar;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -135,8 +136,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         preference = (ListPreference) findPreference(Tuner.PREF_TEMPER);
         v = Integer.valueOf(preference.getValue());
         preference = (ListPreference) findPreference(Tuner.PREF_KEY);
-        if (v == getActivity().getResources()
-            .getInteger(R.integer.default_temper))
+        if (v == getResources().getInteger(R.integer.default_temper))
         {
             preference.setEnabled(false);
             preference.setValueIndex(0);
@@ -186,8 +186,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             ActionBar actionBar = dialog.getActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             Toolbar toolbar = dialog.findViewById
-                (dialog.getContext().getResources().getIdentifier
-                 ("action_bar", "id", "android"));
+                (getResources().getIdentifier("action_bar", "id", "android"));
             toolbar.setNavigationOnClickListener((v) ->
             {
                 dialog.dismiss();
@@ -304,7 +303,15 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         if (key.equals(Tuner.PREF_THEME))
         {
-            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+            {
+                Intent intent = new
+                    Intent(getActivity(), getActivity().getClass());
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            }
+
+            else
                 getActivity().recreate();
         }
     }
