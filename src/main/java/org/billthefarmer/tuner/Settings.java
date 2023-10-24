@@ -91,7 +91,7 @@ public class Settings extends Activity
         // Enable back navigation on action bar
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
+        setTitle(R.string.settings);
     }
 
     // On options item selected
