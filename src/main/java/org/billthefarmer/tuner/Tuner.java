@@ -656,14 +656,7 @@ public class Tuner extends Activity
             if (++theme > BLACK)
                 theme = LIGHT;
 
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
-            {
-                Intent intent = new Intent(this, getClass());
-                startActivity(intent);
-                finish();
-            }
-
-            else
+            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                 recreate();
             break;
 
@@ -766,14 +759,7 @@ public class Tuner extends Activity
         // Change theme
         if (current != theme)
         {
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
-            {
-                Intent intent = new Intent(this, getClass());
-                startActivity(intent);
-                finish();
-            }
-
-            else
+            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                 recreate();
         }
 
