@@ -303,15 +303,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         if (key.equals(Tuner.PREF_THEME))
         {
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
-            {
-                Intent intent = new
-                    Intent(getActivity(), getActivity().getClass());
-                getActivity().startActivity(intent);
-                getActivity().finish();
-            }
-
-            else
+            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                 getActivity().recreate();
         }
     }
