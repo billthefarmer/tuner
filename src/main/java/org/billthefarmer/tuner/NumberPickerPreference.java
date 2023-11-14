@@ -47,6 +47,7 @@ public class NumberPickerPreference extends DialogPreference
 
     private NumberPicker units;
     private NumberPicker tenths;
+    private NumberPicker hundredths;
     private LinearLayout layout;
 
     // Constructor
@@ -70,6 +71,7 @@ public class NumberPickerPreference extends DialogPreference
     {
         units = new NumberPicker(getContext());
         tenths = new NumberPicker(getContext());
+        hundredths = new NumberPicker(getContext());
         layout = new LinearLayout(getContext());
 
         units.setMaxValue(maxValue);
@@ -86,9 +88,20 @@ public class NumberPickerPreference extends DialogPreference
         tenths.setWrapSelectorWheel(false);
         tenths.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
+        hundredths.setMaxValue(9);
+        hundredths.setMinValue(0);
+        hundredths.setValue(Float.valueOf(value * 100).intValue() % 10);
+
+        hundredths.setWrapSelectorWheel(false);
+        hundredths.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
         TextView dot = new TextView(getContext());
         //noinspection SetTextI18n
         dot.setText(".");
+
+        TextView space = new TextView(getContext());
+        //noinspection SetTextI18n
+        space.setText(" ");
 
         TextView hz = new TextView(getContext());
         //noinspection SetTextI18n
@@ -98,6 +111,8 @@ public class NumberPickerPreference extends DialogPreference
         layout.addView(units);
         layout.addView(dot);
         layout.addView(tenths);
+        layout.addView(space);
+        layout.addView(hundredths);
         layout.addView(hz);
         return layout;
     }
@@ -146,7 +161,8 @@ public class NumberPickerPreference extends DialogPreference
         {
             try
             {
-                value = units.getValue() + tenths.getValue() / 10.0f;
+                value = units.getValue() + tenths.getValue() / 10.0f +
+                    hundredths.getValue() / 100.0f;
                 persistFloat(value);
             }
 
