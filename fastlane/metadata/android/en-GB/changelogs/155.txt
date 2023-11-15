@@ -1,0 +1,2 @@
+ * Add digit to reference dialog
+ * Add simplified Chinese translation

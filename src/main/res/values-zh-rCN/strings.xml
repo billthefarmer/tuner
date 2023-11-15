@@ -43,7 +43,7 @@
     <string name="pref_filter">自动过滤</string>
     <string name="pref_filter_summ">过滤输入音频</string>
     <string name="pref_solfa">唱名法</string>
-    <string name="pref_solfa_summ">使用唱名法（DeReMi）</string>
+    <string name="pref_solfa_summ">使用唱名法（DoReMi）</string>
     <string name="pref_bach">Bach</string>
     <string name="pref_bach_summ">使用Bach</string>
     <string name="pref_down">向下采样</string>
