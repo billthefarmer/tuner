@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tuner</string>
+    <string name="help">帮助</string>
+    <string name="settings">设置</string>
+    <string name="built">于 %s 编译</string>
+    <string name="copyright">"版权所有 \\u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>   "</string>
+    <string name="translation">Spanish translation by <a href="https://github.com/susobaco">Suso Comesaña</a> Hungarian   translation by <a href="https://github.com/lna91">András   Lengyel-Nagy</a> Japanese translation by <a href="https://github.com/naofum">naofum</a> Portuguese translation   by <a href="https://github.com/afmachado">Caio Roberto</a> French   translation by <a href="https://github.com/roptat">roptat</a> German   translation by <a href="https://github.com/niccokunzmann">Nicco   Kunzmann</a> Polish translation by <a href="https://github.com/rehork">rehork</a>    Chinese translation by <a href="https://github.com/WeiguangTWK">WeiguangTWK</a></string>
+    <string name="licence">"Licence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>   "</string>
+    <string name="error_buffer">"     音频录制失败! 找不到可用的采样率   "</string>
+    <string name="error_init">音频录制无法初始化! 选定的音频输入源无法使用或者采样率均不可用</string>
+    <string name="filter_on">音频过滤 开</string>
+    <string name="filter_off">音频过滤 关</string>
+    <string name="fund_on">基础过滤 开</string>
+    <string name="fund_off">基础过滤 关</string>
+    <string name="zoom_on">波谱缩放 开</string>
+    <string name="zoom_off">波谱缩放 开</string>
+    <string name="lock_on">显示定格 开</string>
+    <string name="lock_off">显示定格 关</string>
+    <string name="screen_on">屏幕常亮</string>
+    <string name="screen_off">不要屏幕常亮</string>
+    <string name="strobe_on">选通脉冲 开</string>
+    <string name="strobe_off">选通脉冲 关</string>
+    <string name="down_on">向下采样 开</string>
+    <string name="down_off">向下采样 关</string>
+    <string name="mult_on">多行记录 开</string>
+    <string name="mult_off">多行记录 关</string>
+    <string name="copied_clip">数据已复制至剪贴板</string>
+    <string name="sample_rate">采样率：%d</string>
+    <string name="filter">筛选</string>
+    <string name="zoom">缩放</string>
+    <string name="lock">定格</string>
+    <string name="display">常亮</string>
+    <string name="strobe">滤波</string>
+    <string name="down">向下采样</string>
+    <string name="mult">多行</string>
+    <string name="def_custom">[-1073807360,-1090518785]</string>
+    <string name="pref_input_category">输入</string>
+    <string name="pref_input">音频输入源</string>
+    <string name="pref_input_summ">%s</string>
+    <string name="pref_filter">自动过滤</string>
+    <string name="pref_filter_summ">过滤输入音频</string>
+    <string name="pref_solfa">唱名法</string>
+    <string name="pref_solfa_summ">使用唱名法（DeReMi）</string>
+    <string name="pref_bach">Bach</string>
+    <string name="pref_bach_summ">使用Bach</string>
+    <string name="pref_down">向下采样</string>
+    <string name="pref_down_summ">"\n    在分析前向下采样\n  "</string>
+    <string name="pref_display">显示</string>
+    <string name="pref_screen">屏幕</string>
+    <string name="pref_screen_summ">屏幕常亮</string>
+    <string name="pref_zoom">缩放波谱</string>
+    <string name="pref_zoom_summ">"\n    自动缩放波谱中被分析的部分\n  "</string>
+    <string name="pref_mult">多行展示</string>
+    <string name="pref_mult_summ">在屏幕上显示多行记录</string>
+    <string name="pref_fund">基础过滤器</string>
+    <string name="pref_fund_summ">使用基础过滤器</string>
+    <string name="pref_filters">记录过滤列表</string>
+    <string name="pref_filters_summ">使用记录过滤器</string>
+    <string name="pref_note_filter">记录过滤器</string>
+    <string name="pref_note_filter_summ">记录过滤器设置</string>
+    <string name="pref_octave_filter">八度音阶过滤</string>
+    <string name="pref_octave_filter_summ">八度音阶过滤设置</string>
+    <string name="pref_strobe">选通脉冲</string>
+    <string name="pref_strobe_screen">选通脉冲设置</string>
+    <string name="pref_strobe_summ">显示脉冲</string>
+    <string name="pref_colour">脉冲的颜色</string>
+    <string name="pref_colour_summ">更改颜色</string>
+    <string name="pref_custom">自定义</string>
+    <string name="pref_custom_summ">自定义色</string>
+    <string name="pref_refer">基准</string>
+    <string name="pref_refer_summ">%2.2f Hz</string>
+    <string name="pref_transpose">转调</string>
+    <string name="pref_transpose_summ">%s</string>
+    <string name="pref_temper">调律</string>
+    <string name="pref_temper_summ">%s</string>
+    <string name="pref_key">调号</string>
+    <string name="pref_key_summ">%s</string>
+    <string name="pref_theme">主题</string>
+    <string name="pref_theme_summ">%s</string>
+    <string name="pref_about">关于</string>
+    <string name="pref_about_summ"><a href="https://github.com/billthefarmer/tuner/releases/latest">Version   %s</a></string>
+</resources>
