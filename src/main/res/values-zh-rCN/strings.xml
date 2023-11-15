@@ -28,6 +28,8 @@
     <string name="copied_clip">数据已复制至剪贴板</string>
     <string name="sample_rate">采样率：%d</string>
     <string name="filter">筛选</string>
+    <string name="fund">基本</string>
+    <string name="note">音符</string>
     <string name="zoom">缩放</string>
     <string name="lock">定格</string>
     <string name="display">常亮</string>
