@@ -22,9 +22,6 @@
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="error_buffer">
-    Error from audio recording! Cannot find a working input sample rate.
-  </string>
   <string name="error_init">
     Audio recorder not initialised! Maybe the selected input source is
     not available, or a working input sample rate could not be found.

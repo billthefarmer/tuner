@@ -7,7 +7,6 @@
     <string name="copyright">"版权所有 \\u00A9 2014 <a href="https://github.com/billthefarmer">Bill Farmer</a>   "</string>
     <string name="translation">Spanish translation by <a href="https://github.com/susobaco">Suso Comesaña</a> Hungarian   translation by <a href="https://github.com/lna91">András   Lengyel-Nagy</a> Japanese translation by <a href="https://github.com/naofum">naofum</a> Portuguese translation   by <a href="https://github.com/afmachado">Caio Roberto</a> French   translation by <a href="https://github.com/roptat">roptat</a> German   translation by <a href="https://github.com/niccokunzmann">Nicco   Kunzmann</a> Polish translation by <a href="https://github.com/rehork">rehork</a>    Chinese translation by <a href="https://github.com/WeiguangTWK">WeiguangTWK</a></string>
     <string name="licence">"Licence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>   "</string>
-    <string name="error_buffer">"     音频录制失败! 找不到可用的采样率   "</string>
     <string name="error_init">音频录制无法初始化! 选定的音频输入源无法使用或者采样率均不可用</string>
     <string name="filter_on">音频过滤 开</string>
     <string name="filter_off">音频过滤 关</string>

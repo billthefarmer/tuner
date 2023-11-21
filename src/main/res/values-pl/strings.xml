@@ -20,10 +20,6 @@
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="error_buffer">
-    Błąd podczas nagrywania dźwięku! Nie można znaleźć działającej 
-    wejściowej częstotliwości próbkowania.
-  </string>
   <string name="error_init">
     Rejestrator dźwięku nie został zainicjowany! Być może wybrane
     źródło wejściowe nie jest dostępne lub nie można znaleźć 

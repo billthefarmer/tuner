@@ -2,8 +2,12 @@
 <resources>
 
   <string-array name="pref_input_entries">
-    <item>Default audio source</item>
-    <item>Microphone audio source</item>
+    <item>
+      Default audio source
+    </item>
+    <item>
+      Microphone audio source
+    </item>
     <item>
       Microphone audio source with same orientation as camera if
       available, the main device microphone otherwise
@@ -199,24 +203,6 @@
     <item>3</item>
     <item>4</item>
   </string-array>
-
-  <integer-array name="sample_rates">
-    <item>11025</item>
-    <item>22050</item>
-    <item>8000</item>
-    <item>16000</item>
-    <item>44100</item>
-    <item>32000</item>
-  </integer-array>
-
-  <integer-array name="divisors">
-    <item>1</item>
-    <item>2</item>
-    <item>1</item>
-    <item>2</item>
-    <item>4</item>
-    <item>4</item>
-  </integer-array>
 
   <integer-array name="foreground_colours">
     <item>0xbf0000ff</item>

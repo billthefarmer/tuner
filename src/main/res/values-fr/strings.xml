@@ -9,7 +9,6 @@
   <string name="translation">Traduction francais de <a href="https://github.com/roptat">roptat</a></string>
   <string name="licence">License <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a></string>
 
-  <string name="error_buffer">Erreur d\'enregistrement audio ! Impossible de trouver un taux d\'échantillonnage d\'entrée correct.</string>
   <string name="error_init">Enregistrement audio non initialisé ! La source sélectionnée n\'est peut-être pas disponible ou un taux d\'échantillonnage d\'entrée correct n\'a pas été trouvé.</string>
 
   <string name="filter_on">Filtre audio activé</string>

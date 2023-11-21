@@ -12,10 +12,6 @@
   <string name="licence">Licence <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="error_buffer">
-    Erro na gravação de áudio! Impossível encontrar um sample rate que
-    funciona.
-  </string>
   <string name="error_init">
     Gravador de áudio não inicializado! Talvez a fonte de entrada
     selecionada não esteja disponível ou não foi possível encontrar

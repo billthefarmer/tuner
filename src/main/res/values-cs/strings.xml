@@ -22,9 +22,6 @@
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="error_buffer">
-    Chyba při nahrávání zvuku! Nepodařilo se najít funkční vstupní vzorkovací frekvenci.
-  </string>
   <string name="error_init">
     Záznamník zvuku nebyl inicializován! Vybraný zdroj zvuku možná nemusí
     být dostupný nebo nebyla nalezena funkční vstupní vzorkovací frekvenci.

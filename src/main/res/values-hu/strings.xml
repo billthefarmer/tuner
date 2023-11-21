@@ -12,10 +12,6 @@
   <string name="licence">Licensz <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="error_buffer">
-    Hangfelvételi hiba! Nem található használható bemeneti
-    mintavételezési frekvencia.
-  </string>
   <string name="error_init">
     Hangfelvevő elindítása sikertelen! Lehet, hogy a kiválasztott
     jelforrás nem elérhető, vagy nem használható a mintavételi

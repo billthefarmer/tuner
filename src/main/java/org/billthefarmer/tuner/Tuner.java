@@ -783,18 +783,14 @@ public class Tuner extends Activity
         if (status != null)
             status.invalidate();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED)
         {
-            if (checkSelfPermission(Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED)
-            {
-                requestPermissions(new String[]
-                    {Manifest.permission.RECORD_AUDIO,
-                     Manifest.permission.READ_EXTERNAL_STORAGE},
-                                   REQUEST_PERMISSIONS);
-
-                return;
-            }
+            requestPermissions(new String[]
+            {Manifest.permission.RECORD_AUDIO,
+             Manifest.permission.READ_EXTERNAL_STORAGE},
+                               REQUEST_PERMISSIONS);
+            return;
         }
 
         // Start the audio thread
@@ -1151,7 +1147,6 @@ public class Tuner extends Activity
 
         // Private data
         private long timer;
-        private int divisor = 1;
 
         private AudioRecord audioRecord;
 
@@ -1161,6 +1156,8 @@ public class Tuner extends Activity
         private static final int RANGE = SAMPLES * 7 / 16;
         private static final int STEP = SAMPLES / OVERSAMPLE;
         private static final int SIZE = 4096;
+
+        private static final int RATE = 11025;
 
         private static final int OCTAVE = 12;
         private static final int EQUAL = 8;
@@ -1275,84 +1272,35 @@ public class Tuner extends Activity
         // Process Audio
         protected void processAudio()
         {
-            // Sample rates to try
-            Resources resources = getResources();
-
-            int rates[] = resources.getIntArray(R.array.sample_rates);
-            int divisors[] = resources.getIntArray(R.array.divisors);
-
-            int size = 0;
-            int state = 0;
-            int index = 0;
-            for (int rate : rates)
+            // Create the AudioRecord object
+            try
             {
-                // Check sample rate
-                size = AudioRecord
-                    .getMinBufferSize(rate,
-                                      AudioFormat.CHANNEL_IN_MONO,
-                                      AudioFormat.ENCODING_PCM_16BIT);
-                // Loop if invalid sample rate
-                if (size == AudioRecord.ERROR_BAD_VALUE)
-                {
-                    index++;
-                    continue;
-                }
-
-                // Check valid input selected, or other error
-                if (size == AudioRecord.ERROR)
-                {
-                    runOnUiThread(() -> showAlert(R.string.app_name,
-                                                  R.string.error_buffer));
-                    thread = null;
-                    return;
-                }
-
-                // Set divisor
-                divisor = divisors[index];
-
-                // Create the AudioRecord object
-                try
-                {
-                    audioRecord =
-                        new AudioRecord(input, rate,
-                                        AudioFormat.CHANNEL_IN_MONO,
-                                        AudioFormat.ENCODING_PCM_16BIT,
-                                        Math.max(size, SIZE * divisor));
-                }
-
-                // Exception
-                catch (Exception e)
-                {
-                    runOnUiThread(() -> showAlert(R.string.app_name,
-                                                  R.string.error_init));
-                    thread = null;
-                    return;
-                }
-
-                // Check state
-                state = audioRecord.getState();
-                if (state != AudioRecord.STATE_INITIALIZED)
-                {
-                    audioRecord.release();
-                    index++;
-                    continue;
-                }
-
-                // Must be a valid sample rate
-                sample = rate;
-                break;
+                audioRecord = new AudioRecord.Builder()
+                    .setAudioSource(input)
+                    .setAudioFormat
+                    (new AudioFormat.Builder()
+                     .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                     .setSampleRate(RATE)
+                     .setChannelMask(AudioFormat.CHANNEL_IN_MONO)
+                     .build())
+                    .setBufferSizeInBytes(SIZE)
+                    .build();
             }
 
-            // Check valid sample rate
-            if (size == AudioRecord.ERROR_BAD_VALUE)
+            // Exception
+            catch (Exception e)
             {
                 runOnUiThread(() -> showAlert(R.string.app_name,
-                                              R.string.error_buffer));
+                                              R.string.error_init));
                 thread = null;
                 return;
             }
 
+            // Get sample rate
+            sample = audioRecord.getSampleRate();
+
             // Check AudioRecord initialised
+            int state = audioRecord.getState();
             if (state != AudioRecord.STATE_INITIALIZED)
             {
                 runOnUiThread(() -> showAlert(R.string.app_name,
@@ -1364,12 +1312,12 @@ public class Tuner extends Activity
             }
 
             // Calculate fps and expect
-            fps = ((double) sample / divisor) / SAMPLES;
+            fps = ((double) sample) / SAMPLES;
             final double expect = 2.0 * Math.PI *
                                   STEP / SAMPLES;
 
             // Create buffer for input data
-            data = new short[STEP * divisor];
+            data = new short[STEP];
 
             // Start recording
             audioRecord.startRecording();
@@ -1384,7 +1332,7 @@ public class Tuner extends Activity
                 // NOTE: audioRecord.read(short[], int, int) can block
                 // indefinitely, until audioRecord.stop() is called
                 // from another thread
-                size = audioRecord.read(data, 0, STEP * divisor);
+                int size = audioRecord.read(data, 0, STEP);
 
                 // Stop the thread if no data or error state
                 if (size <= 0)
@@ -1407,17 +1355,17 @@ public class Tuner extends Activity
                 for (int i = 0; i < STEP; i++)
                 {
                     xv[0] = xv[1];
-                    xv[1] = data[i * divisor] / G;
+                    xv[1] = data[i] / G;
 
                     yv[0] = yv[1];
                     yv[1] = (xv[0] + xv[1]) + (K * yv[0]);
 
                     // Choose filtered/unfiltered data
                     buffer[(SAMPLES - STEP) + i] =
-                        audio.filter ? yv[1] : data[i * divisor];
+                        audio.filter ? yv[1] : data[i];
 
                     // Find root mean signal
-                    double v = data[i * divisor] / 32768.0;
+                    double v = data[i] / 32768.0;
                     rm += v * v;
                 }
 

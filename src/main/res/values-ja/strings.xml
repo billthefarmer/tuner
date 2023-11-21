@@ -12,9 +12,6 @@
   <string name="licence">ライセンス <a href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
 
-  <string name="error_buffer">
-    音声録音からエラー! 動作中の入力サンプルレートが見つかりません。
-  </string>
   <string name="error_init">
     オーディオレコーダーが初期化されていません! 選択された入力音源が利
     用できないか、動作中の入力サンプルレートが見つからない可能性があり
