@@ -87,7 +87,7 @@ public class Status extends View
         paint.setColor(resources.getColor(android.R.color.darker_gray));
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawLine(0, 0, width, 0, paint);
+        canvas.drawRoundRect(0, 0, width, height, 10, 10, paint);
 
         // Check for audio
         if (audio == null)
