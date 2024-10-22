@@ -43,8 +43,8 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ClickableViewAccessibility', 'AndroidGradlePluginVersion',
-            'CustomViewStyleable', 'TypographyFractions', 'OldTargetApi',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'MissingInflatedId'
+            'CustomViewStyleable', 'TypographyFractions',
+            'NonConstantResourceId', 'MissingInflatedId'
         // abortOnError false
     }
 }
