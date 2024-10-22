@@ -40,11 +40,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    lintOptions {
-        disable 'IconDensities', 'ClickableViewAccessibility', 'AndroidGradlePluginVersion',
-            'CustomViewStyleable', 'TypographyFractions',
-            'NonConstantResourceId', 'MissingInflatedId'
-        // abortOnError false
+    lint {
+        disable 'IconDensities', 'ClickableViewAccessibility', 'AndroidGradlePluginVersion', 'CustomViewStyleable', 'TypographyFractions', 'NonConstantResourceId', 'MissingInflatedId'
     }
+
 }
