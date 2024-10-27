@@ -28,7 +28,8 @@
     <activity android:name="org.billthefarmer.tuner.Settings">
 
     </activity>
-    <activity android:name=".CustomTemperament">
+    <activity android:name=".CustomTemperament"
+        android:windowSoftInputMode="adjustResize">
 
     </activity>
   </application>
