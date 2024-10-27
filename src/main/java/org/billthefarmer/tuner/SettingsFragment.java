@@ -315,9 +315,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         File custom = new File(getActivity().getExternalFilesDir(null),
                                CUSTOM_FILE);
         if (!custom.canRead())
-            custom = new File(Environment.getExternalStorageDirectory(),
-                              CUSTOM_PATH);
-        if (!custom.canRead())
             return;
 
         // Read into properties
