@@ -119,9 +119,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         String s = String.format(summary, f);
         picker.setSummary(s);
 
-        // Load custom temperaments
-        loadCustomTemperaments();
-
         // Reset bach preference on solfa
         CheckBoxPreference check =
             (CheckBoxPreference) findPreference(Tuner.PREF_SOLFA);
