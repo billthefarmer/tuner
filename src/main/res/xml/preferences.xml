@@ -165,6 +165,14 @@
         android:key="pref_temper"
         android:summary="@string/pref_temper_summ"
         android:title="@string/pref_temper" />
+    <Preference
+        android:dialogIcon="?attr/pref_temper"
+        android:title="Set Custom Temperaments"
+        android:key="custom_temper">
+      <intent
+        android:targetPackage="org.billthefarmer.tuner"
+        android:targetClass="org.billthefarmer.tuner.CustomTemperament" />
+    </Preference>
     <ListPreference
         android:defaultValue="@integer/default_key"
         android:dialogIcon="?attr/pref_key"

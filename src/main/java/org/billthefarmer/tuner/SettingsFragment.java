@@ -59,7 +59,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
     private static final String TAG = "Tuner";
     private static final String CUSTOM_FILE = "Custom.txt";
-    private static final String CUSTOM_PATH = "Tuner/Custom.txt";
 
     private String summary;
 

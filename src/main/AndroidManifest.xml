@@ -28,6 +28,9 @@
     <activity android:name="org.billthefarmer.tuner.Settings">
 
     </activity>
+    <activity android:name=".CustomTemperament">
+
+    </activity>
   </application>
 
 </manifest>
