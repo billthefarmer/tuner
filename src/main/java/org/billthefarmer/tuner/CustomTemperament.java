@@ -1,7 +1,9 @@
 package org.billthefarmer.tuner;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,32 @@ public class CustomTemperament extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Get preferences
+        SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+
+        int theme = Integer.parseInt(preferences.getString(Tuner.PREF_THEME,
+                "0"));
+        switch (theme)
+        {
+            case Tuner.LIGHT:
+                setTheme(R.style.AppTheme);
+                break;
+
+            case Tuner.DARK:
+                setTheme(R.style.AppDarkTheme);
+                break;
+
+            case Tuner.WHITE:
+                setTheme(R.style.AppWhiteTheme);
+                break;
+
+            case Tuner.BLACK:
+                setTheme(R.style.AppBlackTheme);
+                break;
+        }
+
         setContentView(R.layout.temperament_editor);
 
         EditText customTemperamentsText = findViewById(R.id.customTemperamentText);
