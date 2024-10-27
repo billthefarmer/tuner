@@ -158,6 +158,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     public void onResume()
     {
         super.onResume();
+        loadCustomTemperaments();
         getPreferenceScreen().getSharedPreferences()
         .registerOnSharedPreferenceChangeListener(this);
     }
