@@ -355,10 +355,10 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         // Get the temperament entries and entry values
         ListPreference preference =
             (ListPreference) findPreference(Tuner.PREF_TEMPER);
-        List<CharSequence> entries = new
-            ArrayList<CharSequence>(Arrays.asList(preference.getEntries()));
-        List<CharSequence> values = new
-            ArrayList<CharSequence>(Arrays.asList(preference.getEntryValues()));
+        List<String> entries = new ArrayList<>(
+                Arrays.asList(getResources().getStringArray(R.array.pref_temper_entries)));
+        List<String> values = new ArrayList<>(
+                Arrays.asList(getResources().getStringArray(R.array.pref_temper_entry_values)));
 
         // Add custom entries and entry values
         int value = values.size();
