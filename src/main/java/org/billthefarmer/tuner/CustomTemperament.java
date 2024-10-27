@@ -1,10 +1,12 @@
 package org.billthefarmer.tuner;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +50,11 @@ public class CustomTemperament extends Activity {
                 setTheme(R.style.AppBlackTheme);
                 break;
         }
+
+        // Enable back navigation on action bar
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.temperament_editor);
 
@@ -98,5 +105,14 @@ public class CustomTemperament extends Activity {
                 Log.e("CustomTemperaments", "Error saving custom temperaments", ioe);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
