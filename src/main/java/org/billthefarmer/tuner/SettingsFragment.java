@@ -25,12 +25,10 @@ package org.billthefarmer.tuner;
 
 import android.app.ActionBar;
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -59,7 +57,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
     private static final String TAG = "Tuner";
     private static final String CUSTOM_FILE = "Custom.txt";
-    private static final String CUSTOM_PATH = "Tuner/Custom.txt";
 
     private String summary;
 
@@ -120,9 +117,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         String s = String.format(summary, f);
         picker.setSummary(s);
 
-        // Load custom temperaments
-        loadCustomTemperaments();
-
         // Reset bach preference on solfa
         CheckBoxPreference check =
             (CheckBoxPreference) findPreference(Tuner.PREF_SOLFA);
@@ -159,6 +153,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     public void onResume()
     {
         super.onResume();
+        loadCustomTemperaments();
         getPreferenceScreen().getSharedPreferences()
         .registerOnSharedPreferenceChangeListener(this);
     }
@@ -315,9 +310,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         File custom = new File(getActivity().getExternalFilesDir(null),
                                CUSTOM_FILE);
         if (!custom.canRead())
-            custom = new File(Environment.getExternalStorageDirectory(),
-                              CUSTOM_PATH);
-        if (!custom.canRead())
             return;
 
         // Read into properties
@@ -358,10 +350,10 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         // Get the temperament entries and entry values
         ListPreference preference =
             (ListPreference) findPreference(Tuner.PREF_TEMPER);
-        List<CharSequence> entries = new
-            ArrayList<CharSequence>(Arrays.asList(preference.getEntries()));
-        List<CharSequence> values = new
-            ArrayList<CharSequence>(Arrays.asList(preference.getEntryValues()));
+        List<String> entries = new ArrayList<>(
+                Arrays.asList(getResources().getStringArray(R.array.pref_temper_entries)));
+        List<String> values = new ArrayList<>(
+                Arrays.asList(getResources().getStringArray(R.array.pref_temper_entry_values)));
 
         // Add custom entries and entry values
         int value = values.size();
