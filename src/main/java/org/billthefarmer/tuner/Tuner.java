@@ -368,6 +368,7 @@ public class Tuner extends Activity
         SignalView signal = findViewById(R.id.signal);
 
         // Find toolbar
+        //noinspection DiscouragedApi
         toolbar = findViewById(getResources().getIdentifier("action_bar",
                                                             "id", "android"));
         // Set up navigation
@@ -1273,6 +1274,7 @@ public class Tuner extends Activity
         protected void processAudio()
         {
             // Create the AudioRecord object
+            //noinspection MissingPermission
             try
             {
                 audioRecord = new AudioRecord.Builder()

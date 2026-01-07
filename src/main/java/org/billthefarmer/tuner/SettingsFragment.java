@@ -39,8 +39,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toolbar;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,10 +57,6 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     private static final int CUSTOM = 3;
 
     private static final String TAG = "Tuner";
-    private static final String CUSTOM_FILE = "Custom.txt";
-    private static final String CUSTOM_PATH = "Tuner/Custom.txt";
-
-    private String summary;
 
     // On create
     @Override
@@ -113,7 +108,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         NumberPickerPreference picker =
             (NumberPickerPreference) findPreference(Tuner.PREF_REFER);
-        summary = picker.getSummary().toString();
+        String summary = picker.getSummary().toString();
 
         // Set number picker summary
         float f = picker.getValue();
@@ -185,6 +180,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             Dialog dialog = ((PreferenceScreen) preference).getDialog();
             ActionBar actionBar = dialog.getActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
+            //noinspection DiscouragedApi
             Toolbar toolbar = dialog.findViewById
                 (getResources().getIdentifier("action_bar", "id", "android"));
             toolbar.setNavigationOnClickListener((v) ->
@@ -311,41 +307,22 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     // loadCustomTemperaments
     private void loadCustomTemperaments()
     {
-        // Check custom temperaments file
-        File custom = new File(getActivity().getExternalFilesDir(null),
-                               CUSTOM_FILE);
-        if (!custom.canRead())
-            custom = new File(Environment.getExternalStorageDirectory(),
-                              CUSTOM_PATH);
-        if (!custom.canRead())
+        // Get from preferences
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        String custom = preferences.getString(Tuner.PREF_PROPS, "");
+        if (custom.isEmpty())
             return;
 
         // Read into properties
         Properties props = new Properties();
-        try (FileReader reader = new FileReader(custom))
+        try (StringReader reader = new StringReader(custom))
         {
             props.load(reader);
         }
 
         catch(Exception e)
-        {
-            e.printStackTrace();
-            return;
-        }
-
-        // Store in preferences
-        SharedPreferences preferences =
-            PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editor = preferences.edit();
-
-        try (StringWriter writer = new StringWriter())
-        {
-            props.store(writer, "Custom Temperaments");
-            editor.putString(Tuner.PREF_PROPS, writer.toString());
-            editor.apply();
-        }
-
-        catch (Exception e)
         {
             e.printStackTrace();
             return;

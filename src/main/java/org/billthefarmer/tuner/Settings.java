@@ -29,11 +29,17 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.Properties;
 
 // Settings
 public class Settings extends Activity
 {
+    public final static String TEXT_WILD = "text/*";
+    public final static int OPEN_DOCUMENT   = 1;
+
     // On create
     @Override
     @SuppressWarnings("deprecation")
@@ -94,6 +100,18 @@ public class Settings extends Activity
         setTitle(R.string.settings);
     }
 
+    // On create options menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it
+        // is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.custom, menu);
+
+        return true;
+    }
+
     // On options item selected
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -106,8 +124,78 @@ public class Settings extends Activity
             finish();
             return true;
 
+        case android.R.id.custom:
+            // load custom temperaments
+            loadCustom();
+            return true;
+
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    // Load custom
+    private void loadCustom()
+    {
+        // Use storage
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType(TEXT_WILD);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, OPEN_DOCUMENT);
+    }
+
+    // On activity result
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data)
+    {
+        if (resultCode == RESULT_CANCELED)
+            return;
+
+        switch (requestCode)
+        {
+        case OPEN_DOCUMENT:
+            Uri content = data.getData();
+            readCustom(content);
+            break;
+        }
+    }
+
+    private void readCustom(Uri content)
+    {
+        // Read into properties
+        Properties props = new Properties();
+        try (InputStreamReader reader = new InputStreamReader
+             (getContentResolver().openInputStream(content)))
+        {
+            props.load(reader);
+        }
+
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return;
+        }
+
+        // Store in preferences
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        try (StringWriter writer = new StringWriter())
+        {
+            props.store(writer, "Custom Temperaments");
+            editor.putString(Tuner.PREF_PROPS, writer.toString());
+            editor.apply();
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+            recreate();
     }
 }
