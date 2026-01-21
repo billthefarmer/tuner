@@ -55,6 +55,8 @@
   <string name="down">ダウン</string>
   <string name="mult">複数</string>
 
+  <string name="custom">カスタムをロードする</string>
+
   <string name="def_custom">[-1073807360,-1090518785]</string>
 
   <string name="pref_input_category">入力</string>

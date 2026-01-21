@@ -33,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 // Colour picker preference
+@SuppressWarnings("deprecation")
 public class ColourPickerPreference extends DialogPreference
 {
     private JSONArray colours;

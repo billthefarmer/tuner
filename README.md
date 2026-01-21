@@ -42,15 +42,15 @@ The app defaults to **equal** temperament and the key of **C**. 32
 temperaments are available in the settings. For all temperaments
 except for equal it is necessary to choose a key.  Note that the
 display may show a cents variation greater than 50 for some notes in
-some temperament due to the interval between notes being greater than
+some temperaments due to the interval between notes being greater than
 100 cents. See [Musical
 temperament](https://en.wikipedia.org/wiki/Musical_temperament).
 
 ### Custom Temperaments
 
-You may load custom temperaments by placing a file in
-`Tuner/Custom.txt`. The file should contain one or more entries
-formatted as property entries. The format is documented
+You may load custom temperaments from the **Settings** menu. The file
+should contain one or more entries formatted as property entries. The
+format is documented
 [here](https://developer.android.com/reference/java/util/Properties#load\(java.io.Reader\)).
 
 ```properties
@@ -67,8 +67,7 @@ Custom: 1.000000000, 1.067871094, 1.125000000, 1.185185185, \
 
 Entries will be loaded and displayed in **Settings** in alphabetical
 order at the end of the list. Erroneous entries will either be ignored
-or replaced with ones (1.0). Changes to the contents of the custom
-file will be loaded in **Settings**.
+or replaced with ones (1.0). Load the file again if it is changed.
 
 ### Scope
 

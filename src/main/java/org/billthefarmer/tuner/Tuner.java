@@ -66,6 +66,7 @@ import java.util.Properties;
 import java.util.Set;
 
 // Main Activity
+@SuppressWarnings("deprecation")
 public class Tuner extends Activity
     implements View.OnClickListener, View.OnLongClickListener,
     PopupMenu.OnMenuItemClickListener

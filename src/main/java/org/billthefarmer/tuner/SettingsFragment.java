@@ -263,6 +263,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
             // Get the value and set the summary
             float v = preference.getValue();
+            String summary = preference.getSummary().toString();
             String s = String.format(summary, v);
             preference.setSummary(s);
         }

@@ -55,6 +55,8 @@
   <string name="down">down</string>
   <string name="mult">múlt</string>
 
+  <string name="custom">Carregar personalizado</string>
+
   <string name="def_custom">[-1073807360,-1090518785]</string>
 
   <string name="pref_input_category">Entrada</string>

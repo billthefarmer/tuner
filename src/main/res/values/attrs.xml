@@ -15,7 +15,6 @@
 
         <attr name="screen" format="reference" />
         <attr name="lock" format="reference" />
-        <attr name="custom" format="reference" />
 
         <attr name="pref_about" format="reference" />
         <attr name="pref_bach" format="reference" />

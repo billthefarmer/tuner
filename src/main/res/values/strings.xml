@@ -63,7 +63,8 @@
   <string name="strobe">strobe</string>
   <string name="down">down</string>
   <string name="mult">mult</string>
-  <string name="custom">custom</string>
+
+  <string name="custom">Load custom</string>
 
   <string name="def_custom">[-1073807360,-1090518785]</string>
 

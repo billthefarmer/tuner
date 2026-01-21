@@ -25,18 +25,28 @@ package org.billthefarmer.tuner;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.util.Properties;
 
 // Settings
+@SuppressWarnings("deprecation")
 public class Settings extends Activity
 {
+    private static final String TAG = "Tuner";
+
     public final static String TEXT_WILD = "text/*";
     public final static int OPEN_DOCUMENT   = 1;
 
@@ -124,7 +134,7 @@ public class Settings extends Activity
             finish();
             return true;
 
-        case android.R.id.custom:
+        case R.id.custom:
             // load custom temperaments
             loadCustom();
             return true;

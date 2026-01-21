@@ -39,8 +39,6 @@
     <item name="lock">@drawable/ic_action_secure</item>
     <item name="screen">@drawable/ic_action_brightness_low</item>
 
-    <item name="custom">@drawable/ic_folder_open_white_24dp</item>
-
     <item name="pref_about">@drawable/ic_info_outline_black_24dp</item>
     <item name="pref_bach">@drawable/ic_chevron_left_black_24dp</item>
     <item name="pref_down">@drawable/ic_trending_down_black_24dp</item>
@@ -69,8 +67,6 @@
     <item name="lock">@drawable/ic_action_secure_dark</item>
     <item name="screen">@drawable/ic_action_brightness_low_dark</item>
 
-    <item name="custom">@drawable/ic_folder_open_white_24dp</item>
-
     <item name="pref_about">@drawable/ic_info_outline_white_24dp</item>
     <item name="pref_bach">@drawable/ic_chevron_left_white_24dp</item>
     <item name="pref_down">@drawable/ic_trending_down_white_24dp</item>
@@ -98,8 +94,6 @@
 
     <item name="lock">@drawable/ic_action_secure_dark</item>
     <item name="screen">@drawable/ic_action_brightness_low_dark</item>
-
-    <item name="custom">@drawable/ic_folder_open_white_24dp</item>
 
     <item name="pref_about">@drawable/ic_info_outline_white_24dp</item>
     <item name="pref_bach">@drawable/ic_chevron_left_white_24dp</item>
@@ -134,8 +128,6 @@
 
     <item name="lock">@drawable/ic_action_secure</item>
     <item name="screen">@drawable/ic_action_brightness_low</item>
-
-    <item name="custom">@drawable/ic_folder_open_black_24dp</item>
 
     <item name="pref_about">@drawable/ic_info_outline_black_24dp</item>
     <item name="pref_bach">@drawable/ic_chevron_left_black_24dp</item>

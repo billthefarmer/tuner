@@ -35,6 +35,7 @@
     <string name="strobe">滤波</string>
     <string name="down">向下采样</string>
     <string name="mult">多行</string>
+    <string name="custom">加载自定义</string>
     <string name="def_custom">[-1073807360,-1090518785]</string>
     <string name="pref_input_category">输入</string>
     <string name="pref_input">音频输入源</string>

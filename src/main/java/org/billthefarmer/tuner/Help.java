@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 // Help
+@SuppressWarnings("deprecation")
 public class Help extends Activity
 {
     private static final String PREF_DARK = "pref_dark";
