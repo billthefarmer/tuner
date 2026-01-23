@@ -51,7 +51,7 @@ temperament](https://en.wikipedia.org/wiki/Musical_temperament).
 You may load custom temperaments from the **Settings** menu. The file
 should contain one or more entries formatted as property entries. The
 format is documented
-[here](https://developer.android.com/reference/java/util/Properties#load\(java.io.Reader\)).
+[here](https://developer.android.com/reference/java/util/Properties#load\(java.io.Reader\)). Sample custom temperament file [here](data/Custom.txt).
 
 ```properties
 # Custom Temperaments
