@@ -57,6 +57,9 @@ import android.widget.Toolbar;
 
 import org.json.JSONArray;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -290,6 +293,7 @@ public class Tuner extends Activity
     private double temperaments[][];
     private String names[];
 
+    private ExecutorService executor;
     private Toolbar toolbar;
     private Spectrum spectrum;
     private Display display;
@@ -393,6 +397,9 @@ public class Tuner extends Activity
             popup.setOnMenuItemClickListener(this);
             popup.show();
         });
+
+        // Executor
+        executor =  Executors.newSingleThreadExecutor();
 
         // Create audio
         audio = new Audio();
@@ -795,7 +802,7 @@ public class Tuner extends Activity
             return;
         }
 
-        // Start the audio thread
+        // Start the audio
         audio.start();
     }
 
@@ -809,7 +816,7 @@ public class Tuner extends Activity
                 if (permissions[i].equals(Manifest.permission.RECORD_AUDIO) &&
                     grantResults[i] == PackageManager.PERMISSION_GRANTED)
                 {
-                    // Granted, recreate or start audio thread
+                    // Granted, recreate or start audio
                     if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
                         recreate();
 
@@ -836,7 +843,7 @@ public class Tuner extends Activity
         // Save preferences
         savePreferences();
 
-        // Stop audio thread
+        // Stop audio
         audio.stop();
     }
 
@@ -1130,7 +1137,6 @@ public class Tuner extends Activity
         protected double reference;
 
         // Data
-        protected Thread thread;
         protected double buffer[];
         protected short data[];
         protected int sample;
@@ -1149,6 +1155,7 @@ public class Tuner extends Activity
 
         // Private data
         private long timer;
+        private boolean running;
 
         private AudioRecord audioRecord;
 
@@ -1221,15 +1228,15 @@ public class Tuner extends Activity
         // Start audio
         protected void start()
         {
-            // Start the thread
-            thread = new Thread(this, "Audio");
-            thread.start();
+            // Start
+            executor.execute(this);
         }
 
         // Run
         @Override
         public void run()
         {
+            running = true;
             processAudio();
         }
 
@@ -1238,18 +1245,7 @@ public class Tuner extends Activity
         {
             // Stop and release the audio recorder
             cleanUpAudioRecord();
-
-            Thread t = thread;
-            thread = null;
-
-            try
-            {
-                // Wait for the thread to exit
-                if (t != null && t.isAlive())
-                    t.join();
-            }
-
-            catch (Exception e) {}
+            running = false;
         }
 
         // Stop and release the audio recorder
@@ -1295,7 +1291,7 @@ public class Tuner extends Activity
             {
                 runOnUiThread(() -> showAlert(R.string.app_name,
                                               R.string.error_init));
-                thread = null;
+                running = false;
                 return;
             }
 
@@ -1310,7 +1306,7 @@ public class Tuner extends Activity
                                               R.string.error_init));
 
                 audioRecord.release();
-                thread = null;
+                running = false;
                 return;
             }
 
@@ -1328,8 +1324,8 @@ public class Tuner extends Activity
             // Max data
             double dmax = 0.0;
 
-            // Continue until the thread is stopped
-            while (thread != null)
+            // Continue until stopped
+            while (running)
             {
                 // Read a buffer of data
                 // NOTE: audioRecord.read(short[], int, int) can block
@@ -1337,10 +1333,10 @@ public class Tuner extends Activity
                 // from another thread
                 int size = audioRecord.read(data, 0, STEP);
 
-                // Stop the thread if no data or error state
+                // Stop if no data or error state
                 if (size <= 0)
                 {
-                    thread = null;
+                    running = false;
                     break;
                 }
 
