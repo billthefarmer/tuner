@@ -38,6 +38,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 // NumberPickerPreference
+@SuppressWarnings("deprecation")
 public class NumberPickerPreference extends DialogPreference
 {
     private final int maxValue;
