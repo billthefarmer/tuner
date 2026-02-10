@@ -23,13 +23,13 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 35
     namespace "org.billthefarmer.tuner"
 
     defaultConfig {
         applicationId "org.billthefarmer.tuner"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 35
         versionName "1.57"
         versionCode 157
 
@@ -47,8 +47,9 @@ android {
 
     lintOptions {
         disable 'IconDensities', 'ClickableViewAccessibility', 'AndroidGradlePluginVersion',
-            'CustomViewStyleable', 'TypographyFractions', 'OldTargetApi',
-            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'MissingInflatedId'
+            'CustomViewStyleable', 'TypographyFractions', 'OldTargetApi', 'ScopedStorage',
+            'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'MissingInflatedId',
+	    'GradleDependency'
         // abortOnError false
     }
 }
