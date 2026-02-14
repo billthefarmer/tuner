@@ -162,12 +162,21 @@ public class ColourPicker extends PreferenceView
             if (trackingCentre)
             {
                 trackingCentre = false;
+                performClick();
                 invalidate();
             }
             break;
         }
 
+        performClick();
         return true;
+    }
+
+    // performClick
+    @Override
+    public boolean performClick()
+    {
+        return super.performClick();
     }
 
     protected interface ColourChangeListener

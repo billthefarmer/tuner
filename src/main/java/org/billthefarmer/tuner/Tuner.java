@@ -370,6 +370,7 @@ public class Tuner extends Activity
         actionBar.setCustomView(R.layout.custom);
         actionBar.setDisplayShowCustomEnabled(true);
 
+        //noinspection MissingInflatedId
         SignalView signal = findViewById(R.id.signal);
 
         // Find toolbar

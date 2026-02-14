@@ -34,6 +34,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 // Staff
+@SuppressWarnings("deprecation")
 public class Staff extends TunerView
 {
     private static final String TAG = "Staff";
