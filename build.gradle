@@ -24,14 +24,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 35
-    namespace "org.billthefarmer.tuner"
+    namespace = "org.billthefarmer.tuner"
 
     defaultConfig {
         applicationId "org.billthefarmer.tuner"
         minSdkVersion 23
         targetSdkVersion 35
-        versionName "1.57"
-        versionCode 157
+        versionName "1.58"
+        versionCode 158
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
