@@ -1158,6 +1158,7 @@ public class Tuner extends Activity
         private long timer;
         private boolean running;
 
+        private PeakDetect detect;
         private AudioRecord audioRecord;
 
         private static final int MAXIMA = 8;
@@ -1318,6 +1319,10 @@ public class Tuner extends Activity
 
             // Create buffer for input data
             data = new short[STEP];
+
+            // Peak detection
+            detect = new PeakDetect();
+            detect.begin();
 
             // Start recording
             audioRecord.startRecording();
@@ -1575,6 +1580,9 @@ public class Tuner extends Activity
                         count++;
                     }
                 }
+
+                // Update peak detect
+                detect.add(max);
 
                 // Found flag
                 boolean found = false;
